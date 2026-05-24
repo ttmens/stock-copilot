@@ -51,6 +51,37 @@ class CapitalFlow(BaseModel):
     period: str = "5d"
 
 
+class ValuationInfo(BaseModel):
+    """PE/PB/market cap/industry from Eastmoney or Tencent."""
+    pe_ttm: Optional[float] = None
+    pb: Optional[float] = None
+    ps_ttm: Optional[float] = None
+    roe: Optional[float] = None
+    total_shares: float = 0
+    float_shares: float = 0
+    mcap: float = 0           # 总市值(元)
+    float_mcap: float = 0     # 流通市值(元)
+    industry: str = ""
+    list_date: str = ""
+
+
+class NewsItem(BaseModel):
+    """News item from Eastmoney or announcements."""
+    title: str
+    url: str = ""
+    date: str = ""
+    source: str = ""
+
+
+class DragonTigerItem(BaseModel):
+    """Dragon & tiger list (龙虎榜) entry."""
+    date: str = ""
+    reason: str = ""
+    net_buy: float = 0
+    buy_amount: float = 0
+    sell_amount: float = 0
+
+
 class StockSnapshot(BaseModel):
     code: str
     name: str
@@ -60,6 +91,11 @@ class StockSnapshot(BaseModel):
     announcements: list[Announcement] = Field(default_factory=list)
     capital: Optional[CapitalFlow] = None
     fetch_errors: list[str] = Field(default_factory=list)
+
+    # Extended fields (a-stock-data V3.1 integration)
+    valuation: Optional[ValuationInfo] = None
+    news: list[NewsItem] = Field(default_factory=list)
+    dragon_tiger: list[DragonTigerItem] = Field(default_factory=list)
 
 
 class AgentResult(BaseModel):

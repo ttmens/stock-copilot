@@ -55,3 +55,18 @@
 - **选择**: B — 工厂模式 + settings.notify.type 切换
 - **理由**: 简单明了，配置决定行为，无需额外依赖
 - **影响**: .env 配置 WECOM_WEBHOOK 即可启用企微推送
+
+## 2026-05-24 — 多源数据 Provider 架构
+
+- **背景**: AkShare 在此服务器上不稳定的问题（RemoteDisconnected），单一数据源不可靠
+- **调研**: a-stock-data (⭐1985) V3.1 完全移除 AkShare 依赖，直连 HTTP API
+- **选择**: 多源 Provider 架构 — AkShare (主) → Eastmoney/Sina/Tencent (备选)
+- **理由**: 每个数据类型至少有 2 个独立数据源，一个挂了自动切另一个
+- **影响**: fetcher.py 重构为链式降级；新增 ValuationInfo/DragonTigerItem 等模型
+- **验证**: 3只股票（茅台/平安/宁德）全部获取 60 日K线 + PE/PB/市值 + 龙虎榜
+
+## 2026-05-24 — Eastmoney push2 鉴权 token
+
+- **背景**: 东财 push2 API 需要 ut 参数才能正常返回
+- **选择**: 使用固定 token `fa5fd1943c7b386f172d6893dbbd1`
+- **影响**: PE/PB/市值/资金流等 Eastmoney 接口正常返回

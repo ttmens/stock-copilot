@@ -54,11 +54,22 @@ python -m src.main schedule
 ## 架构
 
 ```
-watchlist.yaml → Data Fetcher (AkShare) → StockSnapshot
+watchlist.yaml → Data Fetcher (多源降级链) → StockSnapshot
   → Technical / Fundamental / Capital Agent (LLM)
   → Report Generator (Markdown + HTML)
   → GitHub Pages / Notify
+
+数据源: AkShare (主) → Sina/Tencent/Eastmoney (备选)
 ```
+
+### 数据源降级链
+
+| 数据类型 | 主源 | 备选 1 | 备选 2 |
+|---------|------|--------|--------|
+| 日线 OHLCV | AkShare | Sina Finance | Tencent |
+| PE/PB/市值 | Eastmoney push2 | Tencent | - |
+| 资金流 | Eastmoney | AkShare | - |
+| 龙虎榜 | Eastmoney datacenter | - | - |
 
 详细设计见 [docs/](docs/) 目录。
 
