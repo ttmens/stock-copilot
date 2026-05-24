@@ -1,0 +1,33 @@
+# 决策记录
+
+## 2026-05-24 — LLM Provider 抽象化
+
+- **背景**: 设计文档默认 DeepSeek，但实际 Hermes 可能接入多种 LLM
+- **备选**: A) 硬编码 DeepSeek B) OpenAI SDK 兼容抽象 C) 自定义 HTTP 客户端
+- **选择**: B — OpenAI SDK 兼容抽象
+- **理由**: OpenAI SDK 已成事实标准，DeepSeek/OpenRouter/Ollama/Azure 均支持兼容接口
+- **影响**: 用户只需改 base_url + API Key 即可切换模型，代码零修改
+
+## 2026-05-24 — AkShare 同步调用包装为 async
+
+- **背景**: AkShare 是同步库，pipeline 需要异步并发
+- **备选**: A) 全部用 asyncio.to_thread B) 用 httpx 重写采集 C) 多进程
+- **选择**: A — asyncio.to_thread 包装
+- **理由**: 最小改动，AkShare 接口可能变化，不重写采集逻辑
+- **影响**: 采集层 async/await 语法统一，但底层是线程池
+
+## 2026-05-24 — 资金流降级策略
+
+- **背景**: AkShare 资金流接口不稳定（北向/主力都可能失败）
+- **备选**: A) 强制失败阻塞 B) 降级为 unavailable C) 多数据源
+- **选择**: B — 降级为 unavailable
+- **理由**: 资金流是 P1 非必需，单维度失败不阻塞整份报告
+- **影响**: 报告中资金面可能标注「数据暂不可用」
+
+## 2026-05-24 — 无 LLM API Key 时的降级
+
+- **背景**: 部署环境可能未配置 LLM API Key
+- **备选**: A) 启动报错 B) Agent 返回 unavailable C) 使用规则摘要
+- **选择**: B — Agent 返回 unavailable
+- **理由**: 数据采集层仍可工作，报告可生成，只是缺少 AI 分析
+- **影响**: 系统可在无 LLM 情况下部分运行
