@@ -47,6 +47,8 @@ class FusedSignal:
     hard_score: float = 0.0
     soft_score: float = 0.0
     gate_score: float = 0.0
+    dragon_tiger_score: float = 0.0
+    announcement_score: float = 0.0
 
     # Final
     final_score: float = 0.0
@@ -59,7 +61,7 @@ class FusedSignal:
 
     def __post_init__(self):
         if self.data_available is None:
-            self.data_available = {"hard": False, "soft": False, "gate": False}
+            self.data_available = {"hard": False, "soft": False, "gate": False, "dragon_tiger": False, "announcement": False}
 
 
 def fuse_signals(
@@ -70,6 +72,8 @@ def fuse_signals(
     is_st: bool = False,
     is_suspended: bool = False,
     limit_up_down: bool = False,
+    dragon_tiger_entries: Optional[list[dict]] = None,
+    announcement_result: Optional[AgentResult] = None,
 ) -> FusedSignal:
     """Fuse all signal layers into a final signal.
 
@@ -114,17 +118,41 @@ def fuse_signals(
     )
     result.data_available["gate"] = True
 
-    # ── Fusion: weighted sum ───────────────────────────────────
+    # ── Layer 4: Dragon & Tiger ──────────────────────────────
+    if dragon_tiger_entries:
+        from src.data.hard_signals import _dragon_tiger_score
+        result.dragon_tiger_score = _dragon_tiger_score(dragon_tiger_entries)
+        result.data_available["dragon_tiger"] = True
+
+    # ── Layer 5: Announcement ────────────────────────────────
+    if announcement_result and announcement_result.status != AgentStatus.UNAVAILABLE:
+        sentiment_map = {
+            "bullish": 1.0,
+            "bearish": -1.0,
+            "neutral": 0.0,
+        }
+        result.announcement_score = sentiment_map.get(announcement_result.sentiment, 0.0)
+        result.data_available["announcement"] = True
+
+# ── Fusion: weighted sum ──────────────────────────────────────
     # Dynamic weights based on data availability
     has_hard = result.data_available["hard"]
     has_soft = result.data_available["soft"]
+    has_dragon_tiger = result.data_available.get("dragon_tiger", False)
+    has_announcement = result.data_available.get("announcement", False)
 
     if has_hard and has_soft:
-        w_hard, w_soft, w_gate = 0.50, 0.30, 0.20
+        w_hard, w_soft, w_gate = 0.40, 0.25, 0.15
+        w_dragon_tiger = 0.10 if has_dragon_tiger else 0.0
+        w_announcement = 0.10 if has_announcement else 0.0
     elif has_hard:
-        w_hard, w_soft, w_gate = 0.70, 0.00, 0.30
+        w_hard, w_soft, w_gate = 0.60, 0.00, 0.20
+        w_dragon_tiger = 0.10 if has_dragon_tiger else 0.0
+        w_announcement = 0.10 if has_announcement else 0.0
     elif has_soft:
-        w_hard, w_soft, w_gate = 0.00, 0.70, 0.30
+        w_hard, w_soft, w_gate = 0.00, 0.60, 0.20
+        w_dragon_tiger = 0.10 if has_dragon_tiger else 0.0
+        w_announcement = 0.10 if has_announcement else 0.0
     else:
         # No data at all
         result.final_signal = "hold"
@@ -135,7 +163,9 @@ def fuse_signals(
     result.final_score = (
         result.hard_score * w_hard +
         result.soft_score * w_soft +
-        result.gate_score * w_gate
+        result.gate_score * w_gate +
+        result.dragon_tiger_score * w_dragon_tiger +
+        result.announcement_score * w_announcement
     )
 
     # Classify

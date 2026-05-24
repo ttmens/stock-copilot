@@ -174,6 +174,8 @@ async def _analyze_and_fuse(
             hard=hard,
             agents=agents,
             is_st="ST" in snap.name,
+            dragon_tiger_entries=[e.model_dump() for e in snap.dragon_tiger] if snap.dragon_tiger else None,
+            announcement_result=None,  # Will be added when AnnouncementAgent is integrated
         )
 
         analysis = StockAnalysis(

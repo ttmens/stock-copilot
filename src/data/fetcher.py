@@ -27,6 +27,7 @@ from src.data.models import (
     WatchlistItem,
 )
 from src.data.providers import eastmoney, tencent, sina
+from src.data.providers.dragon_tiger import DragonTigerProvider
 from src.data.fetcher_utils import calc_ma
 
 logger = logging.getLogger(__name__)

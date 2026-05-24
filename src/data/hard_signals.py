@@ -165,6 +165,19 @@ def _clip(x: float) -> float:
     return max(-1.0, min(1.0, x))
 
 
+def _dragon_tiger_score(entries: list[dict]) -> float:
+    """Score dragon tiger entries.
+    
+    Positive net buy = bullish, negative = bearish.
+    Normalized: 1 亿 = +1.0, -1 亿 = -1.0
+    """
+    if not entries:
+        return 0.0
+    
+    total_net = sum(e.get("net_buy", 0) for e in entries)
+    return max(-1.0, min(1.0, total_net / 1e8))
+
+
 def _composite_score(signals: HardSignals) -> float:
     """Weighted composite of all hard signals.
 
