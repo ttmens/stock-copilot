@@ -127,6 +127,91 @@ header .meta { font-size: 0.875rem; color: var(--text-secondary); }
     margin-bottom: 12px;
 }
 
+/* 信号评分面板 */
+.score-section {
+    margin: 8px 0 12px;
+    padding: 10px 12px;
+    background: var(--bg-elevated);
+    border-radius: 8px;
+}
+.score-bar-bg {
+    height: 8px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 4px;
+}
+.score-bar-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.3s, background 0.3s;
+}
+.score-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.7rem;
+    color: var(--text-secondary);
+}
+.score-value {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: 0.85rem;
+}
+.confidence-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 6px;
+    font-size: 0.75rem;
+}
+.confidence-label { color: var(--text-secondary); }
+.confidence-dots { display: flex; gap: 3px; }
+.conf-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.1);
+}
+.conf-dot.filled { background: var(--accent); }
+.confidence-value {
+    font-family: var(--font-mono);
+    color: var(--accent);
+    font-weight: 600;
+    margin-left: auto;
+}
+
+/* 硬信号指标行 */
+.metrics-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+}
+.metric {
+    flex: 1;
+    min-width: 60px;
+    padding: 6px 8px;
+    background: var(--bg-elevated);
+    border-radius: 6px;
+    text-align: center;
+    border: 1px solid var(--border);
+}
+.metric.up { border-color: rgba(34,197,94,0.3); }
+.metric.down { border-color: rgba(239,68,68,0.3); }
+.metric-label {
+    display: block;
+    font-size: 0.65rem;
+    color: var(--text-secondary);
+    margin-bottom: 2px;
+}
+.metric-value {
+    display: block;
+    font-family: var(--font-mono);
+    font-weight: 600;
+    font-size: 0.8rem;
+}
+.metric.up .metric-value { color: var(--bullish); }
+.metric.down .metric-value { color: var(--bearish); }
+
 .dimension-table {
     width: 100%;
     font-size: 0.8rem;
@@ -233,22 +318,69 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     <div class="section-title">自选股分析 ({{ stocks|length }})</div>
 
     <div class="stock-grid">
-        {% for stock in stocks %}
+            {% for stock in stocks %}
         <div class="stock-card">
             <div class="stock-header">
                 <div>
                     <span class="stock-code">{{ stock.code }}</span>
                     <span class="stock-name">{{ stock.name }}</span>
                 </div>
-                {% set sent_class = 'sentiment-' + stock.overall_sentiment %}
-                {% set sent_label = {'bullish': '🟢 偏多', 'bearish': '🔴 偏空', 'neutral': '⚪ 中性'}[stock.overall_sentiment] %}
-                <span class="sentiment-badge {{ sent_class }}">{{ sent_label }}</span>
+                {% set sent_class = 'sentiment-' + (stock.overall_sentiment if stock.overall_sentiment in ['strong_buy','buy','bullish'] else 'bullish' if '买' in stock.overall_focus or '多' in stock.overall_focus else 'bearish' if '卖' in stock.overall_focus or '空' in stock.overall_focus else 'neutral') %}
+                <span class="sentiment-badge {{ sent_class }}">{{ stock.overall_focus }}</span>
             </div>
 
-            {% if stock.overall_focus %}
-            <div class="stock-focus">关注: {{ stock.overall_focus }}</div>
-            {% endif %}
+            <!-- 综合评分条 -->
+            <div class="score-section">
+                <div class="score-bar-bg">
+                    <div class="score-bar-fill" style="width: {{ ((stock.hard_score or 0) * 0.5 + (stock.confidence or 0) * 0.5 * 0.5 + 0.5) * 100 }}%; background: {{ '#22C55E' if (stock.hard_score or 0) > 0.2 else '#EF4444' if (stock.hard_score or 0) < -0.2 else '#94A3B8' }};"></div>
+                </div>
+                <div class="score-labels">
+                    <span>看空</span>
+                    <span class="score-value">{{ '%+.2f'|format(stock.hard_score or 0) }}</span>
+                    <span>看多</span>
+                </div>
+                {% if stock.confidence %}
+                <div class="confidence-row">
+                    <span class="confidence-label">置信度</span>
+                    <div class="confidence-dots">
+                        {% for i in range(5) %}
+                        <span class="conf-dot {{ 'filled' if i < (stock.confidence * 5)|round(0, 'floor')|int else '' }}"></span>
+                        {% endfor %}
+                    </div>
+                    <span class="confidence-value">{{ (stock.confidence * 100)|round(0) }}%</span>
+                </div>
+                {% endif %}
+            </div>
 
+            <!-- 硬信号指标 -->
+            <div class="metrics-row">
+                {% if stock.momentum_5d is not none %}
+                <div class="metric {{ 'up' if stock.momentum_5d > 0 else 'down' }}">
+                    <span class="metric-label">5日动量</span>
+                    <span class="metric-value">{{ '%+.1f'|format(stock.momentum_5d) }}%</span>
+                </div>
+                {% endif %}
+                {% if stock.ma_alignment %}
+                <div class="metric {{ 'up' if stock.ma_alignment == 'bullish' else 'down' if stock.ma_alignment == 'bearish' else '' }}">
+                    <span class="metric-label">均线</span>
+                    <span class="metric-value">{{ {'bullish': '多头', 'bearish': '空头', 'neutral': '交叉'}[stock.ma_alignment] }}</span>
+                </div>
+                {% endif %}
+                {% if stock.volume_ratio is not none %}
+                <div class="metric {{ 'up' if stock.volume_ratio > 1.2 else 'down' if stock.volume_ratio < 0.8 else '' }}">
+                    <span class="metric-label">量比</span>
+                    <span class="metric-value">{{ stock.volume_ratio }}</span>
+                </div>
+                {% endif %}
+                {% if stock.pe_ttm is not none %}
+                <div class="metric">
+                    <span class="metric-label">PE</span>
+                    <span class="metric-value">{{ stock.pe_ttm }}</span>
+                </div>
+                {% endif %}
+            </div>
+
+            <!-- LLM 分析维度 -->
             <table class="dimension-table">
                 <thead><tr><th>维度</th><th>状态</th><th>结论</th></tr></thead>
                 <tbody>
@@ -256,7 +388,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
                 <tr>
                     <td>{{ dim_name }}</td>
                     <td>{% if dim.status == 'ok' %}✅{% elif dim.status == 'unavailable' %}⏸️{% else %}❌{% endif %}</td>
-                    <td>{{ dim.summary[:80] }}{% if dim.summary|length > 80 %}...{% endif %}</td>
+                    <td>{{ dim.summary[:60] }}{% if dim.summary|length > 60 %}...{% endif %}</td>
                 </tr>
                 {% endfor %}
                 </tbody>
@@ -335,11 +467,46 @@ def generate_site(report: Report) -> str:
 
     stocks = []
     for a in report.analyses:
+        # Extract hard signal data from snapshot if available
+        snap = a.snapshot
+        bars = snap.bars or []
+        ma = getattr(snap, 'ma', None)
+        valuation = getattr(snap, 'valuation', None)
+        capital = getattr(snap, 'capital', None)
+
+        # Compute hard signals inline (same logic as pipeline)
+        from src.data.hard_signals import compute_hard_signals
+        from src.data.signal_fusion import fuse_signals
+
+        hard = compute_hard_signals(
+            bars=bars,
+            ma=ma if ma and ma.ma5 else None,
+            valuation=valuation,
+            capital=capital,
+        )
+        agents = {"technical": a.technical, "fundamental": a.fundamental, "capital": a.capital}
+        fused = fuse_signals(
+            code=snap.code, name=snap.name,
+            hard=hard, agents=agents,
+            is_st="ST" in snap.name,
+        )
+
         stocks.append({
-            "code": a.snapshot.code,
-            "name": a.snapshot.name,
-            "overall_sentiment": a.overall_sentiment,
-            "overall_focus": a.overall_focus,
+            "code": snap.code,
+            "name": snap.name,
+            "overall_sentiment": fused.final_signal,
+            "overall_focus": fused.signal_label,
+            "confidence": round(fused.confidence, 2),
+            # Hard signals
+            "hard_score": round(hard.composite_score, 2),
+            "momentum_20d": round(hard.momentum_20d, 2) if hard.momentum_20d else None,
+            "momentum_5d": round(hard.momentum_5d, 2) if hard.momentum_5d else None,
+            "ma_alignment": hard.ma_alignment,
+            "volume_ratio": round(hard.volume_ratio, 2) if hard.volume_ratio else None,
+            "pe_ttm": round(valuation.pe_ttm, 1) if valuation and valuation.pe_ttm else None,
+            "pb": round(valuation.pb, 2) if valuation and valuation.pb else None,
+            "mcap_yi": round(valuation.mcap / 1e8, 0) if valuation else None,
+            # Soft signals (from agents)
             "technical": {
                 "status": a.technical.status.value,
                 "summary": a.technical.summary,

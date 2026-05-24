@@ -110,6 +110,91 @@ header .meta { font-size: 0.875rem; color: var(--text-secondary); }
     margin-bottom: 12px;
 }
 
+/* 信号评分面板 */
+.score-section {
+    margin: 8px 0 12px;
+    padding: 10px 12px;
+    background: var(--bg-elevated);
+    border-radius: 8px;
+}
+.score-bar-bg {
+    height: 8px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 4px;
+}
+.score-bar-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.3s, background 0.3s;
+}
+.score-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.7rem;
+    color: var(--text-secondary);
+}
+.score-value {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: 0.85rem;
+}
+.confidence-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 6px;
+    font-size: 0.75rem;
+}
+.confidence-label { color: var(--text-secondary); }
+.confidence-dots { display: flex; gap: 3px; }
+.conf-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.1);
+}
+.conf-dot.filled { background: var(--accent); }
+.confidence-value {
+    font-family: var(--font-mono);
+    color: var(--accent);
+    font-weight: 600;
+    margin-left: auto;
+}
+
+/* 硬信号指标行 */
+.metrics-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+}
+.metric {
+    flex: 1;
+    min-width: 60px;
+    padding: 6px 8px;
+    background: var(--bg-elevated);
+    border-radius: 6px;
+    text-align: center;
+    border: 1px solid var(--border);
+}
+.metric.up { border-color: rgba(34,197,94,0.3); }
+.metric.down { border-color: rgba(239,68,68,0.3); }
+.metric-label {
+    display: block;
+    font-size: 0.65rem;
+    color: var(--text-secondary);
+    margin-bottom: 2px;
+}
+.metric-value {
+    display: block;
+    font-family: var(--font-mono);
+    font-weight: 600;
+    font-size: 0.8rem;
+}
+.metric.up .metric-value { color: var(--bullish); }
+.metric.down .metric-value { color: var(--bearish); }
+
 .dimension-table {
     width: 100%;
     font-size: 0.8rem;

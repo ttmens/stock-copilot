@@ -31,7 +31,8 @@ def cmd_analyze(args: argparse.Namespace) -> None:
         symbols = [s.strip() for s in args.symbols.split(",")]
 
     logger.info("Starting analysis: type=%s symbols=%s", report_type.value, symbols or "watchlist")
-    report = run_analysis(report_type, symbols)
+    import asyncio
+    report = asyncio.run(run_analysis(report_type, symbols))
     logger.info("Report saved to: %s", report.file_path)
 
     # Also generate site
