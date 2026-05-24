@@ -1,0 +1,30 @@
+llm:
+  base_url: "https://api.deepseek.com"
+  model: "deepseek-chat"
+  temperature: 0.3
+  max_tokens: 1024
+  timeout: 60
+
+schedule:
+  pre_market: "08:30"
+  post_market: "16:00"
+  timezone: "Asia/Shanghai"
+
+notify:
+  type: "wecom"          # wecom | email
+  wecom_webhook: "${WECOM_WEBHOOK}"
+
+data:
+  bar_count: 60
+  announcement_days: 7
+  retry: 3
+  retry_delay: 2
+
+report:
+  include_market_overview: true
+  output_dir: "output/reports"
+
+site:
+  output_dir: "site"
+  archive_dir: "site/archive"
+  data_dir: "site/data"

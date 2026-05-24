@@ -1,0 +1,1 @@
+"""Stock Copilot reports module."""

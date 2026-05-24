@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv/
+env/
+venv/
+
+# Environment
+.env
+
+# Data & output
+data/*.db
+data/*.sqlite
+output/reports/*.md
+output/reports/*.json
+
+# Site (generated — only committed via publish)
+site/index.html
+site/archive/
+site/data/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log

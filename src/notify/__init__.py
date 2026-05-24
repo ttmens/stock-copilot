@@ -1,0 +1,1 @@
+"""Stock Copilot notify module."""

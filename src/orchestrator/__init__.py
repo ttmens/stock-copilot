@@ -1,0 +1,1 @@
+"""Stock Copilot orchestrator module."""
