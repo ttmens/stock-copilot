@@ -24,6 +24,7 @@ from src.data.models import (
 from src.agents.technical import TechnicalAgent
 from src.agents.fundamental import FundamentalAgent
 from src.agents.capital import CapitalAgent
+from src.agents.announcement import AnnouncementAgent
 from src.reports.generator import generate_report
 
 logger = logging.getLogger(__name__)
@@ -146,6 +147,7 @@ async def _analyze_and_fuse(
     tech = TechnicalAgent()
     fund = FundamentalAgent()
     cap = CapitalAgent()
+    ann = AnnouncementAgent()
 
     async def process_one(snap: StockSnapshot):
         # A. Compute hard signals (fast, no LLM)
@@ -160,6 +162,9 @@ async def _analyze_and_fuse(
         t_result = await tech.analyze(snap)
         f_result = await fund.analyze(snap)
         c_result = await cap.analyze(snap)
+        # C. Announcement analysis
+        ann_titles = [a.title for a in snap.announcements] if snap.announcements else []
+        a_result = await ann.analyze(snap.code, snap.name, ann_titles)
 
         agents = {
             "technical": t_result,
@@ -167,7 +172,7 @@ async def _analyze_and_fuse(
             "capital": c_result,
         }
 
-        # C. Fuse signals
+        # D. Fuse signals
         fused = fuse_signals(
             code=snap.code,
             name=snap.name,
@@ -175,7 +180,7 @@ async def _analyze_and_fuse(
             agents=agents,
             is_st="ST" in snap.name,
             dragon_tiger_entries=[e.model_dump() for e in snap.dragon_tiger] if snap.dragon_tiger else None,
-            announcement_result=None,  # Will be added when AnnouncementAgent is integrated
+            announcement_result=a_result,
         )
 
         analysis = StockAnalysis(
@@ -183,6 +188,7 @@ async def _analyze_and_fuse(
             technical=t_result,
             fundamental=f_result,
             capital=c_result,
+            announcement=a_result,
             overall_sentiment=fused.final_signal,
             overall_focus=fused.signal_label,
         )

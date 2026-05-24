@@ -329,17 +329,15 @@ HTML_TEMPLATE = """<!DOCTYPE html>
                 <span class="sentiment-badge {{ sent_class }}">{{ stock.overall_focus }}</span>
             </div>
 
-            <!-- 综合评分条 -->
+            <!-- 5 层信号分解面板 -->
             <div class="score-section">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+                    <span style="font-size:0.75rem;color:var(--text-secondary)">综合评分</span>
+                    <span class="score-value" style="color:{{ '#22C55E' if stock.signal_breakdown.final_score > 0.2 else '#EF4444' if stock.signal_breakdown.final_score < -0.2 else '#94A3B8' }}">{{ '%+.3f'|format(stock.signal_breakdown.final_score) }}</span>
+                </div>
                 <div class="score-bar-bg">
-                    <div class="score-bar-fill" style="width: {{ ((stock.hard_score or 0) * 0.5 + (stock.confidence or 0) * 0.5 * 0.5 + 0.5) * 100 }}%; background: {{ '#22C55E' if (stock.hard_score or 0) > 0.2 else '#EF4444' if (stock.hard_score or 0) < -0.2 else '#94A3B8' }};"></div>
+                    <div class="score-bar-fill" style="width: {{ ((stock.signal_breakdown.final_score + 1) / 2 * 100) }}%; background: {{ '#22C55E' if stock.signal_breakdown.final_score > 0.2 else '#EF4444' if stock.signal_breakdown.final_score < -0.2 else '#94A3B8' }};"></div>
                 </div>
-                <div class="score-labels">
-                    <span>看空</span>
-                    <span class="score-value">{{ '%+.2f'|format(stock.hard_score or 0) }}</span>
-                    <span>看多</span>
-                </div>
-                {% if stock.confidence %}
                 <div class="confidence-row">
                     <span class="confidence-label">置信度</span>
                     <div class="confidence-dots">
@@ -349,7 +347,33 @@ HTML_TEMPLATE = """<!DOCTYPE html>
                     </div>
                     <span class="confidence-value">{{ (stock.confidence * 100)|round(0) }}%</span>
                 </div>
-                {% endif %}
+                <!-- 权重分解 -->
+                <div style="margin-top:8px;display:grid;grid-template-columns:1fr 1fr;gap:4px;font-size:0.7rem">
+                    <div style="display:flex;justify-content:space-between;padding:2px 6px;background:rgba(255,255,255,0.03);border-radius:4px">
+                        <span style="color:var(--text-secondary)">硬信号 (40%)</span>
+                        <span style="font-family:var(--font-mono);color:{{ '#22C55E' if stock.signal_breakdown.hard_score > 0 else '#EF4444' if stock.signal_breakdown.hard_score < 0 else 'var(--text-secondary)' }}">{{ '%+.3f'|format(stock.signal_breakdown.hard_score) }}</span>
+                    </div>
+                    <div style="display:flex;justify-content:space-between;padding:2px 6px;background:rgba(255,255,255,0.03);border-radius:4px">
+                        <span style="color:var(--text-secondary)">软信号 (25%)</span>
+                        <span style="font-family:var(--font-mono);color:{{ '#22C55E' if stock.signal_breakdown.soft_score > 0 else '#EF4444' if stock.signal_breakdown.soft_score < 0 else 'var(--text-secondary)' }}">{{ '%+.3f'|format(stock.signal_breakdown.soft_score) }}</span>
+                    </div>
+                    <div style="display:flex;justify-content:space-between;padding:2px 6px;background:rgba(255,255,255,0.03);border-radius:4px">
+                        <span style="color:var(--text-secondary)">门控 (15%)</span>
+                        <span style="font-family:var(--font-mono);color:{{ '#22C55E' if stock.signal_breakdown.gate_score > 0.5 else '#EF4444' if stock.signal_breakdown.gate_score < 0.5 else 'var(--text-secondary)' }}">{{ '%+.3f'|format(stock.signal_breakdown.gate_score) }}</span>
+                    </div>
+                    {% if stock.signal_breakdown.has_dragon_tiger %}
+                    <div style="display:flex;justify-content:space-between;padding:2px 6px;background:rgba(255,255,255,0.03);border-radius:4px">
+                        <span style="color:var(--text-secondary)">龙虎榜 (10%)</span>
+                        <span style="font-family:var(--font-mono);color:{{ '#22C55E' if stock.signal_breakdown.dragon_tiger_score > 0 else '#EF4444' if stock.signal_breakdown.dragon_tiger_score < 0 else 'var(--text-secondary)' }}">{{ '%+.3f'|format(stock.signal_breakdown.dragon_tiger_score) }}</span>
+                    </div>
+                    {% endif %}
+                    {% if stock.signal_breakdown.has_announcement %}
+                    <div style="display:flex;justify-content:space-between;padding:2px 6px;background:rgba(255,255,255,0.03);border-radius:4px">
+                        <span style="color:var(--text-secondary)">公告 (10%)</span>
+                        <span style="font-family:var(--font-mono);color:{{ '#22C55E' if stock.signal_breakdown.announcement_score > 0 else '#EF4444' if stock.signal_breakdown.announcement_score < 0 else 'var(--text-secondary)' }}">{{ '%+.3f'|format(stock.signal_breakdown.announcement_score) }}</span>
+                    </div>
+                    {% endif %}
+                </div>
             </div>
 
             <!-- 硬信号指标 -->
@@ -384,15 +408,50 @@ HTML_TEMPLATE = """<!DOCTYPE html>
             <table class="dimension-table">
                 <thead><tr><th>维度</th><th>状态</th><th>结论</th></tr></thead>
                 <tbody>
-                {% for dim_name, dim in [('技术面', stock.technical), ('公告', stock.fundamental), ('资金', stock.capital)] %}
+                {% for dim_name, dim in [('技术面', stock.technical), ('基本面', stock.fundamental), ('资金', stock.capital), ('公告', stock.announcement)] %}
+                {% if dim.status != 'unavailable' or dim_name in ['技术面', '资金'] %}
                 <tr>
                     <td>{{ dim_name }}</td>
                     <td>{% if dim.status == 'ok' %}✅{% elif dim.status == 'unavailable' %}⏸️{% else %}❌{% endif %}</td>
-                    <td>{{ dim.summary[:60] }}{% if dim.summary|length > 60 %}...{% endif %}</td>
+                    <td>{{ dim.summary[:50] }}{% if dim.summary|length > 50 %}...{% endif %}</td>
                 </tr>
+                {% endif %}
                 {% endfor %}
                 </tbody>
             </table>
+
+            <!-- 龙虎榜数据 -->
+            {% if stock.dragon_tiger %}
+            <div style="margin:8px 0;padding:10px 12px;background:var(--bg-elevated);border-radius:8px;border-left:3px solid #8B5CF6">
+                <div style="font-size:0.75rem;font-weight:600;color:#8B5CF6;margin-bottom:6px">🐉 龙虎榜</div>
+                {% for dt in stock.dragon_tiger %}
+                <div style="font-size:0.75rem;margin-bottom:4px;display:flex;justify-content:space-between;align-items:center">
+                    <span style="color:var(--text-secondary)">{{ dt.reason }}</span>
+                    <span style="font-family:var(--font-mono);color:{{ '#22C55E' if dt.net_buy > 0 else '#EF4444' }}">
+                        {{ '%+.0f'|format(dt.net_buy) if dt.net_buy | abs >= 10000 else '%+.2f万'|format(dt.net_buy / 10000) }}
+                    </span>
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            <!-- 公告关键事件 -->
+            {% if stock.announcement.key_events %}
+            <div style="margin:8px 0;padding:10px 12px;background:var(--bg-elevated);border-radius:8px;border-left:3px solid #F59E0B">
+                <div style="font-size:0.75rem;font-weight:600;color:#F59E0B;margin-bottom:6px">📢 公告关键事件</div>
+                {% for evt in stock.announcement.key_events[:3] %}
+                <div style="font-size:0.75rem;margin-bottom:3px;display:flex;gap:6px;align-items:flex-start">
+                    <span style="color:{{ '#22C55E' if evt.impact == 'positive' else '#EF4444' if evt.impact == 'negative' else 'var(--text-secondary)' }}">
+                        {{ '🟢' if evt.impact == 'positive' else '🔴' if evt.impact == 'negative' else '⚪' }}
+                    </span>
+                    <span style="color:var(--text-primary)">{{ evt.event }}</span>
+                    {% if evt.confidence %}
+                    <span style="font-family:var(--font-mono);color:var(--text-secondary);margin-left:auto;font-size:0.65rem">{{ (evt.confidence * 100)|round(0) }}%</span>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
 
             {% if stock.risk_points %}
             <div class="risk-points">
@@ -489,7 +548,25 @@ def generate_site(report: Report) -> str:
             code=snap.code, name=snap.name,
             hard=hard, agents=agents,
             is_st="ST" in snap.name,
+            dragon_tiger_entries=[e.model_dump() for e in snap.dragon_tiger] if snap.dragon_tiger else None,
+            announcement_result=a.announcement,
         )
+
+        # Dragon tiger entries for display
+        dt_entries = []
+        for dt in snap.dragon_tiger[:3]:  # Show top 3
+            dt_entries.append({
+                "date": dt.date,
+                "reason": dt.reason,
+                "net_buy": dt.net_buy,
+                "buy_amount": dt.buy_amount,
+                "sell_amount": dt.sell_amount,
+            })
+
+        # Announcement key events from LLM
+        ann_events = []
+        if a.announcement.status.value != "unavailable" and a.announcement.raw_json:
+            ann_events = a.announcement.raw_json.get("key_events", [])
 
         stocks.append({
             "code": snap.code,
@@ -522,10 +599,29 @@ def generate_site(report: Report) -> str:
                 "summary": a.capital.summary,
                 "sentiment": a.capital.sentiment,
             },
+            "announcement": {
+                "status": a.announcement.status.value,
+                "summary": a.announcement.summary,
+                "sentiment": a.announcement.sentiment,
+                "key_events": ann_events,
+            },
             "risk_points": [
-                r for agent in [a.technical, a.fundamental, a.capital]
+                r for agent in [a.technical, a.fundamental, a.capital, a.announcement]
                 for r in agent.risk_points
             ],
+            # 5-layer signal breakdown
+            "signal_breakdown": {
+                "hard_score": round(fused.hard_score, 3),
+                "soft_score": round(fused.soft_score, 3),
+                "gate_score": round(fused.gate_score, 3),
+                "dragon_tiger_score": round(fused.dragon_tiger_score, 3),
+                "announcement_score": round(fused.announcement_score, 3),
+                "final_score": round(fused.final_score, 3),
+                "has_dragon_tiger": fused.data_available.get("dragon_tiger", False),
+                "has_announcement": fused.data_available.get("announcement", False),
+            },
+            # Dragon tiger data for display
+            "dragon_tiger": dt_entries,
         })
 
     # Load archive

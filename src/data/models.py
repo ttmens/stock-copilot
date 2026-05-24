@@ -113,6 +113,9 @@ class StockAnalysis(BaseModel):
     technical: AgentResult
     fundamental: AgentResult
     capital: AgentResult
+    announcement: AgentResult = Field(default_factory=lambda: AgentResult(
+        agent_name="announcement", status=AgentStatus.UNAVAILABLE, sentiment="neutral", summary="无公告数据"
+    ))
     overall_sentiment: str = "neutral"
     overall_focus: str = ""
 

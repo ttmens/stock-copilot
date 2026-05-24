@@ -1,8 +1,8 @@
 {
   "meta": {
     "report_type": "pre",
-    "trade_date": "2026-05-24",
-    "generated_at": "2026-05-24T23:45:18.031174",
+    "trade_date": "2026-05-25",
+    "generated_at": "2026-05-25T07:09:20.636246",
     "symbol_count": 1,
     "disclaimer": "⚠️ 本报告仅供个人研究参考，不构成投资建议。报告内容基于公开数据和 AI 分析生成，可能存在错误或遗漏。股市有风险，决策需谨慎。作者不对任何投资损失承担责任。"
   },
@@ -41,11 +41,33 @@
         "summary": "",
         "sentiment": "neutral"
       },
-      "risk_points": []
+      "announcement": {
+        "status": "unavailable",
+        "summary": "无公告数据",
+        "sentiment": "neutral",
+        "key_events": []
+      },
+      "risk_points": [],
+      "signal_breakdown": {
+        "hard_score": 0.0,
+        "soft_score": 1.0,
+        "gate_score": 0.5,
+        "dragon_tiger_score": 0.0,
+        "announcement_score": 0.0,
+        "final_score": 0.325,
+        "has_dragon_tiger": false,
+        "has_announcement": false
+      },
+      "dragon_tiger": []
     }
   ],
   "failed_symbols": [],
   "archive": [
+    {
+      "date": "2026-05-25",
+      "type": "pre",
+      "url": "archive/2026-05-25-pre.html"
+    },
     {
       "date": "2026-05-24",
       "type": "pre",
