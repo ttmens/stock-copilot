@@ -115,7 +115,7 @@ class LLMClient:
 规则：
 1. 只使用用户提供的 JSON 数据，不得编造任何数字、公告、资金数据
 2. 数据缺失时，status 设为 "unavailable"，summary 说明缺失原因
-3. 输出必须是合法 JSON，不含 markdown 代码块
+3. 输出必须是合法 json 格式，不含 markdown 代码块
 4. 不做买卖建议，不使用「必涨」「必买」等词汇
 5. summary 100-200 字，focus_points 和 risk_points 各 1-3 条"""
 

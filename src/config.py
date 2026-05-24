@@ -23,6 +23,11 @@ def _load_yaml(path: Path) -> dict:
 
 
 class LLMConfig(BaseModel):
+    """Multi-provider LLM configuration."""
+    providers: list[dict] = Field(default_factory=list)
+    mode: str = "fallback"  # "fallback" | "concurrent"
+    max_retries: int = 2
+    # Backward compat (single-provider legacy)
     base_url: str = "https://api.deepseek.com"
     model: str = "deepseek-chat"
     temperature: float = 0.3
