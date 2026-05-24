@@ -34,3 +34,5 @@ Thumbs.db
 
 # Logs
 *.log
+verify_full.py
+*.pyc

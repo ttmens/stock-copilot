@@ -1,0 +1,186 @@
+:root {
+    --bg-primary: #0B1220;
+    --bg-card: #151E2E;
+    --bg-elevated: #1C2738;
+    --border: rgba(255,255,255,0.08);
+    --text-primary: #E8ECF4;
+    --text-secondary: #8892A8;
+    --accent: #3B82F6;
+    --accent-glow: #60A5FA;
+    --bullish: #22C55E;
+    --bearish: #EF4444;
+    --neutral: #94A3B8;
+    --warning: #F59E0B;
+    --font-cn: "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+    --font-mono: "JetBrains Mono", "SF Mono", monospace;
+    --radius-card: 12px;
+    --radius-btn: 8px;
+    --radius-pill: 999px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: var(--font-cn);
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.6;
+    min-height: 100vh;
+    padding: 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 16px;
+}
+
+header {
+    background: var(--bg-elevated);
+    border-bottom: 1px solid var(--border);
+    padding: 16px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+header h1 { font-size: 1.25rem; font-weight: 600; }
+header .meta { font-size: 0.875rem; color: var(--text-secondary); }
+
+.market-bar {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-card);
+    padding: 12px 20px;
+    margin: 16px 0;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-size: 0.9rem;
+}
+.market-bar .index { font-family: var(--font-mono); font-weight: 600; font-size: 1.1rem; }
+.market-bar .up { color: var(--bullish); }
+.market-bar .down { color: var(--bearish); }
+
+.section-title {
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 24px 0 12px;
+    color: var(--text-primary);
+}
+
+.stock-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.stock-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-card);
+    padding: 16px;
+    transition: border-color 0.2s;
+}
+.stock-card:hover { border-color: var(--accent); }
+
+.stock-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+.stock-code { font-family: var(--font-mono); font-weight: 600; font-size: 1rem; }
+.stock-name { color: var(--text-secondary); font-size: 0.875rem; }
+
+.sentiment-badge {
+    padding: 2px 10px;
+    border-radius: var(--radius-pill);
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+.sentiment-bullish { background: rgba(34,197,94,0.15); color: var(--bullish); }
+.sentiment-bearish { background: rgba(239,68,68,0.15); color: var(--bearish); }
+.sentiment-neutral { background: rgba(148,163,184,0.15); color: var(--neutral); }
+
+.stock-focus {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-bottom: 12px;
+}
+
+.dimension-table {
+    width: 100%;
+    font-size: 0.8rem;
+    border-collapse: collapse;
+    margin-bottom: 12px;
+}
+.dimension-table th, .dimension-table td {
+    padding: 6px 8px;
+    border: 1px solid var(--border);
+    text-align: left;
+}
+.dimension-table th { background: var(--bg-elevated); color: var(--text-secondary); font-weight: 500; }
+
+.risk-points {
+    font-size: 0.8rem;
+    color: var(--warning);
+    background: rgba(245,158,11,0.08);
+    padding: 8px 12px;
+    border-radius: 8px;
+    border-left: 3px solid var(--warning);
+}
+.risk-label { font-weight: 600; }
+
+.archive-section {
+    margin: 24px 0;
+    padding: 16px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-card);
+}
+.archive-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 8px;
+}
+.archive-item {
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 0.85rem;
+    padding: 4px 12px;
+    border-radius: var(--radius-btn);
+    border: 1px solid var(--border);
+    transition: all 0.2s;
+}
+.archive-item:hover {
+    background: var(--bg-elevated);
+    border-color: var(--accent);
+}
+
+.disclaimer {
+    background: var(--bg-elevated);
+    border-left: 4px solid var(--warning);
+    padding: 12px 16px;
+    margin: 24px 0;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    border-radius: 0 var(--radius-btn) var(--radius-btn) 0;
+    line-height: 1.5;
+}
+
+footer {
+    text-align: center;
+    padding: 16px;
+    color: var(--text-secondary);
+    font-size: 0.75rem;
+    border-top: 1px solid var(--border);
+}
+
+@media (max-width: 480px) {
+    .stock-grid { grid-template-columns: 1fr; }
+    header { padding: 12px 16px; }
+    .container { padding: 8px; }
+}
