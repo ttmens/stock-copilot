@@ -104,22 +104,33 @@ a:hover { color: var(--rausch-active); }
 .brand {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
 }
 .brand-icon {
-    width: 28px; height: 28px;
-    border-radius: var(--radius-sm);
-    background: var(--gradient-brand);
+    width: 32px; height: 32px;
+    flex-shrink: 0;
+}
+.brand-icon svg {
+    width: 100%; height: 100%;
+}
+.brand-text {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 14px;
+    flex-direction: column;
+    gap: 1px;
 }
 .brand-name {
-    font-size: 16px;
-    font-weight: 600;
-    letter-spacing: -0.02em;
-    color: var(--ink);
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: #fff;
+    line-height: 1.2;
+}
+.brand-tagline {
+    font-size: 11px;
+    font-weight: 400;
+    color: rgba(255,255,255,0.45);
+    letter-spacing: 0.02em;
+    line-height: 1.2;
 }
 
 /* Nav pills */
