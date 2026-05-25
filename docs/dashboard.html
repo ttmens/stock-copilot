@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>数据看板 — Stock Copilot</title>
+    <link rel="stylesheet" href="assets/theme.css">
+</head>
+<body>
+
+<header class="site-header">
+    <div class="brand">
+        <div class="brand-icon">📊</div>
+        <span class="brand-name">Stock Copilot</span>
+    </div>
+    
+<div class="site-nav">
+    <a href="index.html">首页</a>
+    <a href="dashboard.html" class="active">看板</a>
+    <a href="history.html">历史</a>
+</div>
+
+    <span class="header-meta">2026-05-25 盘前</span>
+</header>
+
+<div class="shell-wide">
+
+    <a href="index.html" class="back-link">← 返回首页</a>
+
+    <div class="page-title">📋 数据看板</div>
+    <div class="page-subtitle">自选股横向对比 + 信号分布一览</div>
+
+    
+    <div class="market-temp" style="margin-bottom:24px">
+        <div class="market-temp-head">
+            <span class="market-temp-label">市场温度</span>
+            <div>
+                <span class="market-temp-index">上证指数 3200.00</span>
+                
+                <span class="market-temp-change up">&nbsp;+1.50%</span>
+                
+            </div>
+        </div>
+        <div class="signal-distribution">
+            <span class="sig-stat"><span class="sig-dot green"></span> 看多 1</span>
+            <span class="sig-stat"><span class="sig-dot gray"></span> 观望 0</span>
+            <span class="sig-stat"><span class="sig-dot red"></span> 看空 0</span>
+        </div>
+    </div>
+    
+
+    <!-- Comparison table -->
+    <div class="detail-section" style="margin-bottom:24px">
+        <div class="detail-section-title">自选股对比</div>
+        <div style="overflow-x:auto">
+        <table class="comp-table">
+            <thead>
+                <tr>
+                    <th>股票</th>
+                    <th>信号</th>
+                    <th>评分</th>
+                    <th>5日动量</th>
+                    <th>均线</th>
+                    <th>量比</th>
+                    <th>PE</th>
+                    <th>置信度</th>
+                    <th>龙虎榜</th>
+                    <th>公告</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                
+                <tr>
+                    <td class="stock-cell">
+                        <a href="stock/600519.html" style="text-decoration:none;color:inherit">
+                            600519<br>
+                            <span style="font-size:11px;color:var(--muted);font-weight:400">贵州茅台</span>
+                        </a>
+                    </td>
+                    <td><span class="signal-pill buy">🟢 看多</span></td>
+                    <td style="color:#22C55E">
+                        +0.325
+                    </td>
+                    <td style="color:var(--muted)">
+                        -%
+                    </td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>70.0%</td>
+                    <td>⏸</td>
+                    <td>⏸</td>
+                </tr>
+                
+            </tbody>
+        </table>
+        </div>
+    </div>
+
+    <!-- 5-layer signal breakdown for each stock -->
+    <div class="section-title">5层信号分解</div>
+    <div style="overflow-x:auto;margin-bottom:24px">
+    <table class="comp-table">
+        <thead>
+            <tr>
+                <th>股票</th>
+                <th>硬信号 40%</th>
+                <th>软信号 25%</th>
+                <th>门控 15%</th>
+                <th>龙虎 10%</th>
+                <th>公告 10%</th>
+                <th>最终评分</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td class="stock-cell">
+                    <a href="stock/600519.html" style="text-decoration:none;color:inherit">
+                        600519 贵州茅台
+                    </a>
+                </td>
+                <td style="color:var(--muted)">
+                    +0.000
+                </td>
+                <td style="color:#22C55E">
+                    +1.000
+                </td>
+                <td style="color:var(--muted)">
+                    +0.500
+                </td>
+                <td>-</td>
+                <td>-</td>
+                <td style="font-weight:700;color:#22C55E">
+                    +0.325
+                </td>
+            </tr>
+            
+        </tbody>
+    </table>
+    </div>
+
+    <!-- Signal distribution bar -->
+    
+    <div class="detail-section" style="margin-bottom:24px">
+        <div class="detail-section-title">信号分布</div>
+        <div style="display:flex;gap:4px;height:32px;border-radius:var(--radius-sm);overflow:hidden;margin-bottom:8px">
+            
+            <div style="flex:1;background:var(--bullish);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:#fff">
+                看多 1
+            </div>
+            
+            
+            
+        </div>
+        <div style="font-size:12px;color:var(--muted)">
+            共 1 只自选股，1 只看多
+        </div>
+    </div>
+    
+
+    <div class="disclaimer">⚠️ 本报告仅供个人研究参考，不构成投资建议。报告内容基于公开数据和 AI 分析生成，可能存在错误或遗漏。股市有风险，决策需谨慎。作者不对任何投资损失承担责任。</div>
+
+    <footer class="site-footer">
+        Stock Copilot v1.3 · AI 辅助决策 · 不构成投资建议
+    </footer>
+</div>
+</body>
+</html>

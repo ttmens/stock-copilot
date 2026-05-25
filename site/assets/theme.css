@@ -79,6 +79,11 @@ a:hover { color: var(--rausch-active); }
     margin: 0 auto;
     padding: calc(64px + 24px) 20px 80px;
 }
+.shell-wide {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: calc(64px + 24px) 20px 80px;
+}
 
 /* ── Header (glass-morphism) ────────────────────────────────── */
 .site-header {
@@ -116,10 +121,52 @@ a:hover { color: var(--rausch-active); }
     letter-spacing: -0.02em;
     color: var(--ink);
 }
+
+/* Nav pills */
+.site-nav {
+    display: flex;
+    gap: 4px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid var(--hairline-soft);
+    border-radius: var(--radius-full);
+    padding: 4px;
+}
+.site-nav a {
+    padding: 5px 14px;
+    border-radius: var(--radius-full);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--muted);
+    transition: all 0.18s ease;
+}
+.site-nav a:hover { color: var(--ink); }
+.site-nav a.active {
+    background: rgba(255,255,255,0.12);
+    color: var(--ink);
+    box-shadow: 0 1px 0 rgba(0,245,255,0.1), var(--shadow-sm);
+}
 .header-meta {
     font-size: 12px;
     color: var(--muted);
     font-family: var(--font-mono);
+}
+
+/* ── Page title ─────────────────────────────────────────────── */
+.page-title {
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.page-subtitle {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--muted);
+    margin-bottom: 24px;
 }
 
 /* ── Market Temperature ─────────────────────────────────────── */
@@ -283,10 +330,7 @@ a:hover { color: var(--rausch-active); }
     justify-content: space-between;
     margin-bottom: 6px;
 }
-.score-label {
-    font-size: 12px;
-    color: var(--muted);
-}
+.score-label { font-size: 12px; color: var(--muted); }
 .score-value {
     font-family: var(--font-mono);
     font-size: 14px;
@@ -475,7 +519,7 @@ a:hover { color: var(--rausch-active); }
     line-height: 1.5;
 }
 
-/* ── Archive ────────────────────────────────────────────────── */
+/* ── Archive / Links ────────────────────────────────────────── */
 .archive-section {
     background: var(--canvas);
     border: 1px solid var(--hairline-soft);
@@ -534,16 +578,156 @@ a:hover { color: var(--rausch-active); }
 .empty-state-text { font-size: 14px; margin-bottom: 4px; }
 .empty-state-sub { font-size: 12px; color: var(--muted-soft); }
 
+/* ── Back button ────────────────────────────────────────────── */
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 20px;
+    padding: 6px 14px;
+    border-radius: var(--radius-full);
+    border: 1px solid var(--hairline-soft);
+    transition: all 0.18s ease;
+}
+.back-link:hover {
+    color: var(--ink);
+    border-color: var(--border-strong);
+    background: var(--canvas);
+}
+
+/* ── Detail page: score breakdown ───────────────────────────── */
+.detail-grid {
+    display: grid;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+@media (min-width: 640px) {
+    .detail-grid { grid-template-columns: 1fr 1fr; }
+}
+.detail-section {
+    background: var(--canvas);
+    border: 1px solid var(--hairline-soft);
+    border-radius: var(--radius-md);
+    padding: 16px 18px;
+    box-shadow: var(--shadow-sm);
+}
+.detail-section-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+.detail-score-big {
+    font-family: var(--font-mono);
+    font-size: 36px;
+    font-weight: 700;
+    text-align: center;
+    margin: 12px 0;
+}
+.detail-score-label {
+    text-align: center;
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 8px;
+}
+
+/* ── History table ──────────────────────────────────────────── */
+.history-table {
+    width: 100%;
+    font-size: 12px;
+    border-collapse: collapse;
+    margin-bottom: 16px;
+}
+.history-table th {
+    padding: 8px 10px;
+    text-align: left;
+    font-weight: 600;
+    color: var(--muted);
+    border-bottom: 1px solid var(--hairline);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+.history-table td {
+    padding: 8px 10px;
+    border-bottom: 1px solid var(--hairline-soft);
+    font-family: var(--font-mono);
+}
+.history-table tr:hover td {
+    background: rgba(255,255,255,0.02);
+}
+
+/* ── Dashboard: comparison table ────────────────────────────── */
+.comp-table {
+    width: 100%;
+    font-size: 13px;
+    border-collapse: collapse;
+    margin-bottom: 16px;
+}
+.comp-table th {
+    padding: 10px 12px;
+    text-align: left;
+    font-weight: 600;
+    color: var(--muted);
+    border-bottom: 1px solid var(--hairline);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+.comp-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--hairline-soft);
+}
+.comp-table .stock-cell {
+    font-family: var(--font-mono);
+    font-weight: 600;
+    color: var(--ink);
+}
+
+/* ── Stats cards ────────────────────────────────────────────── */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
+    margin-bottom: 24px;
+}
+.stat-card {
+    background: var(--canvas);
+    border: 1px solid var(--hairline-soft);
+    border-radius: var(--radius-md);
+    padding: 14px 16px;
+    text-align: center;
+}
+.stat-value {
+    font-family: var(--font-mono);
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--ink);
+}
+.stat-label {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 4px;
+}
+
 /* ── Responsive ─────────────────────────────────────────────── */
 @media (max-width: 900px) {
-    .shell { padding: calc(64px + 16px) 16px 80px; }
+    .shell, .shell-wide { padding: calc(64px + 16px) 16px 80px; }
     .market-temp-head { flex-direction: column; align-items: flex-start; gap: 8px; }
+    .site-nav { display: none; }
 }
 @media (max-width: 480px) {
     .stock-grid { grid-template-columns: 1fr; }
     .signal-grid { grid-template-columns: 1fr; }
     .metrics-row { flex-wrap: nowrap; overflow-x: auto; }
     .brand-name { font-size: 14px; }
+    .detail-grid { grid-template-columns: 1fr; }
+    .stats-grid { grid-template-columns: 1fr 1fr; }
 }
 
 /* ── Reduced motion ─────────────────────────────────────────── */
