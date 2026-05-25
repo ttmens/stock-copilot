@@ -2,63 +2,258 @@
   "meta": {
     "report_type": "pre",
     "trade_date": "2026-05-25",
-    "generated_at": "2026-05-25T16:48:30.877270",
-    "symbol_count": 1,
+    "generated_at": "2026-05-25T16:59:39.050538",
+    "symbol_count": 3,
     "disclaimer": "⚠️ 本报告仅供个人研究参考，不构成投资建议。报告内容基于公开数据和 AI 分析生成，可能存在错误或遗漏。股市有风险，决策需谨慎。作者不对任何投资损失承担责任。"
   },
   "market": {
     "index_name": "上证指数",
-    "close": 3200.0,
-    "change_pct": 1.5
+    "close": 4112.9,
+    "change_pct": 0.87
   },
   "stocks": [
     {
       "code": "600519",
-      "name": "贵州茅台",
-      "overall_sentiment": "buy",
-      "overall_focus": "🟢 看多",
-      "confidence": 0.7,
-      "hard_score": 0.0,
-      "momentum_20d": null,
-      "momentum_5d": null,
-      "ma_alignment": null,
-      "volume_ratio": null,
-      "pe_ttm": null,
-      "pb": null,
-      "mcap_yi": null,
+      "name": "600519",
+      "overall_sentiment": "hold",
+      "overall_focus": "⚪ 观望",
+      "confidence": 0.59,
+      "hard_score": -0.43,
+      "momentum_20d": -8.77,
+      "momentum_5d": -2.81,
+      "ma_alignment": "bearish",
+      "volume_ratio": 0.96,
+      "pe_ttm": 19.5,
+      "pb": 5.94,
+      "mcap_yi": 16103.0,
       "technical": {
         "status": "ok",
-        "summary": "均线多头排列",
-        "sentiment": "bullish"
+        "summary": "近20个交易日股价持续下跌，从1419元跌至1285.88元，跌幅约9.4%。均线呈空头排列，MA5、MA10、MA20分别位于1305、1322、1359，股价均线下方运行。成交量整体无明显放大，但下跌过程中部分交易日放量，显示抛压持续。最近两日加速下跌，创阶段新低1277元，短期趋势偏弱。",
+        "sentiment": "neutral"
       },
       "fundamental": {
         "status": "unavailable",
-        "summary": "",
+        "summary": "600519 近7日无公告数据",
         "sentiment": "neutral"
       },
       "capital": {
         "status": "unavailable",
-        "summary": "",
+        "summary": "600519 资金数据暂不可用",
         "sentiment": "neutral"
       },
       "announcement": {
         "status": "unavailable",
-        "summary": "无公告数据",
+        "summary": "无近期公告",
         "sentiment": "neutral",
         "key_events": []
       },
-      "risk_points": [],
+      "risk_points": [
+        "股价远离均线，短期或有技术性反弹需求，但趋势未改",
+        "若跌破1277元支撑，可能进一步下探",
+        "量能若持续放大但价格无法回升，可能继续走低"
+      ],
       "signal_breakdown": {
-        "hard_score": 0.0,
-        "soft_score": 1.0,
+        "hard_score": -0.426,
+        "soft_score": 0.0,
         "gate_score": 0.5,
         "dragon_tiger_score": 0.0,
         "announcement_score": 0.0,
-        "final_score": 0.325,
-        "has_dragon_tiger": false,
+        "final_score": -0.096,
+        "has_dragon_tiger": true,
         "has_announcement": false
       },
-      "dragon_tiger": []
+      "dragon_tiger": [
+        {
+          "date": "2013-01-28 00:00:00",
+          "reason": "5家机构卖出，成功率48.38%",
+          "net_buy": 0.0,
+          "buy_amount": 0.0,
+          "sell_amount": 0.0
+        },
+        {
+          "date": "2007-10-24 00:00:00",
+          "reason": "4家机构买入，成功率52.03%",
+          "net_buy": 0.0,
+          "buy_amount": 0.0,
+          "sell_amount": 0.0
+        }
+      ]
+    },
+    {
+      "code": "300750",
+      "name": "300750",
+      "overall_sentiment": "hold",
+      "overall_focus": "⚪ 观望",
+      "confidence": 0.59,
+      "hard_score": -0.43,
+      "momentum_20d": -7.67,
+      "momentum_5d": -3.44,
+      "ma_alignment": "bearish",
+      "volume_ratio": 1.13,
+      "pe_ttm": 23.6,
+      "pb": 5.7,
+      "mcap_yi": 18639.0,
+      "technical": {
+        "status": "ok",
+        "summary": "该股近20个交易日呈下跌趋势，最新收盘价402.88元，低于MA5/MA10/MA20，均线空头排列（MA5<MA10<MA20）。股价持续下行，5月25日创阶段低点400元，成交量较前几日有所放大，但未出现明显止跌信号。上方压力位MA5（约411.67元）和MA10（约419.15元），下方支撑关注400元整数关口。量能变化需进一步观察，若持续缩量可能继续寻底，若放量反弹则有望短期企稳。",
+        "sentiment": "neutral"
+      },
+      "fundamental": {
+        "status": "unavailable",
+        "summary": "300750 近7日无公告数据",
+        "sentiment": "neutral"
+      },
+      "capital": {
+        "status": "unavailable",
+        "summary": "300750 资金数据暂不可用",
+        "sentiment": "neutral"
+      },
+      "announcement": {
+        "status": "unavailable",
+        "summary": "无近期公告",
+        "sentiment": "neutral",
+        "key_events": []
+      },
+      "risk_points": [
+        "均线空头发散，若股价继续下破400元支撑，可能加速下跌",
+        "反弹若无法有效突破MA5及MA10，则下跌趋势延续",
+        "近期成交量未明显萎缩，表明抛压仍在，短期波动风险较大"
+      ],
+      "signal_breakdown": {
+        "hard_score": -0.427,
+        "soft_score": 0.0,
+        "gate_score": 0.5,
+        "dragon_tiger_score": 0.0,
+        "announcement_score": 0.0,
+        "final_score": -0.096,
+        "has_dragon_tiger": true,
+        "has_announcement": false
+      },
+      "dragon_tiger": [
+        {
+          "date": "2020-07-07 00:00:00",
+          "reason": "4家机构买入，成功率53.97%",
+          "net_buy": 0.0,
+          "buy_amount": 0.0,
+          "sell_amount": 0.0
+        },
+        {
+          "date": "2020-04-14 00:00:00",
+          "reason": "买一主买，成功率55.19%",
+          "net_buy": 0.0,
+          "buy_amount": 0.0,
+          "sell_amount": 0.0
+        },
+        {
+          "date": "2020-02-04 00:00:00",
+          "reason": "买一主买，成功率47.61%",
+          "net_buy": 0.0,
+          "buy_amount": 0.0,
+          "sell_amount": 0.0
+        },
+        {
+          "date": "2020-02-03 00:00:00",
+          "reason": "1家机构买入，成功率51.99%",
+          "net_buy": 0.0,
+          "buy_amount": 0.0,
+          "sell_amount": 0.0
+        },
+        {
+          "date": "2020-01-22 00:00:00",
+          "reason": "1家机构买入，成功率52.26%",
+          "net_buy": 0.0,
+          "buy_amount": 0.0,
+          "sell_amount": 0.0
+        }
+      ]
+    },
+    {
+      "code": "000001",
+      "name": "000001",
+      "overall_sentiment": "hold",
+      "overall_focus": "⚪ 观望",
+      "confidence": 0.57,
+      "hard_score": -0.37,
+      "momentum_20d": -2.73,
+      "momentum_5d": -1.66,
+      "ma_alignment": "bearish",
+      "volume_ratio": 0.6,
+      "pe_ttm": 4.8,
+      "pb": 0.45,
+      "mcap_yi": 2073.0,
+      "technical": {
+        "status": "failed",
+        "summary": "股价近期持续下跌，均线空头排列（MA5<MA10<MA20），最新收盘价10.68低于所有均线。量能逐步萎缩，反弹乏力。下方关注10.64前低支撑，若跌破则打开下跌空间；上方压力参考MA5约10.74及MA10约10.90。整体弱势格局明显。",
+        "sentiment": "neutral"
+      },
+      "fundamental": {
+        "status": "unavailable",
+        "summary": "000001 近7日无公告数据",
+        "sentiment": "neutral"
+      },
+      "capital": {
+        "status": "unavailable",
+        "summary": "000001 资金数据暂不可用",
+        "sentiment": "neutral"
+      },
+      "announcement": {
+        "status": "unavailable",
+        "summary": "无近期公告",
+        "sentiment": "neutral",
+        "key_events": []
+      },
+      "risk_points": [
+        "均线压制显著，反弹空间受限",
+        "缩量下跌可能延续弱势",
+        "若跌破10.64支撑，则可能加速下行"
+      ],
+      "signal_breakdown": {
+        "hard_score": -0.367,
+        "soft_score": 0.0,
+        "gate_score": 0.5,
+        "dragon_tiger_score": 0.0,
+        "announcement_score": 0.0,
+        "final_score": -0.072,
+        "has_dragon_tiger": true,
+        "has_announcement": false
+      },
+      "dragon_tiger": [
+        {
+          "date": "2024-02-21 00:00:00",
+          "reason": "主力做T，成功率45.73%",
+          "net_buy": 0.0,
+          "buy_amount": 0.0,
+          "sell_amount": 0.0
+        },
+        {
+          "date": "2022-11-29 00:00:00",
+          "reason": "1家机构买入，成功率59.90%",
+          "net_buy": 0.0,
+          "buy_amount": 0.0,
+          "sell_amount": 0.0
+        },
+        {
+          "date": "2017-07-11 00:00:00",
+          "reason": "上海资金买入，成功率44.93%",
+          "net_buy": 0.0,
+          "buy_amount": 0.0,
+          "sell_amount": 0.0
+        },
+        {
+          "date": "2015-09-01 00:00:00",
+          "reason": "3家机构买入，成功率49.08%",
+          "net_buy": 0.0,
+          "buy_amount": 0.0,
+          "sell_amount": 0.0
+        },
+        {
+          "date": "2015-07-13 00:00:00",
+          "reason": "3家机构卖出，成功率35.94%",
+          "net_buy": 0.0,
+          "buy_amount": 0.0,
+          "sell_amount": 0.0
+        }
+      ]
     }
   ],
   "failed_symbols": [],
