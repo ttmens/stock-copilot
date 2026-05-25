@@ -267,9 +267,22 @@ class DataFetcher:
         return []
 
     async def _fetch_dragon_tiger(self, code: str, errors: list[str]) -> list[DragonTigerItem]:
-        """Get dragon & tiger list (龙虎榜) from Eastmoney datacenter."""
+        """Get dragon & tiger list (龙虎榜) from Eastmoney datacenter.
+
+        Only returns entries from the last 30 days to avoid showing
+        outdated historical data that's irrelevant for current analysis.
+        """
+        from datetime import datetime, timedelta
         try:
             raw_dt = await asyncio.to_thread(eastmoney.get_dragon_tiger, code, 5)
+            # Filter to last 30 days only
+            cutoff = (datetime.now() - timedelta(days=30)).strftime("%Y-%m-%d")
+            recent_entries = [
+                d for d in raw_dt
+                if d.get("date", "") >= cutoff
+            ]
+            if not recent_entries and raw_dt:
+                logger.debug("Dragon tiger data for %s is outdated (before %s), hiding", code, cutoff)
             return [
                 DragonTigerItem(
                     date=d.get("date", ""),
@@ -278,7 +291,7 @@ class DataFetcher:
                     buy_amount=d.get("buy_amount", 0),
                     sell_amount=d.get("sell_amount", 0),
                 )
-                for d in raw_dt[:5]
+                for d in recent_entries[:5]
             ]
         except Exception as e:
             errors.append(f"eastmoney_dragon_tiger: {e}")
