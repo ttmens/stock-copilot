@@ -15,7 +15,21 @@ SYSTEM_PROMPT = """你是 A 股投研分析助手，仅基于用户提供的数�
 2. 数据缺失时，status 设为 "unavailable"，summary 说明缺失原因
 3. 输出必须是合法 JSON，不含 markdown 代码块
 4. 不做买卖建议，不使用「必涨」「必买」等词汇
-5. summary 100-200 字，focus_points 和 risk_points 各 1-3 条"""
+5. summary 100-200 字，focus_points 和 risk_points 各 1-3 条
+
+输出格式（严格按此 JSON 结构）：
+{
+  "status": "ok" | "unavailable" | "failed",
+  "sentiment": "bullish" | "bearish" | "neutral",
+  "summary": "100-200字资金面分析",
+  "focus_points": ["关注点1", "关注点2"],
+  "risk_points": ["风险点1", "风险点2"]
+}
+
+sentiment 判断标准：
+- bullish: 主力/北向资金持续净流入，且呈加速趋势
+- bearish: 主力/北向资金持续净流出，或主力大幅流出
+- neutral: 资金小幅进出、方向不明、或数据不足以判断"""
 
 USER_TEMPLATE = """分析以下 A 股资金数据，输出 JSON。
 

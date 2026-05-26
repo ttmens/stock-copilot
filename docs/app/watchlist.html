@@ -3,102 +3,465 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>自选管理 — 智策 NexStrat</title>
+<title>自选股管理 — 智策 NexStrat</title>
 <link rel="stylesheet" href="../assets/theme.css">
 <style>
-.wl-shell { max-width: 640px; margin: 2rem auto; padding: 0 1rem; }
-.wl-form { display: flex; gap: 0.5rem; margin-bottom: 1rem; flex-wrap: wrap; }
-.wl-form input { flex: 1; min-width: 120px; padding: 0.5rem; border-radius: 8px; border: 1px solid #334; background: #1a1f2e; color: #eee; }
-.wl-form button { padding: 0.5rem 1rem; border-radius: 8px; border: none; background: #7b3ff2; color: #fff; cursor: pointer; }
-.wl-list { list-style: none; padding: 0; }
-.wl-list li { display: flex; justify-content: space-between; padding: 0.75rem; border-bottom: 1px solid rgba(255,255,255,0.06); }
-.wl-msg { color: #94a3b8; font-size: 0.9rem; margin-top: 1rem; }
+.wl-shell { max-width: 800px; margin: 2rem auto; padding: 0 1rem; }
+.wl-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 0.5rem; }
+.wl-header h1 { margin: 0; }
+.wl-stats { display: flex; gap: 1rem; font-size: 0.85rem; color: var(--text-secondary); }
+.wl-stat { background: var(--bg-card); padding: 0.4rem 0.8rem; border-radius: 8px; }
+
+/* Search & Add */
+.wl-add { display: flex; gap: 0.5rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+.wl-add input { flex: 1; min-width: 100px; padding: 0.6rem; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); background: var(--bg-card); color: var(--text-primary); font-size: 0.9rem; }
+.wl-add input:focus { outline: none; border-color: #7b3ff2; }
+.wl-add button { padding: 0.6rem 1.2rem; border-radius: 8px; border: none; background: #7b3ff2; color: #fff; cursor: pointer; font-size: 0.9rem; white-space: nowrap; }
+.wl-add button:hover { background: #6a2de0; }
+.wl-add button.secondary { background: rgba(255,255,255,0.1); }
+
+/* Search results dropdown */
+.search-results { position: absolute; background: var(--bg-card); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; max-height: 200px; overflow-y: auto; z-index: 100; width: 100%; display: none; }
+.search-results .item { padding: 0.5rem 0.8rem; cursor: pointer; display: flex; justify-content: space-between; }
+.search-results .item:hover { background: rgba(123,63,242,0.2); }
+.search-results .item .code { font-family: monospace; color: #7b3ff2; }
+.search-results .item .name { color: var(--text-secondary); font-size: 0.85rem; }
+
+/* Watchlist table */
+.wl-table-wrap { overflow-x: auto; }
+.wl-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+.wl-table th { text-align: left; padding: 0.6rem 0.5rem; border-bottom: 2px solid rgba(255,255,255,0.1); color: var(--text-secondary); font-weight: 500; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; }
+.wl-table td { padding: 0.6rem 0.5rem; border-bottom: 1px solid rgba(255,255,255,0.05); vertical-align: middle; }
+.wl-table tr:hover td { background: rgba(255,255,255,0.03); }
+.wl-table .stock-code { font-family: monospace; color: #7b3ff2; }
+.wl-table .sentiment-badge { display: inline-block; padding: 0.2rem 0.6rem; border-radius: 999px; font-size: 0.75rem; }
+.sentiment-badge.bullish { background: rgba(34,197,94,0.15); color: #22C55E; }
+.sentiment-badge.bearish { background: rgba(239,68,68,0.15); color: #EF4444; }
+.sentiment-badge.neutral { background: rgba(148,163,184,0.15); color: #94A3B8; }
+
+.rm-btn { padding: 0.3rem 0.6rem; border-radius: 6px; border: 1px solid rgba(239,68,68,0.3); background: transparent; color: #EF4444; cursor: pointer; font-size: 0.8rem; }
+.rm-btn:hover { background: rgba(239,68,68,0.15); }
+
+/* Actions bar */
+.wl-actions { display: flex; gap: 0.5rem; margin-bottom: 1rem; flex-wrap: wrap; }
+.wl-actions button { padding: 0.5rem 1rem; border-radius: 8px; border: none; cursor: pointer; font-size: 0.85rem; }
+.wl-actions .analyze-btn { background: #7b3ff2; color: #fff; }
+.wl-actions .analyze-btn:hover { background: #6a2de0; }
+.wl-actions .clear-btn { background: rgba(239,68,68,0.15); color: #EF4444; border: 1px solid rgba(239,68,68,0.3); }
+
+/* Job status */
+.job-status { background: var(--bg-card); border-radius: 8px; padding: 1rem; margin-bottom: 1rem; display: none; }
+.job-status.active { display: block; }
+.job-bar { height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; overflow: hidden; margin-top: 0.5rem; }
+.job-bar-fill { height: 100%; background: #7b3ff2; border-radius: 3px; transition: width 0.3s; }
+
+/* Status indicator */
+.status-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 0.3rem; }
+.status-dot.online { background: #22C55E; }
+.status-dot.offline { background: #EF4444; }
+
+.empty-state { text-align: center; padding: 3rem; color: var(--text-secondary); }
+.wl-msg { color: var(--text-secondary); font-size: 0.85rem; margin-top: 1rem; }
 </style>
 </head>
 <body>
 <header class="site-header">
-  <div class="brand"><span class="brand-name">智策 NexStrat</span></div>
+  <div class="brand">
+    <div class="brand-icon">
+      <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:32px;height:32px">
+        <rect width="32" height="32" rx="8" fill="url(#logo-grad)"/>
+        <path d="M8 22 L14 14 L18 18 L24 10" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M20 10 L24 10 L24 14" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <defs><linearGradient id="logo-grad" x1="0" y1="0" x2="32" y2="32"><stop offset="0%" stop-color="#7b3ff2"/><stop offset="100%" stop-color="#00f5ff"/></linearGradient></defs>
+      </svg>
+    </div>
+    <div class="brand-text">
+      <span class="brand-name">智策 NexStrat</span>
+      <span class="brand-tagline">自选股管理</span>
+    </div>
+  </div>
   <div class="site-nav">
     <a href="../index.html">首页</a>
     <a href="watchlist.html" class="active">自选</a>
   </div>
 </header>
+
 <div class="wl-shell">
-  <h1>自选管理</h1>
-  <p class="wl-msg" id="api-hint">需要连接服务端 API 才能增删自选；GitHub Pages 静态模式下只读展示。</p>
-  <form class="wl-form" id="add-form">
-    <input name="code" placeholder="代码 如 600519" required pattern="[0-9]{6}">
-    <input name="name" placeholder="名称（可选）">
-    <button type="submit">添加</button>
-    <button type="button" id="import-default">导入默认模板</button>
-  </form>
-  <ul class="wl-list" id="wl-list"></ul>
+  <div class="wl-header">
+    <h1>自选股管理</h1>
+    <div class="wl-stats">
+      <span class="wl-stat"><span class="status-dot" id="status-dot"></span><span id="api-status">检测中...</span></span>
+      <span class="wl-stat"><span id="wl-count">0</span> 只</span>
+    </div>
+  </div>
+
+  <!-- Job Status -->
+  <div class="job-status" id="job-status">
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <strong id="job-title">分析中</strong>
+      <span id="job-pct" style="color:var(--text-secondary);font-size:0.85rem">0%</span>
+    </div>
+    <div class="job-bar"><div class="job-bar-fill" id="job-bar-fill" style="width:0%"></div></div>
+    <div id="job-msg" style="font-size:0.85rem;color:var(--text-secondary);margin-top:0.3rem"></div>
+  </div>
+
+  <!-- Add stock -->
+  <div class="wl-add">
+    <input name="code" id="input-code" placeholder="输入代码或名称搜索（如 600519 或 茅台）" required style="position:relative">
+    <div class="search-results" id="search-results"></div>
+    <button type="button" id="btn-add">加入自选</button>
+  </div>
+
+  <!-- Actions -->
+  <div class="wl-actions" id="wl-actions" style="display:none">
+    <button class="analyze-btn" id="btn-analyze">🔍 立即分析全部</button>
+    <button class="analyze-btn secondary" id="btn-analyze-fast" style="background:rgba(255,255,255,0.1);color:var(--text-primary)">⚡ 快速分析（无LLM）</button>
+    <button class="clear-btn" id="btn-clear">清空自选</button>
+  </div>
+
+  <!-- Watchlist table -->
+  <div class="wl-table-wrap">
+    <table class="wl-table" id="wl-table">
+      <thead>
+        <tr>
+          <th>代码</th>
+          <th>名称</th>
+          <th>信号</th>
+          <th>评分</th>
+          <th style="width:60px">操作</th>
+        </tr>
+      </thead>
+      <tbody id="wl-body"></tbody>
+    </table>
+  </div>
+  <div id="empty-state" class="empty-state" style="display:none">
+    <p>暂无自选股</p>
+    <p style="font-size:0.85rem">搜索上方输入框添加股票，或点击下方按钮导入默认模板</p>
+    <button type="button" id="btn-import" style="padding:0.6rem 1.2rem;border-radius:8px;border:none;background:#7b3ff2;color:#fff;cursor:pointer;margin-top:1rem">导入默认模板（10只）</button>
+  </div>
+
+  <p class="wl-msg" id="wl-msg"></p>
 </div>
-<script src="config.js"></script>
+
+<script src="../app/config.js"></script>
 <script>
 (function () {
-  const API = (window.STOCK_COPILOT?.API_BASE || "").replace(/\/$/, "");
-  const listEl = document.getElementById("wl-list");
-  const hint = document.getElementById("api-hint");
+  "use strict";
 
-  function render(items) {
-    listEl.innerHTML = items.map(i => `
-      <li data-code="${i.code}">
-        <span>${i.code} ${i.name || ""}</span>
-        ${API ? `<button type="button" class="rm" data-code="${i.code}">删除</button>` : ""}
-      </li>`).join("");
-    listEl.querySelectorAll(".rm").forEach(btn => {
-      btn.addEventListener("click", () => remove(btn.dataset.code));
+  const cfg = window.STOCK_COPILOT || {};
+  let API = (cfg.API_BASE || "").replace(/\/$/, "");
+
+  // Auto-detect API when served from FastAPI (same origin)
+  if (!API && window.location.hostname !== "ttmens.github.io" && window.location.hostname !== "localhost" && window.location.hostname !== "127.0.0.1") {
+    // Try same-origin API
+    API = window.location.origin;
+  }
+  if (!API && (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1")) {
+    API = "http://127.0.0.1:8000";
+  }
+
+  const body = document.getElementById("wl-body");
+  const emptyState = document.getElementById("empty-state");
+  const tableWrap = document.querySelector(".wl-table-wrap");
+  const actionsBar = document.getElementById("wl-actions");
+  const statusDot = document.getElementById("status-dot");
+  const apiStatus = document.getElementById("api-status");
+  const wlCount = document.getElementById("wl-count");
+  const msg = document.getElementById("wl-msg");
+  const searchInput = document.getElementById("input-code");
+  const searchResults = document.getElementById("search-results");
+
+  // Stock lookup cache (common A-share stocks)
+  const STOCK_DB = {
+    "600519":"贵州茅台","000858":"五粮液","000333":"美的集团","601318":"中国平安",
+    "600036":"招商银行","600900":"长江电力","601166":"兴业银行","600276":"恒瑞医药",
+    "300750":"宁德时代","000001":"平安银行","601398":"工商银行","600031":"三一重工",
+    "601888":"中国中免","600585":"海螺水泥","002714":"牧原股份","600809":"山西汾酒",
+    "600000":"浦发银行","601816":"京沪高铁","600887":"伊利股份","002304":"洋河股份",
+    "600050":"中国联通","601919":"中远海控","600028":"中国石化","601288":"农业银行",
+    "600941":"中国移动","601088":"中国神华","002594":"比亚迪","601668":"中国建筑",
+    "000651":"格力电器","600104":"上汽集团","601628":"中国人寿","600030":"中信证券",
+    "601012":"隆基绿能","300059":"东方财富","601336":"新华保险","000661":"长春高新",
+    "600760":"中航沈飞","603259":"药明康德","002230":"科大讯飞","601211":"国泰君安",
+    "600196":"复星医药","600547":"山东黄金","601985":"中国核电","601601":"中国太保",
+    "601688":"华泰证券","600048":"保利发展","600600":"青岛啤酒","000538":"云南白药",
+    "601138":"工业富联","600016":"民生银行",
+  };
+
+  let currentWatchlist = [];
+  let latestSignals = {};
+
+  function setApiStatus(online) {
+    statusDot.className = "status-dot " + (online ? "online" : "offline");
+    apiStatus.textContent = online ? "API 已连接" : "静态模式";
+    if (online) {
+      actionsBar.style.display = "flex";
+      document.getElementById("btn-import") && (document.getElementById("btn-import").style.display = "none");
+    } else {
+      actionsBar.style.display = "none";
+    }
+  }
+
+  function renderTable() {
+    if (currentWatchlist.length === 0) {
+      tableWrap.style.display = "none";
+      emptyState.style.display = "block";
+      return;
+    }
+    tableWrap.style.display = "block";
+    emptyState.style.display = "none";
+    wlCount.textContent = currentWatchlist.length;
+
+    body.innerHTML = currentWatchlist.map(item => {
+      const sig = latestSignals[item.code] || {};
+      const signal = sig.final_signal || "hold";
+      const score = sig.final_score || 0;
+      const label = sig.signal_label || "⚪ 观望";
+      const bucket = signal.includes("buy") || signal === "bullish" ? "bullish" :
+                     signal.includes("sell") || signal === "bearish" ? "bearish" : "neutral";
+
+      return `<tr data-code="${item.code}">
+        <td class="stock-code">${item.code}</td>
+        <td>${item.name}</td>
+        <td><span class="sentiment-badge ${bucket}">${label}</span></td>
+        <td style="font-family:monospace;color:${score >= 0 ? '#22C55E' : '#EF4444'}">${score >= 0 ? '+' : ''}${score.toFixed(3)}</td>
+        <td>${API ? `<button class="rm-btn" data-code="${item.code}">删除</button>` : ""}</td>
+      </tr>`;
+    }).join("");
+
+    body.querySelectorAll(".rm-btn").forEach(btn => {
+      btn.addEventListener("click", () => removeStock(btn.dataset.code));
     });
   }
 
-  async function load() {
+  async function loadWatchlist() {
     if (API) {
-      hint.textContent = `API: ${API}`;
       try {
         const res = await fetch(`${API}/api/watchlist`);
-        const data = await res.json();
-        render(data.stocks || []);
-        return;
-      } catch (e) {
-        hint.textContent = "API 不可用，尝试静态数据";
-      }
+        if (res.ok) {
+          const data = await res.json();
+          currentWatchlist = (data.stocks || []).map(s => ({ code: s.code, name: s.name }));
+          setApiStatus(true);
+          renderTable();
+          loadSignals();
+          return;
+        }
+      } catch (e) { /* fall through */ }
     }
+    setApiStatus(false);
+    // Fallback: load from latest.json
     try {
       const res = await fetch("../data/latest.json");
       const data = await res.json();
-      render((data.stocks || []).map(s => ({ code: s.code, name: s.name })));
+      currentWatchlist = (data.stocks || []).map(s => ({ code: s.code, name: s.name }));
+      renderTable();
     } catch (_) {
-      listEl.innerHTML = "<li>无法加载自选</li>";
+      currentWatchlist = [];
+      renderTable();
     }
   }
 
-  async function remove(code) {
+  async function loadSignals() {
     if (!API) return;
-    await fetch(`${API}/api/watchlist/${code}`, { method: "DELETE" });
-    load();
+    try {
+      const res = await fetch(`${API}/site/latest.json`);
+      if (res.ok) {
+        const data = await res.json();
+        // Build a lookup from stocks
+        (data.stocks || []).forEach(s => {
+          latestSignals[s.code] = {
+            final_signal: s.overall_sentiment || "hold",
+            final_score: 0,
+            signal_label: s.overall_sentiment === "bullish" ? "🟢 看多" :
+                          s.overall_sentiment === "bearish" ? "🔴 看空" : "⚪ 观望",
+          };
+        });
+        // Also try to get scores from the DB via intraday
+        renderTable();
+      }
+    } catch (_) {}
   }
 
-  document.getElementById("add-form")?.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    if (!API) { alert("静态模式无法写入，请配置 API_BASE"); return; }
-    const fd = new FormData(e.target);
+  async function removeStock(code) {
+    if (!API) return;
+    await fetch(`${API}/api/watchlist/${code}`, { method: "DELETE" });
+    currentWatchlist = currentWatchlist.filter(i => i.code !== code);
+    renderTable();
+  }
+
+  async function addStock(code, name) {
+    if (!API) { alert("静态模式下无法添加，请启动 API 服务"); return; }
+    const resolvedName = name || STOCK_DB[code] || code;
     await fetch(`${API}/api/watchlist`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ code: fd.get("code"), name: fd.get("name") || "" }),
+      body: JSON.stringify({ code, name: resolvedName }),
     });
-    e.target.reset();
-    load();
+    currentWatchlist.push({ code, name: resolvedName });
+    renderTable();
+    searchInput.value = "";
+    searchResults.style.display = "none";
+  }
+
+  // Search functionality
+  let searchTimeout;
+  searchInput.addEventListener("input", function () {
+    clearTimeout(searchTimeout);
+    const q = this.value.trim();
+    if (!q) { searchResults.style.display = "none"; return; }
+    searchTimeout = setTimeout(() => {
+      const results = Object.entries(STOCK_DB).filter(([code, name]) =>
+        code.includes(q) || name.includes(q)
+      ).slice(0, 10);
+
+      if (results.length === 0) {
+        // If it looks like a 6-digit code, allow adding directly
+        if (/^\d{6}$/.test(q)) {
+          searchResults.innerHTML = `<div class="item" data-code="${q}" data-name="${q}"><span class="code">${q}</span><span class="name">直接添加</span></div>`;
+          searchResults.style.display = "block";
+        } else {
+          searchResults.style.display = "none";
+        }
+        return;
+      }
+
+      searchResults.innerHTML = results.map(([code, name]) => {
+        const inWl = currentWatchlist.some(i => i.code === code);
+        return `<div class="item" data-code="${code}" data-name="${name}">
+          <span class="code">${code}</span>
+          <span class="name">${name}${inWl ? " (已在自选)" : ""}</span>
+        </div>`;
+      }).join("");
+      searchResults.style.display = "block";
+
+      searchResults.querySelectorAll(".item").forEach(item => {
+        if (item.dataset.code && currentWatchlist.some(i => i.code === item.dataset.code)) {
+          item.style.opacity = "0.5";
+          item.style.pointerEvents = "none";
+        } else {
+          item.addEventListener("click", () => {
+            if (API) {
+              addStock(item.dataset.code, item.dataset.name);
+            } else {
+              // In static mode, add locally
+              currentWatchlist.push({ code: item.dataset.code, name: item.dataset.name });
+              renderTable();
+              searchInput.value = "";
+              searchResults.style.display = "none";
+            }
+          });
+        }
+      });
+    }, 200);
   });
 
-  document.getElementById("import-default")?.addEventListener("click", async () => {
+  // Add button (for direct code entry)
+  document.getElementById("btn-add").addEventListener("click", () => {
+    const val = searchInput.value.trim();
+    if (!val) return;
+    if (/^\d{6}$/.test(val)) {
+      addStock(val, STOCK_DB[val] || val);
+    } else {
+      // Try to find matching stock
+      const found = Object.entries(STOCK_DB).find(([code, name]) => name.includes(val));
+      if (found) {
+        addStock(found[0], found[1]);
+      }
+    }
+  });
+
+  // Import default template
+  document.getElementById("btn-import")?.addEventListener("click", async () => {
+    if (API) {
+      await fetch(`${API}/api/watchlist/import-default`, { method: "POST" });
+      loadWatchlist();
+    }
+  });
+
+  // Clear all
+  document.getElementById("btn-clear")?.addEventListener("click", async () => {
+    if (!confirm("确定要清空所有自选股吗？")) return;
+    for (const item of [...currentWatchlist]) {
+      await fetch(`${API}/api/watchlist/${item.code}`, { method: "DELETE" });
+    }
+    currentWatchlist = [];
+    renderTable();
+  });
+
+  // Analyze all
+  document.getElementById("btn-analyze")?.addEventListener("click", async () => {
     if (!API) return;
-    await fetch(`${API}/api/watchlist/import-default`, { method: "POST" });
-    load();
+    const jobStatus = document.getElementById("job-status");
+    jobStatus.classList.add("active");
+    document.getElementById("job-title").textContent = "盘后分析中...";
+    document.getElementById("job-msg").textContent = "正在启动分析任务";
+
+    try {
+      const res = await fetch(`${API}/api/jobs`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ type: "post", mode: "full", publish: true }),
+      });
+      const data = await res.json();
+      pollJob(data.job_id);
+    } catch (e) {
+      document.getElementById("job-msg").textContent = "启动失败: " + e.message;
+    }
   });
 
-  load();
+  // Fast analyze
+  document.getElementById("btn-analyze-fast")?.addEventListener("click", async () => {
+    if (!API) return;
+    const jobStatus = document.getElementById("job-status");
+    jobStatus.classList.add("active");
+    document.getElementById("job-title").textContent = "快速分析中...";
+    document.getElementById("job-msg").textContent = "仅计算硬信号（无 LLM）";
+
+    try {
+      const res = await fetch(`${API}/api/jobs`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ type: "post", mode: "fast", publish: false }),
+      });
+      const data = await res.json();
+      pollJob(data.job_id);
+    } catch (e) {
+      document.getElementById("job-msg").textContent = "启动失败: " + e.message;
+    }
+  });
+
+  async function pollJob(jobId) {
+    const interval = setInterval(async () => {
+      try {
+        const res = await fetch(`${API}/api/jobs/${jobId}`);
+        const job = await res.json();
+        const pct = Math.round((job.progress || 0) * 100);
+        document.getElementById("job-bar-fill").style.width = pct + "%";
+        document.getElementById("job-pct").textContent = pct + "%";
+        document.getElementById("job-msg").textContent = job.message || "";
+
+        if (job.status === "completed" || job.status === "failed") {
+          clearInterval(interval);
+          document.getElementById("job-title").textContent =
+            job.status === "completed" ? "✅ 分析完成" : "❌ 分析失败";
+          setTimeout(() => {
+            document.getElementById("job-status").classList.remove("active");
+            loadWatchlist();
+          }, 3000);
+        }
+      } catch (_) { clearInterval(interval); }
+    }, 2000);
+  }
+
+  // Close search on outside click
+  document.addEventListener("click", (e) => {
+    if (!e.target.closest(".wl-add")) {
+      searchResults.style.display = "none";
+    }
+  });
+
+  // Init
+  loadWatchlist();
 })();
 </script>
 </body>

@@ -28,8 +28,27 @@ logger = logging.getLogger(__name__)
 
 
 def _load_watchlist(symbols: list[str] | None = None) -> list[WatchlistItem]:
+    """Load watchlist items. If symbols are codes-only, resolve names from DB or Tencent."""
     if symbols:
-        return [WatchlistItem(code=s, name=s) for s in symbols]
+        from src.data.db_manager import SignalDB
+        from src.data.providers.tencent import get_stock_quote
+
+        db = SignalDB()
+        items = []
+        for s in symbols:
+            # Try DB first (fastest)
+            meta = db.get_stock(s)
+            if meta and meta.get("name") and meta["name"] != s:
+                items.append(WatchlistItem(code=s, name=meta["name"]))
+                continue
+            # Fallback: resolve from Tencent quote API (always returns name)
+            try:
+                quote = get_stock_quote(s)
+                name = quote.get("name", s) if quote else s
+            except Exception:
+                name = s
+            items.append(WatchlistItem(code=s, name=name))
+        return items
     return WatchlistManager().list_items()
 
 
