@@ -1,82 +1,79 @@
 # REST API 规格
 
-> **Updated**: 2026-05-24 — 确认与 `src/api/routes.py` 实现一致
+> **Updated**: 2026-05-26 — v1.4 Phase C，与 `src/api/routes.py` 一致
 
-Base URL: `http://127.0.0.1:8000`
+Base URL: `http://127.0.0.1:8000`（生产与 scheduler 同进程：`python -m src.main run`）
 
 ## 启动
 
 ```bash
-cd stock-copilot
-uvicorn src.api.routes:app --host 0.0.0.0 --port 8000
+python -m src.main run      # scheduler + API
+python -m src.main serve    # 仅 API
 ```
 
-或通过 CLI：
+CORS 默认允许 GitHub Pages 源，见 `config/settings.yaml` → `api.cors_origins`。
 
-```bash
-python -m src.main serve [--port 8000]
-```
+---
 
-## FastAPI 应用
+## 动态 API（Phase C）
 
-```python
-app = FastAPI(
-    title="Stock Copilot API",
-    description="A股辅助决策系统 API",
-    version="0.1.0",
-)
-```
+| 方法 | 路径 | 说明 |
+|------|------|------|
+| GET | `/api/watchlist` | 自选列表 |
+| POST | `/api/watchlist` | 添加 `{code, name?}` |
+| DELETE | `/api/watchlist/{code}` | 删除 |
+| PATCH | `/api/watchlist/{code}` | 更新 pinned/name |
+| POST | `/api/watchlist/import-default` | 导入默认模板 |
+| POST | `/api/jobs` | 创建任务 `{type, mode, symbols?, publish?}` |
+| GET | `/api/jobs/latest` | 最近任务 |
+| GET | `/api/jobs/{id}` | 任务详情 |
+| GET | `/api/quotes/intraday` | 盘中报价 |
+| GET | `/api/evolution/suggestions` | 进化建议 |
+| POST | `/api/evolution/suggestions/{id}/accept` | 接受/拒绝建议 |
+| GET | `/api/published` | 最近发布时间 |
 
 ---
 
 ## GET /health
 
-健康检查。
-
 **Response 200:**
 
 ```json
-{ "status": "ok", "version": "0.1.0" }
+{ "status": "ok", "version": "1.4.0", "last_published": { ... } }
 ```
 
 ---
 
 ## POST /analyze
 
-触发分析管线（MVP 同步实现，非异步）。
+触发 **Full DeliveryPipeline**（分析 → 站点 → 可选 publish）。
 
 **Request:**
 
 ```json
 {
   "type": "pre",
-  "symbols": ["600519", "000001"]
+  "symbols": ["600519"],
+  "publish": false
 }
 ```
-
-- `type`: `"pre"` | `"post"`，必填 (`ReportType` 枚举)
-- `symbols`: 可选，缺省读 `config/watchlist.yaml`
 
 **Response 200:**
 
 ```json
 {
   "status": "completed",
-  "report_path": "output/reports/2026-05-22-pre.md",
-  "symbol_count": 2,
+  "report_path": "output/reports/2026-05-26-pre.md",
+  "symbol_count": 1,
   "failed_symbols": []
 }
 ```
 
-**Response 400:** 非交易日或 watchlist 不存在
+---
 
-```json
-{ "detail": "非交易日，跳过分析" }
-```
+## 原有端点
 
-**Response 500:** 分析管线内部异常
-
-> **注意**：MVP 为同步实现，`POST /analyze` 会阻塞等待完整管线执行完毕（fetch → agents → report → notify）。未来可改为异步任务队列。
+以下端点保持不变，详见下文。
 
 ---
 

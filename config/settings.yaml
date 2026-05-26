@@ -1,5 +1,5 @@
 llm:
-  mode: "fallback"             # "fallback" | "concurrent"
+  mode: "fallback"
   max_retries: 2
 
   providers:
@@ -22,9 +22,32 @@ llm:
       priority: 2
 
 schedule:
-  pre_market: "08:30"
-  post_market: "16:00"
+  pre_market: "08:00"
+  post_market: "15:30"
   timezone: "Asia/Shanghai"
+  intraday_hours: [10, 11, 14]
+  evolution: "16:00"
+  db_cleanup: "23:00"
+  db_cleanup_dow: "sun"
+
+evolution:
+  enabled: true
+  auto_mutate_watchlist: false
+  auto_apply_weights: false
+
+pipeline:
+  llm_concurrency: 2
+  batch_size: 25
+  skip_stock_html: true
+  api_port: 8000
+  api_host: "0.0.0.0"
+
+api:
+  cors_origins:
+    - "https://ttmens.github.io"
+    - "http://127.0.0.1:8000"
+    - "http://localhost:8000"
+  auth_token_env: "STOCK_COPILOT_TOKEN"
 
 notify:
   type: "wecom"

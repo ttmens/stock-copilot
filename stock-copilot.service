@@ -11,7 +11,7 @@ WorkingDirectory=/home/ubuntu/repos/stock-copilot
 Environment=PATH=/home/ubuntu/repos/stock-copilot/.venv/bin:/usr/local/bin:/usr/bin
 EnvironmentFile=/home/ubuntu/repos/stock-copilot/.env
 
-ExecStart=/home/ubuntu/repos/stock-copilot/.venv/bin/python3 -m src.main schedule
+ExecStart=/home/ubuntu/repos/stock-copilot/.venv/bin/python3 -m src.main run
 Restart=on-failure
 RestartSec=30
 StartLimitIntervalSec=300

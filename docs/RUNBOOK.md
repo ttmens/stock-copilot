@@ -1,6 +1,6 @@
 # Stock Copilot 运维手册 (RUNBOOK)
 
-> 版本: v1.3.0 | 更新: 2026-05-26
+> 版本: v1.4.0 | 更新: 2026-05-26
 
 ---
 
@@ -11,26 +11,30 @@
 | 查看服务状态 | `sudo systemctl status stock-copilot` |
 | 重启服务 | `sudo systemctl restart stock-copilot` |
 | 查看日志 | `sudo journalctl -u stock-copilot -f` |
-| 手动触发分析 | `cd /home/ubuntu/repos/stock-copilot && .venv/bin/python3 -m src.main analyze --type pre` |
-| 健康检查 | `bash scripts/health_check.sh` |
+| 手动 Full 分析 | `python -m src.main analyze --type pre [--publish]` |
+| 手动 Fast 更新 | `python -m src.main fast` |
+| 健康检查 | `curl http://127.0.0.1:8000/health` |
 | 停止服务 | `sudo systemctl stop stock-copilot` |
-| 禁用开机自启 | `sudo systemctl disable stock-copilot` |
 
 ---
 
 ## 架构概要
 
 ```
-systemd stock-copilot.service (常驻)
-  └─ APScheduler (29个任务)
-       ├─ 盘前 08:00 (交易日)
-       ├─ 盘中 每15min (9:30-11:15, 13:00-14:45, 交易日)
-       ├─ 盘后 15:30 (交易日)
-       ├─ 非交易时段 每小时 (7:00-22:00, 交易日)
-       └─ DB 清理 每周日 23:00
+systemd stock-copilot.service (常驻, MemoryMax=1G)
+  └─ python -m src.main run
+       ├─ APScheduler (6 个 Job)
+       │    ├─ 盘前 Full + publish (settings.schedule.pre_market)
+       │    ├─ 盘中 Fast × N (intraday_hours, 无 LLM/git)
+       │    ├─ 盘后 Full + publish
+       │    ├─ 进化 (evolution.enabled)
+       │    └─ DB 清理 (weekly)
+       └─ FastAPI :8000 (watchlist/jobs/intraday)
 
-数据流: watchlist.yaml → fetch(多源降级) → hard_signals → 4 LLM Agent → fuse → report → SQLite → site → docs/ (GitHub Pages)
+数据流: Watchlist(DB) → fetch → hard+LLM → fuse → SQLite → site/docs (静态) + API (动态)
 ```
+
+**Job 数量**: 6 个 cron（非 29 个）。盘中小时数由 `config/settings.yaml` → `schedule.intraday_hours` 配置。
 
 ---
 

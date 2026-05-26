@@ -134,8 +134,13 @@ class TestSiteGenerator:
         data = json.loads(json_path.read_text(encoding="utf-8"))
         assert len(data["stocks"]) == 3
 
-        # Verify stock pages created
-        stock_dir = tmp_path / "stock"
-        assert (stock_dir / "600519.html").exists()
-        assert (stock_dir / "000001.html").exists()
-        assert (stock_dir / "000333.html").exists()
+        # Phase C: per-stock HTML skipped when skip_stock_html; app shell deployed
+        from src.config import get_settings
+        if get_settings().pipeline.skip_stock_html:
+            assert (tmp_path / "app" / "stock.html").exists()
+            assert "app/stock.html?code=" in content
+        else:
+            stock_dir = tmp_path / "stock"
+            assert (stock_dir / "600519.html").exists()
+            assert (stock_dir / "000001.html").exists()
+            assert (stock_dir / "000333.html").exists()

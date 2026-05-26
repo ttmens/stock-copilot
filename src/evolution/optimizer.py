@@ -162,6 +162,18 @@ class WeightOptimizer:
         self.save_config()
         return new_weights
 
+    def save_proposed(self):
+        """Write proposed weights without applying to active config."""
+        path = self.config_path.with_name("fusion_weights.proposed.json")
+        path.parent.mkdir(parents=True, exist_ok=True)
+        data = self.weights.to_dict()
+        data["_meta"] = {
+            "status": "proposed",
+            "updated_at": self.weights.last_updated or "",
+        }
+        path.write_text(json.dumps(data, ensure_ascii=False, indent=2))
+        logger.info("Saved proposed weights to %s", path)
+
     def get_weights(self) -> dict:
         """Return current fusion weights."""
         return self._as_dict()

@@ -1,0 +1,93 @@
+(function () {
+  "use strict";
+
+  const cfg = window.STOCK_COPILOT || {};
+  const API = (cfg.API_BASE || "").replace(/\/$/, "");
+
+  function signalBucket(signal) {
+    const s = (signal || "").toLowerCase();
+    if (s.includes("buy") || s === "bullish" || s === "strong_buy") return "bullish";
+    if (s.includes("sell") || s === "bearish" || s === "strong_sell") return "bearish";
+    return "hold";
+  }
+
+  function applyFilters() {
+    const grid = document.getElementById("stock-grid");
+    if (!grid) return;
+    const q = (document.getElementById("filter-search")?.value || "").trim().toLowerCase();
+    const sig = document.getElementById("filter-signal")?.value || "";
+    const sort = document.getElementById("filter-sort")?.value || "score";
+    const links = [...grid.querySelectorAll(".stock-card-link")];
+
+    links.forEach((el) => {
+      const code = el.dataset.code || "";
+      const name = el.dataset.name || "";
+      const bucket = signalBucket(el.dataset.signal);
+      const matchQ = !q || code.includes(q) || name.toLowerCase().includes(q);
+      const matchSig = !sig || bucket === sig;
+      el.style.display = matchQ && matchSig ? "" : "none";
+    });
+
+    const visible = links.filter((el) => el.style.display !== "none");
+    visible.sort((a, b) => {
+      if (sort === "code") return (a.dataset.code || "").localeCompare(b.dataset.code || "");
+      if (sort === "confidence") {
+        return parseFloat(b.dataset.confidence || 0) - parseFloat(a.dataset.confidence || 0);
+      }
+      return parseFloat(b.dataset.score || 0) - parseFloat(a.dataset.score || 0);
+    });
+    visible.forEach((el) => grid.appendChild(el.parentElement === grid ? el : el.closest("a") || el));
+
+    const countEl = document.getElementById("stock-count");
+    if (countEl) countEl.textContent = `(${visible.length} 只自选)`;
+  }
+
+  async function mergeIntraday() {
+    if (!API) return;
+    try {
+      const res = await fetch(`${API}/api/quotes/intraday`);
+      if (!res.ok) return;
+      const data = await res.json();
+      const quotes = data.quotes || [];
+      quotes.forEach((q) => {
+        const el = document.querySelector(`.stock-card-link[data-code="${q.code}"]`);
+        if (!el) return;
+        const chip = el.querySelector(".metric-chip.intraday");
+        if (chip && q.change_pct != null) {
+          const val = chip.querySelector(".metric-chip-val");
+          if (val) {
+            val.textContent = `${q.change_pct >= 0 ? "+" : ""}${Number(q.change_pct).toFixed(2)}%`;
+            val.style.color = q.change_pct >= 0 ? "#22C55E" : "#EF4444";
+          }
+        }
+      });
+    } catch (_) {
+      /* static-only mode */
+    }
+  }
+
+  async function loadPublishedMeta() {
+    if (!API) return;
+    try {
+      const res = await fetch(`${API}/api/published`);
+      if (!res.ok) return;
+      const data = await res.json();
+      const ts = data.db?.published_at || data.file?.published_at;
+      if (ts) {
+        const meta = document.querySelector(".header-meta");
+        if (meta && !meta.dataset.enriched) {
+          meta.dataset.enriched = "1";
+          meta.textContent += ` · 发布 ${String(ts).slice(0, 16).replace("T", " ")}`;
+        }
+      }
+    } catch (_) {}
+  }
+
+  document.getElementById("filter-search")?.addEventListener("input", applyFilters);
+  document.getElementById("filter-signal")?.addEventListener("change", applyFilters);
+  document.getElementById("filter-sort")?.addEventListener("change", applyFilters);
+
+  applyFilters();
+  mergeIntraday();
+  loadPublishedMeta();
+})();

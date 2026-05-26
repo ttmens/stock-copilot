@@ -59,6 +59,28 @@ def publish_to_github(report: Report) -> bool:
         return False
 
 
+def publish_docs_only() -> bool:
+    """Publish docs/ without a Report object (after StaticExporter)."""
+    settings = get_settings()
+    commit_msg = f"publish: static export {datetime.now().strftime('%Y-%m-%d %H:%M')}"
+    if not _check_git_config():
+        return False
+    try:
+        os.chdir(_PROJECT_ROOT)
+        _run("git", "add", "docs/")
+        result = _run("git", "diff", "--cached", "--quiet", check=False)
+        if result.returncode == 0:
+            logger.info("No changes to publish")
+            return True
+        _run("git", "commit", "-m", commit_msg)
+        _run("git", "push", "origin", "main")
+        logger.info("Published docs: %s", commit_msg)
+        return True
+    except subprocess.CalledProcessError as e:
+        logger.error("Publish docs failed: %s", e)
+        return False
+
+
 def _check_git_config() -> bool:
     """Validate git environment before publishing."""
     try:

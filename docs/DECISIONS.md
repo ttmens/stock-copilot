@@ -70,3 +70,20 @@
 - **背景**: 东财 push2 API 需要 ut 参数才能正常返回
 - **选择**: 使用固定 token `fa5fd1943c7b386f172d6893dbbd1`
 - **影响**: PE/PB/市值/资金流等 Eastmoney 接口正常返回
+
+## 2026-05-26 — Phase C 静动分离 + 单进程
+
+- **背景**: 50× HTML 进 git 成本高；自选需 API；盘中不宜频繁 push
+- **选择**: SQLite 为中枢；Full 导出静态到 GitHub Pages；Fast 只写库+API；`main run` 单进程
+- **影响**: `skip_stock_html`、DeliveryPipeline、watchlist/jobs API、`docs/app/` 混合前端
+
+## 2026-05-26 — Evolution 默认闸门
+
+- **选择**: `auto_mutate_watchlist: false`、`auto_apply_weights: false`
+- **影响**: 权重写入 `fusion_weights.proposed.json`；自选变动进 `evolution_suggestions` 待确认
+
+## 2026-05-26 — 融合权重归一化
+
+- **背景**: `fusion_weights.json` 曾出现 sum≠1.0
+- **选择**: 配置修正 + `_normalize_layer_weights()` 运行时归一化
+- **影响**: 最终评分不再因权重和漂移

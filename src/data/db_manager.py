@@ -93,11 +93,67 @@ CREATE TABLE IF NOT EXISTS signal_stats (
     bearish_count   INTEGER DEFAULT 0,
     hold_count      INTEGER DEFAULT 0,
     avg_score       REAL DEFAULT 0,
-    win_rate        REAL DEFAULT NULL,      -- % of bullish signals that were correct
+    win_rate        REAL DEFAULT NULL,
     last_signal     TEXT DEFAULT NULL,
     last_signal_date TEXT DEFAULT NULL,
-    streak          INTEGER DEFAULT 0,      -- consecutive same-direction signals
+    streak          INTEGER DEFAULT 0,
     updated_at      TEXT DEFAULT (datetime('now'))
+);
+
+-- User watchlist (Phase C)
+CREATE TABLE IF NOT EXISTS watchlist (
+    code        TEXT PRIMARY KEY,
+    name        TEXT NOT NULL DEFAULT '',
+    pinned      INTEGER DEFAULT 0,
+    sort_order  INTEGER DEFAULT 0,
+    tags        TEXT DEFAULT '[]',
+    added_at    TEXT DEFAULT (datetime('now'))
+);
+
+-- Analysis jobs
+CREATE TABLE IF NOT EXISTS jobs (
+    id          TEXT PRIMARY KEY,
+    job_type    TEXT NOT NULL,
+    report_type TEXT DEFAULT '',
+    status      TEXT NOT NULL DEFAULT 'pending',
+    progress    REAL DEFAULT 0,
+    message     TEXT DEFAULT '',
+    symbol_count INTEGER DEFAULT 0,
+    created_at  TEXT DEFAULT (datetime('now')),
+    updated_at  TEXT DEFAULT (datetime('now')),
+    finished_at TEXT DEFAULT NULL
+);
+
+-- Intraday fast quotes cache
+CREATE TABLE IF NOT EXISTS intraday_quotes (
+    code        TEXT NOT NULL,
+    trade_date  TEXT NOT NULL,
+    hard_score  REAL,
+    final_score REAL,
+    signal_label TEXT,
+    updated_at  TEXT DEFAULT (datetime('now')),
+    PRIMARY KEY (code, trade_date)
+);
+
+-- Static publish metadata
+CREATE TABLE IF NOT EXISTS published_meta (
+    id          INTEGER PRIMARY KEY AUTOINCREMENT,
+    published_at TEXT NOT NULL,
+    report_type TEXT,
+    symbol_count INTEGER,
+    git_commit  TEXT DEFAULT '',
+    source      TEXT DEFAULT 'full'
+);
+
+-- Evolution suggestions (user must accept)
+CREATE TABLE IF NOT EXISTS evolution_suggestions (
+    id          INTEGER PRIMARY KEY AUTOINCREMENT,
+    code        TEXT NOT NULL,
+    name        TEXT DEFAULT '',
+    action      TEXT NOT NULL,
+    reason      TEXT DEFAULT '',
+    status      TEXT DEFAULT 'pending',
+    created_at  TEXT DEFAULT (datetime('now'))
 );
 """
 
@@ -424,7 +480,159 @@ class SignalDB:
 
     def close(self):
         """Close any open connections (no-op with context manager pattern)."""
-        pass
+        if self._persistent_conn is not None:
+            self._persistent_conn.close()
+            self._persistent_conn = None
+
+    # ── Watchlist (Phase C) ─────────────────────────────────────
+
+    def list_watchlist(self) -> list[dict]:
+        with self._connect() as conn:
+            rows = conn.execute(
+                "SELECT * FROM watchlist ORDER BY pinned DESC, sort_order ASC, code ASC"
+            ).fetchall()
+            return [dict(r) for r in rows]
+
+    def add_watchlist(self, code: str, name: str = "", pinned: bool = False) -> bool:
+        with self._connect() as conn:
+            conn.execute(
+                """INSERT INTO watchlist (code, name, pinned)
+                   VALUES (?, ?, ?)
+                   ON CONFLICT(code) DO UPDATE SET name=excluded.name""",
+                (code, name or code, int(pinned)),
+            )
+            return True
+
+    def remove_watchlist(self, code: str) -> bool:
+        with self._connect() as conn:
+            cur = conn.execute("DELETE FROM watchlist WHERE code = ?", (code,))
+            return cur.rowcount > 0
+
+    def update_watchlist(self, code: str, pinned: bool | None = None, name: str | None = None) -> bool:
+        with self._connect() as conn:
+            if pinned is not None:
+                conn.execute("UPDATE watchlist SET pinned = ? WHERE code = ?", (int(pinned), code))
+            if name is not None:
+                conn.execute("UPDATE watchlist SET name = ? WHERE code = ?", (name, code))
+            return True
+
+    def import_watchlist_codes(self, codes: list[str], names: dict[str, str] | None = None) -> int:
+        names = names or {}
+        count = 0
+        for code in codes:
+            self.add_watchlist(code, names.get(code, code))
+            count += 1
+        return count
+
+    # ── Jobs ────────────────────────────────────────────────────
+
+    def create_job(self, job_id: str, job_type: str, report_type: str = "") -> None:
+        with self._connect() as conn:
+            conn.execute(
+                """INSERT INTO jobs (id, job_type, report_type, status)
+                   VALUES (?, ?, ?, 'pending')""",
+                (job_id, job_type, report_type),
+            )
+
+    def update_job(self, job_id: str, status: str, progress: float = 0, message: str = "",
+                   symbol_count: int = 0) -> None:
+        with self._connect() as conn:
+            if status in ("completed", "failed"):
+                conn.execute(
+                    """UPDATE jobs SET status=?, progress=?, message=?, symbol_count=?,
+                        updated_at=datetime('now'), finished_at=datetime('now')
+                        WHERE id=?""",
+                    (status, progress, message, symbol_count, job_id),
+                )
+            else:
+                conn.execute(
+                    """UPDATE jobs SET status=?, progress=?, message=?, symbol_count=?,
+                        updated_at=datetime('now') WHERE id=?""",
+                    (status, progress, message, symbol_count, job_id),
+                )
+
+    def get_job(self, job_id: str) -> dict | None:
+        with self._connect() as conn:
+            row = conn.execute("SELECT * FROM jobs WHERE id = ?", (job_id,)).fetchone()
+            return dict(row) if row else None
+
+    def get_latest_job(self) -> dict | None:
+        with self._connect() as conn:
+            row = conn.execute(
+                "SELECT * FROM jobs ORDER BY created_at DESC LIMIT 1"
+            ).fetchone()
+            return dict(row) if row else None
+
+    # ── Intraday ──────────────────────────────────────────────────
+
+    def upsert_intraday(self, code: str, trade_date: date, hard_score: float,
+                        final_score: float, signal_label: str) -> None:
+        with self._connect() as conn:
+            conn.execute(
+                """INSERT INTO intraday_quotes (code, trade_date, hard_score, final_score, signal_label)
+                   VALUES (?, ?, ?, ?, ?)
+                   ON CONFLICT(code, trade_date) DO UPDATE SET
+                     hard_score=excluded.hard_score,
+                     final_score=excluded.final_score,
+                     signal_label=excluded.signal_label,
+                     updated_at=datetime('now')""",
+                (code, str(trade_date), hard_score, final_score, signal_label),
+            )
+
+    def get_intraday_quotes(self, trade_date: date | None = None) -> list[dict]:
+        td = str(trade_date or date.today())
+        with self._connect() as conn:
+            rows = conn.execute(
+                "SELECT * FROM intraday_quotes WHERE trade_date = ? ORDER BY final_score DESC",
+                (td,),
+            ).fetchall()
+            return [dict(r) for r in rows]
+
+    # ── Published meta ────────────────────────────────────────────
+
+    def record_publish(self, report_type: str, symbol_count: int, git_commit: str = "",
+                       source: str = "full") -> None:
+        with self._connect() as conn:
+            conn.execute(
+                """INSERT INTO published_meta (published_at, report_type, symbol_count, git_commit, source)
+                   VALUES (datetime('now'), ?, ?, ?, ?)""",
+                (report_type, symbol_count, git_commit, source),
+            )
+
+    def get_last_published(self) -> dict | None:
+        with self._connect() as conn:
+            row = conn.execute(
+                "SELECT * FROM published_meta ORDER BY id DESC LIMIT 1"
+            ).fetchone()
+            return dict(row) if row else None
+
+    # ── Evolution suggestions ─────────────────────────────────────
+
+    def add_evolution_suggestion(self, code: str, action: str, name: str = "",
+                                   reason: str = "") -> int:
+        with self._connect() as conn:
+            cur = conn.execute(
+                """INSERT INTO evolution_suggestions (code, name, action, reason)
+                   VALUES (?, ?, ?, ?)""",
+                (code, name, action, reason),
+            )
+            return cur.lastrowid or 0
+
+    def list_evolution_suggestions(self, status: str = "pending") -> list[dict]:
+        with self._connect() as conn:
+            rows = conn.execute(
+                "SELECT * FROM evolution_suggestions WHERE status = ? ORDER BY id DESC",
+                (status,),
+            ).fetchall()
+            return [dict(r) for r in rows]
+
+    def resolve_evolution_suggestion(self, suggestion_id: int, accept: bool) -> None:
+        status = "accepted" if accept else "rejected"
+        with self._connect() as conn:
+            conn.execute(
+                "UPDATE evolution_suggestions SET status = ? WHERE id = ?",
+                (status, suggestion_id),
+            )
 
     def cleanup_old_signals(self, keep_days: int = 90) -> int:
         """Delete signal records older than keep_days.

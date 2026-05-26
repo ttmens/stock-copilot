@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>自选管理 — 智策 NexStrat</title>
+<link rel="stylesheet" href="../assets/theme.css">
+<style>
+.wl-shell { max-width: 640px; margin: 2rem auto; padding: 0 1rem; }
+.wl-form { display: flex; gap: 0.5rem; margin-bottom: 1rem; flex-wrap: wrap; }
+.wl-form input { flex: 1; min-width: 120px; padding: 0.5rem; border-radius: 8px; border: 1px solid #334; background: #1a1f2e; color: #eee; }
+.wl-form button { padding: 0.5rem 1rem; border-radius: 8px; border: none; background: #7b3ff2; color: #fff; cursor: pointer; }
+.wl-list { list-style: none; padding: 0; }
+.wl-list li { display: flex; justify-content: space-between; padding: 0.75rem; border-bottom: 1px solid rgba(255,255,255,0.06); }
+.wl-msg { color: #94a3b8; font-size: 0.9rem; margin-top: 1rem; }
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="brand"><span class="brand-name">智策 NexStrat</span></div>
+  <div class="site-nav">
+    <a href="../index.html">首页</a>
+    <a href="watchlist.html" class="active">自选</a>
+  </div>
+</header>
+<div class="wl-shell">
+  <h1>自选管理</h1>
+  <p class="wl-msg" id="api-hint">需要连接服务端 API 才能增删自选；GitHub Pages 静态模式下只读展示。</p>
+  <form class="wl-form" id="add-form">
+    <input name="code" placeholder="代码 如 600519" required pattern="[0-9]{6}">
+    <input name="name" placeholder="名称（可选）">
+    <button type="submit">添加</button>
+    <button type="button" id="import-default">导入默认模板</button>
+  </form>
+  <ul class="wl-list" id="wl-list"></ul>
+</div>
+<script src="config.js"></script>
+<script>
+(function () {
+  const API = (window.STOCK_COPILOT?.API_BASE || "").replace(/\/$/, "");
+  const listEl = document.getElementById("wl-list");
+  const hint = document.getElementById("api-hint");
+
+  function render(items) {
+    listEl.innerHTML = items.map(i => `
+      <li data-code="${i.code}">
+        <span>${i.code} ${i.name || ""}</span>
+        ${API ? `<button type="button" class="rm" data-code="${i.code}">删除</button>` : ""}
+      </li>`).join("");
+    listEl.querySelectorAll(".rm").forEach(btn => {
+      btn.addEventListener("click", () => remove(btn.dataset.code));
+    });
+  }
+
+  async function load() {
+    if (API) {
+      hint.textContent = `API: ${API}`;
+      try {
+        const res = await fetch(`${API}/api/watchlist`);
+        const data = await res.json();
+        render(data.stocks || []);
+        return;
+      } catch (e) {
+        hint.textContent = "API 不可用，尝试静态数据";
+      }
+    }
+    try {
+      const res = await fetch("../data/latest.json");
+      const data = await res.json();
+      render((data.stocks || []).map(s => ({ code: s.code, name: s.name })));
+    } catch (_) {
+      listEl.innerHTML = "<li>无法加载自选</li>";
+    }
+  }
+
+  async function remove(code) {
+    if (!API) return;
+    await fetch(`${API}/api/watchlist/${code}`, { method: "DELETE" });
+    load();
+  }
+
+  document.getElementById("add-form")?.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    if (!API) { alert("静态模式无法写入，请配置 API_BASE"); return; }
+    const fd = new FormData(e.target);
+    await fetch(`${API}/api/watchlist`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ code: fd.get("code"), name: fd.get("name") || "" }),
+    });
+    e.target.reset();
+    load();
+  });
+
+  document.getElementById("import-default")?.addEventListener("click", async () => {
+    if (!API) return;
+    await fetch(`${API}/api/watchlist/import-default`, { method: "POST" });
+    load();
+  });
+
+  load();
+})();
+</script>
+</body>
+</html>

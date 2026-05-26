@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>个股详情 — 智策 NexStrat</title>
+<link rel="stylesheet" href="../assets/theme.css">
+<style>
+.detail-shell { max-width: 960px; margin: 0 auto; padding: 1.5rem; }
+.layer-grid { display: grid; gap: 1rem; margin-top: 1.5rem; }
+.layer-card { background: var(--card-bg, #1a1f2e); border-radius: 12px; padding: 1rem; border: 1px solid rgba(255,255,255,0.06); }
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="brand"><span class="brand-name">智策 NexStrat</span></div>
+  <div class="site-nav">
+    <a href="../index.html">首页</a>
+    <a href="../dashboard.html">看板</a>
+    <a href="watchlist.html">自选</a>
+  </div>
+</header>
+<div class="detail-shell">
+  <div id="loading">加载中…</div>
+  <div id="content" style="display:none">
+    <h1 id="title"></h1>
+    <div id="signal-pill" class="signal-pill hold"></div>
+    <div class="score-panel" id="score-panel"></div>
+    <div class="layer-grid" id="layers"></div>
+  </div>
+</div>
+<script src="config.js"></script>
+<script>
+(async function () {
+  const params = new URLSearchParams(location.search);
+  const code = params.get("code");
+  if (!code) { document.getElementById("loading").textContent = "缺少股票代码"; return; }
+
+  let stock = null;
+  try {
+    const res = await fetch("../data/latest.json");
+    const data = await res.json();
+    stock = (data.stocks || []).find(s => s.code === code);
+  } catch (e) {
+    document.getElementById("loading").textContent = "无法加载数据";
+    return;
+  }
+  if (!stock) {
+    document.getElementById("loading").textContent = `未找到 ${code}`;
+    return;
+  }
+
+  document.getElementById("loading").style.display = "none";
+  document.getElementById("content").style.display = "block";
+  document.title = `${stock.name} (${stock.code}) — 智策 NexStrat`;
+  document.getElementById("title").textContent = `${stock.code} ${stock.name}`;
+  const pill = document.getElementById("signal-pill");
+  pill.textContent = stock.overall_focus || stock.overall_sentiment;
+  pill.className = "signal-pill " + (stock.overall_sentiment || "hold");
+
+  const sb = stock.signal_breakdown || {};
+  document.getElementById("score-panel").innerHTML = `
+    <div class="score-row"><span>综合评分</span><span>${(sb.final_score ?? 0).toFixed(3)}</span></div>
+    <div class="score-row"><span>硬信号</span><span>${(sb.hard_score ?? 0).toFixed(3)}</span></div>
+    <div class="score-row"><span>软信号</span><span>${(sb.soft_score ?? 0).toFixed(3)}</span></div>
+  `;
+
+  const layers = [
+    ["技术面", stock.technical],
+    ["基本面", stock.fundamental],
+    ["资金面", stock.capital],
+    ["公告", stock.announcement],
+  ];
+  document.getElementById("layers").innerHTML = layers.map(([label, agent]) => {
+    if (!agent) return "";
+    return `<div class="layer-card"><h3>${label}</h3><p>${agent.summary || "—"}</p></div>`;
+  }).join("");
+
+  if (stock.dragon_tiger && stock.dragon_tiger.length) {
+    const dt = stock.dragon_tiger.map(d => `<li>${d.date} ${d.reason} 净买 ${(d.net_buy/1e8).toFixed(2)}亿</li>`).join("");
+    document.getElementById("layers").insertAdjacentHTML("beforeend",
+      `<div class="layer-card"><h3>龙虎榜</h3><ul>${dt}</ul></div>`);
+  }
+})();
+</script>
+</body>
+</html>

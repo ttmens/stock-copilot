@@ -278,11 +278,27 @@ class DataFetcher:
             return []
 
     async def _fetch_news(self, code: str, errors: list[str]) -> list[NewsItem]:
-        """Get individual stock news. Currently Eastmoney search API is blocked
-        from some servers, so this returns empty with a debug log."""
-        # Eastmoney news API is blocked from this server
-        # TODO: re-enable when network allows
-        return []
+        """Stock news via AkShare; degrades to empty on failure."""
+        try:
+            df = await asyncio.to_thread(
+                ak.stock_news_em,
+                symbol=code,
+            )
+            if df is None or df.empty:
+                return []
+            items: list[NewsItem] = []
+            for _, row in df.head(10).iterrows():
+                items.append(NewsItem(
+                    title=str(row.get("新闻标题", row.get("title", ""))),
+                    url=str(row.get("新闻链接", row.get("url", ""))),
+                    date=str(row.get("发布时间", row.get("date", ""))),
+                    source=str(row.get("文章来源", row.get("source", "akshare"))),
+                ))
+            return items
+        except Exception as e:
+            errors.append(f"akshare_news: {e}")
+            logger.debug("News unavailable for %s: %s", code, e)
+            return []
 
     async def _fetch_dragon_tiger(self, code: str, errors: list[str]) -> list[DragonTigerItem]:
         """Get dragon & tiger list (龙虎榜) from Eastmoney datacenter.
@@ -308,6 +324,9 @@ class DataFetcher:
                     net_buy=d.get("net_buy", 0),
                     buy_amount=d.get("buy_amount", 0),
                     sell_amount=d.get("sell_amount", 0),
+                    participants=await asyncio.to_thread(
+                        eastmoney.get_dragon_tiger_participants, code, d.get("date", ""), 5
+                    ) if d.get("date") else [],
                 )
                 for d in recent_entries[:5]
             ]

@@ -104,7 +104,23 @@ TPL_HOME = """<!DOCTYPE html>
     {% endif %}
 
     <div class="section-title">
-        今日重点 <span class="count">({{ stocks|length }} 只自选)</span>
+        今日重点 <span class="count" id="stock-count">({{ stocks|length }} 只自选)</span>
+    </div>
+
+    <div class="filter-bar" id="filter-bar">
+        <input type="search" id="filter-search" placeholder="搜索代码/名称" aria-label="搜索">
+        <select id="filter-signal" aria-label="信号筛选">
+            <option value="">全部信号</option>
+            <option value="bullish">看多</option>
+            <option value="hold">观望</option>
+            <option value="bearish">看空</option>
+        </select>
+        <select id="filter-sort" aria-label="排序">
+            <option value="score">按评分</option>
+            <option value="confidence">按置信度</option>
+            <option value="code">按代码</option>
+        </select>
+        <a href="app/watchlist.html" class="filter-link">管理自选</a>
     </div>
 
     {% if not stocks %}
@@ -115,9 +131,9 @@ TPL_HOME = """<!DOCTYPE html>
     </div>
     {% endif %}
 
-    <div class="stock-grid">
+    <div class="stock-grid" id="stock-grid">
         {% for stock in stocks %}
-        <a href="stock/{{ stock.code }}.html" style="text-decoration:none;color:inherit">
+        <a href="{% if use_app_pages %}app/stock.html?code={{ stock.code }}{% else %}stock/{{ stock.code }}.html{% endif %}" class="stock-card-link" data-code="{{ stock.code }}" data-name="{{ stock.name }}" data-signal="{{ stock.overall_sentiment }}" data-score="{{ stock.signal_breakdown.final_score }}" data-confidence="{{ stock.confidence }}" style="text-decoration:none;color:inherit">
         <div class="narr-card">
             <div class="narr-header">
                 <div class="narr-stock">
@@ -206,9 +222,11 @@ TPL_HOME = """<!DOCTYPE html>
     <div class="disclaimer">{{ disclaimer }}</div>
 
     <footer class="site-footer">
-        智策 NexStrat v1.3 · AI 辅助决策 · 不构成投资建议
+        智策 NexStrat v1.4 · AI 辅助决策 · 不构成投资建议
     </footer>
 </div>
+<script src="app/config.js"></script>
+<script src="app/app.js" defer></script>
 </body>
 </html>
 """
@@ -856,6 +874,7 @@ def generate_site(report: Report, target_dir: str | None = None) -> str:
                 "net_buy": dt.net_buy,
                 "buy_amount": dt.buy_amount,
                 "sell_amount": dt.sell_amount,
+                "participants": dt.participants[:5] if dt.participants else [],
             })
 
         # Announcement key events
@@ -960,24 +979,29 @@ def generate_site(report: Report, target_dir: str | None = None) -> str:
 
     # ── Page 1: index.html ──────────────────────────────────────
     tmpl = Template(TPL_HOME)
+    use_app_pages = get_settings().pipeline.skip_stock_html
     html = tmpl.render(
         meta=meta, type_label=type_label, market=market,
         stocks=stocks, archive=archive, disclaimer=meta["disclaimer"],
         bullish_count=bullish_count, hold_count=hold_count, bearish_count=bearish_count,
+        use_app_pages=use_app_pages,
     )
     index_path = site_dir / "index.html"
     index_path.write_text(html, encoding="utf-8")
 
     # ── Page 2: stock/{code}.html (per stock) ───────────────────
-    stock_dir = site_dir / "stock"
-    stock_dir.mkdir(exist_ok=True)
-    for stock in stocks:
-        tmpl = Template(TPL_STOCK)
-        stock_html = tmpl.render(
-            stock=stock, disclaimer=meta["disclaimer"],
-            meta=meta, type_label=type_label,
-        )
-        (stock_dir / f"{stock['code']}.html").write_text(stock_html, encoding="utf-8")
+    if not get_settings().pipeline.skip_stock_html:
+        stock_dir = site_dir / "stock"
+        stock_dir.mkdir(exist_ok=True)
+        for stock in stocks:
+            tmpl = Template(TPL_STOCK)
+            stock_html = tmpl.render(
+                stock=stock, disclaimer=meta["disclaimer"],
+                meta=meta, type_label=type_label,
+            )
+            (stock_dir / f"{stock['code']}.html").write_text(stock_html, encoding="utf-8")
+    else:
+        logger.info("skip_stock_html=true — skipping %d per-stock HTML pages", len(stocks))
 
     # ── Page 3: history.html ────────────────────────────────────
     tmpl = Template(TPL_HISTORY)
@@ -999,6 +1023,8 @@ def generate_site(report: Report, target_dir: str | None = None) -> str:
     # Archive copy of index
     archive_file = archive_dir / f"{report.trade_date}-{report.report_type.value}.html"
     archive_file.write_text(html, encoding="utf-8")
+
+    _copy_app_assets(site_dir)
 
     # Sync to docs/ for GitHub Pages
     # Sync to docs/ for GitHub Pages (production only, never in test mode)
@@ -1100,6 +1126,18 @@ def _load_history(settings) -> dict:
     return history
 
 
+def _copy_app_assets(site_dir: Path) -> None:
+    """Copy hybrid SPA shell (app/) into site output."""
+    src_app = Path(__file__).resolve().parent / "app"
+    dst_app = site_dir / "app"
+    if not src_app.exists():
+        return
+    if dst_app.exists():
+        shutil.rmtree(dst_app)
+    shutil.copytree(src_app, dst_app)
+    logger.debug("Copied app assets to %s", dst_app)
+
+
 def _sync_to_docs(settings) -> None:
     """Sync site/ to repo docs/ for GitHub Pages.
 
@@ -1146,13 +1184,35 @@ def _sync_to_docs(settings) -> None:
     if not docs_dir.exists():
         docs_dir.mkdir(exist_ok=True)
 
-    for src_dir in ["assets", "archive", "data", "stock"]:
+    for src_dir in ["assets", "archive", "data"]:
         src = site_dir / src_dir
         dst = docs_dir / src_dir
         if src.exists():
             if dst.exists():
                 shutil.rmtree(dst)
             shutil.copytree(src, dst)
+
+    if not get_settings().pipeline.skip_stock_html:
+        stock_src = site_dir / "stock"
+        if stock_src.exists():
+            stock_dst = docs_dir / "stock"
+            if stock_dst.exists():
+                shutil.rmtree(stock_dst)
+            shutil.copytree(stock_src, stock_dst)
+
+    app_src = site_dir / "app"
+    if app_src.exists():
+        app_dst = docs_dir / "app"
+        if app_dst.exists():
+            shutil.rmtree(app_dst)
+        shutil.copytree(app_src, app_dst)
+
+    meta_src = site_dir / "meta"
+    if meta_src.exists():
+        meta_dst = docs_dir / "meta"
+        if meta_dst.exists():
+            shutil.rmtree(meta_dst)
+        shutil.copytree(meta_src, meta_dst)
 
     # Copy individual pages
     for page in ["index.html", "history.html", "dashboard.html"]:

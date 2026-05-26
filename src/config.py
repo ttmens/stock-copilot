@@ -39,6 +39,31 @@ class ScheduleConfig(BaseModel):
     pre_market: str = "08:30"
     post_market: str = "16:00"
     timezone: str = "Asia/Shanghai"
+    intraday_hours: list[int] = Field(default_factory=lambda: [10, 11, 14])
+    evolution: str = "16:00"
+    db_cleanup: str = "23:00"
+    db_cleanup_dow: str = "sun"
+
+
+class EvolutionConfig(BaseModel):
+    enabled: bool = True
+    auto_mutate_watchlist: bool = False
+    auto_apply_weights: bool = False
+
+
+class PipelineConfig(BaseModel):
+    llm_concurrency: int = 2
+    batch_size: int = 25
+    skip_stock_html: bool = True
+    api_port: int = 8000
+    api_host: str = "0.0.0.0"
+
+
+class ApiConfig(BaseModel):
+    cors_origins: list[str] = Field(
+        default_factory=lambda: ["https://ttmens.github.io", "http://127.0.0.1:8000"]
+    )
+    auth_token_env: str = "STOCK_COPILOT_TOKEN"
 
 
 class NotifyConfig(BaseModel):
@@ -73,6 +98,9 @@ class Settings(BaseSettings):
     data: DataConfig = Field(default_factory=DataConfig)
     report: ReportConfig = Field(default_factory=ReportConfig)
     site: SiteConfig = Field(default_factory=SiteConfig)
+    evolution: EvolutionConfig = Field(default_factory=EvolutionConfig)
+    pipeline: PipelineConfig = Field(default_factory=PipelineConfig)
+    api: ApiConfig = Field(default_factory=ApiConfig)
 
     # Env-based secrets
     deepseek_api_key: str = ""
@@ -112,6 +140,12 @@ class Settings(BaseSettings):
             kwargs["report"] = ReportConfig(**cfg["report"])
         if "site" in cfg:
             kwargs["site"] = SiteConfig(**cfg["site"])
+        if "evolution" in cfg:
+            kwargs["evolution"] = EvolutionConfig(**cfg["evolution"])
+        if "pipeline" in cfg:
+            kwargs["pipeline"] = PipelineConfig(**cfg["pipeline"])
+        if "api" in cfg:
+            kwargs["api"] = ApiConfig(**cfg["api"])
 
         # Override notify.wecom_webhook from env
         wecom_env = os.getenv("WECOM_WEBHOOK", "")

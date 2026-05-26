@@ -186,6 +186,27 @@ def get_dragon_tiger(code: str, page_size: int = 10) -> list[dict]:
     return results
 
 
+def get_dragon_tiger_participants(code: str, trade_date: str, page_size: int = 10) -> list[dict]:
+    """Get dragon & tiger seat details (营业部明细) for one day."""
+    filter_str = f'(SECURITY_CODE="{code}")(TRADE_DATE=\'{trade_date}\')'
+    data = eastmoney_datacenter(
+        "RPT_BILLBOARD_DAILYDETAILSBUY",
+        filter_str=filter_str,
+        page_size=page_size,
+        sort_columns="BUY_AMT",
+        sort_types="-1",
+    )
+    participants = []
+    for item in data[:page_size]:
+        participants.append({
+            "seat": str(item.get("OPERATEDEPT_NAME", "")),
+            "buy": float(item.get("BUY_AMT") or 0),
+            "sell": float(item.get("SELL_AMT") or 0),
+            "net": float(item.get("NET_AMT") or 0),
+        })
+    return participants
+
+
 def get_margin_trading(code: str, page_size: int = 30) -> list[dict]:
     """Get margin trading (融资融券) data."""
     filter_str = f'(SECURITY_CODE="{code}")'

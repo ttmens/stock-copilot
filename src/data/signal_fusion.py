@@ -54,6 +54,28 @@ def _get_optimized_weights() -> dict:
     }
 
 
+def _normalize_layer_weights(
+    w_hard: float,
+    w_soft: float,
+    w_gate: float,
+    w_dragon_tiger: float,
+    w_announcement: float,
+) -> tuple[float, float, float, float, float]:
+    """Renormalize active layer weights to sum to 1.0."""
+    total = w_hard + w_soft + w_gate + w_dragon_tiger + w_announcement
+    if total <= 0:
+        return 0.40, 0.25, 0.15, 0.10, 0.10
+    if abs(total - 1.0) < 1e-6:
+        return w_hard, w_soft, w_gate, w_dragon_tiger, w_announcement
+    return (
+        w_hard / total,
+        w_soft / total,
+        w_gate / total,
+        w_dragon_tiger / total,
+        w_announcement / total,
+    )
+
+
 # ── Signal classification ──────────────────────────────────────────
 
 SIGNAL_LABELS = {
@@ -205,6 +227,10 @@ def fuse_signals(
         result.signal_label = "⚪ 无数据"
         result.confidence = 0.0
         return result
+
+    w_hard, w_soft, w_gate, w_dragon_tiger, w_announcement = _normalize_layer_weights(
+        w_hard, w_soft, w_gate, w_dragon_tiger, w_announcement,
+    )
 
     result.final_score = (
         result.hard_score * w_hard +

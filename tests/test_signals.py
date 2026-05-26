@@ -130,6 +130,11 @@ class TestSignalFusion:
         assert r.data_available["hard"] is True
         assert r.data_available["soft"] is False
 
+    def test_weight_normalization(self):
+        from src.data.signal_fusion import _normalize_layer_weights
+        w = _normalize_layer_weights(0.48, 0.30, 0.18, 0.12, 0.12)
+        assert abs(sum(w) - 1.0) < 1e-6
+
 
 # ── SignalDB Tests ─────────────────────────────────────────────────
 

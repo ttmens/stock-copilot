@@ -80,6 +80,7 @@ class DragonTigerItem(BaseModel):
     net_buy: float = 0
     buy_amount: float = 0
     sell_amount: float = 0
+    participants: list[dict] = Field(default_factory=list)
 
 
 class StockSnapshot(BaseModel):

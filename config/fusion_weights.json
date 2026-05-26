@@ -1,12 +1,12 @@
 {
-  "hard": 0.50,
-  "soft": 0.30,
-  "gate": 0.20,
+  "hard": 0.40,
+  "soft": 0.25,
+  "gate": 0.15,
   "dragon_tiger": 0.10,
   "announcement": 0.10,
   "_meta": {
-    "updated_by": "initial",
+    "updated_by": "phase-c",
     "updated_at": "2026-05-26",
-    "note": "Default weights. Will be updated by OODA evolution cycle."
+    "note": "Default 5-layer weights (sum=1.0). Evolution writes proposed weights."
   }
 }

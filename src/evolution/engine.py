@@ -212,28 +212,42 @@ class EvolutionEngine:
             report.old_weights = dict(self.optimizer.get_weights())
             if perf_report and perf_report.verified > 0:
                 report.new_weights = self.optimizer.optimize(perf_report)
-                report.weights_changed = (
-                    report.old_weights != report.new_weights
-                )
+                report.weights_changed = report.old_weights != report.new_weights
+                from src.config import get_settings
+                evo = get_settings().evolution
                 if report.weights_changed:
-                    logger.info("✅ Orient: weights adjusted")
-                else:
-                    logger.info("ℹ️ Orient: weights stable, no adjustment needed")
+                    if evo.auto_apply_weights:
+                        self.optimizer.save_config()
+                        logger.info("✅ Weights saved to fusion_weights.json")
+                    else:
+                        self.optimizer.save_proposed()
+                        logger.info("ℹ️ Weights saved to fusion_weights.proposed.json (awaiting apply)")
             else:
                 report.new_weights = dict(report.old_weights)
 
-            # Phase 3: DECIDE + ACT (stock pool)
+            # Phase 3: stock pool
             report.phase = "decide"
+            from src.config import get_settings
+            evo = get_settings().evolution
             try:
-                pool_report = self.pool_manager.evolve(db=db)
+                if evo.auto_mutate_watchlist:
+                    pool_report = self.pool_manager.evolve(db=db)
+                else:
+                    pool_report = self.pool_manager.analyze_pool(db)
+                    if db:
+                        for s in pool_report.stats:
+                            if s.status == "candidate_evict":
+                                db.add_evolution_suggestion(
+                                    s.code, "evict", s.name,
+                                    f"胜率 {s.win_rate:.1%} 低于阈值",
+                                )
+                            elif s.status == "candidate_add":
+                                db.add_evolution_suggestion(
+                                    s.code, "add", s.name, "候选加入",
+                                )
                 report.pool_size = pool_report.pool_size
                 report.evicted = pool_report.evicted
                 report.added = pool_report.added
-                if pool_report.evicted or pool_report.added:
-                    logger.info("✅ Stock pool: -%d +%d",
-                                len(pool_report.evicted), len(pool_report.added))
-                else:
-                    logger.info("ℹ️ Stock pool: no changes needed")
             except Exception as e:
                 logger.error("Stock pool evolution failed: %s", e)
                 report.errors.append(f"股票池进化失败: {e}")
@@ -241,9 +255,7 @@ class EvolutionEngine:
             # Phase 4: ACT (apply + report)
             report.phase = "act"
             try:
-                # Apply optimized weights to fusion engine
-                if report.weights_changed:
-                    self.optimizer.apply_to_fusion()
+                # Weights already saved in orient phase per settings
 
                 # Generate and save evolution report
                 report.summary = self._generate_summary(report)
