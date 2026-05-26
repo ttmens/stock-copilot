@@ -11,8 +11,18 @@
 <header class="site-header">
     <div class="brand">
         <div class="brand-icon">
-            <img src="../assets/logo.png" alt="Logo" style="width:36px;height:auto;">
-        </div>
+        <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:32px;height:32px">
+            <rect width="32" height="32" rx="8" fill="url(#logo-grad)"/>
+            <path d="M8 22 L14 14 L18 18 L24 10" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M20 10 L24 10 L24 14" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <defs>
+                <linearGradient id="logo-grad" x1="0" y1="0" x2="32" y2="32">
+                    <stop offset="0%" stop-color="#7b3ff2"/>
+                    <stop offset="100%" stop-color="#00f5ff"/>
+                </linearGradient>
+            </defs>
+        </svg>
+    </div>
         <div class="brand-text">
             <span class="brand-name">智策 NexStrat</span>
             <span class="brand-tagline">面向投资者的AI智能投研</span>
@@ -48,17 +58,17 @@
         <div class="detail-section">
             <div class="detail-section-title">📊 综合评分</div>
             <div class="detail-score-big" style="color:#94A3B8">
-                +0.115
+                +0.114
             </div>
             <div class="detail-score-label">置信度 60.0%</div>
             <div class="score-bar-track" style="margin-top:8px">
-                <div class="score-bar-fill" style="width: 55.75%; background: #94A3B8;"></div>
+                <div class="score-bar-fill" style="width: 55.7%; background: #94A3B8;"></div>
             </div>
             <!-- 5-layer breakdown -->
             <div class="signal-grid" style="margin-top:16px">
                 <div class="signal-cell">
                     <span class="signal-cell-label">硬信号 40%</span>
-                    <span class="signal-cell-val" style="color:#22C55E">+0.024</span>
+                    <span class="signal-cell-val" style="color:#22C55E">+0.023</span>
                 </div>
                 <div class="signal-cell">
                     <span class="signal-cell-label">软信号 25%</span>
@@ -110,13 +120,13 @@
                 
                 <div class="metric-chip" style="min-width:80px">
                     <span class="metric-chip-label">PB</span>
-                    <span class="metric-chip-val">1.94</span>
+                    <span class="metric-chip-val">1.95</span>
                 </div>
                 
                 
                 <div class="metric-chip" style="min-width:80px">
                     <span class="metric-chip-label">总市值</span>
-                    <span class="metric-chip-val">9721亿</span>
+                    <span class="metric-chip-val">9747亿</span>
                 </div>
                 
             </div>
@@ -131,8 +141,8 @@
             
             <tr>
                 <td class="dim-name" style="width:56px">技术面</td>
-                <td class="dim-status" style="width:28px">✅</td>
-                <td class="dim-summary">近期股价从高点48.15回落，呈现下降趋势。均线空头排列（MA5<MA10<MA20），股价受压于短期均线。5月25日放量下跌（5431万股），创近期最大成交量，显示抛压增大。下方支撑位在44.65（前低）和44.53附近，上方压力位为MA5（45.42）和MA10（45.38）。短期走势偏弱，需关注量能变化及能否守住前低。</td>
+                <td class="dim-status" style="width:28px">❌</td>
+                <td class="dim-summary">中国神华近期走势偏弱，股价从48元附近回落至44.78元，处于20日均线下方，均线呈空头排列（MA20>MA5>MA10）。5月25日放量下跌创近期新低，成交量达5431万手，抛压增大。下方支撑关注前期低点44.53-44.65区域，若跌破则可能进一步下探。短期趋势偏空，需等待企稳信号。</td>
             </tr>
             
             
@@ -141,8 +151,8 @@
             
             <tr>
                 <td class="dim-name" style="width:56px">资金面</td>
-                <td class="dim-status" style="width:28px">✅</td>
-                <td class="dim-summary">当日北向资金数据缺失，主力资金净流入77.0万元，显示市场主力对该股有一定关注，但金额较小，可能为短期操作。建议结合其他时段数据综合判断资金动向。</td>
+                <td class="dim-status" style="width:28px">⏸</td>
+                <td class="dim-summary">北向资金数据缺失，仅提供主力资金数据。当日主力净流入341.0万元，显示短期资金偏多，但缺乏北向资金验证，且单日数据不足以判断趋势。</td>
             </tr>
             
             
@@ -160,7 +170,7 @@
     <!-- Risk points -->
     
     <div class="risk-block" style="margin-bottom:16px">
-        <strong>⚠ 风险提示：</strong>若持续放量下跌，可能跌破前低，形成新下降通道、均线压制明显，反弹若无法站上MA5/MA10，则弱势难改、成交量异常放大，需警惕主力出货或恐慌性抛售、主力净流入金额较小，资金动向不显著，可能不代表趋势性变化。、数据仅覆盖单日，缺乏连续性，需关注后续资金流变化。
+        <strong>⚠ 风险提示：</strong>均线空头排列对股价形成压制、成交量放大伴随下跌，抛压增大、无明确止跌信号，存在继续下探风险、北向资金数据不可得，资金面分析不完整。、仅凭单日主力资金流入难以判断持续性，需结合多日数据。
     </div>
     
 

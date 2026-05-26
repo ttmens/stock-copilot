@@ -11,8 +11,18 @@
 <header class="site-header">
     <div class="brand">
         <div class="brand-icon">
-            <img src="../assets/logo.png" alt="Logo" style="width:36px;height:auto;">
-        </div>
+        <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:32px;height:32px">
+            <rect width="32" height="32" rx="8" fill="url(#logo-grad)"/>
+            <path d="M8 22 L14 14 L18 18 L24 10" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M20 10 L24 10 L24 14" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <defs>
+                <linearGradient id="logo-grad" x1="0" y1="0" x2="32" y2="32">
+                    <stop offset="0%" stop-color="#7b3ff2"/>
+                    <stop offset="100%" stop-color="#00f5ff"/>
+                </linearGradient>
+            </defs>
+        </svg>
+    </div>
         <div class="brand-text">
             <span class="brand-name">智策 NexStrat</span>
             <span class="brand-tagline">面向投资者的AI智能投研</span>
@@ -48,17 +58,17 @@
         <div class="detail-section">
             <div class="detail-section-title">📊 综合评分</div>
             <div class="detail-score-big" style="color:#94A3B8">
-                -0.020
+                +0.008
             </div>
             <div class="detail-score-label">置信度 55.0%</div>
             <div class="score-bar-track" style="margin-top:8px">
-                <div class="score-bar-fill" style="width: 49.0%; background: #94A3B8;"></div>
+                <div class="score-bar-fill" style="width: 50.4%; background: #94A3B8;"></div>
             </div>
             <!-- 5-layer breakdown -->
             <div class="signal-grid" style="margin-top:16px">
                 <div class="signal-cell">
                     <span class="signal-cell-label">硬信号 40%</span>
-                    <span class="signal-cell-val" style="color:#EF4444">-0.163</span>
+                    <span class="signal-cell-val" style="color:#EF4444">-0.168</span>
                 </div>
                 <div class="signal-cell">
                     <span class="signal-cell-label">软信号 25%</span>
@@ -66,7 +76,7 @@
                 </div>
                 <div class="signal-cell">
                     <span class="signal-cell-label">门控 15%</span>
-                    <span class="signal-cell-val" style="color:#EF4444">+0.300</span>
+                    <span class="signal-cell-val" style="color:var(--muted-soft)">+0.500</span>
                 </div>
                 
                 
@@ -80,13 +90,13 @@
                 
                 <div class="metric-chip" style="min-width:80px">
                     <span class="metric-chip-label">5日动量</span>
-                    <span class="metric-chip-val" style="color:#EF4444">-2.7%</span>
+                    <span class="metric-chip-val" style="color:#EF4444">-3.7%</span>
                 </div>
                 
                 
                 <div class="metric-chip" style="min-width:80px">
                     <span class="metric-chip-label">20日动量</span>
-                    <span class="metric-chip-val" style="color:#22C55E">+4.9%</span>
+                    <span class="metric-chip-val" style="color:#22C55E">+3.9%</span>
                 </div>
                 
                 
@@ -98,13 +108,13 @@
                 
                 <div class="metric-chip" style="min-width:80px">
                     <span class="metric-chip-label">量比</span>
-                    <span class="metric-chip-val">0.37</span>
+                    <span class="metric-chip-val">0.65</span>
                 </div>
                 
                 
                 <div class="metric-chip" style="min-width:80px">
                     <span class="metric-chip-label">PE(TTM)</span>
-                    <span class="metric-chip-val">13.9</span>
+                    <span class="metric-chip-val">13.8</span>
                 </div>
                 
                 
@@ -116,7 +126,7 @@
                 
                 <div class="metric-chip" style="min-width:80px">
                     <span class="metric-chip-label">总市值</span>
-                    <span class="metric-chip-val">1676亿</span>
+                    <span class="metric-chip-val">1673亿</span>
                 </div>
                 
             </div>
@@ -132,7 +142,7 @@
             <tr>
                 <td class="dim-name" style="width:56px">技术面</td>
                 <td class="dim-status" style="width:28px">✅</td>
-                <td class="dim-summary">该股短期均线呈空头排列（MA5<MA10<MA20），当前股价26.5低于所有均线，处于弱势区间。近期从4月30日高点27.99回调，成交量逐步萎缩，显示买盘不足。下方支撑位25.15（近期低点），上方压力位27.0-27.5（均线密集区）。需关注能否放量突破均线或跌破支撑。</td>
+                <td class="dim-summary">伊利股份近期呈现冲高回落走势。4月底放量突破后，股价在27-28元区间震荡，随后连续下跌，5月25日收盘26.27元，已跌破MA5（26.716）、MA10（27.217）及MA20（26.901）。短期均线MA5下穿MA10形成死叉，均线系统趋于空头排列。成交量在上涨阶段放大，近期下跌过程中量能萎缩后再度放大，显示抛压增强。下方支撑关注前期低点25.1-25.2元区域，上方压力位27-28元。短期趋势偏弱，需警惕进一步调整风险。</td>
             </tr>
             
             
@@ -141,8 +151,8 @@
             
             <tr>
                 <td class="dim-name" style="width:56px">资金面</td>
-                <td class="dim-status" style="width:28px">❌</td>
-                <td class="dim-summary">基于提供的数据，伊利股份当日主力净流入611万元，显示主力资金呈小幅净流入态势。但北向资金数据缺失，无法获悉外资动向，综合研判受限。单日资金流入规模较小，需持续观察后续资金变化及成交情况。</td>
+                <td class="dim-status" style="width:28px">✅</td>
+                <td class="dim-summary">伊利股份今日主力资金净流入511.0，显示主力资金有所介入，但北向资金数据缺失，无法判断外资态度。单日主力净流入规模较小，持续性有待观察。整体资金面中性偏积极。</td>
             </tr>
             
             
@@ -160,7 +170,7 @@
     <!-- Risk points -->
     
     <div class="risk-block" style="margin-bottom:16px">
-        <strong>⚠ 风险提示：</strong>若跌破25.15支撑，可能加速下跌、均线压制明显，反弹若不放量难以突破、市场整体情绪偏弱，个股跟跌风险、北向资金数据缺失，无法评估外资对当前股价的态度。、单日资金数据波动性大，不能代表长期趋势，需警惕短期资金转向风险。
+        <strong>⚠ 风险提示：</strong>若持续跌破25元整数关口，可能引发止损盘加速下跌、均线系统进一步发散形成空头排列，中期趋势转弱、成交量持续萎缩且无法收复短期均线，反弹力度不足、单日净流入金额较小，主力做多力度有限、北向资金数据缺失，无法全面评估资金面
     </div>
     
 

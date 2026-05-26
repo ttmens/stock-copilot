@@ -11,8 +11,18 @@
 <header class="site-header">
     <div class="brand">
         <div class="brand-icon">
-            <img src="../assets/logo.png" alt="Logo" style="width:36px;height:auto;">
-        </div>
+        <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:32px;height:32px">
+            <rect width="32" height="32" rx="8" fill="url(#logo-grad)"/>
+            <path d="M8 22 L14 14 L18 18 L24 10" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M20 10 L24 10 L24 14" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <defs>
+                <linearGradient id="logo-grad" x1="0" y1="0" x2="32" y2="32">
+                    <stop offset="0%" stop-color="#7b3ff2"/>
+                    <stop offset="100%" stop-color="#00f5ff"/>
+                </linearGradient>
+            </defs>
+        </svg>
+    </div>
         <div class="brand-text">
             <span class="brand-name">智策 NexStrat</span>
             <span class="brand-tagline">面向投资者的AI智能投研</span>
@@ -48,17 +58,17 @@
         <div class="detail-section">
             <div class="detail-section-title">📊 综合评分</div>
             <div class="detail-score-big" style="color:#94A3B8">
-                +0.043
+                -0.024
             </div>
-            <div class="detail-score-label">置信度 56.0%</div>
+            <div class="detail-score-label">置信度 55.0%</div>
             <div class="score-bar-track" style="margin-top:8px">
-                <div class="score-bar-fill" style="width: 52.15%; background: #94A3B8;"></div>
+                <div class="score-bar-fill" style="width: 48.8%; background: #94A3B8;"></div>
             </div>
             <!-- 5-layer breakdown -->
             <div class="signal-grid" style="margin-top:16px">
                 <div class="signal-cell">
                     <span class="signal-cell-label">硬信号 40%</span>
-                    <span class="signal-cell-val" style="color:#EF4444">-0.004</span>
+                    <span class="signal-cell-val" style="color:#EF4444">-0.246</span>
                 </div>
                 <div class="signal-cell">
                     <span class="signal-cell-label">软信号 25%</span>
@@ -66,7 +76,7 @@
                 </div>
                 <div class="signal-cell">
                     <span class="signal-cell-label">门控 15%</span>
-                    <span class="signal-cell-val" style="color:#EF4444">+0.300</span>
+                    <span class="signal-cell-val" style="color:var(--muted-soft)">+0.500</span>
                 </div>
                 
                 
@@ -80,25 +90,25 @@
                 
                 <div class="metric-chip" style="min-width:80px">
                     <span class="metric-chip-label">5日动量</span>
-                    <span class="metric-chip-val" style="color:#EF4444">-2.4%</span>
+                    <span class="metric-chip-val" style="color:#EF4444">-3.0%</span>
                 </div>
                 
                 
                 <div class="metric-chip" style="min-width:80px">
                     <span class="metric-chip-label">20日动量</span>
-                    <span class="metric-chip-val" style="color:#EF4444">-1.2%</span>
+                    <span class="metric-chip-val" style="color:#EF4444">-2.0%</span>
                 </div>
                 
                 
                 <div class="metric-chip" style="min-width:80px">
                     <span class="metric-chip-label">均线排列</span>
-                    <span class="metric-chip-val" style="color:#22C55E">多头</span>
+                    <span class="metric-chip-val" style="color:var(--body-ink)">交叉</span>
                 </div>
                 
                 
                 <div class="metric-chip" style="min-width:80px">
                     <span class="metric-chip-label">量比</span>
-                    <span class="metric-chip-val">0.45</span>
+                    <span class="metric-chip-val">0.63</span>
                 </div>
                 
                 
@@ -131,8 +141,8 @@
             
             <tr>
                 <td class="dim-name" style="width:56px">技术面</td>
-                <td class="dim-status" style="width:28px">❌</td>
-                <td class="dim-summary">股价近期经历5月12日放量大涨后持续回落，当前收于4.86元，低于MA10(4.917)和MA20(4.911)，呈空头排列；MA5(4.86)与收盘价持平，短期均线向下，量能萎缩，上行动能不足。下方支撑关注近期低点4.83元，上方压力位于MA10及MA20附近约4.91-4.92元区域，若放量突破则有望转强，否则可能延续弱势震荡。</td>
+                <td class="dim-status" style="width:28px">✅</td>
+                <td class="dim-summary">近20个交易日股价先横盘后异动，5月12日大幅放量跳空高开至5.15后持续回落，至5月25日收盘4.84，已回吐大部分涨幅。当前价格低于MA5(4.884)、MA10(4.936)和MA20(4.9135)，均线系统混乱，MA5下穿MA10形成死叉，呈现短期空头排列。成交量在冲高后逐步萎缩，显示上攻动能不足。支撑位在4.83（近期低点），压力位依次为4.90、5.00及均线区域。整体技术上处于回调弱势阶段。</td>
             </tr>
             
             
@@ -141,8 +151,8 @@
             
             <tr>
                 <td class="dim-name" style="width:56px">资金面</td>
-                <td class="dim-status" style="width:28px">⏸</td>
-                <td class="dim-summary">北向资金数据缺失，无法评估外资态度。仅基于主力资金数据，当日主力净流入157万元，显示小幅资金关注。整体资金面信号有限，需结合更多数据判断。</td>
+                <td class="dim-status" style="width:28px">✅</td>
+                <td class="dim-summary">京沪高铁（601816）今日主力资金净流入167.0万元，显示短期主力资金小幅流入；但北向资金数据缺失，无法判断外资态度。整体市场资金情绪中性偏积极，需关注后续持续性。</td>
             </tr>
             
             
@@ -160,7 +170,7 @@
     <!-- Risk points -->
     
     <div class="risk-block" style="margin-bottom:16px">
-        <strong>⚠ 风险提示：</strong>均线压制明显，MA10与MA20在4.91附近构成双重阻力，突破需成交量配合、日线连续收阴，MACD若形成死叉将加剧调整压力、北向资金数据缺失，信息不完整，可能遗漏重要信号、主力资金流入金额较小，尚不足以形成明确趋势
+        <strong>⚠ 风险提示：</strong>若跌破4.83支撑位，可能引发新一轮下跌，下方无明确技术支撑。、均线系统（MA5/MA10/MA20）在4.88-4.94区间构成反压，反弹空间受限。、成交量持续萎缩，市场参与度下降，短期难以形成有效反攻。、单日主力净流入金额较低，可能仅为短期交易行为，不具趋势意义、北向资金数据不可用，若后续外资大幅流出可能形成资金面压力
     </div>
     
 

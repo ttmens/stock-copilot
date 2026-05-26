@@ -11,8 +11,18 @@
 <header class="site-header">
     <div class="brand">
         <div class="brand-icon">
-            <img src="../assets/logo.png" alt="Logo" style="width:36px;height:auto;">
-        </div>
+        <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:32px;height:32px">
+            <rect width="32" height="32" rx="8" fill="url(#logo-grad)"/>
+            <path d="M8 22 L14 14 L18 18 L24 10" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M20 10 L24 10 L24 14" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <defs>
+                <linearGradient id="logo-grad" x1="0" y1="0" x2="32" y2="32">
+                    <stop offset="0%" stop-color="#7b3ff2"/>
+                    <stop offset="100%" stop-color="#00f5ff"/>
+                </linearGradient>
+            </defs>
+        </svg>
+    </div>
         <div class="brand-text">
             <span class="brand-name">智策 NexStrat</span>
             <span class="brand-tagline">面向投资者的AI智能投研</span>
@@ -48,17 +58,17 @@
         <div class="detail-section">
             <div class="detail-section-title">📊 综合评分</div>
             <div class="detail-score-big" style="color:#94A3B8">
-                -0.096
+                -0.114
             </div>
             <div class="detail-score-label">置信度 59.0%</div>
             <div class="score-bar-track" style="margin-top:8px">
-                <div class="score-bar-fill" style="width: 45.2%; background: #94A3B8;"></div>
+                <div class="score-bar-fill" style="width: 44.3%; background: #94A3B8;"></div>
             </div>
             <!-- 5-layer breakdown -->
             <div class="signal-grid" style="margin-top:16px">
                 <div class="signal-cell">
                     <span class="signal-cell-label">硬信号 40%</span>
-                    <span class="signal-cell-val" style="color:#EF4444">-0.428</span>
+                    <span class="signal-cell-val" style="color:#EF4444">-0.471</span>
                 </div>
                 <div class="signal-cell">
                     <span class="signal-cell-label">软信号 25%</span>
@@ -80,13 +90,13 @@
                 
                 <div class="metric-chip" style="min-width:80px">
                     <span class="metric-chip-label">5日动量</span>
-                    <span class="metric-chip-val" style="color:#EF4444">-2.7%</span>
+                    <span class="metric-chip-val" style="color:#EF4444">-2.9%</span>
                 </div>
                 
                 
                 <div class="metric-chip" style="min-width:80px">
                     <span class="metric-chip-label">20日动量</span>
-                    <span class="metric-chip-val" style="color:#EF4444">-4.1%</span>
+                    <span class="metric-chip-val" style="color:#EF4444">-4.8%</span>
                 </div>
                 
                 
@@ -98,13 +108,13 @@
                 
                 <div class="metric-chip" style="min-width:80px">
                     <span class="metric-chip-label">量比</span>
-                    <span class="metric-chip-val">0.58</span>
+                    <span class="metric-chip-val">0.72</span>
                 </div>
                 
                 
                 <div class="metric-chip" style="min-width:80px">
                     <span class="metric-chip-label">PE(TTM)</span>
-                    <span class="metric-chip-val">20.5</span>
+                    <span class="metric-chip-val">20.6</span>
                 </div>
                 
                 
@@ -116,7 +126,7 @@
                 
                 <div class="metric-chip" style="min-width:80px">
                     <span class="metric-chip-label">总市值</span>
-                    <span class="metric-chip-val">1728亿</span>
+                    <span class="metric-chip-val">1731亿</span>
                 </div>
                 
             </div>
@@ -132,7 +142,7 @@
             <tr>
                 <td class="dim-name" style="width:56px">技术面</td>
                 <td class="dim-status" style="width:28px">✅</td>
-                <td class="dim-summary">股价处于明显下跌趋势，均线呈空头排列（MA5<MA10<MA20），最新收盘18.79低于所有均线。成交量在下跌过程中先放大后萎缩，近期缩量，抛压减弱但买盘不足。支撑位关注18.58（近期低点）及18.0整数关口；压力位看18.99（MA5）、19.61（MA10）及20.0-20.5前期平台。短线偏空，需关注能否放量企稳。</td>
+                <td class="dim-summary">近20个交易日股价自19.72元震荡下跌至18.83元，跌幅约4.5%。均线呈现空头排列：MA5（19.092）< MA10（19.867）< MA20（20.127），短期持续承压。期间放量下跌（如5月18日成交1158万手），空方力量较强。近期低点18.69（5月25日）为关键支撑，若跌破可能加速下行；上方MA5（~19.09）构成首道压力。量能未见明显萎缩，趋势偏弱。</td>
             </tr>
             
             
@@ -142,7 +152,7 @@
             <tr>
                 <td class="dim-name" style="width:56px">资金面</td>
                 <td class="dim-status" style="width:28px">⏸</td>
-                <td class="dim-summary">当日北向资金数据缺失，无法判断外资动向；主力净流入为-296.0万元，显示主力资金小幅流出。数据仅供1日参考，需结合更长周期趋势分析。</td>
+                <td class="dim-summary">北向资金数据缺失，主力净流入为0.0，无法判断资金态度。数据不完整，建议补充完整数据后再分析。</td>
             </tr>
             
             
@@ -160,7 +170,7 @@
     <!-- Risk points -->
     
     <div class="risk-block" style="margin-bottom:16px">
-        <strong>⚠ 风险提示：</strong>若跌破18.58支撑，可能加速下探至18.0以下、反弹至MA5（18.99）附近可能遇阻，需警惕二次回落、整体市场弱势，基本面未提供支撑信号、主力资金流出可能对股价形成短期压力、缺乏北向数据，难以全面评估资金面状况
+        <strong>⚠ 风险提示：</strong>空头趋势延续，均线系统尚未出现收敛拐头迹象，反弹力度有限。、放量下跌后缩量反弹为弱势特征，当前未出现明显缩量止跌信号。、前高20.78元（4月30日）至21.05元（5月6日）区域形成套牢盘，对后市反弹构成压力。
     </div>
     
 

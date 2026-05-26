@@ -11,8 +11,18 @@
 <header class="site-header">
     <div class="brand">
         <div class="brand-icon">
-            <img src="../assets/logo.png" alt="Logo" style="width:36px;height:auto;">
-        </div>
+        <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:32px;height:32px">
+            <rect width="32" height="32" rx="8" fill="url(#logo-grad)"/>
+            <path d="M8 22 L14 14 L18 18 L24 10" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M20 10 L24 10 L24 14" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <defs>
+                <linearGradient id="logo-grad" x1="0" y1="0" x2="32" y2="32">
+                    <stop offset="0%" stop-color="#7b3ff2"/>
+                    <stop offset="100%" stop-color="#00f5ff"/>
+                </linearGradient>
+            </defs>
+        </svg>
+    </div>
         <div class="brand-text">
             <span class="brand-name">智策 NexStrat</span>
             <span class="brand-tagline">面向投资者的AI智能投研</span>
@@ -48,17 +58,17 @@
         <div class="detail-section">
             <div class="detail-section-title">📊 综合评分</div>
             <div class="detail-score-big" style="color:#94A3B8">
-                +0.032
+                +0.025
             </div>
-            <div class="detail-score-label">置信度 56.0%</div>
+            <div class="detail-score-label">置信度 55.0%</div>
             <div class="score-bar-track" style="margin-top:8px">
-                <div class="score-bar-fill" style="width: 51.6%; background: #94A3B8;"></div>
+                <div class="score-bar-fill" style="width: 51.24999999999999%; background: #94A3B8;"></div>
             </div>
             <!-- 5-layer breakdown -->
             <div class="signal-grid" style="margin-top:16px">
                 <div class="signal-cell">
                     <span class="signal-cell-label">硬信号 40%</span>
-                    <span class="signal-cell-val" style="color:#EF4444">-0.106</span>
+                    <span class="signal-cell-val" style="color:#EF4444">-0.125</span>
                 </div>
                 <div class="signal-cell">
                     <span class="signal-cell-label">软信号 25%</span>
@@ -116,7 +126,7 @@
                 
                 <div class="metric-chip" style="min-width:80px">
                     <span class="metric-chip-label">总市值</span>
-                    <span class="metric-chip-val">9822亿</span>
+                    <span class="metric-chip-val">9818亿</span>
                 </div>
                 
             </div>
@@ -131,8 +141,8 @@
             
             <tr>
                 <td class="dim-name" style="width:56px">技术面</td>
-                <td class="dim-status" style="width:28px">✅</td>
-                <td class="dim-summary">近期股价持续下行，均线呈空头排列（MA5<MA10<MA20），空方主导。量能方面，下跌时放量（如5月13、15日），反弹缩量，抛压较大。短期支撑参考53.47附近（近期低点），压力在MA5（54.05）及MA10（55.5）。需关注能否在支撑位企稳，否则可能继续探底。</td>
+                <td class="dim-status" style="width:28px">❌</td>
+                <td class="dim-summary">近20个交易日股价从58元附近震荡下跌至54.22元，跌幅约6.3%。均线系统呈现空头排列（MA5<MA10<MA20），短期趋势偏弱。成交量在4月29日放出巨量后未能持续，随后量能萎缩并伴随价格下跌，显示抛压较重。当前股价运行于所有均线下方，上方MA5（54.05）构成近期压力，下方前低53.47附近有一定支撑。趋势方向向下，量价关系不理想，需关注能否放量突破均线压制。</td>
             </tr>
             
             
@@ -141,8 +151,8 @@
             
             <tr>
                 <td class="dim-name" style="width:56px">资金面</td>
-                <td class="dim-status" style="width:28px">❌</td>
-                <td class="dim-summary"></td>
+                <td class="dim-status" style="width:28px">⏸</td>
+                <td class="dim-summary">当日无有效资金数据：北向资金数据缺失，主力净流入为0.0，可能因非交易日或数据未更新。无法判断资金态度。</td>
             </tr>
             
             
@@ -160,7 +170,7 @@
     <!-- Risk points -->
     
     <div class="risk-block" style="margin-bottom:16px">
-        <strong>⚠ 风险提示：</strong>若跌破53.47低点可能加速下行、均线空头发散，反弹空间受限、成交量若持续萎缩则反弹无力
+        <strong>⚠ 风险提示：</strong>均线系统压制明显，股价反弹至MA5或MA10附近可能遭遇抛压、成交量持续低迷，市场参与度下降，反弹动力不足、近期高点60.6与低点53.47的区间较大，价格处于区间低位，存在继续探底风险、数据缺失可能导致资金流向判断依据不足、若为交易日，零主力净流入需警惕短期流动性风险
     </div>
     
 

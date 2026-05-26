@@ -11,8 +11,18 @@
 <header class="site-header">
     <div class="brand">
         <div class="brand-icon">
-            <img src="../assets/logo.png" alt="Logo" style="width:36px;height:auto;">
-        </div>
+        <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:32px;height:32px">
+            <rect width="32" height="32" rx="8" fill="url(#logo-grad)"/>
+            <path d="M8 22 L14 14 L18 18 L24 10" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M20 10 L24 10 L24 14" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <defs>
+                <linearGradient id="logo-grad" x1="0" y1="0" x2="32" y2="32">
+                    <stop offset="0%" stop-color="#7b3ff2"/>
+                    <stop offset="100%" stop-color="#00f5ff"/>
+                </linearGradient>
+            </defs>
+        </svg>
+    </div>
         <div class="brand-text">
             <span class="brand-name">智策 NexStrat</span>
             <span class="brand-tagline">面向投资者的AI智能投研</span>
@@ -38,8 +48,8 @@
 
     
     <div style="margin-bottom:24px">
-        <span class="signal-pill sell" style="font-size:14px;padding:6px 16px">
-            🔴 看空
+        <span class="signal-pill hold" style="font-size:14px;padding:6px 16px">
+            ⚪ 观望
         </span>
     </div>
 
@@ -47,18 +57,18 @@
     <div class="detail-grid">
         <div class="detail-section">
             <div class="detail-section-title">📊 综合评分</div>
-            <div class="detail-score-big" style="color:#EF4444">
-                -0.213
+            <div class="detail-score-big" style="color:#94A3B8">
+                -0.094
             </div>
-            <div class="detail-score-label">置信度 64.0%</div>
+            <div class="detail-score-label">置信度 58.0%</div>
             <div class="score-bar-track" style="margin-top:8px">
-                <div class="score-bar-fill" style="width: 39.35%; background: #EF4444;"></div>
+                <div class="score-bar-fill" style="width: 45.300000000000004%; background: #94A3B8;"></div>
             </div>
             <!-- 5-layer breakdown -->
             <div class="signal-grid" style="margin-top:16px">
                 <div class="signal-cell">
                     <span class="signal-cell-label">硬信号 40%</span>
-                    <span class="signal-cell-val" style="color:#EF4444">-0.719</span>
+                    <span class="signal-cell-val" style="color:#EF4444">-0.423</span>
                 </div>
                 <div class="signal-cell">
                     <span class="signal-cell-label">软信号 25%</span>
@@ -80,13 +90,13 @@
                 
                 <div class="metric-chip" style="min-width:80px">
                     <span class="metric-chip-label">5日动量</span>
-                    <span class="metric-chip-val" style="color:#EF4444">-1.7%</span>
+                    <span class="metric-chip-val" style="color:#EF4444">-1.4%</span>
                 </div>
                 
                 
                 <div class="metric-chip" style="min-width:80px">
                     <span class="metric-chip-label">20日动量</span>
-                    <span class="metric-chip-val" style="color:#EF4444">-11.3%</span>
+                    <span class="metric-chip-val" style="color:#EF4444">-10.0%</span>
                 </div>
                 
                 
@@ -98,25 +108,25 @@
                 
                 <div class="metric-chip" style="min-width:80px">
                     <span class="metric-chip-label">量比</span>
-                    <span class="metric-chip-val">0.54</span>
+                    <span class="metric-chip-val">1.5</span>
                 </div>
                 
                 
                 <div class="metric-chip" style="min-width:80px">
                     <span class="metric-chip-label">PE(TTM)</span>
-                    <span class="metric-chip-val">65.8</span>
+                    <span class="metric-chip-val">65.6</span>
                 </div>
                 
                 
                 <div class="metric-chip" style="min-width:80px">
                     <span class="metric-chip-label">PB</span>
-                    <span class="metric-chip-val">1.36</span>
+                    <span class="metric-chip-val">1.35</span>
                 </div>
                 
                 
                 <div class="metric-chip" style="min-width:80px">
                     <span class="metric-chip-label">总市值</span>
-                    <span class="metric-chip-val">668亿</span>
+                    <span class="metric-chip-val">666亿</span>
                 </div>
                 
             </div>
@@ -132,7 +142,7 @@
             <tr>
                 <td class="dim-name" style="width:56px">技术面</td>
                 <td class="dim-status" style="width:28px">✅</td>
-                <td class="dim-summary">洋河股份近期处于下跌趋势，股价从49.87元持续下滑至44.38元，均线呈空头排列（MA5<MA10<MA20），最新收盘价44.38元略低于MA5（44.382元），受MA10（45.23元）和MA20（47.08元）压制。5月25日出现放量反弹，但次日缩量整理，反弹动能不足。短期支撑位在43.32元（5月25日低点），压力位为MA5及MA10。需关注是否能放量突破均线压制，否则可能继续下行。</td>
+                <td class="dim-summary">洋河股份近20个交易日呈现下降趋势，均线空头排列（MA5<MA10<MA20），价格从49.55持续下跌至43.32后反弹至44.47。5月25日成交量放大且收阳，显示短期止跌迹象，但整体空头格局未改。支撑位43.32，压力位MA5（44.54）及MA10（45.55）。</td>
             </tr>
             
             
@@ -141,8 +151,8 @@
             
             <tr>
                 <td class="dim-name" style="width:56px">资金面</td>
-                <td class="dim-status" style="width:28px">⏸</td>
-                <td class="dim-summary">当日北向资金数据缺失，无法评估外资态度；主力资金净流出51.0万元，显示短期主力偏空。需结合后续数据综合判断。</td>
+                <td class="dim-status" style="width:28px">❌</td>
+                <td class="dim-summary"></td>
             </tr>
             
             
@@ -160,7 +170,7 @@
     <!-- Risk points -->
     
     <div class="risk-block" style="margin-bottom:16px">
-        <strong>⚠ 风险提示：</strong>均线空头压制明显，反弹若无量能配合，可能受阻回落、股价处于下降通道，趋势未扭转前风险较大、5月26日成交量大幅缩减，显示市场观望情绪浓厚、主力净流出可能反映短线资金离场意愿、数据不全，当前分析结论可靠性有限
+        <strong>⚠ 风险提示：</strong>若跌破43.32支撑，可能加速下跌、均线持续空头压制，反弹空间有限、成交量若无法持续放大，反弹可能夭折、主力净流出可能反映机构短期看空情绪。、资金面偏弱，若持续流出可能对股价形成压力。
     </div>
     
 

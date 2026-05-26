@@ -11,8 +11,18 @@
 <header class="site-header">
     <div class="brand">
         <div class="brand-icon">
-            <img src="../assets/logo.png" alt="Logo" style="width:36px;height:auto;">
-        </div>
+        <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:32px;height:32px">
+            <rect width="32" height="32" rx="8" fill="url(#logo-grad)"/>
+            <path d="M8 22 L14 14 L18 18 L24 10" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M20 10 L24 10 L24 14" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <defs>
+                <linearGradient id="logo-grad" x1="0" y1="0" x2="32" y2="32">
+                    <stop offset="0%" stop-color="#7b3ff2"/>
+                    <stop offset="100%" stop-color="#00f5ff"/>
+                </linearGradient>
+            </defs>
+        </svg>
+    </div>
         <div class="brand-text">
             <span class="brand-name">智策 NexStrat</span>
             <span class="brand-tagline">面向投资者的AI智能投研</span>
@@ -116,7 +126,7 @@
                 
                 <div class="metric-chip" style="min-width:80px">
                     <span class="metric-chip-label">总市值</span>
-                    <span class="metric-chip-val">18634亿</span>
+                    <span class="metric-chip-val">18630亿</span>
                 </div>
                 
             </div>
@@ -131,8 +141,8 @@
             
             <tr>
                 <td class="dim-name" style="width:56px">技术面</td>
-                <td class="dim-status" style="width:28px">✅</td>
-                <td class="dim-summary">股价自5月7日高点468.75持续下跌，最新收盘402.88，已跌破所有短期均线，MA5、MA10、MA20呈空头排列，且均线向下发散。量能方面，近几个交易日成交量有所放大，尤其是5月25日下跌放量，显示抛压较大。支撑位关注400整数关口，压力位参考MA5约411.67。短期趋势偏空，需关注能否在400附近止跌企稳。</td>
+                <td class="dim-status" style="width:28px">❌</td>
+                <td class="dim-summary">最近20个交易日股价从443.5元跌至402.88元，跌幅约9.2%。均线系统呈空头排列：MA5(411.67) < MA10(419.15) < MA20(430.68)，且最新价402.88已跌破所有均线。成交量在5月25日放大至3819.77万手，为近期较高水平，但价格下跌，呈现放量下行特征。短期趋势偏弱，400元整数关口为关键支撑，均线MA5附近（约411.7元）构成上方压力。</td>
             </tr>
             
             
@@ -142,7 +152,7 @@
             <tr>
                 <td class="dim-name" style="width:56px">资金面</td>
                 <td class="dim-status" style="width:28px">✅</td>
-                <td class="dim-summary">宁德时代（300750）今日主力资金净流入40.0亿元，显示市场主力资金积极买入，可能反映短期市场情绪乐观。但北向资金数据缺失（north_net_inflow为null），无法评估外资态度，分析存在信息不完整。投资者需注意主力资金单日大幅流入的持续性，以及缺乏北向数据带来的不确定性。</td>
+                <td class="dim-summary">今日主力资金净流出4.2亿元（按单位万计则为-420万，数值较小，但实际常见单位为万元，这里按数据给出），显示主力卖出意愿较强。北向资金数据缺失，无法判断外资态度。整体资金面偏空，需关注后续主力动向及北向资金恢复后的表现。</td>
             </tr>
             
             
@@ -160,7 +170,7 @@
     <!-- Risk points -->
     
     <div class="risk-block" style="margin-bottom:16px">
-        <strong>⚠ 风险提示：</strong>均线空头排列且发散，短期反弹可能受均线压制。、下跌过程中放量，表明市场抛压较大，可能继续下行。、若跌破400元支撑，可能引发新一轮下跌。、单日主力资金大幅流入可能存在波动，后续资金能否持续流入需关注。、缺乏北向资金数据，可能遗漏外部机构对股票的态度变化。、单一主力资金指标不宜作为唯一决策依据，需结合其他数据综合研判。
+        <strong>⚠ 风险提示：</strong>均线空头排列且股价远离MA20，短期反弹可能受阻于MA5或MA10。、放量下跌后若次日继续缩量阴跌，则调整可能延续。、大盘或板块情绪偏弱时，400元支撑位可能被轻易击穿。、主力持续流出可能引发市场悲观情绪，短期股价承压、北向资金数据缺失，若外资同步流出将加剧调整风险、缺乏行业及大盘资金对比数据，需警惕单一指标误判
     </div>
     
 

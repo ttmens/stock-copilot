@@ -11,8 +11,18 @@
 <header class="site-header">
     <div class="brand">
         <div class="brand-icon">
-            <img src="../assets/logo.png" alt="Logo" style="width:36px;height:auto;">
-        </div>
+        <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:32px;height:32px">
+            <rect width="32" height="32" rx="8" fill="url(#logo-grad)"/>
+            <path d="M8 22 L14 14 L18 18 L24 10" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M20 10 L24 10 L24 14" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <defs>
+                <linearGradient id="logo-grad" x1="0" y1="0" x2="32" y2="32">
+                    <stop offset="0%" stop-color="#7b3ff2"/>
+                    <stop offset="100%" stop-color="#00f5ff"/>
+                </linearGradient>
+            </defs>
+        </svg>
+    </div>
         <div class="brand-text">
             <span class="brand-name">智策 NexStrat</span>
             <span class="brand-tagline">面向投资者的AI智能投研</span>
@@ -131,8 +141,8 @@
             
             <tr>
                 <td class="dim-name" style="width:56px">技术面</td>
-                <td class="dim-status" style="width:28px">❌</td>
-                <td class="dim-summary"></td>
+                <td class="dim-status" style="width:28px">✅</td>
+                <td class="dim-summary">股价持续下行，短期均线已形成空头排列，MA5（12.448）低于MA10（12.76）和MA20（13.2215）。近20个交易日从13.89跌至12.33，跌幅约11.2%，期间成交量整体放大，显示抛压较重。最新收盘12.33，接近近期低点12.22，短期支撑关注12元整数关口，压力位参考MA5约12.45。量能若未能明显萎缩，可能继续探底。</td>
             </tr>
             
             
@@ -142,7 +152,7 @@
             <tr>
                 <td class="dim-name" style="width:56px">资金面</td>
                 <td class="dim-status" style="width:28px">⏸</td>
-                <td class="dim-summary">北向资金数据缺失，无法分析外资态度；仅有主力资金数据（净流出1.7亿元），信息不全，无法全面判断资金动向。</td>
+                <td class="dim-summary">由于北向资金数据缺失（north_net_inflow为null），无法完整分析资金态度。仅有的主力资金数据显示当日净流出202.0万元，表明主力资金短期流出。</td>
             </tr>
             
             
@@ -160,7 +170,7 @@
     <!-- Risk points -->
     
     <div class="risk-block" style="margin-bottom:16px">
-        <strong>⚠ 风险提示：</strong>北向资金数据缺失，无法评估外资对个股的态度。、仅凭主力数据可能误判整体资金流向，需结合其他周期数据。
+        <strong>⚠ 风险提示：</strong>均线系统完全空头，短期反弹可能受MA5和MA10压制、若跌破12元整数关口，可能加速下跌、基本面未配合情况下，技术面弱势难改、北向资金数据缺失，无法判断外资动向
     </div>
     
 

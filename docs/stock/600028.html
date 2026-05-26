@@ -11,8 +11,18 @@
 <header class="site-header">
     <div class="brand">
         <div class="brand-icon">
-            <img src="../assets/logo.png" alt="Logo" style="width:36px;height:auto;">
-        </div>
+        <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:32px;height:32px">
+            <rect width="32" height="32" rx="8" fill="url(#logo-grad)"/>
+            <path d="M8 22 L14 14 L18 18 L24 10" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M20 10 L24 10 L24 14" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <defs>
+                <linearGradient id="logo-grad" x1="0" y1="0" x2="32" y2="32">
+                    <stop offset="0%" stop-color="#7b3ff2"/>
+                    <stop offset="100%" stop-color="#00f5ff"/>
+                </linearGradient>
+            </defs>
+        </svg>
+    </div>
         <div class="brand-text">
             <span class="brand-name">智策 NexStrat</span>
             <span class="brand-tagline">面向投资者的AI智能投研</span>
@@ -48,17 +58,17 @@
         <div class="detail-section">
             <div class="detail-section-title">📊 综合评分</div>
             <div class="detail-score-big" style="color:#94A3B8">
-                -0.130
+                -0.120
             </div>
             <div class="detail-score-label">置信度 60.0%</div>
             <div class="score-bar-track" style="margin-top:8px">
-                <div class="score-bar-fill" style="width: 43.5%; background: #94A3B8;"></div>
+                <div class="score-bar-fill" style="width: 44.0%; background: #94A3B8;"></div>
             </div>
             <!-- 5-layer breakdown -->
             <div class="signal-grid" style="margin-top:16px">
                 <div class="signal-cell">
                     <span class="signal-cell-label">硬信号 40%</span>
-                    <span class="signal-cell-val" style="color:#EF4444">-0.512</span>
+                    <span class="signal-cell-val" style="color:#EF4444">-0.487</span>
                 </div>
                 <div class="signal-cell">
                     <span class="signal-cell-label">软信号 25%</span>
@@ -80,13 +90,13 @@
                 
                 <div class="metric-chip" style="min-width:80px">
                     <span class="metric-chip-label">5日动量</span>
-                    <span class="metric-chip-val" style="color:#EF4444">-4.9%</span>
+                    <span class="metric-chip-val" style="color:#EF4444">-4.3%</span>
                 </div>
                 
                 
                 <div class="metric-chip" style="min-width:80px">
                     <span class="metric-chip-label">20日动量</span>
-                    <span class="metric-chip-val" style="color:#EF4444">-10.5%</span>
+                    <span class="metric-chip-val" style="color:#EF4444">-9.6%</span>
                 </div>
                 
                 
@@ -98,7 +108,7 @@
                 
                 <div class="metric-chip" style="min-width:80px">
                     <span class="metric-chip-label">量比</span>
-                    <span class="metric-chip-val">0.67</span>
+                    <span class="metric-chip-val">0.66</span>
                 </div>
                 
                 
@@ -116,7 +126,7 @@
                 
                 <div class="metric-chip" style="min-width:80px">
                     <span class="metric-chip-label">总市值</span>
-                    <span class="metric-chip-val">5913亿</span>
+                    <span class="metric-chip-val">5889亿</span>
                 </div>
                 
             </div>
@@ -132,7 +142,7 @@
             <tr>
                 <td class="dim-name" style="width:56px">技术面</td>
                 <td class="dim-status" style="width:28px">✅</td>
-                <td class="dim-summary">股价自4月24日5.43元持续下跌至5月26日4.88元，跌幅约10%。均线呈空头排列，MA5、MA10、MA20依次向下发散，短期趋势偏空。成交量整体萎缩，反弹缺乏量能配合。当前价格接近4.86前期低点，若跌破可能进一步下探；上方压力位于5.0-5.1附近。需关注后续能否出现放量突破均线组合的企稳信号。</td>
+                <td class="dim-summary">近20个交易日股价从5.44持续下跌至4.92，跌幅约9.6%，形成明显下降趋势。均线系统呈现空头排列（MA5=5.028 < MA10=5.093 < MA20=5.217），短期均线持续下行。成交量在下跌过程中未显著放大，说明抛压较为温和但缺乏买盘支撑。当前价格已跌破所有均线，下方支撑关注4.92（近期低点），上方压力位参考MA5和MA10。</td>
             </tr>
             
             
@@ -141,8 +151,8 @@
             
             <tr>
                 <td class="dim-name" style="width:56px">资金面</td>
-                <td class="dim-status" style="width:28px">✅</td>
-                <td class="dim-summary">北向资金当日数据缺失，无法判断北向态度。主力资金净流出787万元，显示主力短期态度偏空，资金面承压。需结合行业及公司基本面进一步评估。</td>
+                <td class="dim-status" style="width:28px">⏸</td>
+                <td class="dim-summary">仅提供主力净流入数据（-1070万元），北向净流入数据缺失，无法全面分析资金态度。数据不足，无法得出有效结论。</td>
             </tr>
             
             
@@ -160,7 +170,7 @@
     <!-- Risk points -->
     
     <div class="risk-block" style="margin-bottom:16px">
-        <strong>⚠ 风险提示：</strong>若跌破4.86元支撑，可能加速下跌、均线压制下反弹空间有限、量能不足，反弹难以持续、主力资金持续净流出可能对股价形成压力、北向资金缺席无法提供资金面支撑信号
+        <strong>⚠ 风险提示：</strong>趋势未改，若跌破4.92支撑可能加速下跌。、均线持续下移，反弹空间受制于短期均线压力。、量能不足，市场参与度低，反弹力度有限。、主力净流出可能暗示短期资金面偏弱、数据不完整，分析结论可靠性较低
     </div>
     
 
