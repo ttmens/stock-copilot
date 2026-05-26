@@ -2,2015 +2,2694 @@
   "meta": {
     "report_type": "post",
     "trade_date": "2026-05-26",
-    "generated_at": "2026-05-26T16:30:00",
+    "generated_at": "2026-05-26T21:24:16.865227",
     "symbol_count": 50,
-    "disclaimer": "⚠️ 本报告仅供个人研究参考，不构成投资建议。"
+    "disclaimer": "⚠️ 本报告仅供个人研究参考，不构成投资建议。报告内容基于公开数据和 AI 分析生成，可能存在错误或遗漏。股市有风险，决策需谨慎。作者不对任何投资损失承担责任。"
   },
   "market": {
     "index_name": "上证指数",
-    "close": 3200,
-    "change_pct": 1.5
+    "close": 4145.37,
+    "change_pct": -0.17
   },
   "stocks": [
+    {
+      "code": "600000",
+      "name": "浦发银行",
+      "overall_sentiment": "buy",
+      "overall_focus": "🟢 看多",
+      "confidence": 0.65,
+      "hard_score": 0.27,
+      "momentum_20d": -2.83,
+      "momentum_5d": 3.58,
+      "ma_alignment": "neutral",
+      "volume_ratio": 1.52,
+      "pe_ttm": 6.1,
+      "pb": 0.41,
+      "mcap_yi": 3087.0,
+      "technical": {
+        "status": "failed",
+        "summary": "",
+        "sentiment": "neutral"
+      },
+      "fundamental": {
+        "status": "unavailable",
+        "summary": "浦发银行 近7日无公告数据",
+        "sentiment": "neutral"
+      },
+      "capital": {
+        "status": "unavailable",
+        "summary": "北向资金数据缺失，仅提供主力资金净流入2839.0万元（1日）。无法对比北向与主力态度，单日数据偏小，持续性待观察。",
+        "sentiment": "neutral"
+      },
+      "announcement": {
+        "status": "unavailable",
+        "summary": "无近期公告",
+        "sentiment": "neutral",
+        "key_events": []
+      },
+      "risk_points": [
+        "资金数据不完整，北向态度未知，短期方向不确定",
+        "单日主力净流入规模较小，后续需关注是否持续"
+      ],
+      "signal_breakdown": {
+        "hard_score": 0.27,
+        "soft_score": 0.0,
+        "gate_score": 0.7,
+        "dragon_tiger_score": 0.0,
+        "announcement_score": 0.0,
+        "final_score": 0.275,
+        "has_dragon_tiger": false,
+        "has_announcement": false
+      },
+      "dragon_tiger": []
+    },
     {
       "code": "601919",
       "name": "中远海控",
       "overall_sentiment": "buy",
       "overall_focus": "🟢 看多",
-      "technical": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": null
-      },
-      "fundamental": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": "neutral"
-      },
-      "capital": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": "neutral"
-      },
-      "signal_breakdown": {
-        "hard_score": 0.5805055975656771,
-        "soft_score": 0.0,
-        "gate_score": 0.5,
-        "final_score": 0.3072015838262709,
-        "final_signal": "buy"
-      },
-      "momentum_5d": 4.642857142857149,
-      "momentum_20d": 1.3139695712309774,
+      "confidence": 0.65,
+      "hard_score": 0.35,
+      "momentum_20d": 0.76,
+      "momentum_5d": 3.85,
       "ma_alignment": "bullish",
-      "volume_ratio": 0.9919816852268267,
-      "pe_ttm": 11.480000000000002,
-      "pe_percentile": 11.480000000000002,
-      "pb": 0,
-      "mcap_yi": 0,
-      "announcement": [],
-      "dragon_tiger": [],
-      "confidence": 0.5,
-      "risk_points": []
-    },
-    {
-      "code": "601138",
-      "name": "工业富联",
-      "overall_sentiment": "hold",
-      "overall_focus": "⚪ 观望",
+      "volume_ratio": 0.76,
+      "pe_ttm": 8.9,
+      "pb": 0.95,
+      "mcap_yi": 2230.0,
       "technical": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": null
+        "status": "failed",
+        "summary": "近20个交易日股价从14.4元震荡上行至14.56元，5月20日放量突破后冲高回落，随后缩量整理。当前均线呈多头排列（MA5>MA10>MA20），但收盘价略低于MA5，短期承压。量能明显萎缩，市场动能减弱。下方支撑关注14.4-14.5元区域（近期低点及MA20附近），上方压力14.8-14.9元（前高）。需观察后续能否放量突破压力位。",
+        "sentiment": "neutral"
       },
       "fundamental": {
-        "status": "ok",
-        "summary": "",
+        "status": "unavailable",
+        "summary": "中远海控 近7日无公告数据",
         "sentiment": "neutral"
       },
       "capital": {
-        "status": "ok",
-        "summary": "",
+        "status": "unavailable",
+        "summary": "北向资金数据缺失，无法判断外资态度。主力资金净流出692万元，显示短期资金偏空。建议关注后续北向资金动向及主力资金变化。",
         "sentiment": "neutral"
       },
+      "announcement": {
+        "status": "unavailable",
+        "summary": "无近期公告",
+        "sentiment": "neutral",
+        "key_events": []
+      },
+      "risk_points": [
+        "股价持续低于MA5，可能进一步下探MA10（14.36）",
+        "量价背离：上涨后缩量，回调风险增加",
+        "若跌破14.4元支撑，可能形成短期双顶形态",
+        "北向资金数据缺失，可能影响趋势判断",
+        "主力资金净流出，短期或面临调整压力"
+      ],
       "signal_breakdown": {
-        "hard_score": 0.21994853328976555,
+        "hard_score": 0.351,
         "soft_score": 0.0,
         "gate_score": 0.5,
-        "final_score": 0.16356349631590625,
-        "final_signal": "hold"
+        "dragon_tiger_score": 0.0,
+        "announcement_score": 0.0,
+        "final_score": 0.275,
+        "has_dragon_tiger": false,
+        "has_announcement": false
       },
-      "momentum_5d": 1.9135981443896721,
-      "momentum_20d": 5.097921961429197,
-      "ma_alignment": "bullish",
-      "volume_ratio": 1.0265150101819567,
-      "pe_ttm": 52.97818181818182,
-      "pe_percentile": 52.97818181818182,
-      "pb": 0,
-      "mcap_yi": 0,
-      "announcement": [],
-      "dragon_tiger": [],
-      "confidence": 0.5,
-      "risk_points": []
+      "dragon_tiger": []
     },
     {
-      "code": "601088",
-      "name": "中国神华",
-      "overall_sentiment": "hold",
-      "overall_focus": "⚪ 观望",
-      "technical": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": null
-      },
-      "fundamental": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": "neutral"
-      },
-      "capital": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": "neutral"
-      },
-      "signal_breakdown": {
-        "hard_score": 0.024169891326945598,
-        "soft_score": 0.0,
-        "gate_score": 0.7,
-        "final_score": 0.11462866153077822,
-        "final_signal": "hold"
-      },
-      "momentum_5d": -2.3336968375136324,
-      "momentum_20d": -2.37628079354697,
-      "ma_alignment": "neutral",
-      "volume_ratio": 1.6426363832016284,
-      "pe_ttm": 27.63090909090909,
-      "pe_percentile": 27.63090909090909,
-      "pb": 0,
-      "mcap_yi": 0,
-      "announcement": [],
-      "dragon_tiger": [],
-      "confidence": 0.5,
-      "risk_points": []
-    },
-    {
-      "code": "601166",
-      "name": "兴业银行",
-      "overall_sentiment": "hold",
-      "overall_focus": "⚪ 观望",
-      "technical": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": null
-      },
-      "fundamental": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": "neutral"
-      },
-      "capital": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": "neutral"
-      },
-      "signal_breakdown": {
-        "hard_score": 0.035419614697415766,
-        "soft_score": 0.0,
-        "gate_score": 0.5,
-        "final_score": 0.08916786567896631,
-        "final_signal": "hold"
-      },
-      "momentum_5d": 1.0888252148997246,
-      "momentum_20d": -3.18331503841931,
-      "ma_alignment": "neutral",
-      "volume_ratio": 1.0313967297401914,
-      "pe_ttm": 5.0,
-      "pe_percentile": 5.0,
-      "pb": 0,
-      "mcap_yi": 0,
-      "announcement": [],
-      "dragon_tiger": [],
-      "confidence": 0.5,
-      "risk_points": []
-    },
-    {
-      "code": "300059",
-      "name": "东方财富",
-      "overall_sentiment": "hold",
-      "overall_focus": "⚪ 观望",
-      "technical": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": null
-      },
-      "fundamental": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": "neutral"
-      },
-      "capital": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": "neutral"
-      },
-      "signal_breakdown": {
-        "hard_score": -0.0721984930960784,
-        "soft_score": 0.0,
-        "gate_score": 0.5,
-        "final_score": 0.0878989634993013,
-        "final_signal": "hold"
-      },
-      "momentum_5d": 0.5058168942842833,
-      "momentum_20d": 0.8044243338360957,
-      "ma_alignment": "neutral",
-      "volume_ratio": 0.9753575295707781,
-      "pe_ttm": 36.025454545454544,
-      "pe_percentile": 36.025454545454544,
-      "pb": 0,
-      "mcap_yi": 0,
-      "announcement": [],
-      "dragon_tiger": [],
-      "confidence": 0.5,
-      "risk_points": []
-    },
-    {
-      "code": "600030",
-      "name": "中信证券",
-      "overall_sentiment": "hold",
-      "overall_focus": "⚪ 观望",
-      "technical": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": null
-      },
-      "fundamental": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": "neutral"
-      },
-      "capital": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": "neutral"
-      },
-      "signal_breakdown": {
-        "hard_score": -0.03396031665517048,
-        "soft_score": 0.0,
-        "gate_score": 0.5,
-        "final_score": 0.06141360713793181,
-        "final_signal": "hold"
-      },
-      "momentum_5d": 0.11467889908256534,
-      "momentum_20d": -1.9468363908648478,
-      "ma_alignment": "neutral",
-      "volume_ratio": 0.8675567788941179,
-      "pe_ttm": 15.669090909090908,
-      "pe_percentile": 15.669090909090908,
-      "pb": 0,
-      "mcap_yi": 0,
-      "announcement": [],
-      "dragon_tiger": [],
-      "confidence": 0.5,
-      "risk_points": []
-    },
-    {
-      "code": "600000",
-      "name": "浦发银行",
-      "overall_sentiment": "hold",
-      "overall_focus": "⚪ 观望",
-      "technical": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": null
-      },
-      "fundamental": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": "neutral"
-      },
-      "capital": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": "neutral"
-      },
-      "signal_breakdown": {
-        "hard_score": -0.050011169030152236,
-        "soft_score": 0.0,
-        "gate_score": 0.5,
-        "final_score": 0.0549965613879391,
-        "final_signal": "hold"
-      },
-      "momentum_5d": 0.0,
-      "momentum_20d": -5.515088449531735,
-      "ma_alignment": "neutral",
-      "volume_ratio": 0.970560687880762,
-      "pe_ttm": 6.652727272727272,
-      "pe_percentile": 6.652727272727272,
-      "pb": 0,
-      "mcap_yi": 0,
-      "announcement": [],
-      "dragon_tiger": [],
-      "confidence": 0.5,
-      "risk_points": []
-    },
-    {
-      "code": "601318",
-      "name": "中国平安",
-      "overall_sentiment": "hold",
-      "overall_focus": "⚪ 观望",
-      "technical": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": null
-      },
-      "fundamental": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": "neutral"
-      },
-      "capital": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": "neutral"
-      },
-      "signal_breakdown": {
-        "hard_score": -0.10632010336738595,
-        "soft_score": 0.0,
-        "gate_score": 0.5,
-        "final_score": 0.03246939845304561,
-        "final_signal": "hold"
-      },
-      "momentum_5d": -1.2206230643104443,
-      "momentum_20d": -6.56556953300017,
-      "ma_alignment": "neutral",
-      "volume_ratio": 0.9713402561459736,
-      "pe_ttm": 8.91090909090909,
-      "pe_percentile": 8.91090909090909,
-      "pb": 0,
-      "mcap_yi": 0,
-      "announcement": [],
-      "dragon_tiger": [],
-      "confidence": 0.5,
-      "risk_points": []
-    },
-    {
-      "code": "000651",
-      "name": "格力电器",
-      "overall_sentiment": "hold",
-      "overall_focus": "⚪ 观望",
-      "technical": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": null
-      },
-      "fundamental": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": "neutral"
-      },
-      "capital": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": "neutral"
-      },
-      "signal_breakdown": {
-        "hard_score": -0.13567639980313517,
-        "soft_score": 0.0,
-        "gate_score": 0.5,
-        "final_score": 0.020730160678745918,
-        "final_signal": "hold"
-      },
-      "momentum_5d": -2.719717955175016,
-      "momentum_20d": 4.57498646453709,
-      "ma_alignment": "neutral",
-      "volume_ratio": 0.6077804866957344,
-      "pe_ttm": 8.96,
-      "pe_percentile": 8.96,
-      "pb": 0,
-      "mcap_yi": 0,
-      "announcement": [],
-      "dragon_tiger": [],
-      "confidence": 0.5,
-      "risk_points": []
-    },
-    {
-      "code": "603259",
-      "name": "药明康德",
-      "overall_sentiment": "hold",
-      "overall_focus": "⚪ 观望",
-      "technical": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": null
-      },
-      "fundamental": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": "neutral"
-      },
-      "capital": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": "neutral"
-      },
-      "signal_breakdown": {
-        "hard_score": -0.14666067974124822,
-        "soft_score": 0.0,
-        "gate_score": 0.5,
-        "final_score": 0.015422029903500716,
-        "final_signal": "hold"
-      },
-      "momentum_5d": 0.48995590396865296,
-      "momentum_20d": 3.324937027707797,
+      "code": "600276",
+      "name": "恒瑞医药",
+      "overall_sentiment": "sell",
+      "overall_focus": "🔴 看空",
+      "confidence": 0.64,
+      "hard_score": -0.69,
+      "momentum_20d": -12.77,
+      "momentum_5d": -4.63,
       "ma_alignment": "bearish",
-      "volume_ratio": 0.6593608079446225,
-      "pe_ttm": 21.69090909090909,
-      "pe_percentile": 21.69090909090909,
-      "pb": 0,
-      "mcap_yi": 0,
-      "announcement": [],
-      "dragon_tiger": [],
-      "confidence": 0.5,
-      "risk_points": []
-    },
-    {
-      "code": "600887",
-      "name": "伊利股份",
-      "overall_sentiment": "hold",
-      "overall_focus": "⚪ 观望",
+      "volume_ratio": 0.82,
+      "pe_ttm": 40.2,
+      "pb": 5.13,
+      "mcap_yi": 3266.0,
       "technical": {
         "status": "ok",
-        "summary": "",
-        "sentiment": null
+        "summary": "恒瑞医药近期股价持续下跌，均线呈空头排列（MA5<MA10<MA20），价格位于所有均线下方，弱势明显。成交量在5月12日放量后逐步萎缩，反弹无力。短期支撑位在48.8元（5月26日低点），压力位在MA5（50.3元）及前期平台53-55元。趋势向下，需警惕进一步下探风险。",
+        "sentiment": "neutral"
       },
       "fundamental": {
-        "status": "ok",
-        "summary": "",
+        "status": "unavailable",
+        "summary": "恒瑞医药 近7日无公告数据",
         "sentiment": "neutral"
       },
       "capital": {
         "status": "ok",
-        "summary": "",
+        "summary": "恒瑞医药1日资金数据显示，北向资金数据缺失，无法判断外资态度；主力资金净流出1641万元，显示短期主力偏空。投资者需关注后续资金流向变化。",
         "sentiment": "neutral"
       },
+      "announcement": {
+        "status": "unavailable",
+        "summary": "无近期公告",
+        "sentiment": "neutral",
+        "key_events": []
+      },
+      "risk_points": [
+        "均线系统压制，短期难以扭转下跌趋势。",
+        "量价背离（下跌放量、反弹缩量），资金出逃迹象。",
+        "前期低点附近支撑若无效，可能打开下跌空间。",
+        "主力资金持续流出可能对股价形成压力",
+        "北向资金数据缺失，需等待后续更新以完善判断"
+      ],
       "signal_breakdown": {
-        "hard_score": -0.16770364799891604,
+        "hard_score": -0.694,
         "soft_score": 0.0,
         "gate_score": 0.5,
-        "final_score": 0.007919245800433572,
-        "final_signal": "hold"
+        "dragon_tiger_score": 0.0,
+        "announcement_score": 0.0,
+        "final_score": -0.247,
+        "has_dragon_tiger": false,
+        "has_announcement": false
       },
-      "momentum_5d": -3.737632832539395,
-      "momentum_20d": 3.875049426650845,
-      "ma_alignment": "neutral",
-      "volume_ratio": 0.6511668545089735,
-      "pe_ttm": 19.31818181818182,
-      "pe_percentile": 19.31818181818182,
-      "pb": 0,
-      "mcap_yi": 0,
-      "announcement": [],
-      "dragon_tiger": [],
-      "confidence": 0.5,
-      "risk_points": []
+      "dragon_tiger": []
     },
     {
-      "code": "600600",
-      "name": "青岛啤酒",
-      "overall_sentiment": "hold",
-      "overall_focus": "⚪ 观望",
-      "technical": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": null
-      },
-      "fundamental": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": "neutral"
-      },
-      "capital": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": "neutral"
-      },
-      "signal_breakdown": {
-        "hard_score": -0.19243733790875353,
-        "soft_score": 0.0,
-        "gate_score": 0.5,
-        "final_score": 0.007493224941654761,
-        "final_signal": "hold"
-      },
-      "momentum_5d": -2.3338735818476564,
-      "momentum_20d": -2.516534924987901,
+      "code": "600760",
+      "name": "中航沈飞",
+      "overall_sentiment": "sell",
+      "overall_focus": "🔴 看空",
+      "confidence": 0.64,
+      "hard_score": -0.68,
+      "momentum_20d": -11.53,
+      "momentum_5d": -7.35,
       "ma_alignment": "bearish",
-      "volume_ratio": 1.1610683912994917,
-      "pe_ttm": 25.56909090909091,
-      "pe_percentile": 25.56909090909091,
-      "pb": 0,
-      "mcap_yi": 0,
-      "announcement": [],
-      "dragon_tiger": [],
-      "confidence": 0.5,
-      "risk_points": []
-    },
-    {
-      "code": "601601",
-      "name": "中国太保",
-      "overall_sentiment": "hold",
-      "overall_focus": "⚪ 观望",
+      "volume_ratio": 0.84,
+      "pe_ttm": 38.0,
+      "pb": 5.2,
+      "mcap_yi": 1237.0,
       "technical": {
-        "status": "ok",
+        "status": "failed",
         "summary": "",
-        "sentiment": null
+        "sentiment": "neutral"
       },
       "fundamental": {
-        "status": "ok",
-        "summary": "",
+        "status": "unavailable",
+        "summary": "中航沈飞 近7日无公告数据",
         "sentiment": "neutral"
       },
       "capital": {
-        "status": "ok",
-        "summary": "",
+        "status": "unavailable",
+        "summary": "北向资金数据缺失，无法分析北向资金动向；主力资金净流出1013万元，显示短期主力态度偏空。",
         "sentiment": "neutral"
       },
+      "announcement": {
+        "status": "unavailable",
+        "summary": "无近期公告",
+        "sentiment": "neutral",
+        "key_events": []
+      },
+      "risk_points": [
+        "主力资金净流出可能暗示短期抛压",
+        "北向资金缺失增加分析不确定性"
+      ],
       "signal_breakdown": {
-        "hard_score": -0.1822238313067292,
+        "hard_score": -0.679,
         "soft_score": 0.0,
         "gate_score": 0.5,
-        "final_score": 0.002109053277308315,
-        "final_signal": "hold"
+        "dragon_tiger_score": 0.0,
+        "announcement_score": 0.0,
+        "final_score": -0.239,
+        "has_dragon_tiger": false,
+        "has_announcement": false
       },
-      "momentum_5d": -1.7124298789489178,
-      "momentum_20d": -10.148448043184876,
-      "ma_alignment": "neutral",
-      "volume_ratio": 0.9147356911181062,
-      "pe_ttm": 6.538181818181819,
-      "pe_percentile": 6.538181818181819,
-      "pb": 0,
-      "mcap_yi": 0,
-      "announcement": [],
-      "dragon_tiger": [],
-      "confidence": 0.5,
-      "risk_points": []
+      "dragon_tiger": []
     },
     {
-      "code": "600941",
-      "name": "中国移动",
-      "overall_sentiment": "hold",
-      "overall_focus": "⚪ 观望",
-      "technical": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": null
-      },
-      "fundamental": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": "neutral"
-      },
-      "capital": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": "neutral"
-      },
-      "signal_breakdown": {
-        "hard_score": -0.18489618085789222,
-        "soft_score": 0.0,
-        "gate_score": 0.5,
-        "final_score": 0.0006814796568431203,
-        "final_signal": "hold"
-      },
-      "momentum_5d": -3.7169905331340236,
-      "momentum_20d": 0.8348987685243392,
-      "ma_alignment": "neutral",
-      "volume_ratio": 0.7269863520421352,
-      "pe_ttm": 22.05090909090909,
-      "pe_percentile": 22.05090909090909,
-      "pb": 0,
-      "mcap_yi": 0,
-      "announcement": [],
-      "dragon_tiger": [],
-      "confidence": 0.5,
-      "risk_points": []
-    },
-    {
-      "code": "000333",
-      "name": "美的集团",
-      "overall_sentiment": "hold",
-      "overall_focus": "⚪ 观望",
-      "technical": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": null
-      },
-      "fundamental": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": "neutral"
-      },
-      "capital": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": "neutral"
-      },
-      "signal_breakdown": {
-        "hard_score": -0.19113977669785115,
-        "soft_score": 0.0,
-        "gate_score": 0.5,
-        "final_score": -0.0014556454791404688,
-        "final_signal": "hold"
-      },
-      "momentum_5d": -3.6460219727151966,
-      "momentum_20d": 0.6431273644388558,
-      "ma_alignment": "neutral",
-      "volume_ratio": 0.6913370148220987,
-      "pe_ttm": 19.301818181818184,
-      "pe_percentile": 19.301818181818184,
-      "pb": 0,
-      "mcap_yi": 0,
-      "announcement": [],
-      "dragon_tiger": [],
-      "confidence": 0.5,
-      "risk_points": []
-    },
-    {
-      "code": "002594",
-      "name": "比亚迪",
-      "overall_sentiment": "hold",
-      "overall_focus": "⚪ 观望",
-      "technical": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": null
-      },
-      "fundamental": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": "neutral"
-      },
-      "capital": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": "neutral"
-      },
-      "signal_breakdown": {
-        "hard_score": -0.19056820161146285,
-        "soft_score": 0.0,
-        "gate_score": 0.5,
-        "final_score": -0.0019914260445851456,
-        "final_signal": "hold"
-      },
-      "momentum_5d": 1.5342291820971132,
-      "momentum_20d": -5.569769730368046,
-      "ma_alignment": "neutral",
-      "volume_ratio": 0.8787433019915254,
-      "pe_ttm": 48.78909090909091,
-      "pe_percentile": 48.78909090909091,
-      "pb": 0,
-      "mcap_yi": 0,
-      "announcement": [],
-      "dragon_tiger": [],
-      "confidence": 0.5,
-      "risk_points": []
-    },
-    {
-      "code": "600809",
-      "name": "山西汾酒",
-      "overall_sentiment": "hold",
-      "overall_focus": "⚪ 观望",
-      "technical": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": null
-      },
-      "fundamental": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": "neutral"
-      },
-      "capital": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": "neutral"
-      },
-      "signal_breakdown": {
-        "hard_score": -0.2123719183190238,
-        "soft_score": 0.0,
-        "gate_score": 0.5,
-        "final_score": -0.009950076527609542,
-        "final_signal": "hold"
-      },
-      "momentum_5d": -0.9319162045594687,
-      "momentum_20d": -6.047768607114168,
+      "code": "002304",
+      "name": "洋河股份",
+      "overall_sentiment": "sell",
+      "overall_focus": "🔴 看空",
+      "confidence": 0.63,
+      "hard_score": -0.65,
+      "momentum_20d": -11.67,
+      "momentum_5d": -2.13,
       "ma_alignment": "bearish",
-      "volume_ratio": 0.9791660427682903,
-      "pe_ttm": 20.201818181818183,
-      "pe_percentile": 20.201818181818183,
-      "pb": 0,
-      "mcap_yi": 0,
-      "announcement": [],
-      "dragon_tiger": [],
-      "confidence": 0.5,
-      "risk_points": []
+      "volume_ratio": 0.84,
+      "pe_ttm": 65.5,
+      "pb": 1.35,
+      "mcap_yi": 666.0,
+      "technical": {
+        "status": "ok",
+        "summary": "洋河股份近20个交易日呈持续下跌趋势，股价从49.87元跌至最低43.32元，跌幅约13%。均线系统空头排列，MA5（44.344）<MA10（45.211）<MA20（47.072），短期均线持续压制股价。成交量在下跌过程中有所放大，5月14日和5月25日出现放量，但反弹力度有限，5月26日冲高回落。目前股价在43.3-44.5区间震荡，关注能否站稳MA5并突破MA10压力，下方43.3附近为短期支撑。整体处于弱势调整格局。",
+        "sentiment": "neutral"
+      },
+      "fundamental": {
+        "status": "unavailable",
+        "summary": "洋河股份 近7日无公告数据",
+        "sentiment": "neutral"
+      },
+      "capital": {
+        "status": "unavailable",
+        "summary": "北向资金数据缺失，无法分析北向态度。根据提供的主力资金数据，1日主力净流出-147万元，显示短期资金流出。",
+        "sentiment": "neutral"
+      },
+      "announcement": {
+        "status": "unavailable",
+        "summary": "无近期公告",
+        "sentiment": "neutral",
+        "key_events": []
+      },
+      "risk_points": [
+        "均线系统压制明显，反弹受阻于MA10则可能继续探底",
+        "成交量虽放大但未能扭转趋势，需警惕下跌中继风险",
+        "行业白酒板块整体表现可能影响个股走势",
+        "主力资金流出可能预示短期压力",
+        "北向数据缺失增加不确定性"
+      ],
+      "signal_breakdown": {
+        "hard_score": -0.646,
+        "soft_score": 0.0,
+        "gate_score": 0.5,
+        "dragon_tiger_score": 0.0,
+        "announcement_score": 0.0,
+        "final_score": -0.223,
+        "has_dragon_tiger": false,
+        "has_announcement": false
+      },
+      "dragon_tiger": []
     },
     {
       "code": "600900",
       "name": "长江电力",
-      "overall_sentiment": "hold",
-      "overall_focus": "⚪ 观望",
-      "technical": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": null
-      },
-      "fundamental": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": "neutral"
-      },
-      "capital": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": "neutral"
-      },
-      "signal_breakdown": {
-        "hard_score": -0.23134729340608892,
-        "soft_score": 0.0,
-        "gate_score": 0.5,
-        "final_score": -0.018774825362435577,
-        "final_signal": "hold"
-      },
-      "momentum_5d": -0.8181480104127892,
-      "momentum_20d": -0.7073715562174177,
-      "ma_alignment": "bearish",
-      "volume_ratio": 0.7916436621446018,
-      "pe_ttm": 26.419999999999998,
-      "pe_percentile": 26.419999999999998,
-      "pb": 0,
-      "mcap_yi": 0,
-      "announcement": [],
-      "dragon_tiger": [],
-      "confidence": 0.5,
-      "risk_points": []
-    },
-    {
-      "code": "601816",
-      "name": "京沪高铁",
-      "overall_sentiment": "hold",
-      "overall_focus": "⚪ 观望",
-      "technical": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": null
-      },
-      "fundamental": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": "neutral"
-      },
-      "capital": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": "neutral"
-      },
-      "signal_breakdown": {
-        "hard_score": -0.24573601980090584,
-        "soft_score": 0.0,
-        "gate_score": 0.5,
-        "final_score": -0.023574124720362355,
-        "final_signal": "hold"
-      },
-      "momentum_5d": -3.006012024048099,
-      "momentum_20d": -2.0242914979757165,
+      "overall_sentiment": "buy",
+      "overall_focus": "🟢 看多",
+      "confidence": 0.62,
+      "hard_score": 0.13,
+      "momentum_20d": 0.71,
+      "momentum_5d": -0.4,
       "ma_alignment": "neutral",
-      "volume_ratio": 0.6305741368017811,
-      "pe_ttm": 25.847272727272724,
-      "pe_percentile": 25.847272727272724,
-      "pb": 0,
-      "mcap_yi": 0,
-      "announcement": [],
-      "dragon_tiger": [],
-      "confidence": 0.5,
-      "risk_points": []
-    },
-    {
-      "code": "601688",
-      "name": "华泰证券",
-      "overall_sentiment": "hold",
-      "overall_focus": "⚪ 观望",
+      "volume_ratio": 1.53,
+      "pe_ttm": 18.4,
+      "pb": 2.91,
+      "mcap_yi": 6641.0,
       "technical": {
         "status": "ok",
-        "summary": "",
-        "sentiment": null
+        "summary": "长江电力近20日呈现先跌后反弹走势，最新收盘27.14站上所有均线，但均线系统仍为空头排列（MA5=26.786<MA10=26.904<MA20=26.932），短期反弹需进一步确认。量能方面，反弹过程中成交量放大，5月19日和26日放量明显，说明有资金介入，但此前下跌亦伴随放量，多空分歧较大。支撑位关注26.56（近期低点），压力位27.32（前期高点）。整体处于区间震荡格局，方向选择需关注后续量能及均线修复情况。",
+        "sentiment": "neutral"
       },
       "fundamental": {
-        "status": "ok",
-        "summary": "",
+        "status": "unavailable",
+        "summary": "长江电力 近7日无公告数据",
         "sentiment": "neutral"
       },
       "capital": {
-        "status": "ok",
-        "summary": "",
+        "status": "unavailable",
+        "summary": "北向资金数据缺失，无法分析外资态度；主力资金净流入7750.0万元，显示内资做多意愿较强，但缺乏北向验证。需关注后续北向数据补充及持续性。",
         "sentiment": "neutral"
       },
-      "signal_breakdown": {
-        "hard_score": -0.24707554003664736,
-        "soft_score": 0.0,
-        "gate_score": 0.5,
-        "final_score": -0.02382974021465896,
-        "final_signal": "hold"
+      "announcement": {
+        "status": "unavailable",
+        "summary": "无近期公告",
+        "sentiment": "neutral",
+        "key_events": []
       },
-      "momentum_5d": 0.3266194882961315,
-      "momentum_20d": -4.901960784313719,
+      "risk_points": [
+        "均线空头压制，反弹可能遇阻回落",
+        "若成交量萎缩，反弹持续性存疑",
+        "26.56支撑若跌破，可能进一步下探",
+        "北向资金数据缺失可能导致信号不完整",
+        "单一主力资金流入不足以确认趋势，需结合成交量及后续资金变化"
+      ],
+      "signal_breakdown": {
+        "hard_score": 0.135,
+        "soft_score": 0.0,
+        "gate_score": 0.7,
+        "dragon_tiger_score": 0.0,
+        "announcement_score": 0.0,
+        "final_score": 0.207,
+        "has_dragon_tiger": false,
+        "has_announcement": false
+      },
+      "dragon_tiger": []
+    },
+    {
+      "code": "601985",
+      "name": "中国核电",
+      "overall_sentiment": "sell",
+      "overall_focus": "🔴 看空",
+      "confidence": 0.62,
+      "hard_score": -0.61,
+      "momentum_20d": -3.74,
+      "momentum_5d": -5.1,
       "ma_alignment": "bearish",
-      "volume_ratio": 0.6666217276548551,
-      "pe_ttm": 12.330909090909092,
-      "pe_percentile": 12.330909090909092,
-      "pb": 0,
-      "mcap_yi": 0,
-      "announcement": [],
-      "dragon_tiger": [],
-      "confidence": 0.5,
-      "risk_points": []
-    },
-    {
-      "code": "601398",
-      "name": "工商银行",
-      "overall_sentiment": "hold",
-      "overall_focus": "⚪ 观望",
+      "volume_ratio": 0.57,
+      "pe_ttm": 21.9,
+      "pb": 1.5,
+      "mcap_yi": 1800.0,
       "technical": {
-        "status": "ok",
+        "status": "failed",
         "summary": "",
-        "sentiment": null
+        "sentiment": "neutral"
       },
       "fundamental": {
-        "status": "ok",
-        "summary": "",
+        "status": "unavailable",
+        "summary": "中国核电 近7日无公告数据",
         "sentiment": "neutral"
       },
       "capital": {
-        "status": "ok",
-        "summary": "",
+        "status": "unavailable",
+        "summary": "北向资金数据缺失，无法判断外资态度；主力净流入为0，无明显资金变动。仅依靠当前数据不足以分析资金面。",
         "sentiment": "neutral"
       },
+      "announcement": {
+        "status": "unavailable",
+        "summary": "无近期公告",
+        "sentiment": "neutral",
+        "key_events": []
+      },
+      "risk_points": [
+        "北向数据缺失可能导致对资金面判断不完整。",
+        "主力资金无变动，但需警惕后续潜在方向选择。"
+      ],
       "signal_breakdown": {
-        "hard_score": -0.25503940826636257,
+        "hard_score": -0.615,
         "soft_score": 0.0,
         "gate_score": 0.5,
-        "final_score": -0.02701551850654503,
-        "final_signal": "hold"
+        "dragon_tiger_score": 0.0,
+        "announcement_score": 0.0,
+        "final_score": -0.207,
+        "has_dragon_tiger": false,
+        "has_announcement": false
       },
-      "momentum_5d": -0.2781641168289384,
-      "momentum_20d": -4.654255319148937,
-      "ma_alignment": "bearish",
-      "volume_ratio": 0.702752839230888,
-      "pe_ttm": 8.076363636363636,
-      "pe_percentile": 8.076363636363636,
-      "pb": 0,
-      "mcap_yi": 0,
-      "announcement": [],
-      "dragon_tiger": [],
-      "confidence": 0.5,
-      "risk_points": []
-    },
-    {
-      "code": "002230",
-      "name": "科大讯飞",
-      "overall_sentiment": "hold",
-      "overall_focus": "⚪ 观望",
-      "technical": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": null
-      },
-      "fundamental": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": "neutral"
-      },
-      "capital": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": "neutral"
-      },
-      "signal_breakdown": {
-        "hard_score": -0.2782352355355566,
-        "soft_score": 0.0,
-        "gate_score": 0.5,
-        "final_score": -0.03629607181422266,
-        "final_signal": "hold"
-      },
-      "momentum_5d": -0.06158899609937096,
-      "momentum_20d": -1.6764290042415642,
-      "ma_alignment": "neutral",
-      "volume_ratio": 1.0636274112497315,
-      "pe_ttm": 95.0,
-      "pe_percentile": 95.0,
-      "pb": 0,
-      "mcap_yi": 0,
-      "announcement": [],
-      "dragon_tiger": [],
-      "confidence": 0.5,
-      "risk_points": []
+      "dragon_tiger": []
     },
     {
       "code": "601336",
       "name": "新华保险",
       "overall_sentiment": "hold",
       "overall_focus": "⚪ 观望",
-      "technical": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": null
-      },
-      "fundamental": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": "neutral"
-      },
-      "capital": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": "neutral"
-      },
-      "signal_breakdown": {
-        "hard_score": -0.27943257506471825,
-        "soft_score": 0.0,
-        "gate_score": 0.5,
-        "final_score": -0.036772422825887316,
-        "final_signal": "hold"
-      },
-      "momentum_5d": -1.19760479041916,
-      "momentum_20d": -6.735751295336789,
-      "ma_alignment": "bearish",
-      "volume_ratio": 0.81502650811471,
-      "pe_ttm": 5.032727272727272,
-      "pe_percentile": 5.032727272727272,
-      "pb": 0,
-      "mcap_yi": 0,
-      "announcement": [],
-      "dragon_tiger": [],
-      "confidence": 0.5,
-      "risk_points": []
-    },
-    {
-      "code": "601668",
-      "name": "中国建筑",
-      "overall_sentiment": "hold",
-      "overall_focus": "⚪ 观望",
-      "technical": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": null
-      },
-      "fundamental": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": "neutral"
-      },
-      "capital": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": "neutral"
-      },
-      "signal_breakdown": {
-        "hard_score": -0.2867106500331726,
-        "soft_score": 0.0,
-        "gate_score": 0.5,
-        "final_score": -0.03968425041326905,
-        "final_signal": "hold"
-      },
-      "momentum_5d": -2.4539877300613466,
-      "momentum_20d": -1.6494845360824795,
-      "ma_alignment": "bearish",
-      "volume_ratio": 0.7380898106067522,
-      "pe_ttm": 5.327272727272727,
-      "pe_percentile": 5.327272727272727,
-      "pb": 0,
-      "mcap_yi": 0,
-      "announcement": [],
-      "dragon_tiger": [],
-      "confidence": 0.5,
-      "risk_points": []
-    },
-    {
-      "code": "600050",
-      "name": "中国联通",
-      "overall_sentiment": "hold",
-      "overall_focus": "⚪ 观望",
-      "technical": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": null
-      },
-      "fundamental": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": "neutral"
-      },
-      "capital": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": "neutral"
-      },
-      "signal_breakdown": {
-        "hard_score": -0.34182169453731054,
-        "soft_score": 0.0,
-        "gate_score": 0.5,
-        "final_score": -0.041059482342685624,
-        "final_signal": "hold"
-      },
-      "momentum_5d": -9.349593495934961,
-      "momentum_20d": -0.8888888888888946,
+      "confidence": 0.62,
+      "hard_score": 0.11,
+      "momentum_20d": -4.28,
+      "momentum_5d": -0.45,
       "ma_alignment": "neutral",
-      "volume_ratio": 0.6207274210331758,
-      "pe_ttm": 23.18,
-      "pe_percentile": 23.18,
-      "pb": 0,
-      "mcap_yi": 0,
-      "announcement": [],
-      "dragon_tiger": [],
-      "confidence": 0.5,
-      "risk_points": []
-    },
-    {
-      "code": "600036",
-      "name": "招商银行",
-      "overall_sentiment": "hold",
-      "overall_focus": "⚪ 观望",
+      "volume_ratio": 1.59,
+      "pe_ttm": 5.1,
+      "pb": 1.52,
+      "mcap_yi": 1877.0,
       "technical": {
         "status": "ok",
-        "summary": "",
-        "sentiment": null
+        "summary": "新华保险近20日整体呈下跌趋势，股价从62.41跌至60.16，近期探底58.51后反弹。均线系统呈现空头排列（MA5<MA10<MA20），但股价站上MA5，短期有企稳迹象。5月26日成交量显著放大（3256.6万手），为近20日最大量能，支撑反弹延续。上方压力位于MA10（60.51）及MA20（62.34），下方支撑参考前低58.3附近。短期关注能否放量突破MA10，若受阻则可能继续震荡筑底。",
+        "sentiment": "neutral"
       },
       "fundamental": {
-        "status": "ok",
-        "summary": "",
+        "status": "unavailable",
+        "summary": "新华保险 近7日无公告数据",
         "sentiment": "neutral"
       },
       "capital": {
-        "status": "ok",
-        "summary": "",
+        "status": "unavailable",
+        "summary": "北向资金数据缺失，无法分析北向资金态度；主力净流入2519万元，但缺少北向资金对比，无法判断资金整体动向。建议关注后续数据补充。",
         "sentiment": "neutral"
       },
-      "signal_breakdown": {
-        "hard_score": -0.3044288788516315,
-        "soft_score": 0.0,
-        "gate_score": 0.5,
-        "final_score": -0.046770955140652604,
-        "final_signal": "hold"
+      "announcement": {
+        "status": "unavailable",
+        "summary": "无近期公告",
+        "sentiment": "neutral",
+        "key_events": []
       },
-      "momentum_5d": -1.4144649052575398,
-      "momentum_20d": -7.045797684952204,
-      "ma_alignment": "bearish",
-      "volume_ratio": 0.7701409448568878,
-      "pe_ttm": 6.93090909090909,
-      "pe_percentile": 6.93090909090909,
-      "pb": 0,
-      "mcap_yi": 0,
-      "announcement": [],
-      "dragon_tiger": [],
-      "confidence": 0.5,
-      "risk_points": []
+      "risk_points": [
+        "均线空头格局未改，反弹可能面临MA10和MA20双重压制",
+        "前期高点67.16附近套牢盘较重，若冲高回落需警惕",
+        "成交量若后续萎缩，反弹动能不足，可能再次探底",
+        "北向资金数据缺失，无法评估外资动向对股价的潜在影响。"
+      ],
+      "signal_breakdown": {
+        "hard_score": 0.108,
+        "soft_score": 0.0,
+        "gate_score": 0.7,
+        "dragon_tiger_score": 0.0,
+        "announcement_score": 0.0,
+        "final_score": 0.194,
+        "has_dragon_tiger": false,
+        "has_announcement": false
+      },
+      "dragon_tiger": []
     },
     {
-      "code": "000001",
-      "name": "平安银行",
+      "code": "601138",
+      "name": "工业富联",
       "overall_sentiment": "hold",
       "overall_focus": "⚪ 观望",
+      "confidence": 0.61,
+      "hard_score": 0.15,
+      "momentum_20d": 3.03,
+      "momentum_5d": 2.07,
+      "ma_alignment": "bullish",
+      "volume_ratio": 0.85,
+      "pe_ttm": 34.2,
+      "pb": 7.88,
+      "mcap_yi": 13887.0,
       "technical": {
         "status": "ok",
-        "summary": "",
-        "sentiment": null
+        "summary": "近20个交易日股价呈震荡上行趋势，最新收盘价69.98站上MA5/MA10/MA20三线，但MA5（68.22）略低于MA10（68.57），均线尚未形成明确多头排列。5月13日放量涨停后成交量逐步萎缩，上攻动能减弱。短期支撑关注MA10（约68.57）及MA20（66.80），压力位参考前高70.84。需警惕短期均线死叉及量能不足可能引发的回调风险。",
+        "sentiment": "neutral"
       },
       "fundamental": {
-        "status": "ok",
-        "summary": "",
+        "status": "unavailable",
+        "summary": "工业富联 近7日无公告数据",
         "sentiment": "neutral"
       },
       "capital": {
-        "status": "ok",
-        "summary": "",
+        "status": "unavailable",
+        "summary": "北向资金数据缺失，无法全面判断资金态度。当日主力净流出6906万元，显示短期空头力量较强。由于缺少北向数据，无法评估外资与主力的一致性，建议关注后续北向资金动向。",
         "sentiment": "neutral"
       },
+      "announcement": {
+        "status": "unavailable",
+        "summary": "无近期公告",
+        "sentiment": "neutral",
+        "key_events": []
+      },
+      "risk_points": [
+        "MA5已略低于MA10，若进一步下行可能形成死叉，引发短线抛压。",
+        "量能萎缩表明追高意愿不足，若跌破MA10（68.57）支撑，调整空间或打开。",
+        "前期高点70.84附近存在套牢盘压力，突破需放量配合。",
+        "北向资金数据缺失，可能影响判断完整性",
+        "主力净流出可能引发市场负面情绪"
+      ],
       "signal_breakdown": {
-        "hard_score": -0.3674710299180719,
+        "hard_score": 0.148,
         "soft_score": 0.0,
         "gate_score": 0.5,
-        "final_score": -0.04993959337214447,
-        "final_signal": "hold"
+        "dragon_tiger_score": 0.0,
+        "announcement_score": 0.0,
+        "final_score": 0.174,
+        "has_dragon_tiger": false,
+        "has_announcement": false
       },
-      "momentum_5d": -1.6574585635359074,
-      "momentum_20d": -2.732240437158473,
-      "ma_alignment": "bearish",
-      "volume_ratio": 0.6003500603427774,
-      "pe_ttm": 5.0,
-      "pe_percentile": 5.0,
-      "pb": 0,
-      "mcap_yi": 0,
-      "announcement": [],
-      "dragon_tiger": [],
-      "confidence": 0.5,
-      "risk_points": []
-    },
-    {
-      "code": "000538",
-      "name": "云南白药",
-      "overall_sentiment": "hold",
-      "overall_focus": "⚪ 观望",
-      "technical": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": null
-      },
-      "fundamental": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": "neutral"
-      },
-      "capital": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": "neutral"
-      },
-      "signal_breakdown": {
-        "hard_score": -0.4080675777836893,
-        "soft_score": 0.0,
-        "gate_score": 0.5,
-        "final_score": -0.05215416457045101,
-        "final_signal": "hold"
-      },
-      "momentum_5d": -2.732992528509637,
-      "momentum_20d": -7.305502846299817,
-      "ma_alignment": "bearish",
-      "volume_ratio": 0.7285762388338218,
-      "pe_ttm": 24.29272727272727,
-      "pe_percentile": 24.29272727272727,
-      "pb": 0,
-      "mcap_yi": 0,
-      "announcement": [],
-      "dragon_tiger": [],
-      "confidence": 0.5,
-      "risk_points": []
-    },
-    {
-      "code": "000661",
-      "name": "长春高新",
-      "overall_sentiment": "hold",
-      "overall_focus": "⚪ 观望",
-      "technical": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": null
-      },
-      "fundamental": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": "neutral"
-      },
-      "capital": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": "neutral"
-      },
-      "signal_breakdown": {
-        "hard_score": -0.32884657024970676,
-        "soft_score": 0.0,
-        "gate_score": 0.5,
-        "final_score": -0.056539449499882696,
-        "final_signal": "hold"
-      },
-      "momentum_5d": -3.4616315662067243,
-      "momentum_20d": -8.385021824029405,
-      "ma_alignment": "bearish",
-      "volume_ratio": 0.9879724800736273,
-      "pe_ttm": 5.0,
-      "pe_percentile": 5.0,
-      "pb": 0,
-      "mcap_yi": 0,
-      "announcement": [],
-      "dragon_tiger": [],
-      "confidence": 0.5,
-      "risk_points": []
-    },
-    {
-      "code": "600016",
-      "name": "民生银行",
-      "overall_sentiment": "hold",
-      "overall_focus": "⚪ 观望",
-      "technical": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": null
-      },
-      "fundamental": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": "neutral"
-      },
-      "capital": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": "neutral"
-      },
-      "signal_breakdown": {
-        "hard_score": -0.3481753814326104,
-        "soft_score": 0.0,
-        "gate_score": 0.5,
-        "final_score": -0.06427015257304418,
-        "final_signal": "hold"
-      },
-      "momentum_5d": -1.4005602240896309,
-      "momentum_20d": -5.882352941176472,
-      "ma_alignment": "bearish",
-      "volume_ratio": 0.7501977638120851,
-      "pe_ttm": 5.409090909090909,
-      "pe_percentile": 5.409090909090909,
-      "pb": 0,
-      "mcap_yi": 0,
-      "announcement": [],
-      "dragon_tiger": [],
-      "confidence": 0.5,
-      "risk_points": []
-    },
-    {
-      "code": "600048",
-      "name": "保利发展",
-      "overall_sentiment": "hold",
-      "overall_focus": "⚪ 观望",
-      "technical": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": null
-      },
-      "fundamental": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": "neutral"
-      },
-      "capital": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": "neutral"
-      },
-      "signal_breakdown": {
-        "hard_score": -0.35078918245477303,
-        "soft_score": 0.0,
-        "gate_score": 0.5,
-        "final_score": -0.06531604378190924,
-        "final_signal": "hold"
-      },
-      "momentum_5d": -2.975206611570247,
-      "momentum_20d": -1.0118043844856595,
-      "ma_alignment": "bearish",
-      "volume_ratio": 0.5615310022519457,
-      "pe_ttm": 5.0,
-      "pe_percentile": 5.0,
-      "pb": 0,
-      "mcap_yi": 0,
-      "announcement": [],
-      "dragon_tiger": [],
-      "confidence": 0.5,
-      "risk_points": []
-    },
-    {
-      "code": "600519",
-      "name": "贵州茅台",
-      "overall_sentiment": "hold",
-      "overall_focus": "⚪ 观望",
-      "technical": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": null
-      },
-      "fundamental": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": "neutral"
-      },
-      "capital": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": "neutral"
-      },
-      "signal_breakdown": {
-        "hard_score": -0.3625025116253359,
-        "soft_score": 0.0,
-        "gate_score": 0.5,
-        "final_score": -0.06924322585013439,
-        "final_signal": "hold"
-      },
-      "momentum_5d": -2.805744520030229,
-      "momentum_20d": -8.770485987938981,
-      "ma_alignment": "bearish",
-      "volume_ratio": 0.9615104198367337,
-      "pe_ttm": 28.67818181818182,
-      "pe_percentile": 28.67818181818182,
-      "pb": 0,
-      "mcap_yi": 0,
-      "announcement": [],
-      "dragon_tiger": [],
-      "confidence": 0.5,
-      "risk_points": []
-    },
-    {
-      "code": "300750",
-      "name": "宁德时代",
-      "overall_sentiment": "hold",
-      "overall_focus": "⚪ 观望",
-      "technical": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": null
-      },
-      "fundamental": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": "neutral"
-      },
-      "capital": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": "neutral"
-      },
-      "signal_breakdown": {
-        "hard_score": -0.362711481075243,
-        "soft_score": 0.0,
-        "gate_score": 0.5,
-        "final_score": -0.0699866896300972,
-        "final_signal": "hold"
-      },
-      "momentum_5d": -3.439349998801622,
-      "momentum_20d": -7.670448034834432,
-      "ma_alignment": "bearish",
-      "volume_ratio": 1.130657515998762,
-      "pe_ttm": 35.43636363636364,
-      "pe_percentile": 35.43636363636364,
-      "pb": 0,
-      "mcap_yi": 0,
-      "announcement": [],
-      "dragon_tiger": [],
-      "confidence": 0.5,
-      "risk_points": []
-    },
-    {
-      "code": "600104",
-      "name": "上汽集团",
-      "overall_sentiment": "hold",
-      "overall_focus": "⚪ 观望",
-      "technical": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": null
-      },
-      "fundamental": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": "neutral"
-      },
-      "capital": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": "neutral"
-      },
-      "signal_breakdown": {
-        "hard_score": -0.3638790258232638,
-        "soft_score": 0.0,
-        "gate_score": 0.5,
-        "final_score": -0.07055146572930553,
-        "final_signal": "hold"
-      },
-      "momentum_5d": -2.529644268774711,
-      "momentum_20d": -10.845986984815614,
-      "ma_alignment": "bearish",
-      "volume_ratio": 0.8239630145087526,
-      "pe_ttm": 19.759999999999998,
-      "pe_percentile": 19.759999999999998,
-      "pb": 0,
-      "mcap_yi": 0,
-      "announcement": [],
-      "dragon_tiger": [],
-      "confidence": 0.5,
-      "risk_points": []
-    },
-    {
-      "code": "601012",
-      "name": "隆基绿能",
-      "overall_sentiment": "hold",
-      "overall_focus": "⚪ 观望",
-      "technical": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": null
-      },
-      "fundamental": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": "neutral"
-      },
-      "capital": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": "neutral"
-      },
-      "signal_breakdown": {
-        "hard_score": -0.3686693011312509,
-        "soft_score": 0.0,
-        "gate_score": 0.5,
-        "final_score": -0.07246860905250037,
-        "final_signal": "hold"
-      },
-      "momentum_5d": -1.915455746367245,
-      "momentum_20d": -15.384615384615385,
-      "ma_alignment": "bearish",
-      "volume_ratio": 0.7343008874598997,
-      "pe_ttm": 5.0,
-      "pe_percentile": 5.0,
-      "pb": 0,
-      "mcap_yi": 0,
-      "announcement": [],
-      "dragon_tiger": [],
-      "confidence": 0.5,
-      "risk_points": []
-    },
-    {
-      "code": "601628",
-      "name": "中国人寿",
-      "overall_sentiment": "hold",
-      "overall_focus": "⚪ 观望",
-      "technical": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": null
-      },
-      "fundamental": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": "neutral"
-      },
-      "capital": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": "neutral"
-      },
-      "signal_breakdown": {
-        "hard_score": -0.37291634740218216,
-        "soft_score": 0.0,
-        "gate_score": 0.5,
-        "final_score": -0.07416664216087289,
-        "final_signal": "hold"
-      },
-      "momentum_5d": -2.6474820143884914,
-      "momentum_20d": -8.764832793959009,
-      "ma_alignment": "bearish",
-      "volume_ratio": 0.7585698604777052,
-      "pe_ttm": 7.618181818181817,
-      "pe_percentile": 7.618181818181817,
-      "pb": 0,
-      "mcap_yi": 0,
-      "announcement": [],
-      "dragon_tiger": [],
-      "confidence": 0.5,
-      "risk_points": []
-    },
-    {
-      "code": "600031",
-      "name": "三一重工",
-      "overall_sentiment": "hold",
-      "overall_focus": "⚪ 观望",
-      "technical": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": null
-      },
-      "fundamental": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": "neutral"
-      },
-      "capital": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": "neutral"
-      },
-      "signal_breakdown": {
-        "hard_score": -0.4006257045360297,
-        "soft_score": 0.0,
-        "gate_score": 0.5,
-        "final_score": -0.0854893812144119,
-        "final_signal": "hold"
-      },
-      "momentum_5d": -2.8880866425992857,
-      "momentum_20d": -4.802831142568264,
-      "ma_alignment": "bearish",
-      "volume_ratio": 0.7219360143612125,
-      "pe_ttm": 30.46181818181818,
-      "pe_percentile": 30.46181818181818,
-      "pb": 0,
-      "mcap_yi": 0,
-      "announcement": [],
-      "dragon_tiger": [],
-      "confidence": 0.5,
-      "risk_points": []
-    },
-    {
-      "code": "601211",
-      "name": "国泰君安",
-      "overall_sentiment": "hold",
-      "overall_focus": "⚪ 观望",
-      "technical": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": null
-      },
-      "fundamental": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": "neutral"
-      },
-      "capital": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": "neutral"
-      },
-      "signal_breakdown": {
-        "hard_score": -0.4114368452992328,
-        "soft_score": 0.0,
-        "gate_score": 0.5,
-        "final_score": -0.08957430791969313,
-        "final_signal": "hold"
-      },
-      "momentum_5d": -1.941747572815522,
-      "momentum_20d": -9.82142857142857,
-      "ma_alignment": "bearish",
-      "volume_ratio": 0.5877392689308959,
-      "pe_ttm": 16.716363636363635,
-      "pe_percentile": 16.716363636363635,
-      "pb": 0,
-      "mcap_yi": 0,
-      "announcement": [],
-      "dragon_tiger": [],
-      "confidence": 0.5,
-      "risk_points": []
-    },
-    {
-      "code": "600585",
-      "name": "海螺水泥",
-      "overall_sentiment": "hold",
-      "overall_focus": "⚪ 观望",
-      "technical": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": null
-      },
-      "fundamental": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": "neutral"
-      },
-      "capital": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": "neutral"
-      },
-      "signal_breakdown": {
-        "hard_score": -0.4178502472134127,
-        "soft_score": 0.0,
-        "gate_score": 0.5,
-        "final_score": -0.09213948988536509,
-        "final_signal": "hold"
-      },
-      "momentum_5d": -3.293413173652693,
-      "momentum_20d": -11.10091743119267,
-      "ma_alignment": "bearish",
-      "volume_ratio": 0.7357126917936139,
-      "pe_ttm": 18.450909090909093,
-      "pe_percentile": 18.450909090909093,
-      "pb": 0,
-      "mcap_yi": 0,
-      "announcement": [],
-      "dragon_tiger": [],
-      "confidence": 0.5,
-      "risk_points": []
-    },
-    {
-      "code": "002304",
-      "name": "洋河股份",
-      "overall_sentiment": "hold",
-      "overall_focus": "⚪ 观望",
-      "technical": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": null
-      },
-      "fundamental": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": "neutral"
-      },
-      "capital": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": "neutral"
-      },
-      "signal_breakdown": {
-        "hard_score": -0.42333806333354,
-        "soft_score": 0.0,
-        "gate_score": 0.5,
-        "final_score": -0.09433579473341601,
-        "final_signal": "hold"
-      },
-      "momentum_5d": -1.4406028368794344,
-      "momentum_20d": -10.016187778227447,
-      "ma_alignment": "bearish",
-      "volume_ratio": 1.4950747859803986,
-      "pe_ttm": 95.0,
-      "pe_percentile": 95.0,
-      "pb": 0,
-      "mcap_yi": 0,
-      "announcement": [],
-      "dragon_tiger": [],
-      "confidence": 0.5,
-      "risk_points": []
-    },
-    {
-      "code": "601288",
-      "name": "农业银行",
-      "overall_sentiment": "hold",
-      "overall_focus": "⚪ 观望",
-      "technical": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": null
-      },
-      "fundamental": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": "neutral"
-      },
-      "capital": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": "neutral"
-      },
-      "signal_breakdown": {
-        "hard_score": -0.4246556432616331,
-        "soft_score": 0.0,
-        "gate_score": 0.5,
-        "final_score": -0.09486233650465324,
-        "final_signal": "hold"
-      },
-      "momentum_5d": -2.4242424242424176,
-      "momentum_20d": -8.910891089108908,
-      "ma_alignment": "bearish",
-      "volume_ratio": 0.5651609869346693,
-      "pe_ttm": 9.352727272727272,
-      "pe_percentile": 9.352727272727272,
-      "pb": 0,
-      "mcap_yi": 0,
-      "announcement": [],
-      "dragon_tiger": [],
-      "confidence": 0.5,
-      "risk_points": []
-    },
-    {
-      "code": "000858",
-      "name": "五粮液",
-      "overall_sentiment": "hold",
-      "overall_focus": "⚪ 观望",
-      "technical": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": null
-      },
-      "fundamental": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": "neutral"
-      },
-      "capital": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": "neutral"
-      },
-      "signal_breakdown": {
-        "hard_score": -0.43094786158004844,
-        "soft_score": 0.0,
-        "gate_score": 0.5,
-        "final_score": -0.09642062603201938,
-        "final_signal": "hold"
-      },
-      "momentum_5d": -1.6711464298235224,
-      "momentum_20d": -16.395071542130367,
-      "ma_alignment": "bearish",
-      "volume_ratio": 0.8613764229786612,
-      "pe_ttm": 39.232727272727274,
-      "pe_percentile": 39.232727272727274,
-      "pb": 0,
-      "mcap_yi": 0,
-      "announcement": [],
-      "dragon_tiger": [],
-      "confidence": 0.5,
-      "risk_points": []
+      "dragon_tiger": []
     },
     {
       "code": "600196",
       "name": "复星医药",
       "overall_sentiment": "hold",
       "overall_focus": "⚪ 观望",
+      "confidence": 0.6,
+      "hard_score": -0.52,
+      "momentum_20d": -9.39,
+      "momentum_5d": -4.22,
+      "ma_alignment": "bearish",
+      "volume_ratio": 0.57,
+      "pe_ttm": 17.8,
+      "pb": 1.26,
+      "mcap_yi": 619.0,
       "technical": {
         "status": "ok",
-        "summary": "",
-        "sentiment": null
+        "summary": "复星医药近期持续下跌，最新收盘价23.17元，处于所有均线之下，均线呈空头排列（MA5<MA10<MA20），趋势偏弱。成交量维持低位，无明显资金介入迹象。近期低点23.08（5月25日）形成短期支撑，上方MA5（23.52）构成第一压力位。整体技术面偏空，需关注量能变化及能否企稳。",
+        "sentiment": "neutral"
       },
       "fundamental": {
-        "status": "ok",
-        "summary": "",
+        "status": "unavailable",
+        "summary": "复星医药 近7日无公告数据",
         "sentiment": "neutral"
       },
       "capital": {
-        "status": "ok",
-        "summary": "",
+        "status": "unavailable",
+        "summary": "北向资金数据缺失，无法分析其态度；主力净流入为-150.0万元，显示资金流出。整体资金面偏空，但需注意数据不完整，北向动向未知。",
         "sentiment": "neutral"
       },
+      "announcement": {
+        "status": "unavailable",
+        "summary": "无近期公告",
+        "sentiment": "neutral",
+        "key_events": []
+      },
+      "risk_points": [
+        "若跌破23.08元支撑，可能开启新一轮下跌",
+        "均线发散向下，反弹压力重重",
+        "缺乏利好催化，弱势格局短期难改",
+        "主力资金流出可能暗示机构短期看空",
+        "数据缺失导致判断不全面，存在信息盲区"
+      ],
       "signal_breakdown": {
-        "hard_score": -0.43041160918835003,
+        "hard_score": -0.522,
         "soft_score": 0.0,
         "gate_score": 0.5,
-        "final_score": -0.09676464487534005,
-        "final_signal": "hold"
+        "dragon_tiger_score": 0.0,
+        "announcement_score": 0.0,
+        "final_score": -0.161,
+        "has_dragon_tiger": false,
+        "has_announcement": false
       },
-      "momentum_5d": -3.158769742310885,
-      "momentum_20d": -8.948808128175067,
-      "ma_alignment": "bearish",
-      "volume_ratio": 0.732300070243142,
-      "pe_ttm": 26.10909090909091,
-      "pe_percentile": 26.10909090909091,
-      "pb": 0,
-      "mcap_yi": 0,
-      "announcement": [],
-      "dragon_tiger": [],
-      "confidence": 0.5,
-      "risk_points": []
-    },
-    {
-      "code": "601985",
-      "name": "中国核电",
-      "overall_sentiment": "hold",
-      "overall_focus": "⚪ 观望",
-      "technical": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": null
-      },
-      "fundamental": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": "neutral"
-      },
-      "capital": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": "neutral"
-      },
-      "signal_breakdown": {
-        "hard_score": -0.3715176341525921,
-        "soft_score": 0.0,
-        "gate_score": 0.5,
-        "final_score": -0.09983215466004332,
-        "final_signal": "hold"
-      },
-      "momentum_5d": -3.314917127071826,
-      "momentum_20d": -2.343750000000011,
-      "ma_alignment": "bearish",
-      "volume_ratio": 0.8151456264066457,
-      "pe_ttm": 32.589090909090906,
-      "pe_percentile": 32.589090909090906,
-      "pb": 0,
-      "mcap_yi": 0,
-      "announcement": [],
-      "dragon_tiger": [],
-      "confidence": 0.5,
-      "risk_points": []
-    },
-    {
-      "code": "600028",
-      "name": "中国石化",
-      "overall_sentiment": "hold",
-      "overall_focus": "⚪ 观望",
-      "technical": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": null
-      },
-      "fundamental": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": "neutral"
-      },
-      "capital": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": "neutral"
-      },
-      "signal_breakdown": {
-        "hard_score": -0.4883060568033201,
-        "soft_score": 0.0,
-        "gate_score": 0.5,
-        "final_score": -0.11964290632132808,
-        "final_signal": "hold"
-      },
-      "momentum_5d": -4.280155642023342,
-      "momentum_20d": -9.558823529411775,
-      "ma_alignment": "bearish",
-      "volume_ratio": 0.6596221055415381,
-      "pe_ttm": 24.210909090909087,
-      "pe_percentile": 24.210909090909087,
-      "pb": 0,
-      "mcap_yi": 0,
-      "announcement": [],
-      "dragon_tiger": [],
-      "confidence": 0.5,
-      "risk_points": []
-    },
-    {
-      "code": "601888",
-      "name": "中国中免",
-      "overall_sentiment": "hold",
-      "overall_focus": "⚪ 观望",
-      "technical": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": null
-      },
-      "fundamental": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": "neutral"
-      },
-      "capital": {
-        "status": "ok",
-        "summary": "",
-        "sentiment": "neutral"
-      },
-      "signal_breakdown": {
-        "hard_score": -0.4947263104028529,
-        "soft_score": 0.0,
-        "gate_score": 0.5,
-        "final_score": -0.12233131796114118,
-        "final_signal": "hold"
-      },
-      "momentum_5d": -2.254345207365349,
-      "momentum_20d": -14.753114212817053,
-      "ma_alignment": "bearish",
-      "volume_ratio": 0.8390985052076657,
-      "pe_ttm": 45.14,
-      "pe_percentile": 45.14,
-      "pb": 0,
-      "mcap_yi": 0,
-      "announcement": [],
-      "dragon_tiger": [],
-      "confidence": 0.5,
-      "risk_points": []
+      "dragon_tiger": []
     },
     {
       "code": "002714",
       "name": "牧原股份",
       "overall_sentiment": "hold",
       "overall_focus": "⚪ 观望",
+      "confidence": 0.6,
+      "hard_score": -0.51,
+      "momentum_20d": -10.99,
+      "momentum_5d": -3.95,
+      "ma_alignment": "bearish",
+      "volume_ratio": 0.77,
+      "pe_ttm": 22.9,
+      "pb": 2.59,
+      "mcap_yi": 2235.0,
       "technical": {
         "status": "ok",
-        "summary": "",
-        "sentiment": null
+        "summary": "该股近期处于明显下跌趋势，均线系统呈现空头排列（MA5<MA10<MA20），价格持续创出新低，5月26日收盘报38.71元，低于所有短期均线。量能在下跌过程中有所放大，显示抛压较大；近两日成交量略有萎缩，但未出现企稳信号。支撑位关注近期低点38.08元，若跌破可能进一步下探；压力位参考MA5（39.00元）附近。整体技术面偏弱，需等待均线走平或放量止跌信号。",
+        "sentiment": "neutral"
       },
       "fundamental": {
-        "status": "ok",
-        "summary": "",
+        "status": "unavailable",
+        "summary": "牧原股份 近7日无公告数据",
+        "sentiment": "neutral"
+      },
+      "capital": {
+        "status": "unavailable",
+        "summary": "北向资金数据缺失，无法判断北向资金态度。当日主力净流入972.0万元，显示短期有主力资金介入，但单日数据难以判断趋势。北向资金未提供，需结合历史数据及市场整体环境综合分析。",
+        "sentiment": "neutral"
+      },
+      "announcement": {
+        "status": "unavailable",
+        "summary": "无近期公告",
+        "sentiment": "neutral",
+        "key_events": []
+      },
+      "risk_points": [
+        "股价已跌破多个整数关口，若38.08元支撑无效，可能加速下行",
+        "均线发散向下，短期反弹至MA5附近可能遭遇卖压",
+        "成交量未显著萎缩，继续下跌风险仍存",
+        "单日主力数据可靠性有限，需观察持续性",
+        "北向资金数据缺失可能导致分析不全面",
+        "资金流入规模较小，对股价影响可能有限"
+      ],
+      "signal_breakdown": {
+        "hard_score": -0.51,
+        "soft_score": 0.0,
+        "gate_score": 0.5,
+        "dragon_tiger_score": 0.0,
+        "announcement_score": 0.0,
+        "final_score": -0.155,
+        "has_dragon_tiger": false,
+        "has_announcement": false
+      },
+      "dragon_tiger": []
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "overall_sentiment": "hold",
+      "overall_focus": "⚪ 观望",
+      "confidence": 0.6,
+      "hard_score": 0.1,
+      "momentum_20d": 3.91,
+      "momentum_5d": 2.28,
+      "ma_alignment": "neutral",
+      "volume_ratio": 0.83,
+      "pe_ttm": 15.4,
+      "pb": 3.69,
+      "mcap_yi": 3106.0,
+      "technical": {
+        "status": "failed",
+        "summary": "近20个交易日股价在100-115区间波动，4月28-29日大幅跳空高开冲高至114.5后回落，近期于100-105区间震荡整理。当前收盘104.11，站上MA5（103.594）和MA10（103.687），但受MA20（105.745）压制，均线呈空头排列。成交量在冲高时放大后显著萎缩，近期量能平淡，缺乏向上突破动力。支撑位关注100整数关口及前低100.61，压力位关注MA20及110附近。",
+        "sentiment": "neutral"
+      },
+      "fundamental": {
+        "status": "unavailable",
+        "summary": "药明康德 近7日无公告数据",
         "sentiment": "neutral"
       },
       "capital": {
         "status": "ok",
+        "summary": "当日主力净流入6117万元，显示资金小幅流入，但北向资金数据缺失，无法判断外资态度。单日主力净流入规模有限，未出现异常大额变动，市场关注药明康德近期基本面变化及板块轮动。",
+        "sentiment": "neutral"
+      },
+      "announcement": {
+        "status": "unavailable",
+        "summary": "无近期公告",
+        "sentiment": "neutral",
+        "key_events": []
+      },
+      "risk_points": [
+        "均线空头排列，MA20持续下行，若无法快速收复，可能进一步下探。",
+        "量能持续萎缩，缺乏增量资金，反弹高度受限。",
+        "前期跳空缺口（110.57-111.18）上方套牢盘较重，突破难度大。",
+        "北向资金数据缺失，外部资金动向不透明可能影响判断。",
+        "单日主力净流入金额较小，持续性待观察。"
+      ],
+      "signal_breakdown": {
+        "hard_score": 0.099,
+        "soft_score": 0.0,
+        "gate_score": 0.5,
+        "dragon_tiger_score": 0.0,
+        "announcement_score": 0.0,
+        "final_score": 0.149,
+        "has_dragon_tiger": false,
+        "has_announcement": false
+      },
+      "dragon_tiger": []
+    },
+    {
+      "code": "600030",
+      "name": "中信证券",
+      "overall_sentiment": "hold",
+      "overall_focus": "⚪ 观望",
+      "confidence": 0.6,
+      "hard_score": 0.09,
+      "momentum_20d": -1.02,
+      "momentum_5d": -0.23,
+      "ma_alignment": "neutral",
+      "volume_ratio": 1.3,
+      "pe_ttm": 11.5,
+      "pb": 1.33,
+      "mcap_yi": 3884.0,
+      "technical": {
+        "status": "ok",
+        "summary": "中信证券近期股价在25.81-27.78区间震荡，当前收盘26.21低于MA5、MA10、MA20，均线呈空头排列，短期趋势偏弱。成交量在5月21日显著放大后未能持续，后续量能不足。支撑位关注近期低点25.81-25.88区域，压力位参考MA10约26.32及MA20约26.71。股价处于震荡筑底阶段，需等待均线走平或放量突破。",
+        "sentiment": "neutral"
+      },
+      "fundamental": {
+        "status": "unavailable",
+        "summary": "中信证券 近7日无公告数据",
+        "sentiment": "neutral"
+      },
+      "capital": {
+        "status": "ok",
+        "summary": "根据提供的1日资金数据，中信证券今日主力净流入387.0，显示机构资金有一定流入迹象。但北向资金数据缺失，无法评估外资态度。单日资金数据易受短期因素影响，需结合多日趋势及成交量变化综合判断。",
+        "sentiment": "neutral"
+      },
+      "announcement": {
+        "status": "unavailable",
+        "summary": "无近期公告",
+        "sentiment": "neutral",
+        "key_events": []
+      },
+      "risk_points": [
+        "均线空头压制，若跌破25.81可能加速下行",
+        "反弹面临MA10及MA20双重压力，突破需量能配合",
+        "市场情绪低迷，若大盘走弱可能拖累个股",
+        "仅单日数据，趋势持续性待验证",
+        "北向资金缺失，无法全面评估资金面"
+      ],
+      "signal_breakdown": {
+        "hard_score": 0.094,
+        "soft_score": 0.0,
+        "gate_score": 0.5,
+        "dragon_tiger_score": 0.0,
+        "announcement_score": 0.0,
+        "final_score": 0.147,
+        "has_dragon_tiger": false,
+        "has_announcement": false
+      },
+      "dragon_tiger": []
+    },
+    {
+      "code": "000858",
+      "name": "五粮液",
+      "overall_sentiment": "hold",
+      "overall_focus": "⚪ 观望",
+      "confidence": 0.6,
+      "hard_score": -0.49,
+      "momentum_20d": -17.61,
+      "momentum_5d": -2.82,
+      "ma_alignment": "bearish",
+      "volume_ratio": 0.8,
+      "pe_ttm": 25.7,
+      "pb": 2.53,
+      "mcap_yi": 3236.0,
+      "technical": {
+        "status": "ok",
+        "summary": "五粮液近期持续下跌，均线呈空头排列（MA5<MA10<MA20），5月6日放量下挫后缩量回调，反弹无力，短期趋势偏弱。当前价格接近近期低点82.88附近，需关注该支撑位有效性；上方MA5及MA10构成压力。量能方面，除5月6日外整体缩量，市场观望情绪浓厚。",
+        "sentiment": "neutral"
+      },
+      "fundamental": {
+        "status": "unavailable",
+        "summary": "五粮液 近7日无公告数据",
+        "sentiment": "neutral"
+      },
+      "capital": {
+        "status": "unavailable",
+        "summary": "北向资金数据缺失，无法分析北向态度。主力资金净流出2147万元，显示短期主力资金偏空。需关注后续北向资金动向及主力资金是否持续流出。",
+        "sentiment": "neutral"
+      },
+      "announcement": {
+        "status": "unavailable",
+        "summary": "无近期公告",
+        "sentiment": "neutral",
+        "key_events": []
+      },
+      "risk_points": [
+        "空头趋势未扭转，成交量未明显放大，反弹动能不足",
+        "MACD若继续死叉，下跌风险加剧",
+        "主力资金流出可能引发短线回调压力",
+        "北向数据缺失导致外资动向不明确，增加判断不确定性"
+      ],
+      "signal_breakdown": {
+        "hard_score": -0.487,
+        "soft_score": 0.0,
+        "gate_score": 0.5,
+        "dragon_tiger_score": 0.0,
+        "announcement_score": 0.0,
+        "final_score": -0.144,
+        "has_dragon_tiger": false,
+        "has_announcement": false
+      },
+      "dragon_tiger": []
+    },
+    {
+      "code": "601166",
+      "name": "兴业银行",
+      "overall_sentiment": "hold",
+      "overall_focus": "⚪ 观望",
+      "confidence": 0.59,
+      "hard_score": 0.07,
+      "momentum_20d": -2.03,
+      "momentum_5d": 1.89,
+      "ma_alignment": "neutral",
+      "volume_ratio": 1.0,
+      "pe_ttm": 4.9,
+      "pb": 0.45,
+      "mcap_yi": 3773.0,
+      "technical": {
+        "status": "failed",
+        "summary": "兴业银行近期股价从17.28低点反弹至17.83，站上MA5和MA10，但仍在MA20（17.749）下方。均线系统为空头排列（MA5<MA10<MA20），短期反弹力度有限，需关注能否突破MA20压力。量能随反弹温和放大，但未显著放量，若后续量能不济可能再次回落。支撑位参考近期低点17.28，压力位关注MA20及前高18.32。整体处于下跌后的修复阶段，趋势尚未转多。",
+        "sentiment": "neutral"
+      },
+      "fundamental": {
+        "status": "unavailable",
+        "summary": "兴业银行 近7日无公告数据",
+        "sentiment": "neutral"
+      },
+      "capital": {
+        "status": "unavailable",
+        "summary": "北向资金数据缺失，仅提供主力资金当日净流入1812万元。由于北向资金缺失，无法全面判断外资态度，仅主力数据反映短期资金小幅流入，但数据不完整，需结合其他维度分析。",
+        "sentiment": "neutral"
+      },
+      "announcement": {
+        "status": "unavailable",
+        "summary": "无近期公告",
+        "sentiment": "neutral",
+        "key_events": []
+      },
+      "risk_points": [
+        "均线系统呈空头排列，反弹未扭转趋势，若突破MA20失败可能继续探底",
+        "前高18.32为强压力位，突破需更大成交量和基本面配合",
+        "近期反弹缩量或滞涨可能引发二次下跌风险",
+        "北向资金数据缺失，影响资金面全面评估",
+        "单日主力净流入金额较小，持续性存疑"
+      ],
+      "signal_breakdown": {
+        "hard_score": 0.068,
+        "soft_score": 0.0,
+        "gate_score": 0.5,
+        "dragon_tiger_score": 0.0,
+        "announcement_score": 0.0,
+        "final_score": 0.134,
+        "has_dragon_tiger": false,
+        "has_announcement": false
+      },
+      "dragon_tiger": []
+    },
+    {
+      "code": "601816",
+      "name": "京沪高铁",
+      "overall_sentiment": "hold",
+      "overall_focus": "⚪ 观望",
+      "confidence": 0.59,
+      "hard_score": 0.06,
+      "momentum_20d": -1.22,
+      "momentum_5d": -2.41,
+      "ma_alignment": "bullish",
+      "volume_ratio": 0.72,
+      "pe_ttm": 17.8,
+      "pb": 1.13,
+      "mcap_yi": 2378.0,
+      "technical": {
+        "status": "ok",
+        "summary": "短期股价从5.05元回落至4.86元，呈现下降趋势。均线方面，MA5（4.86）低于MA10（4.917）和MA20（4.911），短期均线走弱，有形成死叉迹象，但中长期均线仍交织，空头排列未完全确立。量能自5月12日放量后持续萎缩，市场参与度降低。下方4.83-4.84区间为近期支撑位，上方5.25为压力位。整体走势偏弱，需关注支撑有效性。",
+        "sentiment": "neutral"
+      },
+      "fundamental": {
+        "status": "unavailable",
+        "summary": "京沪高铁 近7日无公告数据",
+        "sentiment": "neutral"
+      },
+      "capital": {
+        "status": "ok",
+        "summary": "京沪高铁今日主力净流入252万元，显示主力资金呈小幅流入态势。北向资金数据缺失，无法判断外资态度。单日资金面偏积极，但规模较小，持续性待观察。",
+        "sentiment": "neutral"
+      },
+      "announcement": {
+        "status": "unavailable",
+        "summary": "无近期公告",
+        "sentiment": "neutral",
+        "key_events": []
+      },
+      "risk_points": [
+        "若跌破4.83元支撑，可能加速下行",
+        "均线死叉确认后，中期趋势转弱",
+        "缩量反弹难以突破上方压力",
+        "主力净流入金额较小，对股价推动力有限",
+        "北向资金态度未知，外部资金动向不明确"
+      ],
+      "signal_breakdown": {
+        "hard_score": 0.061,
+        "soft_score": 0.0,
+        "gate_score": 0.5,
+        "dragon_tiger_score": 0.0,
+        "announcement_score": 0.0,
+        "final_score": 0.131,
+        "has_dragon_tiger": false,
+        "has_announcement": false
+      },
+      "dragon_tiger": []
+    },
+    {
+      "code": "600941",
+      "name": "中国移动",
+      "overall_sentiment": "hold",
+      "overall_focus": "⚪ 观望",
+      "confidence": 0.59,
+      "hard_score": 0.06,
+      "momentum_20d": 1.4,
+      "momentum_5d": -3.77,
+      "ma_alignment": "bullish",
+      "volume_ratio": 0.69,
+      "pe_ttm": 15.5,
+      "pb": 1.48,
+      "mcap_yi": 21060.0,
+      "technical": {
+        "status": "ok",
+        "summary": "中国移动近期股价经历冲高回落，5月19日创出103.36高点后回调，最低至95.65，随后小幅反弹。当前价格97.19位于MA5（97.14）附近，但低于MA10（98.144）和MA20（97.3065），均线呈空头排列迹象，短期趋势偏弱。量能方面，5月18、19日放量明显，但随后缩量，显示资金追高意愿不足。支撑位在95.65-95.8区域，压力位为MA10（98.14）及前高103.36。需关注后续能否放量站上MA10扭转短期颓势。",
+        "sentiment": "neutral"
+      },
+      "fundamental": {
+        "status": "unavailable",
+        "summary": "中国移动 近7日无公告数据",
+        "sentiment": "neutral"
+      },
+      "capital": {
+        "status": "unavailable",
+        "summary": "北向资金数据缺失，无法判断外资态度。主力资金当日净流入445万元，显示小幅资金关注，但净流入金额较小，需结合后续数据验证持续性。",
+        "sentiment": "neutral"
+      },
+      "announcement": {
+        "status": "unavailable",
+        "summary": "无近期公告",
+        "sentiment": "neutral",
+        "key_events": []
+      },
+      "risk_points": [
+        "MA5已下穿MA10和MA20，短期均线空头排列，存在继续下跌风险",
+        "前期放量冲高后快速缩量，资金出逃迹象明显，后续可能继续调整",
+        "若跌破95.65近期低点，可能引发技术性止损盘，加速下行",
+        "北向资金数据不足，无法全面评估资金面",
+        "主力净流入金额较小，可能为短期波动"
+      ],
+      "signal_breakdown": {
+        "hard_score": 0.058,
+        "soft_score": 0.0,
+        "gate_score": 0.5,
+        "dragon_tiger_score": 0.0,
+        "announcement_score": 0.0,
+        "final_score": 0.129,
+        "has_dragon_tiger": false,
+        "has_announcement": false
+      },
+      "dragon_tiger": []
+    },
+    {
+      "code": "600585",
+      "name": "海螺水泥",
+      "overall_sentiment": "hold",
+      "overall_focus": "⚪ 观望",
+      "confidence": 0.59,
+      "hard_score": -0.45,
+      "momentum_20d": -9.93,
+      "momentum_5d": -2.45,
+      "ma_alignment": "bearish",
+      "volume_ratio": 0.53,
+      "pe_ttm": 13.3,
+      "pb": 0.53,
+      "mcap_yi": 1033.0,
+      "technical": {
+        "status": "ok",
+        "summary": "海螺水泥近20个交易日呈持续下跌趋势，股价从21.61元跌至19.5元，跌幅约9%。均线系统呈现典型空头排列，MA5（19.656）< MA10（20.104）< MA20（20.671），且股价持续运行于所有均线下方。成交量在下跌初期放大，随后逐步萎缩，显示市场参与度下降，做多动能不足。近期低点19.26元附近形成短期支撑，但反弹力度微弱，压力位主要集中在MA10（20.1元）和MA20（20.67元）附近。整体技术面偏空，未出现明显止跌信号。",
+        "sentiment": "neutral"
+      },
+      "fundamental": {
+        "status": "unavailable",
+        "summary": "海螺水泥 近7日无公告数据",
+        "sentiment": "neutral"
+      },
+      "capital": {
+        "status": "failed",
+        "summary": "今日北向资金数据缺失，无法进行北向资金分析。主力资金净流入228.0万元，表明有主动买入资金入场，但对北向资金态度未知，需警惕数据不完整带来的判断偏差。",
+        "sentiment": "neutral"
+      },
+      "announcement": {
+        "status": "unavailable",
+        "summary": "无近期公告",
+        "sentiment": "neutral",
+        "key_events": []
+      },
+      "risk_points": [
+        "股价连续创出新低，下跌趋势明确，若跌破19.26元支撑，可能加速下行。",
+        "均线系统发散向下，短期难以形成有效反转，反弹空间受限。",
+        "量能不足，即使出现反弹，持续性存疑，需警惕冲高回落风险。",
+        "北向资金数据暂缺，无法评估外资态度",
+        "主力资金流入规模较小，持续性待观察"
+      ],
+      "signal_breakdown": {
+        "hard_score": -0.45,
+        "soft_score": 0.0,
+        "gate_score": 0.5,
+        "dragon_tiger_score": 0.0,
+        "announcement_score": 0.0,
+        "final_score": -0.125,
+        "has_dragon_tiger": false,
+        "has_announcement": false
+      },
+      "dragon_tiger": []
+    },
+    {
+      "code": "300059",
+      "name": "东方财富",
+      "overall_sentiment": "hold",
+      "overall_focus": "⚪ 观望",
+      "confidence": 0.59,
+      "hard_score": 0.03,
+      "momentum_20d": 0.8,
+      "momentum_5d": 0.75,
+      "ma_alignment": "neutral",
+      "volume_ratio": 1.21,
+      "pe_ttm": 24.2,
+      "pb": 3.31,
+      "mcap_yi": 3169.0,
+      "technical": {
+        "status": "ok",
+        "summary": "东方财富近期股价在20元附近震荡筑底。最新收盘20.05站上MA5(19.814)和MA10(19.973)，但仍低于MA20(20.2405)，均线呈空头排列但短期粘合，有金叉趋势。5月26日成交量放大至4.22亿，显示资金介入意愿增强。下方支撑19.36（5月22日低点），上方压力20.24（MA20）及21.6（前高）。需关注后续量能能否持续，若放量突破MA20则有望开启反弹，否则可能继续区间整理。",
+        "sentiment": "neutral"
+      },
+      "fundamental": {
+        "status": "unavailable",
+        "summary": "东方财富 近7日无公告数据",
+        "sentiment": "neutral"
+      },
+      "capital": {
+        "status": "unavailable",
+        "summary": "北向资金数据缺失，无法判断外资态度；主力净流入7640万元，显示短期资金小幅流入，但数据不完整需谨慎。",
+        "sentiment": "neutral"
+      },
+      "announcement": {
+        "status": "unavailable",
+        "summary": "无近期公告",
+        "sentiment": "neutral",
+        "key_events": []
+      },
+      "risk_points": [
+        "均线仍为空头排列（MA5<MA10<MA20），未形成多头格局前反弹空间受限",
+        "5月21日放量长上影后调整，若后续量能不足可能再次回落",
+        "股价处于前期密集成交区，20元整数关口多空争夺激烈，突破需进一步放量",
+        "北向资金数据缺失，无法判断外资对股价的影响",
+        "仅依据主力资金单日净流入，持续性存疑"
+      ],
+      "signal_breakdown": {
+        "hard_score": 0.032,
+        "soft_score": 0.0,
+        "gate_score": 0.5,
+        "dragon_tiger_score": 0.0,
+        "announcement_score": 0.0,
+        "final_score": 0.116,
+        "has_dragon_tiger": false,
+        "has_announcement": false
+      },
+      "dragon_tiger": []
+    },
+    {
+      "code": "601888",
+      "name": "中国中免",
+      "overall_sentiment": "hold",
+      "overall_focus": "⚪ 观望",
+      "confidence": 0.58,
+      "hard_score": -0.42,
+      "momentum_20d": -14.71,
+      "momentum_5d": -3.14,
+      "ma_alignment": "bearish",
+      "volume_ratio": 1.18,
+      "pe_ttm": 29.4,
+      "pb": 2.03,
+      "mcap_yi": 1175.0,
+      "technical": {
+        "status": "failed",
         "summary": "",
         "sentiment": "neutral"
       },
+      "fundamental": {
+        "status": "unavailable",
+        "summary": "中国中免 近7日无公告数据",
+        "sentiment": "neutral"
+      },
+      "capital": {
+        "status": "failed",
+        "summary": "",
+        "sentiment": "neutral"
+      },
+      "announcement": {
+        "status": "unavailable",
+        "summary": "无近期公告",
+        "sentiment": "neutral",
+        "key_events": []
+      },
+      "risk_points": [
+        "主力资金持续流出可能压制股价",
+        "数据缺失增加判断不确定性"
+      ],
       "signal_breakdown": {
-        "hard_score": -0.5330072830403011,
+        "hard_score": -0.423,
         "soft_score": 0.0,
         "gate_score": 0.5,
-        "final_score": -0.13884142461612042,
-        "final_signal": "hold"
+        "dragon_tiger_score": 0.0,
+        "announcement_score": 0.0,
+        "final_score": -0.112,
+        "has_dragon_tiger": false,
+        "has_announcement": false
       },
-      "momentum_5d": -4.922087558743515,
-      "momentum_20d": -14.042933810375668,
+      "dragon_tiger": []
+    },
+    {
+      "code": "600519",
+      "name": "贵州茅台",
+      "overall_sentiment": "hold",
+      "overall_focus": "⚪ 观望",
+      "confidence": 0.58,
+      "hard_score": -0.42,
+      "momentum_20d": -10.26,
+      "momentum_5d": -3.85,
       "ma_alignment": "bearish",
-      "volume_ratio": 0.8036337752482181,
-      "pe_ttm": 33.94727272727273,
-      "pe_percentile": 33.94727272727273,
-      "pb": 0,
-      "mcap_yi": 0,
-      "announcement": [],
-      "dragon_tiger": [],
-      "confidence": 0.5,
-      "risk_points": []
+      "volume_ratio": 0.94,
+      "pe_ttm": 19.3,
+      "pb": 5.89,
+      "mcap_yi": 15946.0,
+      "technical": {
+        "status": "ok",
+        "summary": "贵州茅台近20个交易日持续下跌，收盘价从1458.49元降至1273.38元，跌幅明显。均线系统呈空头排列（MA5<MA10<MA20），短期趋势偏弱。成交量在下跌过程中有所放大，显示抛压增加。当前价格位于所有均线下方，下方支撑关注1270元附近（近期低点），上方压力参考MA5（约1295元）及MA10（约1314元）。未出现明显止跌信号，但连续下跌后存在超卖可能。",
+        "sentiment": "neutral"
+      },
+      "fundamental": {
+        "status": "unavailable",
+        "summary": "贵州茅台 近7日无公告数据",
+        "sentiment": "neutral"
+      },
+      "capital": {
+        "status": "ok",
+        "summary": "当日北向资金数据缺失，无法分析北向态度。主力资金净流出5704万元，显示机构资金短期离场，需关注后续持续性。",
+        "sentiment": "neutral"
+      },
+      "announcement": {
+        "status": "unavailable",
+        "summary": "无近期公告",
+        "sentiment": "neutral",
+        "key_events": []
+      },
+      "risk_points": [
+        "股价持续下行跌破前低1270元，可能加速下跌。",
+        "均线空头排列压制反弹空间，反弹至均线附近可能遇阻。",
+        "量能未出现萎缩或反转信号，市场情绪偏弱。",
+        "北向资金数据缺失可能影响判断完整性",
+        "主力资金持续流出可能拖累股价"
+      ],
+      "signal_breakdown": {
+        "hard_score": -0.418,
+        "soft_score": 0.0,
+        "gate_score": 0.5,
+        "dragon_tiger_score": 0.0,
+        "announcement_score": 0.0,
+        "final_score": -0.109,
+        "has_dragon_tiger": false,
+        "has_announcement": false
+      },
+      "dragon_tiger": []
+    },
+    {
+      "code": "000661",
+      "name": "长春高新",
+      "overall_sentiment": "hold",
+      "overall_focus": "⚪ 观望",
+      "confidence": 0.58,
+      "hard_score": -0.41,
+      "momentum_20d": -9.18,
+      "momentum_5d": -6.74,
+      "ma_alignment": "bearish",
+      "volume_ratio": 0.93,
+      "pe_ttm": -755.4,
+      "pb": 1.43,
+      "mcap_yi": 317.0,
+      "technical": {
+        "status": "ok",
+        "summary": "长春高新近期持续下跌，均线呈空头排列（MA5<MA10<MA20），价格位于所有均线下方。5月11日放量冲高至90元后连续回调，成交量整体萎缩但下跌过程中偶有放量，显示抛压仍未释放完毕。最新收盘价77.76创阶段新低，短期支撑关注77.3元，突破后可能进一步下探；反弹阻力位在MA5（79.64）和MA10（82.08）附近。市场情绪偏空，需警惕惯性下跌风险。",
+        "sentiment": "neutral"
+      },
+      "fundamental": {
+        "status": "unavailable",
+        "summary": "长春高新 近7日无公告数据",
+        "sentiment": "neutral"
+      },
+      "capital": {
+        "status": "unavailable",
+        "summary": "北向资金数据缺失，无法分析外资态度。主力资金当日净流出913.0万元，显示短期资金面偏空，但需注意单日数据波动性较大，可能受市场情绪或特定事件影响。建议结合多日数据综合判断。",
+        "sentiment": "neutral"
+      },
+      "announcement": {
+        "status": "unavailable",
+        "summary": "无近期公告",
+        "sentiment": "neutral",
+        "key_events": []
+      },
+      "risk_points": [
+        "均线空头压制，反弹空间受限",
+        "近期低点77.3元若有效跌破，可能引发加速下跌",
+        "前期放量冲高后快速回落，套牢盘压力较大",
+        "主力净流出可能反映短期抛压，但单日数据信号有限",
+        "北向数据缺失导致对长线资金判断不足"
+      ],
+      "signal_breakdown": {
+        "hard_score": -0.41,
+        "soft_score": 0.0,
+        "gate_score": 0.5,
+        "dragon_tiger_score": 0.0,
+        "announcement_score": 0.0,
+        "final_score": -0.105,
+        "has_dragon_tiger": false,
+        "has_announcement": false
+      },
+      "dragon_tiger": []
+    },
+    {
+      "code": "300750",
+      "name": "宁德时代",
+      "overall_sentiment": "hold",
+      "overall_focus": "⚪ 观望",
+      "confidence": 0.58,
+      "hard_score": -0.41,
+      "momentum_20d": -8.29,
+      "momentum_5d": -3.69,
+      "ma_alignment": "bearish",
+      "volume_ratio": 1.03,
+      "pe_ttm": 23.6,
+      "pb": 5.7,
+      "mcap_yi": 18622.0,
+      "technical": {
+        "status": "ok",
+        "summary": "股价处于均线下方，均线呈空头排列（MA5<MA10<MA20），且近20日股价从高点468.75持续回落，最新收盘402.5接近前期低点400。成交量在下跌期间整体放大，显示卖压较强，短期弱势明显。支撑位关注400整数关口，压力位依次为MA5（408.58）和MA10（416.27）。",
+        "sentiment": "neutral"
+      },
+      "fundamental": {
+        "status": "unavailable",
+        "summary": "宁德时代 近7日无公告数据",
+        "sentiment": "neutral"
+      },
+      "capital": {
+        "status": "unavailable",
+        "summary": "北向资金数据缺失，无法评估外资态度；仅当日主力净流出1335万元，显示内资短期偏空，但需结合更长周期数据判断趋势。",
+        "sentiment": "neutral"
+      },
+      "announcement": {
+        "status": "unavailable",
+        "summary": "无近期公告",
+        "sentiment": "neutral",
+        "key_events": []
+      },
+      "risk_points": [
+        "股价持续创新低，未见止跌信号",
+        "量能维持高位，空头动能强",
+        "反弹面临多条均线压制，上行阻力大",
+        "北向资金数据缺失，无法判断外资动向",
+        "单日主力流出幅度较小，需观察持续性"
+      ],
+      "signal_breakdown": {
+        "hard_score": -0.408,
+        "soft_score": 0.0,
+        "gate_score": 0.5,
+        "dragon_tiger_score": 0.0,
+        "announcement_score": 0.0,
+        "final_score": -0.104,
+        "has_dragon_tiger": false,
+        "has_announcement": false
+      },
+      "dragon_tiger": []
+    },
+    {
+      "code": "600028",
+      "name": "中国石化",
+      "overall_sentiment": "hold",
+      "overall_focus": "⚪ 观望",
+      "confidence": 0.58,
+      "hard_score": -0.39,
+      "momentum_20d": -10.64,
+      "momentum_5d": -5.07,
+      "ma_alignment": "bearish",
+      "volume_ratio": 1.09,
+      "pe_ttm": 16.6,
+      "pb": 0.71,
+      "mcap_yi": 5889.0,
+      "technical": {
+        "status": "ok",
+        "summary": "近20个交易日股价持续下跌，从5.43元降至4.87元，跌幅约10.3%。短期均线（MA5=4.976、MA10=5.060）已下穿中长期均线（MA20=5.188），形成空头排列，表明下跌趋势明确。成交量在下跌初期放大，随后保持中等水平，未出现明显缩量止跌信号。当前价格临近近期低点4.85元，该位置为重要支撑，若跌破则可能进一步下探。上方压力位集中在MA5（4.98元）和MA10（5.06元）附近，反弹空间有限。整体技术面偏弱，需等待量价企稳信号。",
+        "sentiment": "neutral"
+      },
+      "fundamental": {
+        "status": "unavailable",
+        "summary": "中国石化 近7日无公告数据",
+        "sentiment": "neutral"
+      },
+      "capital": {
+        "status": "failed",
+        "summary": "当日中国石化北向资金数据缺失，无法评估外资态度。主力资金净流出1608万元，显示主力短期倾向于减仓或对股价形成一定压制。整体资金面偏弱，需关注后续资金动向及市场情绪变化。",
+        "sentiment": "neutral"
+      },
+      "announcement": {
+        "status": "unavailable",
+        "summary": "无近期公告",
+        "sentiment": "neutral",
+        "key_events": []
+      },
+      "risk_points": [
+        "下跌过程中成交量未明显萎缩，抛压持续",
+        "均线发散向下，短期难以形成有效反弹",
+        "若跌破4.85元支撑，可能加速下行",
+        "主力资金持续流出可能拖累股价",
+        "北向资金缺席下，市场情绪或更依赖内资"
+      ],
+      "signal_breakdown": {
+        "hard_score": -0.388,
+        "soft_score": 0.0,
+        "gate_score": 0.5,
+        "dragon_tiger_score": 0.0,
+        "announcement_score": 0.0,
+        "final_score": -0.094,
+        "has_dragon_tiger": false,
+        "has_announcement": false
+      },
+      "dragon_tiger": []
+    },
+    {
+      "code": "601012",
+      "name": "隆基绿能",
+      "overall_sentiment": "hold",
+      "overall_focus": "⚪ 观望",
+      "confidence": 0.58,
+      "hard_score": -0.38,
+      "momentum_20d": -16.71,
+      "momentum_5d": -4.2,
+      "ma_alignment": "bearish",
+      "volume_ratio": 0.96,
+      "pe_ttm": -16.0,
+      "pb": 2.19,
+      "mcap_yi": 1106.0,
+      "technical": {
+        "status": "failed",
+        "summary": "股价处于空头趋势，均线呈空头排列（MA5<MA10<MA20），最新收盘价14.60元低于所有均线。近期量能放大但价格持续下跌，5月26日最低触及14.39元，创阶段新低。支撑位关注14.39元（近期低点），压力位看14.93元（MA5）及15.37元（MA10）。无明显止跌信号，需观察能否缩量企稳。",
+        "sentiment": "neutral"
+      },
+      "fundamental": {
+        "status": "unavailable",
+        "summary": "隆基绿能 近7日无公告数据",
+        "sentiment": "neutral"
+      },
+      "capital": {
+        "status": "unavailable",
+        "summary": "北向资金数据缺失，无法评估外资态度。主力资金净流出3588万元，显示内资短期偏空。由于北向数据缺失，整体资金面解读受限，需结合更多数据判断。",
+        "sentiment": "neutral"
+      },
+      "announcement": {
+        "status": "unavailable",
+        "summary": "无近期公告",
+        "sentiment": "neutral",
+        "key_events": []
+      },
+      "risk_points": [
+        "下跌趋势延续，若跌破14.39元可能加速下探",
+        "量能放大却未能止跌，显示抛压仍较重",
+        "北向资金数据不可用，存在信息盲区",
+        "主力连续流出可能加剧股价下行压力"
+      ],
+      "signal_breakdown": {
+        "hard_score": -0.383,
+        "soft_score": 0.0,
+        "gate_score": 0.5,
+        "dragon_tiger_score": 0.0,
+        "announcement_score": 0.0,
+        "final_score": -0.092,
+        "has_dragon_tiger": false,
+        "has_announcement": false
+      },
+      "dragon_tiger": []
+    },
+    {
+      "code": "601688",
+      "name": "华泰证券",
+      "overall_sentiment": "hold",
+      "overall_focus": "⚪ 观望",
+      "confidence": 0.58,
+      "hard_score": -0.02,
+      "momentum_20d": -2.04,
+      "momentum_5d": -0.05,
+      "ma_alignment": "neutral",
+      "volume_ratio": 0.94,
+      "pe_ttm": 9.6,
+      "pb": 0.95,
+      "mcap_yi": 1687.0,
+      "technical": {
+        "status": "ok",
+        "summary": "华泰证券近期股价在18.1-19.9区间震荡，当前收盘18.69元，低于MA20（18.94）和MA10（18.67），但高于MA5（18.50），呈空头排列。5月12日放量冲高至19.92后回落，随后缩量调整，5月21日再冲高19.44未果，显示上方压力较大。量能方面，上涨日放量、下跌日缩量，但整体交投活跃。支撑位关注18.12（5月19日低点），压力位19.5附近。需观察均线能否金叉及量能配合。",
+        "sentiment": "neutral"
+      },
+      "fundamental": {
+        "status": "unavailable",
+        "summary": "华泰证券 近7日无公告数据",
+        "sentiment": "neutral"
+      },
+      "capital": {
+        "status": "unavailable",
+        "summary": "北向资金数据缺失，无法分析北向态度。当日主力净流入2906万元，显示主力资金小幅流入，但缺乏北向数据综合判断，资金态度不完整。",
+        "sentiment": "neutral"
+      },
+      "announcement": {
+        "status": "unavailable",
+        "summary": "无近期公告",
+        "sentiment": "neutral",
+        "key_events": []
+      },
+      "risk_points": [
+        "均线空头排列，若无法突破MA10和MA20，可能继续下探。",
+        "5月21日冲高回落收长上影线，表明多头信心不足。",
+        "成交额虽高但价格未有效突破，存在滞涨风险。",
+        "北向资金数据缺失，无法评估外资动向，市场情绪可能偏弱。"
+      ],
+      "signal_breakdown": {
+        "hard_score": -0.018,
+        "soft_score": 0.0,
+        "gate_score": 0.5,
+        "dragon_tiger_score": 0.0,
+        "announcement_score": 0.0,
+        "final_score": 0.091,
+        "has_dragon_tiger": false,
+        "has_announcement": false
+      },
+      "dragon_tiger": []
     },
     {
       "code": "600547",
       "name": "山东黄金",
       "overall_sentiment": "hold",
       "overall_focus": "⚪ 观望",
+      "confidence": 0.58,
+      "hard_score": -0.02,
+      "momentum_20d": -12.22,
+      "momentum_5d": 1.98,
+      "ma_alignment": "neutral",
+      "volume_ratio": 1.45,
+      "pe_ttm": 28.1,
+      "pb": 4.53,
+      "mcap_yi": 1450.0,
       "technical": {
         "status": "ok",
-        "summary": "",
-        "sentiment": null
+        "summary": "山东黄金（600547）近20个交易日延续下跌趋势，股价从35.84元持续下滑至5月26日低点29.58元后出现放量反弹，最终收于31.46元。均线系统呈空头排列（MA5=30.324 < MA10=31.397 < MA20=33.418），显示中期趋势偏弱。最后一根日线成交量显著放大（8135万手），拉出长下影阳线，表明下方存在买盘承接，但能否扭转趋势需观察后续走势。",
+        "sentiment": "neutral"
       },
       "fundamental": {
-        "status": "ok",
-        "summary": "",
+        "status": "unavailable",
+        "summary": "山东黄金 近7日无公告数据",
         "sentiment": "neutral"
       },
       "capital": {
-        "status": "ok",
-        "summary": "",
+        "status": "unavailable",
+        "summary": "北向资金数据缺失，无法分析北向资金态度。主力资金（大单、特大单）净流入11638.0万元，显示短期主力资金积极买入。该股票为黄金板块龙头，资金动向需结合黄金价格及市场避险情绪综合判断。",
         "sentiment": "neutral"
       },
+      "announcement": {
+        "status": "unavailable",
+        "summary": "无近期公告",
+        "sentiment": "neutral",
+        "key_events": []
+      },
+      "risk_points": [
+        "均线系统空头排列，反弹可能受MA10压制后继续探底",
+        "5月26日成交量虽大但未能突破前一日高点（31.18），追涨需谨慎",
+        "整体趋势向下，反弹若无法持续可能形成下跌中继",
+        "北向资金数据缺失，无法判断外资动向",
+        "单日资金数据波动较大，需关注持续性"
+      ],
       "signal_breakdown": {
-        "hard_score": -0.5229021728924875,
+        "hard_score": -0.02,
         "soft_score": 0.0,
         "gate_score": 0.5,
-        "final_score": -0.13915391575699498,
-        "final_signal": "hold"
+        "dragon_tiger_score": 0.0,
+        "announcement_score": 0.0,
+        "final_score": 0.09,
+        "has_dragon_tiger": false,
+        "has_announcement": false
       },
-      "momentum_5d": -3.8387715930902178,
-      "momentum_20d": -19.3020134228188,
-      "ma_alignment": "bearish",
-      "volume_ratio": 0.8463117698625344,
-      "pe_ttm": 40.77090909090909,
-      "pe_percentile": 40.77090909090909,
-      "pb": 0,
-      "mcap_yi": 0,
-      "announcement": [],
-      "dragon_tiger": [],
-      "confidence": 0.5,
-      "risk_points": []
+      "dragon_tiger": []
     },
     {
-      "code": "600760",
-      "name": "中航沈飞",
+      "code": "601288",
+      "name": "农业银行",
       "overall_sentiment": "hold",
       "overall_focus": "⚪ 观望",
+      "confidence": 0.58,
+      "hard_score": -0.38,
+      "momentum_20d": -8.68,
+      "momentum_5d": -3.02,
+      "ma_alignment": "bearish",
+      "volume_ratio": 0.79,
+      "pe_ttm": 7.6,
+      "pb": 0.81,
+      "mcap_yi": 22469.0,
       "technical": {
         "status": "ok",
-        "summary": "",
-        "sentiment": null
+        "summary": "农业银行近期呈下跌趋势，股价从7.04元回落至6.42元，短期均线空头排列（MA5<MA10<MA20），表明空方主导。成交量在下跌过程中呈现放量，5月14日出现反弹但随后继续走弱，量能未持续配合。当前价格处于近期低位，支撑位关注6.37元（5月21日低点），压力位参考MA10（6.56元）及MA20（6.73元）。趋势偏空，需关注后续能否放量站稳均线。",
+        "sentiment": "neutral"
       },
       "fundamental": {
-        "status": "ok",
-        "summary": "",
+        "status": "unavailable",
+        "summary": "农业银行 近7日无公告数据",
         "sentiment": "neutral"
       },
       "capital": {
-        "status": "ok",
-        "summary": "",
+        "status": "unavailable",
+        "summary": "由于北向资金数据缺失，无法评估北向资金态度。主力资金净流出478万元（1日数据），但单日资金波动参考价值有限，暂不构成明确趋势信号。",
         "sentiment": "neutral"
       },
+      "announcement": {
+        "status": "unavailable",
+        "summary": "无近期公告",
+        "sentiment": "neutral",
+        "key_events": []
+      },
+      "risk_points": [
+        "股价连续走弱，若跌破6.37元支撑可能加速下行。",
+        "均线系统压制明显，MA10（6.56元）构成短期强阻力。",
+        "近期成交量未能持续缩减，空头动能尚未充分释放。",
+        "单日主力流出可能为短期调整，但若连续流出需警惕压制",
+        "北向数据缺失导致资金面分析不完整，存在信息不对称风险"
+      ],
       "signal_breakdown": {
-        "hard_score": -0.5965176534196986,
+        "hard_score": -0.376,
         "soft_score": 0.0,
         "gate_score": 0.5,
-        "final_score": -0.16156597056787952,
-        "final_signal": "hold"
+        "dragon_tiger_score": 0.0,
+        "announcement_score": 0.0,
+        "final_score": -0.088,
+        "has_dragon_tiger": false,
+        "has_announcement": false
       },
-      "momentum_5d": -5.168346558009873,
-      "momentum_20d": -11.204819277108435,
-      "ma_alignment": "bearish",
-      "volume_ratio": 1.1299553102676714,
-      "pe_ttm": 59.9,
-      "pe_percentile": 59.9,
-      "pb": 0,
-      "mcap_yi": 0,
-      "announcement": [],
-      "dragon_tiger": [],
-      "confidence": 0.5,
-      "risk_points": []
+      "dragon_tiger": []
     },
     {
-      "code": "600276",
-      "name": "恒瑞医药",
+      "code": "600048",
+      "name": "保利发展",
       "overall_sentiment": "hold",
       "overall_focus": "⚪ 观望",
+      "confidence": 0.57,
+      "hard_score": -0.36,
+      "momentum_20d": -0.34,
+      "momentum_5d": -5.19,
+      "ma_alignment": "bearish",
+      "volume_ratio": 0.75,
+      "pe_ttm": -384.2,
+      "pb": 0.36,
+      "mcap_yi": 700.0,
       "technical": {
         "status": "ok",
-        "summary": "",
-        "sentiment": null
+        "summary": "该股近20个交易日呈现冲高回落走势，股价自5.74元上涨至6.86元高点后连续回调至5.85元。当前MA5(5.898) < MA10(6.075) < MA20(6.153)，均线已转为空头排列，短期趋势转弱。成交量在上涨阶段显著放大，回调期间逐步萎缩，显示资金退潮。近期价格持续运行于MA10下方，反弹受阻于MA10附近，需警惕进一步下探支撑。",
+        "sentiment": "neutral"
       },
       "fundamental": {
-        "status": "ok",
+        "status": "unavailable",
+        "summary": "保利发展 近7日无公告数据",
+        "sentiment": "neutral"
+      },
+      "capital": {
+        "status": "unavailable",
+        "summary": "北向资金数据缺失，仅依据主力资金数据（-213.0万元）分析。当日主力净流出213万元，显示短期抛压，但规模较小，态度中性偏空。需关注后续资金动向及北向资金恢复后的态度变化。",
+        "sentiment": "neutral"
+      },
+      "announcement": {
+        "status": "unavailable",
+        "summary": "无近期公告",
+        "sentiment": "neutral",
+        "key_events": []
+      },
+      "risk_points": [
+        "均线空头排列确认，若持续不能站上MA10，可能加速下行。",
+        "近期高点6.86元形成明显头部，回调幅度已超10%，市场情绪偏谨慎。",
+        "成交量持续萎缩，若后续无增量资金介入，反弹力度有限。",
+        "主力资金净流出可能反映短期看空情绪",
+        "数据不完整，分析结论可靠性降低"
+      ],
+      "signal_breakdown": {
+        "hard_score": -0.359,
+        "soft_score": 0.0,
+        "gate_score": 0.5,
+        "dragon_tiger_score": 0.0,
+        "announcement_score": 0.0,
+        "final_score": -0.08,
+        "has_dragon_tiger": false,
+        "has_announcement": false
+      },
+      "dragon_tiger": []
+    },
+    {
+      "code": "600016",
+      "name": "民生银行",
+      "overall_sentiment": "hold",
+      "overall_focus": "⚪ 观望",
+      "confidence": 0.57,
+      "hard_score": -0.36,
+      "momentum_20d": -5.88,
+      "momentum_5d": -1.68,
+      "ma_alignment": "bearish",
+      "volume_ratio": 0.75,
+      "pe_ttm": 5.2,
+      "pb": 0.27,
+      "mcap_yi": 1541.0,
+      "technical": {
+        "status": "failed",
         "summary": "",
+        "sentiment": "neutral"
+      },
+      "fundamental": {
+        "status": "unavailable",
+        "summary": "民生银行 近7日无公告数据",
+        "sentiment": "neutral"
+      },
+      "capital": {
+        "status": "unavailable",
+        "summary": "北向资金数据缺失，无法分析外资态度。主力净流入为0，显示当日无显著资金变动。因数据不完整，无法提供有效分析。",
+        "sentiment": "neutral"
+      },
+      "announcement": {
+        "status": "unavailable",
+        "summary": "无近期公告",
+        "sentiment": "neutral",
+        "key_events": []
+      },
+      "risk_points": [
+        "数据不完整可能导致分析偏差",
+        "缺乏外资动向参考，判断资金面需谨慎"
+      ],
+      "signal_breakdown": {
+        "hard_score": -0.359,
+        "soft_score": 0.0,
+        "gate_score": 0.5,
+        "dragon_tiger_score": 0.0,
+        "announcement_score": 0.0,
+        "final_score": -0.08,
+        "has_dragon_tiger": false,
+        "has_announcement": false
+      },
+      "dragon_tiger": []
+    },
+    {
+      "code": "600104",
+      "name": "上汽集团",
+      "overall_sentiment": "hold",
+      "overall_focus": "⚪ 观望",
+      "confidence": 0.57,
+      "hard_score": -0.36,
+      "momentum_20d": -11.74,
+      "momentum_5d": -3.01,
+      "ma_alignment": "bearish",
+      "volume_ratio": 0.91,
+      "pe_ttm": 13.9,
+      "pb": 0.47,
+      "mcap_yi": 1409.0,
+      "technical": {
+        "status": "ok",
+        "summary": "上汽集团近期持续下跌，自4月30日高点13.97回落至5月26日收盘12.26，累计跌幅约12%。当前股价位于MA5（12.37）、MA10（12.65）和MA20（13.14）下方，均线呈空头排列，趋势偏弱。成交量在下跌过程中有所放大，表明抛压较重。近期低点12.18（5月26日盘中）形成短期支撑，若跌破则可能继续探底；上方MA5和MA10构成压力。整体技术面空头占优，需关注能否出现放量止跌信号。",
+        "sentiment": "neutral"
+      },
+      "fundamental": {
+        "status": "unavailable",
+        "summary": "上汽集团 近7日无公告数据",
+        "sentiment": "neutral"
+      },
+      "capital": {
+        "status": "unavailable",
+        "summary": "北向资金数据缺失（null），无法分析北向态度。主力净流入为-250.0万元，表明当日主力资金净流出250万元。整体资金面显示机构偏空，但北向缺失导致分析不完整，需关注后续数据补充。",
+        "sentiment": "neutral"
+      },
+      "announcement": {
+        "status": "unavailable",
+        "summary": "无近期公告",
+        "sentiment": "neutral",
+        "key_events": []
+      },
+      "risk_points": [
+        "若继续跌破12.18支撑，可能加速下跌。",
+        "均线压制（MA5=12.37，MA10=12.65）反弹空间受限。",
+        "下跌放量暗示资金离场，短期难以扭转弱势。",
+        "主力资金流出可能压制股价短期表现。",
+        "北向态度不明，缺乏外部资金指引，增加判断不确定性。"
+      ],
+      "signal_breakdown": {
+        "hard_score": -0.356,
+        "soft_score": 0.0,
+        "gate_score": 0.5,
+        "dragon_tiger_score": 0.0,
+        "announcement_score": 0.0,
+        "final_score": -0.078,
+        "has_dragon_tiger": false,
+        "has_announcement": false
+      },
+      "dragon_tiger": []
+    },
+    {
+      "code": "000538",
+      "name": "云南白药",
+      "overall_sentiment": "hold",
+      "overall_focus": "⚪ 观望",
+      "confidence": 0.57,
+      "hard_score": -0.35,
+      "momentum_20d": -10.0,
+      "momentum_5d": -3.99,
+      "ma_alignment": "bearish",
+      "volume_ratio": 1.1,
+      "pe_ttm": 16.6,
+      "pb": 2.22,
+      "mcap_yi": 872.0,
+      "technical": {
+        "status": "ok",
+        "summary": "云南白药近期股价持续下跌，从54元以上跌至48.85元，跌幅超10%。均线系统呈空头排列（MA5<MA10<MA20），短期趋势偏弱。成交量在下跌过程中有所放大，但未出现恐慌性抛售，5月26日放量下跌表明抛压仍存。当前价格跌破所有均线，MA5（49.81）构成第一压力位，下方支撑关注近期低点48.66。整体处于下跌通道，需等待量缩价稳信号。",
+        "sentiment": "neutral"
+      },
+      "fundamental": {
+        "status": "unavailable",
+        "summary": "云南白药 近7日无公告数据",
+        "sentiment": "neutral"
+      },
+      "capital": {
+        "status": "unavailable",
+        "summary": "北向资金数据缺失，仅提供主力资金数据。当日主力净流出554万元，显示短期资金态度偏空，但流出规模较小，需结合后续资金流向及基本面进一步判断。由于北向数据不可用，无法全面评估外资动向。",
+        "sentiment": "neutral"
+      },
+      "announcement": {
+        "status": "unavailable",
+        "summary": "无近期公告",
+        "sentiment": "neutral",
+        "key_events": []
+      },
+      "risk_points": [
+        "股价受短期均线压制，反弹可能遭遇MA5（49.81）和MA10（50.48）阻力",
+        "近期低点48.66为关键支撑，若跌破可能加速下行",
+        "成交量未明显萎缩，下跌风险尚未完全释放，需警惕持续调整",
+        "主力资金流出可能反映短期谨慎情绪",
+        "数据不完整，可能影响趋势判断准确性"
+      ],
+      "signal_breakdown": {
+        "hard_score": -0.35,
+        "soft_score": 0.0,
+        "gate_score": 0.5,
+        "dragon_tiger_score": 0.0,
+        "announcement_score": 0.0,
+        "final_score": -0.075,
+        "has_dragon_tiger": false,
+        "has_announcement": false
+      },
+      "dragon_tiger": []
+    },
+    {
+      "code": "601318",
+      "name": "中国平安",
+      "overall_sentiment": "hold",
+      "overall_focus": "⚪ 观望",
+      "confidence": 0.57,
+      "hard_score": -0.06,
+      "momentum_20d": -6.24,
+      "momentum_5d": -0.39,
+      "ma_alignment": "neutral",
+      "volume_ratio": 1.01,
+      "pe_ttm": 7.4,
+      "pb": 0.97,
+      "mcap_yi": 9827.0,
+      "technical": {
+        "status": "failed",
+        "summary": "中国平安近期持续下跌，从59.37元高点回落至54.27元，均线呈现空头排列（MA20>MA10>MA5>现价），表明短期趋势偏弱。成交量在下跌过程中放大，说明空方动能较强；最近两日缩量止跌，但反弹力度有限。当前价格位于MA5附近，上方MA10（约54.99元）和MA20（约57.03元）构成压力，下方支撑关注前期低点53.47元。量能未能有效放大，短期可能继续震荡筑底。",
+        "sentiment": "neutral"
+      },
+      "fundamental": {
+        "status": "unavailable",
+        "summary": "中国平安 近7日无公告数据",
+        "sentiment": "neutral"
+      },
+      "capital": {
+        "status": "unavailable",
+        "summary": "北向资金数据缺失，无法评估外资态度。主力资金净流入456万元，显示短期看多迹象。但单日数据不足以判断趋势，需结合更多维度分析。",
+        "sentiment": "neutral"
+      },
+      "announcement": {
+        "status": "unavailable",
+        "summary": "无近期公告",
+        "sentiment": "neutral",
+        "key_events": []
+      },
+      "risk_points": [
+        "股价处于下降通道，均线压制明显，反弹空间受限于MA10和MA20",
+        "成交量尚未有效放大，资金入场意愿不强，反弹持续性存疑",
+        "前期高点59.37元附近压力较大，需较长时间消化套牢盘",
+        "北向资金数据缺失可能导致评估不完整",
+        "单日主力净流入不足以确认趋势，需警惕资金转向"
+      ],
+      "signal_breakdown": {
+        "hard_score": -0.062,
+        "soft_score": 0.0,
+        "gate_score": 0.5,
+        "dragon_tiger_score": 0.0,
+        "announcement_score": 0.0,
+        "final_score": 0.069,
+        "has_dragon_tiger": false,
+        "has_announcement": false
+      },
+      "dragon_tiger": []
+    },
+    {
+      "code": "601668",
+      "name": "中国建筑",
+      "overall_sentiment": "hold",
+      "overall_focus": "⚪ 观望",
+      "confidence": 0.56,
+      "hard_score": -0.32,
+      "momentum_20d": -1.86,
+      "momentum_5d": -2.66,
+      "ma_alignment": "bearish",
+      "volume_ratio": 0.66,
+      "pe_ttm": 5.2,
+      "pb": 0.4,
+      "mcap_yi": 1967.0,
+      "technical": {
+        "status": "failed",
+        "summary": "近20个交易日股价从4.84震荡下跌至4.76，短期均线空头排列，MA5、MA10、MA20逐次降低，趋势偏弱。5月11日曾放量冲高至5.0后回落，后续量能萎缩，显示多头动能不足。近期支撑位关注4.75，若跌破可能进一步下探；上方压力集中在MA10(4.857)和MA20(4.8795)。整体量价关系偏空，需警惕继续回调风险。",
+        "sentiment": "neutral"
+      },
+      "fundamental": {
+        "status": "unavailable",
+        "summary": "中国建筑 近7日无公告数据",
+        "sentiment": "neutral"
+      },
+      "capital": {
+        "status": "unavailable",
+        "summary": "北向资金数据缺失（null），仅提供主力资金数据。当日主力净流入为-131.0，显示明显净流出，表明机构资金态度偏空。由于北向数据缺失，无法全面评估外资动向，分析需谨慎。",
+        "sentiment": "neutral"
+      },
+      "announcement": {
+        "status": "unavailable",
+        "summary": "无近期公告",
+        "sentiment": "neutral",
+        "key_events": []
+      },
+      "risk_points": [
+        "若跌破4.75支撑，可能加速下跌",
+        "MA20(4.8795)形成反压，反弹空间有限",
+        "近期高点5.0附近套牢盘较重，上行阻力较大",
+        "主力资金大幅流出可能反映机构短期看空情绪",
+        "北向数据缺失导致内外资对比分析无法进行"
+      ],
+      "signal_breakdown": {
+        "hard_score": -0.319,
+        "soft_score": 0.0,
+        "gate_score": 0.5,
+        "dragon_tiger_score": 0.0,
+        "announcement_score": 0.0,
+        "final_score": -0.059,
+        "has_dragon_tiger": false,
+        "has_announcement": false
+      },
+      "dragon_tiger": []
+    },
+    {
+      "code": "000651",
+      "name": "格力电器",
+      "overall_sentiment": "hold",
+      "overall_focus": "⚪ 观望",
+      "confidence": 0.56,
+      "hard_score": -0.09,
+      "momentum_20d": 5.19,
+      "momentum_5d": -1.72,
+      "ma_alignment": "neutral",
+      "volume_ratio": 0.62,
+      "pe_ttm": 7.5,
+      "pb": 1.43,
+      "mcap_yi": 2178.0,
+      "technical": {
+        "status": "ok",
+        "summary": "格力电器近期走势呈现冲高回落，4月29日放量冲至40.88高点后持续下跌，成交量萎缩。当前股价38.88元，低于MA5(38.924)、MA10(39.469)和MA20(39.441)，均线呈空头排列，短期弱势明显。近期在38.4-39.5区间窄幅震荡，下方支撑关注38.4（前低），上方压力看40元附近。量能较前期明显缩小，多空双方趋于谨慎，短线方向不明。",
+        "sentiment": "neutral"
+      },
+      "fundamental": {
+        "status": "unavailable",
+        "summary": "格力电器 近7日无公告数据",
+        "sentiment": "neutral"
+      },
+      "capital": {
+        "status": "unavailable",
+        "summary": "今日格力电器主力净流入843万元，显示主力资金小幅流入。但北向资金数据缺失，无法判断外资态度。由于缺少北向数据，整体资金面分析受限。",
+        "sentiment": "neutral"
+      },
+      "announcement": {
+        "status": "unavailable",
+        "summary": "无近期公告",
+        "sentiment": "neutral",
+        "key_events": []
+      },
+      "risk_points": [
+        "破位风险：若跌破38.4低点，可能加速下行至前期36.7附近",
+        "均线压制：MA10与MA20在39.4-39.5构成反压，反弹若不能放量突破则易再回落",
+        "缺乏催化：当前无明显利多驱动，市场情绪偏冷，需警惕阴跌",
+        "北向资金数据缺失，无法全面评估资金面",
+        "单一主力数据不足以判断趋势，需结合后续数据观察"
+      ],
+      "signal_breakdown": {
+        "hard_score": -0.087,
+        "soft_score": 0.0,
+        "gate_score": 0.5,
+        "dragon_tiger_score": 0.0,
+        "announcement_score": 0.0,
+        "final_score": 0.056,
+        "has_dragon_tiger": false,
+        "has_announcement": false
+      },
+      "dragon_tiger": []
+    },
+    {
+      "code": "000001",
+      "name": "平安银行",
+      "overall_sentiment": "hold",
+      "overall_focus": "⚪ 观望",
+      "confidence": 0.56,
+      "hard_score": -0.09,
+      "momentum_20d": -1.91,
+      "momentum_5d": -0.64,
+      "ma_alignment": "neutral",
+      "volume_ratio": 0.76,
+      "pe_ttm": 4.9,
+      "pb": 0.45,
+      "mcap_yi": 2094.0,
+      "technical": {
+        "status": "ok",
+        "summary": "近20个交易日股价从11.0元震荡下跌至10.79元，跌幅约1.9%。均线系统呈空头排列（MA5<MA10<MA20），短期趋势偏弱。成交量在5月21日放量下跌后逐步萎缩，显示市场参与度下降。近期低点10.64元形成短期支撑，上方11.0元附近为压力位。若后续无法放量突破均线压制，可能继续探底。",
+        "sentiment": "neutral"
+      },
+      "fundamental": {
+        "status": "unavailable",
+        "summary": "平安银行 近7日无公告数据",
+        "sentiment": "neutral"
+      },
+      "capital": {
+        "status": "unavailable",
+        "summary": "北向资金数据缺失，无法评估外资态度；主力资金净流入928万元，金额较小，显示短期资金偏中性，未出现明显异动。",
+        "sentiment": "neutral"
+      },
+      "announcement": {
+        "status": "unavailable",
+        "summary": "无近期公告",
+        "sentiment": "neutral",
+        "key_events": []
+      },
+      "risk_points": [
+        "股价持续运行于所有均线下方，短期反弹空间受限",
+        "若跌破10.64元前低，可能加速下跌",
+        "市场情绪低迷，需警惕流动性风险",
+        "北向资金数据缺失，无法获得外资的完整态度",
+        "主力净流入金额较小，可能不足以驱动股价趋势"
+      ],
+      "signal_breakdown": {
+        "hard_score": -0.094,
+        "soft_score": 0.0,
+        "gate_score": 0.5,
+        "dragon_tiger_score": 0.0,
+        "announcement_score": 0.0,
+        "final_score": 0.053,
+        "has_dragon_tiger": false,
+        "has_announcement": false
+      },
+      "dragon_tiger": []
+    },
+    {
+      "code": "600887",
+      "name": "伊利股份",
+      "overall_sentiment": "hold",
+      "overall_focus": "⚪ 观望",
+      "confidence": 0.56,
+      "hard_score": -0.1,
+      "momentum_20d": 5.18,
+      "momentum_5d": -2.39,
+      "ma_alignment": "neutral",
+      "volume_ratio": 0.68,
+      "pe_ttm": 13.9,
+      "pb": 2.82,
+      "mcap_yi": 1681.0,
+      "technical": {
+        "status": "ok",
+        "summary": "近20个交易日股价先升后降，4月30日触及27.99高点后回落，近期持续走弱。当前MA5（26.59）位于MA10（27.07）和MA20（26.97）下方，呈空头排列迹象，短期均线已死叉。成交量在4月30日放巨量后萎缩，显示上攻动能不足。近期低点26.19（5月22日）形成支撑，上方MA10和27.0整数关口构成压力。整体趋势偏弱，需关注能否放量突破均线压制。",
+        "sentiment": "neutral"
+      },
+      "fundamental": {
+        "status": "unavailable",
+        "summary": "伊利股份 近7日无公告数据",
         "sentiment": "neutral"
       },
       "capital": {
         "status": "ok",
+        "summary": "当日主力资金净流入1498.0万元，显示短期资金关注。北向资金数据缺失，无法判断外资态度。主力小幅流入但成交量未提供，需结合价格走势判断。",
+        "sentiment": "neutral"
+      },
+      "announcement": {
+        "status": "unavailable",
+        "summary": "无近期公告",
+        "sentiment": "neutral",
+        "key_events": []
+      },
+      "risk_points": [
+        "死叉确认：若股价持续低于MA5，可能加速下跌",
+        "压力未破：26.86（近期反弹高点）及27.07（MA10）形成阻力区",
+        "趋势转弱：连续3日收盘低于MA20，中期趋势偏空",
+        "主力流入金额不大，持续性存疑",
+        "北向资金缺失，信息不完整影响判断",
+        "未提供成交量数据，资金推动力待验证"
+      ],
+      "signal_breakdown": {
+        "hard_score": -0.095,
+        "soft_score": 0.0,
+        "gate_score": 0.5,
+        "dragon_tiger_score": 0.0,
+        "announcement_score": 0.0,
+        "final_score": 0.052,
+        "has_dragon_tiger": false,
+        "has_announcement": false
+      },
+      "dragon_tiger": []
+    },
+    {
+      "code": "600050",
+      "name": "中国联通",
+      "overall_sentiment": "hold",
+      "overall_focus": "⚪ 观望",
+      "confidence": 0.56,
+      "hard_score": -0.3,
+      "momentum_20d": -1.11,
+      "momentum_5d": -10.1,
+      "ma_alignment": "neutral",
+      "volume_ratio": 0.59,
+      "pe_ttm": 16.1,
+      "pb": 0.82,
+      "mcap_yi": 1391.0,
+      "technical": {
+        "status": "ok",
+        "summary": "股价处于短期、中期均线下方，均线呈空头排列（MA5=4.532 < MA20=4.602 < MA10=4.665），趋势偏弱。5月18日冲高5.0后连续回调，成交量在下跌过程中先放大后萎缩，显示抛压减轻但买盘不足。近期在4.42-4.48区间窄幅震荡，支撑位参考前低4.44附近，压力位关注4.55-4.60区域。MACD、KDJ等指标因数据缺失无法进一步分析。",
+        "sentiment": "neutral"
+      },
+      "fundamental": {
+        "status": "unavailable",
+        "summary": "中国联通 近7日无公告数据",
+        "sentiment": "neutral"
+      },
+      "capital": {
+        "status": "unavailable",
+        "summary": "北向资金数据缺失，无法评估外资态度。主力资金当日净流出约1.77亿元，显示内资机构短期偏空。仅根据现有数据，市场资金参与度下降，需关注后续资金动向。",
+        "sentiment": "neutral"
+      },
+      "announcement": {
+        "status": "unavailable",
+        "summary": "无近期公告",
+        "sentiment": "neutral",
+        "key_events": []
+      },
+      "risk_points": [
+        "均线空头排列且股价远离MA5，技术上存在超跌反弹可能，但反弹高度受制于均线压制",
+        "近期量能持续萎缩，若反弹无量配合，可能仅是弱势震荡",
+        "上方压力位密集（4.55-4.60区域），突破需放量，否则易冲高回落",
+        "主力资金持续流出可能引发股价下跌",
+        "数据不完整增加分析不确定性"
+      ],
+      "signal_breakdown": {
+        "hard_score": -0.302,
+        "soft_score": 0.0,
+        "gate_score": 0.5,
+        "dragon_tiger_score": 0.0,
+        "announcement_score": 0.0,
+        "final_score": -0.051,
+        "has_dragon_tiger": false,
+        "has_announcement": false
+      },
+      "dragon_tiger": []
+    },
+    {
+      "code": "601601",
+      "name": "中国太保",
+      "overall_sentiment": "hold",
+      "overall_focus": "⚪ 观望",
+      "confidence": 0.56,
+      "hard_score": -0.1,
+      "momentum_20d": -10.12,
+      "momentum_5d": -1.45,
+      "ma_alignment": "neutral",
+      "volume_ratio": 1.17,
+      "pe_ttm": 5.9,
+      "pb": 1.0,
+      "mcap_yi": 3196.0,
+      "technical": {
+        "status": "ok",
+        "summary": "中国太保近期股价处于下降通道，均线系统呈空头排列（MA5<MA10<MA20），中期趋势偏弱。股价自5月22日低点32.57反弹，但连续两个交易日未能有效突破34元关口，且反弹量能萎缩，显示多头动能不足。上方压力关注34-34.5元区域，下方支撑为32.57元前低。成交量在下跌时放大、反弹时缩小，市场参与度较低，短期或延续震荡筑底走势。",
+        "sentiment": "neutral"
+      },
+      "fundamental": {
+        "status": "unavailable",
+        "summary": "中国太保 近7日无公告数据",
+        "sentiment": "neutral"
+      },
+      "capital": {
+        "status": "failed",
         "summary": "",
         "sentiment": "neutral"
       },
+      "announcement": {
+        "status": "unavailable",
+        "summary": "无近期公告",
+        "sentiment": "neutral",
+        "key_events": []
+      },
+      "risk_points": [
+        "若无法站稳34元上方，可能再度下探32.57支撑甚至更低。",
+        "均线持续空头压制，反弹仅为技术性修复，后市存在继续下行风险。",
+        "若出现放量下跌，可能加速调整，需警惕破位风险。"
+      ],
       "signal_breakdown": {
-        "hard_score": -0.6689896337632135,
+        "hard_score": -0.097,
         "soft_score": 0.0,
         "gate_score": 0.5,
-        "final_score": -0.19183172910528545,
-        "final_signal": "hold"
+        "dragon_tiger_score": 0.0,
+        "announcement_score": 0.0,
+        "final_score": 0.051,
+        "has_dragon_tiger": false,
+        "has_announcement": false
       },
-      "momentum_5d": -5.72191493419798,
-      "momentum_20d": -10.84054834054834,
+      "dragon_tiger": []
+    },
+    {
+      "code": "600036",
+      "name": "招商银行",
+      "overall_sentiment": "hold",
+      "overall_focus": "⚪ 观望",
+      "confidence": 0.56,
+      "hard_score": -0.29,
+      "momentum_20d": -7.06,
+      "momentum_5d": -0.99,
       "ma_alignment": "bearish",
-      "volume_ratio": 0.9504104624559548,
-      "pe_ttm": 62.94363636363636,
-      "pe_percentile": 62.94363636363636,
-      "pb": 0,
-      "mcap_yi": 0,
-      "announcement": [],
-      "dragon_tiger": [],
-      "confidence": 0.5,
-      "risk_points": []
+      "volume_ratio": 0.76,
+      "pe_ttm": 6.2,
+      "pb": 0.82,
+      "mcap_yi": 9331.0,
+      "technical": {
+        "status": "ok",
+        "summary": "招商银行近20个交易日呈持续下跌趋势，收盘价从39.38元降至37.00元。均线系统呈现空头排列（MA5<MA10<MA20），股价持续运行于所有均线下方，反弹乏力。成交量在下跌初期显著放大（4月29日达2.53亿股），但近期逐步萎缩，显示市场参与度下降。短期支撑位关注36.90元（近期低点），压力位参考MA10（37.35元）及MA20（37.92元）。整体技术面偏弱，需关注量能变化及均线修复情况。",
+        "sentiment": "neutral"
+      },
+      "fundamental": {
+        "status": "unavailable",
+        "summary": "招商银行 近7日无公告数据",
+        "sentiment": "neutral"
+      },
+      "capital": {
+        "status": "ok",
+        "summary": "今日招商银行主力资金净流入425.0万元，显示主力资金有小幅流入，但金额不大。北向资金数据缺失，无法判断外资态度。整体资金面偏中性，需警惕主力资金流入持续性及后续北向数据补充。",
+        "sentiment": "neutral"
+      },
+      "announcement": {
+        "status": "unavailable",
+        "summary": "无近期公告",
+        "sentiment": "neutral",
+        "key_events": []
+      },
+      "risk_points": [
+        "空头趋势延续，若无放量突破均线压制，下行风险较大",
+        "下跌过程中放量破位（如4月29日）后未有效收复，市场信心不足",
+        "宏观经济或行业负面消息可能加剧抛压",
+        "主力资金净流入量级较小，对股价支撑有限",
+        "北向资金缺失增加不确定性"
+      ],
+      "signal_breakdown": {
+        "hard_score": -0.293,
+        "soft_score": 0.0,
+        "gate_score": 0.5,
+        "dragon_tiger_score": 0.0,
+        "announcement_score": 0.0,
+        "final_score": -0.046,
+        "has_dragon_tiger": false,
+        "has_announcement": false
+      },
+      "dragon_tiger": []
+    },
+    {
+      "code": "000333",
+      "name": "美的集团",
+      "overall_sentiment": "hold",
+      "overall_focus": "⚪ 观望",
+      "confidence": 0.56,
+      "hard_score": -0.12,
+      "momentum_20d": -0.38,
+      "momentum_5d": -1.79,
+      "ma_alignment": "neutral",
+      "volume_ratio": 0.74,
+      "pe_ttm": 13.7,
+      "pb": 2.61,
+      "mcap_yi": 6055.0,
+      "technical": {
+        "status": "ok",
+        "summary": "美的集团近期股价在5月中旬冲高至83.44后回落，当前收于79.55，已跌破所有均线（MA5=80.53, MA10=81.12, MA20=80.73）。均线呈现MA10>MA20>MA5的交叉态，未形成多头排列，短期趋势转弱。成交量在冲高期间放大，近两日明显萎缩，市场参与度下降。下方支撑关注前期低点78.79附近，上方压力位参考80.73（MA20）及81.12（MA10）。",
+        "sentiment": "neutral"
+      },
+      "fundamental": {
+        "status": "unavailable",
+        "summary": "美的集团 近7日无公告数据",
+        "sentiment": "neutral"
+      },
+      "capital": {
+        "status": "failed",
+        "summary": "当日主力资金净流出637万元，但北向资金数据缺失，无法评估内外资合力。资金面偏空，需关注后续持续性。",
+        "sentiment": "neutral"
+      },
+      "announcement": {
+        "status": "unavailable",
+        "summary": "无近期公告",
+        "sentiment": "neutral",
+        "key_events": []
+      },
+      "risk_points": [
+        "若跌破78.79低点，可能打开下行空间至前期平台76-77区域",
+        "均线压制明显，反弹若不过MA10（81.12）则可能延续跌势",
+        "量能持续萎缩，市场情绪偏谨慎",
+        "主力净流出可能预示短期调整压力。",
+        "数据完整性不足可能影响判断准确性。"
+      ],
+      "signal_breakdown": {
+        "hard_score": -0.122,
+        "soft_score": 0.0,
+        "gate_score": 0.5,
+        "dragon_tiger_score": 0.0,
+        "announcement_score": 0.0,
+        "final_score": 0.039,
+        "has_dragon_tiger": false,
+        "has_announcement": false
+      },
+      "dragon_tiger": []
+    },
+    {
+      "code": "601088",
+      "name": "中国神华",
+      "overall_sentiment": "hold",
+      "overall_focus": "⚪ 观望",
+      "confidence": 0.55,
+      "hard_score": -0.27,
+      "momentum_20d": -4.64,
+      "momentum_5d": -2.76,
+      "ma_alignment": "bearish",
+      "volume_ratio": 1.08,
+      "pe_ttm": 18.8,
+      "pb": 1.94,
+      "mcap_yi": 9717.0,
+      "technical": {
+        "status": "ok",
+        "summary": "中国神华（601088）当前股价44.8元，处于MA5（45.164）、MA10（45.341）、MA20（46.019）下方，均线呈空头排列，短期下降趋势明显。5月25日放量下跌（成交量5431万，收阴），显示抛压较大；26日缩量企稳，但反弹动能不足。近期低点44.35元为关键支撑，若跌破可能加速下行。反弹关注MA5（45.16）附近压力，突破需量能配合。",
+        "sentiment": "neutral"
+      },
+      "fundamental": {
+        "status": "unavailable",
+        "summary": "中国神华 近7日无公告数据",
+        "sentiment": "neutral"
+      },
+      "capital": {
+        "status": "ok",
+        "summary": "中国神华今日主力净流入73万元，属于小额流入，显示主力资金态度中性偏积极，但力度较弱。北向资金数据缺失，无法分析外资动向。整体资金面无明显异常。",
+        "sentiment": "neutral"
+      },
+      "announcement": {
+        "status": "unavailable",
+        "summary": "无近期公告",
+        "sentiment": "neutral",
+        "key_events": []
+      },
+      "risk_points": [
+        "反弹至MA5附近可能遇阻，若无法突破则延续下跌",
+        "成交量持续萎缩，反弹缺乏量能配合，存在二次探底风险",
+        "均线持续下移，对股价形成层层压制，短期难以扭转颓势",
+        "主力流入量级较小，对股价支撑作用有限",
+        "北向资金缺席期间，需警惕外资后续动向的不确定性"
+      ],
+      "signal_breakdown": {
+        "hard_score": -0.269,
+        "soft_score": 0.0,
+        "gate_score": 0.5,
+        "dragon_tiger_score": 0.0,
+        "announcement_score": 0.0,
+        "final_score": -0.034,
+        "has_dragon_tiger": false,
+        "has_announcement": false
+      },
+      "dragon_tiger": []
+    },
+    {
+      "code": "601398",
+      "name": "工商银行",
+      "overall_sentiment": "hold",
+      "overall_focus": "⚪ 观望",
+      "confidence": 0.55,
+      "hard_score": -0.14,
+      "momentum_20d": -5.28,
+      "momentum_5d": -1.1,
+      "ma_alignment": "neutral",
+      "volume_ratio": 0.79,
+      "pe_ttm": 6.9,
+      "pb": 0.66,
+      "mcap_yi": 25590.0,
+      "technical": {
+        "status": "ok",
+        "summary": "工商银行近期日线数据（2026-04-24至2026-05-26）显示股价从7.58元震荡下跌至7.18元，累计跌幅约5.3%。均线系统呈现空头排列（MA5=7.162 < MA10=7.203 < MA20=7.336），表明短期、中期趋势偏弱。成交量在下跌过程中显著放大，尤其5月6日、13日等单日成交量超3.6亿股，显示抛压较强。近期低点7.08元（5月21日）为关键支撑，上方7.22-7.30区间构成短期压力。整体技术面偏空，需关注量能能否萎缩企稳。",
+        "sentiment": "neutral"
+      },
+      "fundamental": {
+        "status": "unavailable",
+        "summary": "工商银行 近7日无公告数据",
+        "sentiment": "neutral"
+      },
+      "capital": {
+        "status": "unavailable",
+        "summary": "北向资金数据缺失，仅主力资金数据可用。当日主力净流入216.0万元，金额较小，显示市场对该股短期关注度一般，无明显资金异常信号。",
+        "sentiment": "neutral"
+      },
+      "announcement": {
+        "status": "unavailable",
+        "summary": "无近期公告",
+        "sentiment": "neutral",
+        "key_events": []
+      },
+      "risk_points": [
+        "股价持续运行于所有均线下方，若无放量突破，下跌趋势可能延续",
+        "成交量未明显萎缩，市场抛压依然存在，需警惕破位风险",
+        "宏观或行业利空可能加剧股价调整，但数据中无相关公告",
+        "缺乏北向资金数据，信息不完整",
+        "主力净流入金额偏低，可能反映短期资金参与度不足"
+      ],
+      "signal_breakdown": {
+        "hard_score": -0.14,
+        "soft_score": 0.0,
+        "gate_score": 0.5,
+        "dragon_tiger_score": 0.0,
+        "announcement_score": 0.0,
+        "final_score": 0.03,
+        "has_dragon_tiger": false,
+        "has_announcement": false
+      },
+      "dragon_tiger": []
+    },
+    {
+      "code": "600031",
+      "name": "三一重工",
+      "overall_sentiment": "hold",
+      "overall_focus": "⚪ 观望",
+      "confidence": 0.55,
+      "hard_score": -0.25,
+      "momentum_20d": -3.67,
+      "momentum_5d": -2.23,
+      "ma_alignment": "bearish",
+      "volume_ratio": 1.09,
+      "pe_ttm": 20.6,
+      "pb": 1.92,
+      "mcap_yi": 1736.0,
+      "technical": {
+        "status": "ok",
+        "summary": "股价自5月11日高点22.48持续回落，近期在18.58-19.13区间低位震荡，5月26日收于18.88，仍在所有均线下方。均线呈空头排列（MA5<MA10<MA20），短线和中线趋势偏弱。成交量方面，前期放量上涨后缩量调整，但5月26日再度放量，显示多空分歧加大。支撑位参考近期低点18.58-18.69区域，压力位关注MA5（19.01）和MA10（19.62）附近。短期关注能否放量突破均线压制。",
+        "sentiment": "neutral"
+      },
+      "fundamental": {
+        "status": "unavailable",
+        "summary": "三一重工 近7日无公告数据",
+        "sentiment": "neutral"
+      },
+      "capital": {
+        "status": "unavailable",
+        "summary": "北向资金数据缺失，无法分析外资态度。当日主力净流入557.0万元，显示内资短期看多，但需结合历史趋势和成交量判断持续性。",
+        "sentiment": "neutral"
+      },
+      "announcement": {
+        "status": "unavailable",
+        "summary": "无近期公告",
+        "sentiment": "neutral",
+        "key_events": []
+      },
+      "risk_points": [
+        "均线空头压制，上攻MA5及MA10存在技术阻力",
+        "前期高点22.48附近形成套牢盘，上方抛压较重",
+        "若跌破18.58支撑，可能加速下行",
+        "单日资金数据不足以确认趋势",
+        "主力资金可能受大盘情绪影响，存在短期操纵风险"
+      ],
+      "signal_breakdown": {
+        "hard_score": -0.253,
+        "soft_score": 0.0,
+        "gate_score": 0.5,
+        "dragon_tiger_score": 0.0,
+        "announcement_score": 0.0,
+        "final_score": -0.026,
+        "has_dragon_tiger": false,
+        "has_announcement": false
+      },
+      "dragon_tiger": []
+    },
+    {
+      "code": "600809",
+      "name": "山西汾酒",
+      "overall_sentiment": "hold",
+      "overall_focus": "⚪ 观望",
+      "confidence": 0.55,
+      "hard_score": -0.25,
+      "momentum_20d": -11.03,
+      "momentum_5d": -2.39,
+      "ma_alignment": "bearish",
+      "volume_ratio": 1.18,
+      "pe_ttm": 14.1,
+      "pb": 3.43,
+      "mcap_yi": 1545.0,
+      "technical": {
+        "status": "ok",
+        "summary": "股价处于下跌趋势，均线呈空头排列（MA20>MA10>MA5>收盘价），近期放量下跌，动量偏空。支撑位关注125.36（前低）及整数关口120，压力位关注MA5（129.28）和MA10（130.53）。",
+        "sentiment": "neutral"
+      },
+      "fundamental": {
+        "status": "unavailable",
+        "summary": "山西汾酒 近7日无公告数据",
+        "sentiment": "neutral"
+      },
+      "capital": {
+        "status": "unavailable",
+        "summary": "北向资金数据缺失，无法判断外资态度；主力资金当日净流出1865万元，显示短期偏空，但需结合更多数据验证。",
+        "sentiment": "neutral"
+      },
+      "announcement": {
+        "status": "unavailable",
+        "summary": "无近期公告",
+        "sentiment": "neutral",
+        "key_events": []
+      },
+      "risk_points": [
+        "若跌破125.36前低，可能加速下跌",
+        "均线发散向下，短期反弹可能受压于MA5",
+        "主力净流出规模虽不大，但若连续流出可能加剧调整风险",
+        "北向资金数据缺失，信息不完整可能导致误判"
+      ],
+      "signal_breakdown": {
+        "hard_score": -0.253,
+        "soft_score": 0.0,
+        "gate_score": 0.5,
+        "dragon_tiger_score": 0.0,
+        "announcement_score": 0.0,
+        "final_score": -0.026,
+        "has_dragon_tiger": false,
+        "has_announcement": false
+      },
+      "dragon_tiger": []
+    },
+    {
+      "code": "002230",
+      "name": "科大讯飞",
+      "overall_sentiment": "hold",
+      "overall_focus": "⚪ 观望",
+      "confidence": 0.55,
+      "hard_score": -0.15,
+      "momentum_20d": 0.74,
+      "momentum_5d": 0.26,
+      "ma_alignment": "neutral",
+      "volume_ratio": 1.34,
+      "pe_ttm": 137.1,
+      "pb": 5.18,
+      "mcap_yi": 1183.0,
+      "technical": {
+        "status": "ok",
+        "summary": "截至2026-05-26，科大讯飞收盘价49.25元，站上MA5(48.10)、MA10(48.25)和MA20(48.75)，但均线仍呈空头排列（MA5<MA10<MA20），短期价格突破但趋势未完全转多。近期股价在46.77-50.88区间震荡，5月26日放量上涨（成交量6894万），显示多头尝试上攻。上方压力关注50.88附近，下方支撑暂看47.0一带。量能若持续放大，有望挑战前高，否则需警惕均线压制。",
+        "sentiment": "neutral"
+      },
+      "fundamental": {
+        "status": "unavailable",
+        "summary": "科大讯飞 近7日无公告数据",
+        "sentiment": "neutral"
+      },
+      "capital": {
+        "status": "unavailable",
+        "summary": "根据提供的1日资金数据，科大讯飞主力资金呈现净流入状态，数值为3966.0。北向资金数据缺失，无法评估外资动向。整体资金面显示主力短期有一定介入意愿，但缺乏北向资金配合验证，资金结构完整性不足。建议结合后续多日数据及公司基本面综合观察，单一指标参考价值有限。",
+        "sentiment": "neutral"
+      },
+      "announcement": {
+        "status": "unavailable",
+        "summary": "无近期公告",
+        "sentiment": "neutral",
+        "key_events": []
+      },
+      "risk_points": [
+        "均线空头排列形态未改，价格突破可能为假突破，存在回踩确认需求。",
+        "5月14日、15日连续阴线实体较大，显示上方抛压较重，若后续缩量则反弹动能不足。",
+        "当前价格处于震荡区间上沿，若无法有效放量突破50.88，可能再度回落至区间下沿。",
+        "仅依赖单日主力净流入数据易受短期交易波动干扰，趋势持续性存疑",
+        "北向资金数据缺失导致无法全面评估内外资共振情况，存在分析盲区"
+      ],
+      "signal_breakdown": {
+        "hard_score": -0.154,
+        "soft_score": 0.0,
+        "gate_score": 0.5,
+        "dragon_tiger_score": 0.0,
+        "announcement_score": 0.0,
+        "final_score": 0.023,
+        "has_dragon_tiger": false,
+        "has_announcement": false
+      },
+      "dragon_tiger": []
+    },
+    {
+      "code": "600600",
+      "name": "青岛啤酒",
+      "overall_sentiment": "hold",
+      "overall_focus": "⚪ 观望",
+      "confidence": 0.55,
+      "hard_score": -0.17,
+      "momentum_20d": -2.52,
+      "momentum_5d": -2.04,
+      "ma_alignment": "bearish",
+      "volume_ratio": 1.2,
+      "pe_ttm": 17.6,
+      "pb": 2.54,
+      "mcap_yi": 824.0,
+      "technical": {
+        "status": "ok",
+        "summary": "青岛啤酒近20日股价从63.41元持续下行至60.43元，跌幅约4.7%。均线系统呈空头排列（MA5<MA10<MA20），最新收盘价60.43元低于所有短期均线，短期趋势偏弱。5月26日放量收阳（低开高走），成交量724万手，显示60元附近有支撑博弈。压力位关注MA5（60.91元）及MA10（61.40元），支撑位看近期低点59.02元。量能放大但股价未有效突破均线，市场多空分歧加大。",
+        "sentiment": "neutral"
+      },
+      "fundamental": {
+        "status": "unavailable",
+        "summary": "青岛啤酒 近7日无公告数据",
+        "sentiment": "neutral"
+      },
+      "capital": {
+        "status": "unavailable",
+        "summary": "北向资金数据缺失，无法评估外资态度。主力资金净流入122万元，为微弱正向流入，但缺乏北向资金对比，难以判断资金合力方向。建议关注后续北向数据补充。",
+        "sentiment": "neutral"
+      },
+      "announcement": {
+        "status": "unavailable",
+        "summary": "无近期公告",
+        "sentiment": "neutral",
+        "key_events": []
+      },
+      "risk_points": [
+        "均线空头排列形成技术压制，反弹可能面临均线反压",
+        "成交放量但价格未突破均线，若后续缩量调整，可能继续探底",
+        "仅主力资金单边数据，无法确认资金整体共识",
+        "净流入金额极小，对股价影响有限，存在资金波动风险"
+      ],
+      "signal_breakdown": {
+        "hard_score": -0.169,
+        "soft_score": 0.0,
+        "gate_score": 0.5,
+        "dragon_tiger_score": 0.0,
+        "announcement_score": 0.0,
+        "final_score": 0.016,
+        "has_dragon_tiger": false,
+        "has_announcement": false
+      },
+      "dragon_tiger": []
+    },
+    {
+      "code": "601211",
+      "name": "国泰君安",
+      "overall_sentiment": "hold",
+      "overall_focus": "⚪ 观望",
+      "confidence": 0.55,
+      "hard_score": -0.17,
+      "momentum_20d": -8.87,
+      "momentum_5d": -1.1,
+      "ma_alignment": "neutral",
+      "volume_ratio": 0.83,
+      "pe_ttm": 12.3,
+      "pb": 0.83,
+      "mcap_yi": 2697.0,
+      "technical": {
+        "status": "ok",
+        "summary": "股价处于空头排列（MA5<MA10<MA20），近期连续走低，跌破所有均线。累计跌幅约8.5%（从4月27日高点16.77），最低触及15.01。成交量在下跌过程中放大，5月13日和21日放量下挫，显示抛压。均线系统呈空头排列，20日均线（15.82）构成主要压力。短期支撑在15.0整数关及近期低点，若跌破可能继续寻底。",
+        "sentiment": "neutral"
+      },
+      "fundamental": {
+        "status": "unavailable",
+        "summary": "国泰君安 近7日无公告数据",
+        "sentiment": "neutral"
+      },
+      "capital": {
+        "status": "unavailable",
+        "summary": "北向资金数据缺失，无法分析外资态度；当日主力资金净流入1670万元，显示内资短期偏多。但因北向数据不可得，资金面整体分析完整性受限，需关注后续数据补充。",
+        "sentiment": "neutral"
+      },
+      "announcement": {
+        "status": "unavailable",
+        "summary": "无近期公告",
+        "sentiment": "neutral",
+        "key_events": []
+      },
+      "risk_points": [
+        "均线空头压制：MA10（15.41）和MA20（15.82）形成短期和中期压力，反弹空间有限。",
+        "支撑考验：15.0整数关口若被有效跌破，可能加速下行。",
+        "量价背离风险：若反弹无量，则可能再度下跌。",
+        "北向资金数据缺失，可能因交易披露延迟或异常，需警惕信息不对称风险",
+        "主力资金单日净流入规模较小，持续性待观察"
+      ],
+      "signal_breakdown": {
+        "hard_score": -0.173,
+        "soft_score": 0.0,
+        "gate_score": 0.5,
+        "dragon_tiger_score": 0.0,
+        "announcement_score": 0.0,
+        "final_score": 0.013,
+        "has_dragon_tiger": false,
+        "has_announcement": false
+      },
+      "dragon_tiger": []
+    },
+    {
+      "code": "002594",
+      "name": "比亚迪",
+      "overall_sentiment": "hold",
+      "overall_focus": "⚪ 观望",
+      "confidence": 0.54,
+      "hard_score": -0.21,
+      "momentum_20d": -3.43,
+      "momentum_5d": 0.57,
+      "ma_alignment": "neutral",
+      "volume_ratio": 0.84,
+      "pe_ttm": 31.9,
+      "pb": 3.8,
+      "mcap_yi": 8803.0,
+      "technical": {
+        "status": "ok",
+        "summary": "股价近期从高点105.4回落至92.61后小幅反弹至96.55，均线呈空头排列（MA5<MA10<MA20），表明中期趋势偏弱。成交量在下跌过程中未显著放大，反弹时量能一般，市场参与度不高。最新收盘价站上MA5但受MA10压制，短期或有震荡。",
+        "sentiment": "neutral"
+      },
+      "fundamental": {
+        "status": "unavailable",
+        "summary": "比亚迪 近7日无公告数据",
+        "sentiment": "neutral"
+      },
+      "capital": {
+        "status": "ok",
+        "summary": "北向资金数据缺失，无法评估外资态度。主力资金净流入 2287.0 万元，显示当日有主动买入意愿，但绝对金额较小，对万亿级市值的比亚迪影响有限。资金面整体中性偏积极，但需关注后续持续性。",
+        "sentiment": "neutral"
+      },
+      "announcement": {
+        "status": "unavailable",
+        "summary": "无近期公告",
+        "sentiment": "neutral",
+        "key_events": []
+      },
+      "risk_points": [
+        "空头排列未改善，反弹可能夭折，警惕继续下行",
+        "成交量持续低迷，市场做多动能不足",
+        "前期高点105.4构成强阻力，中期反转需有效突破该位置",
+        "主力净流入金额较小，可能仅为短期波动，不构成趋势信号",
+        "缺少北向资金数据，资金面分析不完整"
+      ],
+      "signal_breakdown": {
+        "hard_score": -0.212,
+        "soft_score": 0.0,
+        "gate_score": 0.5,
+        "dragon_tiger_score": 0.0,
+        "announcement_score": 0.0,
+        "final_score": -0.006,
+        "has_dragon_tiger": false,
+        "has_announcement": false
+      },
+      "dragon_tiger": []
+    },
+    {
+      "code": "601628",
+      "name": "中国人寿",
+      "overall_sentiment": "hold",
+      "overall_focus": "⚪ 观望",
+      "confidence": 0.54,
+      "hard_score": -0.19,
+      "momentum_20d": -8.35,
+      "momentum_5d": -2.62,
+      "ma_alignment": "bearish",
+      "volume_ratio": 1.35,
+      "pe_ttm": 6.6,
+      "pb": 1.6,
+      "mcap_yi": 9553.0,
+      "technical": {
+        "status": "ok",
+        "summary": "该股近期处于持续下跌趋势，均线呈空头排列（MA5<MA10<MA20），股价位于所有均线下方。成交量在下跌过程中有所放大，显示抛压较重。近期低点33.48附近存在一定支撑，但整体趋势偏弱，上方MA10和MA20构成压力。",
+        "sentiment": "neutral"
+      },
+      "fundamental": {
+        "status": "unavailable",
+        "summary": "中国人寿 近7日无公告数据",
+        "sentiment": "neutral"
+      },
+      "capital": {
+        "status": "unavailable",
+        "summary": "北向资金数据缺失，无法评估外资态度。主力资金净流出145万元，呈现一定的资金离场迹象，但单个交易日数据不足以判断趋势。建议结合更多交易日数据进一步观察。",
+        "sentiment": "neutral"
+      },
+      "announcement": {
+        "status": "unavailable",
+        "summary": "无近期公告",
+        "sentiment": "neutral",
+        "key_events": []
+      },
+      "risk_points": [
+        "空头趋势延续风险，若无法止跌可能继续下行",
+        "均线压制明显，反弹可能受阻于MA10或MA20",
+        "若跌破33.48元支撑，可能加速下跌",
+        "北向资金数据缺失，信息不完整",
+        "主力净流出可能预示短期调整风险"
+      ],
+      "signal_breakdown": {
+        "hard_score": -0.191,
+        "soft_score": 0.0,
+        "gate_score": 0.5,
+        "dragon_tiger_score": 0.0,
+        "announcement_score": 0.0,
+        "final_score": 0.005,
+        "has_dragon_tiger": false,
+        "has_announcement": false
+      },
+      "dragon_tiger": []
     }
   ],
   "failed_symbols": [],
