@@ -1,0 +1,30 @@
+[Unit]
+Description=Stock Copilot Scheduler — A股 AI 分析定时任务
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=ubuntu
+Group=ubuntu
+WorkingDirectory=/home/ubuntu/repos/stock-copilot
+Environment=PATH=/home/ubuntu/repos/stock-copilot/.venv/bin:/usr/local/bin:/usr/bin
+EnvironmentFile=/home/ubuntu/repos/stock-copilot/.env
+
+ExecStart=/home/ubuntu/repos/stock-copilot/.venv/bin/python3 -m src.main schedule
+Restart=on-failure
+RestartSec=30
+StartLimitIntervalSec=300
+StartLimitBurst=5
+
+# Logging
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=stock-copilot
+
+# Resource limits
+MemoryMax=1G
+CPUQuota=80%
+
+[Install]
+WantedBy=multi-user.target

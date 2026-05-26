@@ -19,10 +19,8 @@ data/*.sqlite
 output/reports/*.md
 output/reports/*.json
 
-# Site (generated — only committed via publish)
-site/index.html
-site/archive/
-site/data/
+# Site (generated — only docs/ is committed via publish)
+site/
 
 # IDE
 .idea/
