@@ -20,7 +20,6 @@ from dataclasses import dataclass, field
 from datetime import date, datetime
 from pathlib import Path
 from typing import Optional
-import sqlite3
 
 logger = logging.getLogger(__name__)
 
@@ -426,6 +425,25 @@ class SignalDB:
     def close(self):
         """Close any open connections (no-op with context manager pattern)."""
         pass
+
+    def cleanup_old_signals(self, keep_days: int = 90) -> int:
+        """Delete signal records older than keep_days.
+
+        Preserves stock_meta and only cleans the append-only signals table.
+        Returns number of deleted rows.
+        """
+        from datetime import timedelta
+        cutoff = (date.today() - timedelta(days=keep_days)).isoformat()
+        with self._connect() as conn:
+            cursor = conn.execute(
+                "DELETE FROM signals WHERE trade_date < ?", (cutoff,)
+            )
+            deleted = cursor.rowcount
+            # Also clean up signal_stats (will be recomputed on next analysis)
+            conn.execute("DELETE FROM signal_stats")
+            if deleted:
+                conn.execute("VACUUM")
+            return deleted
 
     def __repr__(self):
         return f"SignalDB({self.db_path})"

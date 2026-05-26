@@ -1,18 +1,20 @@
-"""APScheduler jobs — adaptive update strategy for Stock Copilot.
+"""APScheduler jobs — production schedule for Stock Copilot.
 
-Update frequency:
-- Trading hours (Mon-Fri 9:30-11:30, 13:00-15:00): every 15 minutes
-- Non-trading hours on trading days (7:00-9:30, 15:00-23:00): every 60 minutes
-- Non-trading days (weekends/holidays): every 120 minutes
+Schedule (trading days only):
+- 盘前 08:00: 全量分析（含 LLM）+ 站点生成 + 推送 GitHub
+- 盘中 10:00, 11:00, 14:00: 全量分析（含 LLM）+ 站点生成 + 推送 GitHub
+- 盘后 15:30: 全量分析（含 LLM）+ 站点生成 + 推送 GitHub
+- 数据库清理 每周日 23:00
 
-Two analysis types:
-- PRE: 盘前 (before market open)
-- POST: 盘后 (after market close / intraday updates)
+Every job runs the FULL analysis pipeline including LLM calls, site
+generation, and GitHub push — no lightweight shortcuts.
 """
 
 import asyncio
 import logging
-from datetime import datetime
+import os
+import subprocess
+from datetime import datetime, date
 
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 
@@ -23,46 +25,88 @@ from src.orchestrator.pipeline import run_analysis
 
 logger = logging.getLogger(__name__)
 
-_TRADING_HOURS = [
-    (9, 30, 11, 30),   # 上午 9:30-11:30
-    (13, 0, 15, 0),     # 下午 13:00-15:00
-]
+_PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 
-def _is_trading_hour() -> bool:
-    """Check if current time is within A-share trading hours."""
-    now = datetime.now()
-    hour_min = now.hour * 60 + now.minute
-    for sh, sm, eh, em in _TRADING_HOURS:
-        start = sh * 60 + sm
-        end = eh * 60 + em
-        if start <= hour_min < end:
+def _publish_to_github(report_type: str = "post") -> bool:
+    """Commit and push docs/ to GitHub for Pages deployment."""
+    try:
+        os.chdir(_PROJECT_ROOT)
+
+        # Check git user configured
+        r = subprocess.run(["git", "config", "user.name"], capture_output=True, text=True)
+        if not r.stdout.strip():
+            logger.warning("Git user.name not configured, skipping publish")
+            return False
+
+        r = subprocess.run(["git", "config", "user.email"], capture_output=True, text=True)
+        if not r.stdout.strip():
+            logger.warning("Git user.email not configured, skipping publish")
+            return False
+
+        # Stage docs/
+        subprocess.run(["git", "add", "docs/"], capture_output=True, text=True)
+
+        # Check if there are changes
+        r = subprocess.run(["git", "diff", "--cached", "--quiet"], capture_output=True, text=True)
+        if r.returncode == 0:
+            logger.info("No changes to publish")
             return True
-    return False
+
+        # Commit
+        type_label = "盘前" if report_type == "pre" else "盘后"
+        msg = f"auto: report {date.today()}-{report_type} {type_label}"
+        r = subprocess.run(["git", "commit", "-m", msg], capture_output=True, text=True)
+        if r.returncode != 0:
+            logger.warning("Git commit failed: %s", r.stderr.strip() or r.stdout.strip())
+            return False
+
+        # Push
+        r = subprocess.run(["git", "push", "origin", "main"], capture_output=True, text=True, timeout=120)
+        if r.returncode != 0:
+            logger.error("Git push failed: %s", r.stderr.strip() or r.stdout.strip())
+            return False
+
+        logger.info("Published to GitHub: %s", msg)
+        return True
+
+    except Exception as e:
+        logger.error("Publish failed: %s", e)
+        return False
+
+
+async def _run_full_pipeline(report_type: ReportType):
+    """Run full analysis + generate site + publish to GitHub."""
+    from src.site.generator import generate_site
+
+    report = await run_analysis(report_type, persist=True)
+    logger.info("Full analysis completed: %s (%d stocks)", report.file_path, len(report.analyses))
+
+    # Generate site
+    try:
+        site_path = generate_site(report)
+        logger.info("Site generated: %s", site_path)
+    except Exception as e:
+        logger.error("Site generation failed: %s", e, exc_info=True)
+        return
+
+    # Publish to GitHub
+    try:
+        _publish_to_github(report_type.value)
+    except Exception as e:
+        logger.error("Publish failed: %s", e, exc_info=True)
 
 
 async def run_intraday_update():
-    """Intraday update (every 30 min during trading hours).
-
-    Lightweight update: only fetches market data and computes hard signals.
-    Skips LLM calls to save cost and time. Runs full analysis only at
-    pre-market (08:00) and post-market (15:30).
-    """
+    """Intraday update — full analysis with LLM + auto publish."""
     if not is_trading_day():
         return
-    if not _is_trading_hour():
-        return
 
-    logger.info("Running intraday update (lightweight — hard signals only)")
+    logger.info("Running intraday update (full analysis)")
     try:
-        # Run analysis with persist=True but skip site generation for speed
-        # The full analysis will happen at 15:30 post-market
-        from src.orchestrator.pipeline import run_analysis
-        from src.data.models import ReportType
-        report = await run_analysis(ReportType.POST, persist=True)
-        logger.info("Intraday hard signals updated: %d stocks", len(report.analyses) if report else 0)
+        await _run_full_pipeline(ReportType.POST)
     except Exception as e:
-        logger.error("Intraday update failed: %s", e)
+        logger.error("Intraday update failed: %s", e, exc_info=True)
 
 
 async def run_post_market():
@@ -73,8 +117,7 @@ async def run_post_market():
 
     logger.info("Running post-market full analysis")
     try:
-        report = await run_analysis(ReportType.POST)
-        logger.info("Post-market report generated: %s", report.file_path)
+        await _run_full_pipeline(ReportType.POST)
     except Exception as e:
         logger.error("Post-market analysis failed: %s", e, exc_info=True)
 
@@ -87,25 +130,9 @@ async def run_pre_market():
 
     logger.info("Running pre-market analysis")
     try:
-        report = await run_analysis(ReportType.PRE)
-        logger.info("Pre-market report generated: %s", report.file_path)
+        await _run_full_pipeline(ReportType.PRE)
     except Exception as e:
         logger.error("Pre-market analysis failed: %s", e, exc_info=True)
-
-
-async def run_offpeak_update():
-    """Off-peak update (every 1 hour on trading days, every 2 hours on non-trading days)."""
-    trading = is_trading_day()
-    if not trading:
-        logger.debug("Non-trading day, off-peak update skipped")
-        return
-
-    logger.info("Running off-peak update (trading day)")
-    try:
-        report = await run_analysis(ReportType.POST)
-        logger.info("Off-peak report generated: %s", report.file_path)
-    except Exception as e:
-        logger.error("Off-peak update failed: %s", e)
 
 
 async def run_db_cleanup():
@@ -122,8 +149,7 @@ async def run_db_cleanup():
 
 async def _startup_catch_up():
     """On startup: if today is a trading day and no signals exist for today,
-    run a pre-market analysis immediately so we don't miss the first data."""
-    from datetime import date
+    run a full analysis immediately so the website has today's data."""
     from src.data.db_manager import SignalDB
 
     if not is_trading_day():
@@ -136,17 +162,11 @@ async def _startup_catch_up():
         logger.info("Today already has %d pre-market signals, skipping catch-up", len(today_signals))
         return
 
-    logger.info("No pre-market signals for today — running catch-up analysis")
+    logger.info("No signals for today — running startup catch-up analysis")
     try:
-        report = await run_analysis(ReportType.PRE)
-        logger.info("Catch-up report generated: %s", report.file_path)
-
-        # Also generate site
-        from src.site.generator import generate_site
-        generate_site(report)
-        logger.info("Catch-up site generated successfully")
+        await _run_full_pipeline(ReportType.PRE)
     except Exception as e:
-        logger.error("Catch-up analysis failed: %s", e)
+        logger.error("Catch-up analysis failed: %s", e, exc_info=True)
 
 
 async def _run_scheduler():
@@ -156,7 +176,7 @@ async def _run_scheduler():
     settings = get_settings()
     scheduler = AsyncIOScheduler(timezone=settings.schedule.timezone)
 
-    # 1. Pre-market: 8:00 AM on trading days
+    # 1. Pre-market: 08:00 on trading days
     scheduler.add_job(
         run_pre_market,
         "cron",
@@ -167,8 +187,7 @@ async def _run_scheduler():
         name="盘前分析",
     )
 
-    # 2. Intraday: every 60 minutes during trading hours (reduced from 15min)
-    # Full analysis at 10:00, 11:00, 14:00 only (skip 13:00 which is close to open)
+    # 2. Intraday: 10:00, 11:00, 14:00 on trading days (full analysis)
     for hour in [10, 11, 14]:
         scheduler.add_job(
             run_intraday_update,
@@ -191,16 +210,7 @@ async def _run_scheduler():
         name="盘后全量分析",
     )
 
-    # 4. Off-peak updates: removed (unnecessary overhead, full analysis at 15:30 is sufficient)
-
-    logger.info("Scheduler configured with optimized strategy:")
-    logger.info("  - 盘前: 08:00 (full analysis)")
-    logger.info("  - 盘中: 10:00, 11:00, 14:00 (lightweight)")
-    logger.info("  - 盘后: 15:30 (full analysis)")
-    logger.info("  - DB 清理: 每周日 23:00")
-    logger.info("Total jobs registered: %d", len(scheduler.get_jobs()))
-
-    # 5. Weekly DB cleanup: every Sunday at 23:00
+    # 4. Weekly DB cleanup: every Sunday at 23:00
     scheduler.add_job(
         run_db_cleanup,
         "cron",
@@ -210,13 +220,18 @@ async def _run_scheduler():
         id="db_cleanup",
         name="数据库清理",
     )
-    logger.info("Total jobs after cleanup: %d", len(scheduler.get_jobs()))
+
+    logger.info("Scheduler configured — production mode (all tasks = full analysis + auto push):")
+    logger.info("  - 盘前: 08:00 (全量 + 自动推送)")
+    logger.info("  - 盘中: 10:00, 11:00, 14:00 (全量 + 自动推送)")
+    logger.info("  - 盘后: 15:30 (全量 + 自动推送)")
+    logger.info("  - 清理: 每周日 23:00")
+    logger.info("Total jobs: %d", len(scheduler.get_jobs()))
 
     scheduler.start()
     logger.info("Scheduler started — waiting for triggers")
 
-    # Startup check: if we're on a trading day and today's pre-market hasn't run yet,
-    # trigger an immediate analysis so we don't miss the first data of the day
+    # Startup check: run full analysis if today has no data yet
     await _startup_catch_up()
 
     # Keep alive forever

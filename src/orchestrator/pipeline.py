@@ -91,7 +91,7 @@ async def run_analysis(
             logger.warning("Market overview failed: %s", e)
 
     # 5. Compute hard signals + run agents + fuse (per stock)
-    analyses, fused_records = await _analyze_and_fuse(snapshots)
+    analyses, fused_records = await _analyze_and_fuse(snapshots, report_type)
 
     # 6. Generate report
     report = generate_report(analyses, report_type, market, failed_symbols)
@@ -135,6 +135,7 @@ async def run_analysis(
 
 async def _analyze_and_fuse(
     snapshots: list[StockSnapshot],
+    report_type: ReportType,
 ) -> tuple[list[StockAnalysis], dict]:
     """Run hard signal computation + LLM agents + fusion for each stock.
 
@@ -149,7 +150,14 @@ async def _analyze_and_fuse(
     cap = CapitalAgent()
     ann = AnnouncementAgent()
 
+    # Limit concurrent LLM calls to avoid API rate limits (50 stocks × 4 agents = 200 calls)
+    _sem = asyncio.Semaphore(3)
+
     async def process_one(snap: StockSnapshot):
+        async with _sem:
+            return await _process_stock(snap, tech, fund, cap, ann)
+
+    async def _process_stock(snap: StockSnapshot, tech, fund, cap, ann):
         # A. Compute hard signals (fast, no LLM)
         hard = compute_hard_signals(
             bars=snap.bars or [],
@@ -216,7 +224,7 @@ async def _analyze_and_fuse(
             record = SignalRecord(
                 code=code,
                 trade_date=date_type.today(),
-                report_type="pre",
+                report_type=report_type.value,
                 momentum_20d=hard.momentum_20d,
                 momentum_5d=hard.momentum_5d,
                 ma_alignment=hard.ma_alignment,

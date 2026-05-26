@@ -147,3 +147,12 @@ class Settings(BaseSettings):
 def get_settings() -> Settings:
     """Cached singleton — call once at startup."""
     return Settings.from_yaml()
+
+
+def refresh_settings() -> Settings:
+    """Clear the settings cache and reload from YAML.
+
+    Use when configuration has changed at runtime (e.g. .env updated).
+    """
+    get_settings.cache_clear()
+    return get_settings()

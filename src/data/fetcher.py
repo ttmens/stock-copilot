@@ -39,7 +39,6 @@ def _retry_sync(func, max_retries: int = 3, delay: int = 2, **kwargs):
     for attempt in range(max_retries):
         try:
             return func(**kwargs)
-            break
         except Exception as e:
             last_err = e
             if attempt < max_retries - 1:
@@ -193,7 +192,7 @@ class DataFetcher:
         return None
 
     async def _fetch_capital_chain(self, code: str, errors: list[str]) -> Optional[CapitalFlow]:
-        """Capital flow: Eastmoney push2 → AkShare (quick fail)."""
+        """Capital flow: Eastmoney push2 → Tencent quote derivation → K-line estimation."""
         # Try Eastmoney push2 (most reliable when available)
         try:
             cf = await asyncio.to_thread(eastmoney.get_capital_flow, code, 5)
@@ -203,31 +202,50 @@ class DataFetcher:
             errors.append(f"eastmoney_capital: {e}")
             logger.debug("Eastmoney capital flow failed for %s", code)
 
-        # Fallback: AkShare (quick fail)
+        # Fallback: derive from Tencent real-time quote (turnover + volume)
         try:
-            market = "sh" if code.startswith("6") else "sz"
-            df = await asyncio.to_thread(
-                _retry_sync,
-                ak.stock_individual_fund_flow,
-                max_retries=1,
-                delay=1,
-                stock=code,
-                market=market,
-            )
-            if df is not None and not df.empty:
-                last_row = df.iloc[-1]
-                for col in ["主力净流入-净额", "主力净流入", "main_net_inflow"]:
-                    if col in last_row:
-                        try:
-                            return CapitalFlow(
-                                north_net_inflow=None,
-                                main_net_inflow=float(last_row[col]),
-                                period="1d",
-                            )
-                        except (ValueError, TypeError):
-                            pass
+            quote = await asyncio.to_thread(tencent.get_stock_quote, code)
+            if quote and quote.get("code"):
+                # Estimate capital flow from volume and price
+                volume = quote.get("volume", 0)
+                amount = quote.get("amount", 0)
+                price = quote.get("price", 0)
+                prev_close = quote.get("prev_close", 0)
+                if volume > 0 and price > 0 and prev_close > 0:
+                    # Simple estimation: net flow based on price change vs volume
+                    change_ratio = (price - prev_close) / prev_close if prev_close else 0
+                    # Positive change → estimated net inflow proportional to amount
+                    est_inflow = amount * change_ratio if amount else 0
+                    return CapitalFlow(
+                        north_net_inflow=None,
+                        main_net_inflow=round(est_inflow, 0),
+                        period="1d",
+                    )
         except Exception as e:
-            errors.append(f"akshare_capital: {e}")
+            errors.append(f"tencent_capital_derive: {e}")
+
+        # Fallback: estimate from K-line data (use Sina for K-lines)
+        try:
+            bars_data = await asyncio.to_thread(sina.get_kline_sina, code, 5)
+            if bars_data and len(bars_data) >= 2:
+                total_inflow = 0.0
+                total_amount = 0.0
+                for bar in bars_data[-3:]:  # Last 3 days
+                    if bar.close > bar.open:
+                        # Bullish day: volume is inflow
+                        total_inflow += (bar.amount or bar.volume * bar.close)
+                    elif bar.close < bar.open:
+                        # Bearish day: volume is outflow
+                        total_inflow -= (bar.amount or bar.volume * bar.close)
+                    total_amount += (bar.amount or bar.volume * bar.close)
+                if total_amount > 0:
+                    return CapitalFlow(
+                        north_net_inflow=None,
+                        main_net_inflow=round(total_inflow, 0),
+                        period="3d",
+                    )
+        except Exception as e:
+            errors.append(f"kline_capital_est: {e}")
 
         return None
 
@@ -362,7 +380,11 @@ class DataFetcher:
 async def fetch_all(
     items: list[WatchlistItem] | list[tuple[str, str]],
 ) -> tuple[list[StockSnapshot], list[str]]:
-    """Fetch all stocks in parallel with multi-source degradation."""
+    """Fetch all stocks in parallel with multi-source degradation.
+
+    Uses an HTTP semaphore to limit concurrent requests and avoid
+    getting rate-limited / blocked by data providers.
+    """
     fetcher = DataFetcher()
 
     pairs: list[tuple[str, str]] = []
@@ -372,8 +394,12 @@ async def fetch_all(
         else:
             pairs.append(item)  # type: ignore[arg-type]
 
+    # Limit concurrent HTTP requests (avoid IP bans from AkShare/Eastmoney)
+    _http_sem = asyncio.Semaphore(10)
+
     async def _fetch_one(code: str, name: str) -> StockSnapshot:
-        return await fetcher.fetch_stock(code, name)
+        async with _http_sem:
+            return await fetcher.fetch_stock(code, name)
 
     results: list[StockSnapshot | BaseException] = await asyncio.gather(
         *[_fetch_one(code, name) for code, name in pairs],
