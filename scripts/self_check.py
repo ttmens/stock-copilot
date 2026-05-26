@@ -387,42 +387,28 @@ async def check_llm_providers():
 
 # ── 7. Report Generation ─────────────────────────────────────────────
 def check_report_generation():
-    """报告生成完整性：免责声明、JSON 格式、文件路径。"""
+    """报告生成完整性：只读验证现有报告文件，绝不生成测试数据。"""
     print(f"\n{CYAN}━━━ 报告生成检查 ━━━{RESET}")
 
     try:
-        from src.reports.generator import generate_report
-        from src.data.models import (
-            StockAnalysis, StockSnapshot, AgentResult, AgentStatus,
-            ReportType, MovingAverages, OHLCVBar, ValuationInfo,
-        )
-        from datetime import date, datetime
+        out_dir = _PROJECT_ROOT / "output" / "reports"
+        report.add("输出目录", "报告", out_dir.is_dir(), str(out_dir))
 
-        snap = StockSnapshot(
-            code="000001", name="平安银行",
-            fetched_at=datetime.now(),
-            bars=[OHLCVBar(date=date(2025, 1, 1), open=10, high=11, low=9, close=10.5, volume=1e6)],
-            ma=MovingAverages(ma5=10.4, ma10=10.3, ma20=10.2),
-            valuation=ValuationInfo(pe_ttm=5.0, pb=0.6, mcap=1e11),
-        )
-        analysis = StockAnalysis(
-            snapshot=snap,
-            technical=AgentResult(agent_name="technical", status=AgentStatus.OK,
-                                  summary="看涨", sentiment="bullish"),
-            fundamental=AgentResult(agent_name="fundamental", status=AgentStatus.OK,
-                                    summary="低估值", sentiment="bullish"),
-            capital=AgentResult(agent_name="capital", status=AgentStatus.OK,
-                                summary="资金流入", sentiment="bullish"),
-        )
+        # Find the most recent report file
+        report_files = sorted(out_dir.glob("*.md"), key=lambda f: f.stat().st_mtime, reverse=True)
+        if not report_files:
+            report.add("报告文件", "报告", False, "无报告文件", severity="warning")
+            return
 
-        rpt = generate_report([analysis], ReportType.PRE)
+        latest_report = report_files[0]
+        report.add("最新报告", "报告", True, f"{latest_report.name} ({latest_report.stat().st_size} bytes)")
 
-        # 7.1 Markdown 非空
-        report.add("Markdown 报告", "报告", bool(rpt.markdown),
-                   f"{len(rpt.markdown)} 字符" if rpt.markdown else "空报告")
+        # Check file is non-empty
+        content = latest_report.read_text(encoding="utf-8")
+        report.add("报告非空", "报告", len(content) > 100, f"{len(content)} 字符")
 
-        # 7.2 免责声明（多种可能格式）
-        disclaimer_found = any(kw in rpt.markdown for kw in [
+        # Check disclaimer (read-only)
+        disclaimer_found = any(kw in content for kw in [
             "不构成投资建议", "不构成任何投资建议", "免责声明", "投资有风险",
             "仅供参考", "DISCLAIMER",
         ])
@@ -432,21 +418,19 @@ def check_report_generation():
             report.add("免责声明", "报告", False,
                        "报告中未找到免责声明关键词", severity="error")
 
-        # 7.3 输出目录可写
-        out_dir = _PROJECT_ROOT / "output" / "reports"
-        out_dir.mkdir(parents=True, exist_ok=True)
-        report.add("输出目录", "报告", True, str(out_dir))
-
-        # 7.4 报告文件已写入
-        if rpt.file_path and Path(rpt.file_path).exists():
-            report.add("报告文件", "报告", True, rpt.file_path)
-        else:
-            report.add("报告文件", "报告", False, f"文件未生成: {rpt.file_path}",
-                       severity="warning")
+        # Check JSON data integrity (read-only)
+        import json
+        for json_path in [_PROJECT_ROOT / "site" / "data" / "latest.json",
+                          _PROJECT_ROOT / "docs" / "data" / "latest.json"]:
+            if json_path.exists():
+                data = json.loads(json_path.read_text())
+                stocks = data.get("stocks", [])
+                report.add(f"latest.json ({json_path.parent.parent.name})", "数据",
+                           len(stocks) >= 10, f"{len(stocks)} stocks")
 
     except Exception as e:
         import traceback
-        report.add("报告生成", "报告", False, f"{e}\n{traceback.format_exc()}",
+        report.add("报告检查", "报告", False, f"{e}\n{traceback.format_exc()}",
                    severity="error")
 
 
