@@ -142,7 +142,7 @@ TPL_HOME = """<!DOCTYPE html>
                     </span>
                 </div>
                 <div class="score-bar-track">
-                    <div class="score-bar-fill" style="width: {{ ((stock.signal_breakdown.final_score + 1) / 2 * 100) }}%; background: {{ '#22C55E' if stock.signal_breakdown.final_score > 0.2 else '#EF4444' if stock.signal_breakdown.final_score < -0.2 else '#94A3B8' }};"></div>
+                    <div class="score-bar-fill" style="width: {{ ((stock.signal_breakdown.final_score + 1) / 2 * 100)|round(1) }}%; background: {{ '#22C55E' if stock.signal_breakdown.final_score > 0.2 else '#EF4444' if stock.signal_breakdown.final_score < -0.2 else '#94A3B8' }};"></div>
                 </div>
                 <div class="confidence-row">
                     <span>置信度</span>
@@ -171,13 +171,13 @@ TPL_HOME = """<!DOCTYPE html>
                 {% if stock.volume_ratio is not none %}
                 <div class="metric-chip" style="{{ 'border-color:rgba(34,197,94,0.3)' if stock.volume_ratio > 1.2 else 'border-color:rgba(239,68,68,0.3)' if stock.volume_ratio < 0.8 else '' }}">
                     <span class="metric-chip-label">量比</span>
-                    <span class="metric-chip-val">{{ stock.volume_ratio }}</span>
+                    <span class="metric-chip-val">{{ '%.2f'|format(stock.volume_ratio) }}</span>
                 </div>
                 {% endif %}
                 {% if stock.pe_ttm is not none %}
                 <div class="metric-chip">
                     <span class="metric-chip-label">PE</span>
-                    <span class="metric-chip-val">{{ stock.pe_ttm }}</span>
+                    <span class="metric-chip-val">{{ '%.1f'|format(stock.pe_ttm) }}</span>
                 </div>
                 {% endif %}
             </div>
@@ -277,7 +277,7 @@ TPL_STOCK = """<!DOCTYPE html>
             </div>
             <div class="detail-score-label">置信度 {{ (stock.confidence * 100)|round(0) }}%</div>
             <div class="score-bar-track" style="margin-top:8px">
-                <div class="score-bar-fill" style="width: {{ ((stock.signal_breakdown.final_score + 1) / 2 * 100) }}%; background: {{ '#22C55E' if stock.signal_breakdown.final_score > 0.2 else '#EF4444' if stock.signal_breakdown.final_score < -0.2 else '#94A3B8' }};"></div>
+                <div class="score-bar-fill" style="width: {{ ((stock.signal_breakdown.final_score + 1) / 2 * 100)|round(1) }}%; background: {{ '#22C55E' if stock.signal_breakdown.final_score > 0.2 else '#EF4444' if stock.signal_breakdown.final_score < -0.2 else '#94A3B8' }};"></div>
             </div>
             <!-- 5-layer breakdown -->
             <div class="signal-grid" style="margin-top:16px">
@@ -331,21 +331,21 @@ TPL_STOCK = """<!DOCTYPE html>
                 </div>
                 {% endif %}
                 {% if stock.volume_ratio is not none %}
-                <div class="metric-chip" style="min-width:80px">
+                <div class="metric-chip">
                     <span class="metric-chip-label">量比</span>
-                    <span class="metric-chip-val">{{ stock.volume_ratio }}</span>
+                    <span class="metric-chip-val">{{ '%.2f'|format(stock.volume_ratio) }}</span>
                 </div>
                 {% endif %}
                 {% if stock.pe_ttm is not none %}
-                <div class="metric-chip" style="min-width:80px">
-                    <span class="metric-chip-label">PE(TTM)</span>
-                    <span class="metric-chip-val">{{ stock.pe_ttm }}</span>
+                <div class="metric-chip">
+                    <span class="metric-chip-label">PE</span>
+                    <span class="metric-chip-val">{{ '%.1f'|format(stock.pe_ttm) }}</span>
                 </div>
                 {% endif %}
                 {% if stock.pb is not none %}
-                <div class="metric-chip" style="min-width:80px">
+                <div class="metric-chip">
                     <span class="metric-chip-label">PB</span>
-                    <span class="metric-chip-val">{{ stock.pb }}</span>
+                    <span class="metric-chip-val">{{ '%.2f'|format(stock.pb) }}</span>
                 </div>
                 {% endif %}
                 {% if stock.mcap_yi is not none %}
@@ -666,8 +666,8 @@ TPL_DASHBOARD = """<!DOCTYPE html>
                         {{ '%+.1f'|format(stock.momentum_5d) if stock.momentum_5d is not none else '-' }}%
                     </td>
                     <td>{{ {'bullish': '多头', 'bearish': '空头', 'neutral': '交叉'}.get(stock.ma_alignment, '-') }}</td>
-                    <td>{{ stock.volume_ratio if stock.volume_ratio is not none else '-' }}</td>
-                    <td>{{ stock.pe_ttm if stock.pe_ttm is not none else '-' }}</td>
+                    <td>{{ '%.2f'|format(stock.volume_ratio) if stock.volume_ratio is not none else '-' }}</td>
+                    <td>{{ '%.1f'|format(stock.pe_ttm) if stock.pe_ttm is not none else '-' }}</td>
                     <td>{{ (stock.confidence * 100)|round(0) }}%</td>
                     <td>{% if stock.signal_breakdown.has_dragon_tiger %}<span style="color:var(--accent-purple)">✅</span>{% else %}⏸{% endif %}</td>
                     <td>{% if stock.signal_breakdown.has_announcement %}<span style="color:var(--accent-warm)">✅</span>{% else %}⏸{% endif %}</td>
