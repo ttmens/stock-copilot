@@ -759,15 +759,28 @@ TPL_DASHBOARD = """<!DOCTYPE html>
 """
 
 
-def generate_site(report: Report) -> str:
+def generate_site(report: Report, target_dir: str | None = None) -> str:
     """Generate multi-page static site from a Report.
+
+    Args:
+        report: The analysis report to render.
+        target_dir: Optional output directory. When None (production), writes to
+            site/ and syncs to docs/. When set (testing), writes ONLY to that dir
+            and skips docs/ sync entirely.
 
     Returns the path to index.html.
     """
     settings = get_settings()
-    site_dir = Path(settings.site.output_dir)
-    archive_dir = Path(settings.site.archive_dir)
-    data_dir = Path(settings.site.data_dir)
+    is_test = target_dir is not None
+
+    if is_test:
+        site_dir = Path(target_dir)
+        archive_dir = site_dir / "archive"
+        data_dir = site_dir / "data"
+    else:
+        site_dir = Path(settings.site.output_dir)
+        archive_dir = Path(settings.site.archive_dir)
+        data_dir = Path(settings.site.data_dir)
 
     site_dir.mkdir(parents=True, exist_ok=True)
     archive_dir.mkdir(parents=True, exist_ok=True)
@@ -988,7 +1001,9 @@ def generate_site(report: Report) -> str:
     archive_file.write_text(html, encoding="utf-8")
 
     # Sync to docs/ for GitHub Pages
-    _sync_to_docs(settings)
+    # Sync to docs/ for GitHub Pages (production only, never in test mode)
+    if not is_test:
+        _sync_to_docs(settings)
 
     logger.info("Site generated: %s (%d stocks, %d pages)", index_path, len(stocks), 3 + len(stocks))
     return str(index_path)
@@ -1086,17 +1101,53 @@ def _load_history(settings) -> dict:
 
 
 def _sync_to_docs(settings) -> None:
-    """Sync site/ to repo docs/ for GitHub Pages."""
+    """Sync site/ to repo docs/ for GitHub Pages.
+
+    PROTECTION: Never overwrite docs/ with partial data.
+    If the new report has significantly fewer stocks than the existing one,
+    skip the sync to prevent data loss.
+    """
     import pathlib
+    import json
 
     project_root = pathlib.Path(__file__).resolve().parent.parent.parent
     docs_dir = project_root / "docs"
+    site_dir = Path(settings.site.output_dir)
+
+    # Check stock counts before syncing
+    new_count = 0
+    existing_count = 0
+
+    site_latest = site_dir / "data" / "latest.json"
+    docs_latest = docs_dir / "data" / "latest.json"
+
+    if site_latest.exists():
+        try:
+            new_count = len(json.loads(site_latest.read_text()).get("stocks", []))
+        except Exception:
+            pass
+
+    if docs_latest.exists():
+        try:
+            existing_count = len(json.loads(docs_latest.read_text()).get("stocks", []))
+        except Exception:
+            pass
+
+    if new_count == 0 and existing_count > 0:
+        logger.warning("_sync_to_docs: SKIPPED — new site has 0 stocks, docs/ has %d. "
+                        "Preventing data loss.", existing_count)
+        return
+
+    if new_count < existing_count and new_count < existing_count * 0.8:
+        logger.warning("_sync_to_docs: SKIPPED — new site has %d stocks, docs/ has %d (>20%% drop). "
+                        "Preventing partial data overwrite.", new_count, existing_count)
+        return
 
     if not docs_dir.exists():
         docs_dir.mkdir(exist_ok=True)
 
     for src_dir in ["assets", "archive", "data", "stock"]:
-        src = Path(settings.site.output_dir) / src_dir
+        src = site_dir / src_dir
         dst = docs_dir / src_dir
         if src.exists():
             if dst.exists():
@@ -1105,8 +1156,8 @@ def _sync_to_docs(settings) -> None:
 
     # Copy individual pages
     for page in ["index.html", "history.html", "dashboard.html"]:
-        src = Path(settings.site.output_dir) / page
+        src = site_dir / page
         if src.exists():
             shutil.copy2(src, docs_dir / page)
 
-    logger.info("Site synced to docs/ for GitHub Pages")
+    logger.info("Site synced to docs/ for GitHub Pages (%d stocks)", new_count)
