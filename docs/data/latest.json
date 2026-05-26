@@ -1,64 +1,2016 @@
 {
   "meta": {
-    "report_type": "pre",
+    "report_type": "post",
     "trade_date": "2026-05-26",
-    "generated_at": "2026-05-26T16:27:16.009838",
-    "symbol_count": 1,
-    "disclaimer": "⚠️ 本报告仅供个人研究参考，不构成投资建议。报告内容基于公开数据和 AI 分析生成，可能存在错误或遗漏。股市有风险，决策需谨慎。作者不对任何投资损失承担责任。"
+    "generated_at": "2026-05-26T16:30:00",
+    "symbol_count": 50,
+    "disclaimer": "⚠️ 本报告仅供个人研究参考，不构成投资建议。"
   },
   "market": {
     "index_name": "上证指数",
-    "close": 3200.0,
+    "close": 3200,
     "change_pct": 1.5
   },
   "stocks": [
     {
-      "code": "600519",
-      "name": "贵州茅台",
+      "code": "601919",
+      "name": "中远海控",
       "overall_sentiment": "buy",
       "overall_focus": "🟢 看多",
-      "confidence": 0.7,
-      "hard_score": 0.0,
-      "momentum_20d": null,
-      "momentum_5d": null,
-      "ma_alignment": null,
-      "volume_ratio": null,
-      "pe_ttm": null,
-      "pb": null,
-      "mcap_yi": null,
       "technical": {
         "status": "ok",
-        "summary": "均线多头排列",
-        "sentiment": "bullish"
+        "summary": "",
+        "sentiment": null
       },
       "fundamental": {
-        "status": "unavailable",
+        "status": "ok",
         "summary": "",
         "sentiment": "neutral"
       },
       "capital": {
-        "status": "unavailable",
+        "status": "ok",
         "summary": "",
         "sentiment": "neutral"
       },
-      "announcement": {
-        "status": "unavailable",
-        "summary": "无公告数据",
-        "sentiment": "neutral",
-        "key_events": []
-      },
-      "risk_points": [],
       "signal_breakdown": {
-        "hard_score": 0.0,
-        "soft_score": 1.0,
+        "hard_score": 0.5805055975656771,
+        "soft_score": 0.0,
         "gate_score": 0.5,
-        "dragon_tiger_score": 0.0,
-        "announcement_score": 0.0,
-        "final_score": 0.325,
-        "has_dragon_tiger": false,
-        "has_announcement": false
+        "final_score": 0.3072015838262709,
+        "final_signal": "buy"
       },
-      "dragon_tiger": []
+      "momentum_5d": 4.642857142857149,
+      "momentum_20d": 1.3139695712309774,
+      "ma_alignment": "bullish",
+      "volume_ratio": 0.9919816852268267,
+      "pe_ttm": 11.480000000000002,
+      "pe_percentile": 11.480000000000002,
+      "pb": 0,
+      "mcap_yi": 0,
+      "announcement": [],
+      "dragon_tiger": [],
+      "confidence": 0.5,
+      "risk_points": []
+    },
+    {
+      "code": "601138",
+      "name": "工业富联",
+      "overall_sentiment": "hold",
+      "overall_focus": "⚪ 观望",
+      "technical": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": null
+      },
+      "fundamental": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": "neutral"
+      },
+      "capital": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": "neutral"
+      },
+      "signal_breakdown": {
+        "hard_score": 0.21994853328976555,
+        "soft_score": 0.0,
+        "gate_score": 0.5,
+        "final_score": 0.16356349631590625,
+        "final_signal": "hold"
+      },
+      "momentum_5d": 1.9135981443896721,
+      "momentum_20d": 5.097921961429197,
+      "ma_alignment": "bullish",
+      "volume_ratio": 1.0265150101819567,
+      "pe_ttm": 52.97818181818182,
+      "pe_percentile": 52.97818181818182,
+      "pb": 0,
+      "mcap_yi": 0,
+      "announcement": [],
+      "dragon_tiger": [],
+      "confidence": 0.5,
+      "risk_points": []
+    },
+    {
+      "code": "601088",
+      "name": "中国神华",
+      "overall_sentiment": "hold",
+      "overall_focus": "⚪ 观望",
+      "technical": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": null
+      },
+      "fundamental": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": "neutral"
+      },
+      "capital": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": "neutral"
+      },
+      "signal_breakdown": {
+        "hard_score": 0.024169891326945598,
+        "soft_score": 0.0,
+        "gate_score": 0.7,
+        "final_score": 0.11462866153077822,
+        "final_signal": "hold"
+      },
+      "momentum_5d": -2.3336968375136324,
+      "momentum_20d": -2.37628079354697,
+      "ma_alignment": "neutral",
+      "volume_ratio": 1.6426363832016284,
+      "pe_ttm": 27.63090909090909,
+      "pe_percentile": 27.63090909090909,
+      "pb": 0,
+      "mcap_yi": 0,
+      "announcement": [],
+      "dragon_tiger": [],
+      "confidence": 0.5,
+      "risk_points": []
+    },
+    {
+      "code": "601166",
+      "name": "兴业银行",
+      "overall_sentiment": "hold",
+      "overall_focus": "⚪ 观望",
+      "technical": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": null
+      },
+      "fundamental": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": "neutral"
+      },
+      "capital": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": "neutral"
+      },
+      "signal_breakdown": {
+        "hard_score": 0.035419614697415766,
+        "soft_score": 0.0,
+        "gate_score": 0.5,
+        "final_score": 0.08916786567896631,
+        "final_signal": "hold"
+      },
+      "momentum_5d": 1.0888252148997246,
+      "momentum_20d": -3.18331503841931,
+      "ma_alignment": "neutral",
+      "volume_ratio": 1.0313967297401914,
+      "pe_ttm": 5.0,
+      "pe_percentile": 5.0,
+      "pb": 0,
+      "mcap_yi": 0,
+      "announcement": [],
+      "dragon_tiger": [],
+      "confidence": 0.5,
+      "risk_points": []
+    },
+    {
+      "code": "300059",
+      "name": "东方财富",
+      "overall_sentiment": "hold",
+      "overall_focus": "⚪ 观望",
+      "technical": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": null
+      },
+      "fundamental": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": "neutral"
+      },
+      "capital": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": "neutral"
+      },
+      "signal_breakdown": {
+        "hard_score": -0.0721984930960784,
+        "soft_score": 0.0,
+        "gate_score": 0.5,
+        "final_score": 0.0878989634993013,
+        "final_signal": "hold"
+      },
+      "momentum_5d": 0.5058168942842833,
+      "momentum_20d": 0.8044243338360957,
+      "ma_alignment": "neutral",
+      "volume_ratio": 0.9753575295707781,
+      "pe_ttm": 36.025454545454544,
+      "pe_percentile": 36.025454545454544,
+      "pb": 0,
+      "mcap_yi": 0,
+      "announcement": [],
+      "dragon_tiger": [],
+      "confidence": 0.5,
+      "risk_points": []
+    },
+    {
+      "code": "600030",
+      "name": "中信证券",
+      "overall_sentiment": "hold",
+      "overall_focus": "⚪ 观望",
+      "technical": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": null
+      },
+      "fundamental": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": "neutral"
+      },
+      "capital": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": "neutral"
+      },
+      "signal_breakdown": {
+        "hard_score": -0.03396031665517048,
+        "soft_score": 0.0,
+        "gate_score": 0.5,
+        "final_score": 0.06141360713793181,
+        "final_signal": "hold"
+      },
+      "momentum_5d": 0.11467889908256534,
+      "momentum_20d": -1.9468363908648478,
+      "ma_alignment": "neutral",
+      "volume_ratio": 0.8675567788941179,
+      "pe_ttm": 15.669090909090908,
+      "pe_percentile": 15.669090909090908,
+      "pb": 0,
+      "mcap_yi": 0,
+      "announcement": [],
+      "dragon_tiger": [],
+      "confidence": 0.5,
+      "risk_points": []
+    },
+    {
+      "code": "600000",
+      "name": "浦发银行",
+      "overall_sentiment": "hold",
+      "overall_focus": "⚪ 观望",
+      "technical": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": null
+      },
+      "fundamental": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": "neutral"
+      },
+      "capital": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": "neutral"
+      },
+      "signal_breakdown": {
+        "hard_score": -0.050011169030152236,
+        "soft_score": 0.0,
+        "gate_score": 0.5,
+        "final_score": 0.0549965613879391,
+        "final_signal": "hold"
+      },
+      "momentum_5d": 0.0,
+      "momentum_20d": -5.515088449531735,
+      "ma_alignment": "neutral",
+      "volume_ratio": 0.970560687880762,
+      "pe_ttm": 6.652727272727272,
+      "pe_percentile": 6.652727272727272,
+      "pb": 0,
+      "mcap_yi": 0,
+      "announcement": [],
+      "dragon_tiger": [],
+      "confidence": 0.5,
+      "risk_points": []
+    },
+    {
+      "code": "601318",
+      "name": "中国平安",
+      "overall_sentiment": "hold",
+      "overall_focus": "⚪ 观望",
+      "technical": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": null
+      },
+      "fundamental": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": "neutral"
+      },
+      "capital": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": "neutral"
+      },
+      "signal_breakdown": {
+        "hard_score": -0.10632010336738595,
+        "soft_score": 0.0,
+        "gate_score": 0.5,
+        "final_score": 0.03246939845304561,
+        "final_signal": "hold"
+      },
+      "momentum_5d": -1.2206230643104443,
+      "momentum_20d": -6.56556953300017,
+      "ma_alignment": "neutral",
+      "volume_ratio": 0.9713402561459736,
+      "pe_ttm": 8.91090909090909,
+      "pe_percentile": 8.91090909090909,
+      "pb": 0,
+      "mcap_yi": 0,
+      "announcement": [],
+      "dragon_tiger": [],
+      "confidence": 0.5,
+      "risk_points": []
+    },
+    {
+      "code": "000651",
+      "name": "格力电器",
+      "overall_sentiment": "hold",
+      "overall_focus": "⚪ 观望",
+      "technical": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": null
+      },
+      "fundamental": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": "neutral"
+      },
+      "capital": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": "neutral"
+      },
+      "signal_breakdown": {
+        "hard_score": -0.13567639980313517,
+        "soft_score": 0.0,
+        "gate_score": 0.5,
+        "final_score": 0.020730160678745918,
+        "final_signal": "hold"
+      },
+      "momentum_5d": -2.719717955175016,
+      "momentum_20d": 4.57498646453709,
+      "ma_alignment": "neutral",
+      "volume_ratio": 0.6077804866957344,
+      "pe_ttm": 8.96,
+      "pe_percentile": 8.96,
+      "pb": 0,
+      "mcap_yi": 0,
+      "announcement": [],
+      "dragon_tiger": [],
+      "confidence": 0.5,
+      "risk_points": []
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "overall_sentiment": "hold",
+      "overall_focus": "⚪ 观望",
+      "technical": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": null
+      },
+      "fundamental": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": "neutral"
+      },
+      "capital": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": "neutral"
+      },
+      "signal_breakdown": {
+        "hard_score": -0.14666067974124822,
+        "soft_score": 0.0,
+        "gate_score": 0.5,
+        "final_score": 0.015422029903500716,
+        "final_signal": "hold"
+      },
+      "momentum_5d": 0.48995590396865296,
+      "momentum_20d": 3.324937027707797,
+      "ma_alignment": "bearish",
+      "volume_ratio": 0.6593608079446225,
+      "pe_ttm": 21.69090909090909,
+      "pe_percentile": 21.69090909090909,
+      "pb": 0,
+      "mcap_yi": 0,
+      "announcement": [],
+      "dragon_tiger": [],
+      "confidence": 0.5,
+      "risk_points": []
+    },
+    {
+      "code": "600887",
+      "name": "伊利股份",
+      "overall_sentiment": "hold",
+      "overall_focus": "⚪ 观望",
+      "technical": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": null
+      },
+      "fundamental": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": "neutral"
+      },
+      "capital": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": "neutral"
+      },
+      "signal_breakdown": {
+        "hard_score": -0.16770364799891604,
+        "soft_score": 0.0,
+        "gate_score": 0.5,
+        "final_score": 0.007919245800433572,
+        "final_signal": "hold"
+      },
+      "momentum_5d": -3.737632832539395,
+      "momentum_20d": 3.875049426650845,
+      "ma_alignment": "neutral",
+      "volume_ratio": 0.6511668545089735,
+      "pe_ttm": 19.31818181818182,
+      "pe_percentile": 19.31818181818182,
+      "pb": 0,
+      "mcap_yi": 0,
+      "announcement": [],
+      "dragon_tiger": [],
+      "confidence": 0.5,
+      "risk_points": []
+    },
+    {
+      "code": "600600",
+      "name": "青岛啤酒",
+      "overall_sentiment": "hold",
+      "overall_focus": "⚪ 观望",
+      "technical": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": null
+      },
+      "fundamental": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": "neutral"
+      },
+      "capital": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": "neutral"
+      },
+      "signal_breakdown": {
+        "hard_score": -0.19243733790875353,
+        "soft_score": 0.0,
+        "gate_score": 0.5,
+        "final_score": 0.007493224941654761,
+        "final_signal": "hold"
+      },
+      "momentum_5d": -2.3338735818476564,
+      "momentum_20d": -2.516534924987901,
+      "ma_alignment": "bearish",
+      "volume_ratio": 1.1610683912994917,
+      "pe_ttm": 25.56909090909091,
+      "pe_percentile": 25.56909090909091,
+      "pb": 0,
+      "mcap_yi": 0,
+      "announcement": [],
+      "dragon_tiger": [],
+      "confidence": 0.5,
+      "risk_points": []
+    },
+    {
+      "code": "601601",
+      "name": "中国太保",
+      "overall_sentiment": "hold",
+      "overall_focus": "⚪ 观望",
+      "technical": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": null
+      },
+      "fundamental": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": "neutral"
+      },
+      "capital": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": "neutral"
+      },
+      "signal_breakdown": {
+        "hard_score": -0.1822238313067292,
+        "soft_score": 0.0,
+        "gate_score": 0.5,
+        "final_score": 0.002109053277308315,
+        "final_signal": "hold"
+      },
+      "momentum_5d": -1.7124298789489178,
+      "momentum_20d": -10.148448043184876,
+      "ma_alignment": "neutral",
+      "volume_ratio": 0.9147356911181062,
+      "pe_ttm": 6.538181818181819,
+      "pe_percentile": 6.538181818181819,
+      "pb": 0,
+      "mcap_yi": 0,
+      "announcement": [],
+      "dragon_tiger": [],
+      "confidence": 0.5,
+      "risk_points": []
+    },
+    {
+      "code": "600941",
+      "name": "中国移动",
+      "overall_sentiment": "hold",
+      "overall_focus": "⚪ 观望",
+      "technical": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": null
+      },
+      "fundamental": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": "neutral"
+      },
+      "capital": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": "neutral"
+      },
+      "signal_breakdown": {
+        "hard_score": -0.18489618085789222,
+        "soft_score": 0.0,
+        "gate_score": 0.5,
+        "final_score": 0.0006814796568431203,
+        "final_signal": "hold"
+      },
+      "momentum_5d": -3.7169905331340236,
+      "momentum_20d": 0.8348987685243392,
+      "ma_alignment": "neutral",
+      "volume_ratio": 0.7269863520421352,
+      "pe_ttm": 22.05090909090909,
+      "pe_percentile": 22.05090909090909,
+      "pb": 0,
+      "mcap_yi": 0,
+      "announcement": [],
+      "dragon_tiger": [],
+      "confidence": 0.5,
+      "risk_points": []
+    },
+    {
+      "code": "000333",
+      "name": "美的集团",
+      "overall_sentiment": "hold",
+      "overall_focus": "⚪ 观望",
+      "technical": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": null
+      },
+      "fundamental": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": "neutral"
+      },
+      "capital": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": "neutral"
+      },
+      "signal_breakdown": {
+        "hard_score": -0.19113977669785115,
+        "soft_score": 0.0,
+        "gate_score": 0.5,
+        "final_score": -0.0014556454791404688,
+        "final_signal": "hold"
+      },
+      "momentum_5d": -3.6460219727151966,
+      "momentum_20d": 0.6431273644388558,
+      "ma_alignment": "neutral",
+      "volume_ratio": 0.6913370148220987,
+      "pe_ttm": 19.301818181818184,
+      "pe_percentile": 19.301818181818184,
+      "pb": 0,
+      "mcap_yi": 0,
+      "announcement": [],
+      "dragon_tiger": [],
+      "confidence": 0.5,
+      "risk_points": []
+    },
+    {
+      "code": "002594",
+      "name": "比亚迪",
+      "overall_sentiment": "hold",
+      "overall_focus": "⚪ 观望",
+      "technical": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": null
+      },
+      "fundamental": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": "neutral"
+      },
+      "capital": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": "neutral"
+      },
+      "signal_breakdown": {
+        "hard_score": -0.19056820161146285,
+        "soft_score": 0.0,
+        "gate_score": 0.5,
+        "final_score": -0.0019914260445851456,
+        "final_signal": "hold"
+      },
+      "momentum_5d": 1.5342291820971132,
+      "momentum_20d": -5.569769730368046,
+      "ma_alignment": "neutral",
+      "volume_ratio": 0.8787433019915254,
+      "pe_ttm": 48.78909090909091,
+      "pe_percentile": 48.78909090909091,
+      "pb": 0,
+      "mcap_yi": 0,
+      "announcement": [],
+      "dragon_tiger": [],
+      "confidence": 0.5,
+      "risk_points": []
+    },
+    {
+      "code": "600809",
+      "name": "山西汾酒",
+      "overall_sentiment": "hold",
+      "overall_focus": "⚪ 观望",
+      "technical": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": null
+      },
+      "fundamental": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": "neutral"
+      },
+      "capital": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": "neutral"
+      },
+      "signal_breakdown": {
+        "hard_score": -0.2123719183190238,
+        "soft_score": 0.0,
+        "gate_score": 0.5,
+        "final_score": -0.009950076527609542,
+        "final_signal": "hold"
+      },
+      "momentum_5d": -0.9319162045594687,
+      "momentum_20d": -6.047768607114168,
+      "ma_alignment": "bearish",
+      "volume_ratio": 0.9791660427682903,
+      "pe_ttm": 20.201818181818183,
+      "pe_percentile": 20.201818181818183,
+      "pb": 0,
+      "mcap_yi": 0,
+      "announcement": [],
+      "dragon_tiger": [],
+      "confidence": 0.5,
+      "risk_points": []
+    },
+    {
+      "code": "600900",
+      "name": "长江电力",
+      "overall_sentiment": "hold",
+      "overall_focus": "⚪ 观望",
+      "technical": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": null
+      },
+      "fundamental": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": "neutral"
+      },
+      "capital": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": "neutral"
+      },
+      "signal_breakdown": {
+        "hard_score": -0.23134729340608892,
+        "soft_score": 0.0,
+        "gate_score": 0.5,
+        "final_score": -0.018774825362435577,
+        "final_signal": "hold"
+      },
+      "momentum_5d": -0.8181480104127892,
+      "momentum_20d": -0.7073715562174177,
+      "ma_alignment": "bearish",
+      "volume_ratio": 0.7916436621446018,
+      "pe_ttm": 26.419999999999998,
+      "pe_percentile": 26.419999999999998,
+      "pb": 0,
+      "mcap_yi": 0,
+      "announcement": [],
+      "dragon_tiger": [],
+      "confidence": 0.5,
+      "risk_points": []
+    },
+    {
+      "code": "601816",
+      "name": "京沪高铁",
+      "overall_sentiment": "hold",
+      "overall_focus": "⚪ 观望",
+      "technical": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": null
+      },
+      "fundamental": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": "neutral"
+      },
+      "capital": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": "neutral"
+      },
+      "signal_breakdown": {
+        "hard_score": -0.24573601980090584,
+        "soft_score": 0.0,
+        "gate_score": 0.5,
+        "final_score": -0.023574124720362355,
+        "final_signal": "hold"
+      },
+      "momentum_5d": -3.006012024048099,
+      "momentum_20d": -2.0242914979757165,
+      "ma_alignment": "neutral",
+      "volume_ratio": 0.6305741368017811,
+      "pe_ttm": 25.847272727272724,
+      "pe_percentile": 25.847272727272724,
+      "pb": 0,
+      "mcap_yi": 0,
+      "announcement": [],
+      "dragon_tiger": [],
+      "confidence": 0.5,
+      "risk_points": []
+    },
+    {
+      "code": "601688",
+      "name": "华泰证券",
+      "overall_sentiment": "hold",
+      "overall_focus": "⚪ 观望",
+      "technical": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": null
+      },
+      "fundamental": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": "neutral"
+      },
+      "capital": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": "neutral"
+      },
+      "signal_breakdown": {
+        "hard_score": -0.24707554003664736,
+        "soft_score": 0.0,
+        "gate_score": 0.5,
+        "final_score": -0.02382974021465896,
+        "final_signal": "hold"
+      },
+      "momentum_5d": 0.3266194882961315,
+      "momentum_20d": -4.901960784313719,
+      "ma_alignment": "bearish",
+      "volume_ratio": 0.6666217276548551,
+      "pe_ttm": 12.330909090909092,
+      "pe_percentile": 12.330909090909092,
+      "pb": 0,
+      "mcap_yi": 0,
+      "announcement": [],
+      "dragon_tiger": [],
+      "confidence": 0.5,
+      "risk_points": []
+    },
+    {
+      "code": "601398",
+      "name": "工商银行",
+      "overall_sentiment": "hold",
+      "overall_focus": "⚪ 观望",
+      "technical": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": null
+      },
+      "fundamental": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": "neutral"
+      },
+      "capital": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": "neutral"
+      },
+      "signal_breakdown": {
+        "hard_score": -0.25503940826636257,
+        "soft_score": 0.0,
+        "gate_score": 0.5,
+        "final_score": -0.02701551850654503,
+        "final_signal": "hold"
+      },
+      "momentum_5d": -0.2781641168289384,
+      "momentum_20d": -4.654255319148937,
+      "ma_alignment": "bearish",
+      "volume_ratio": 0.702752839230888,
+      "pe_ttm": 8.076363636363636,
+      "pe_percentile": 8.076363636363636,
+      "pb": 0,
+      "mcap_yi": 0,
+      "announcement": [],
+      "dragon_tiger": [],
+      "confidence": 0.5,
+      "risk_points": []
+    },
+    {
+      "code": "002230",
+      "name": "科大讯飞",
+      "overall_sentiment": "hold",
+      "overall_focus": "⚪ 观望",
+      "technical": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": null
+      },
+      "fundamental": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": "neutral"
+      },
+      "capital": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": "neutral"
+      },
+      "signal_breakdown": {
+        "hard_score": -0.2782352355355566,
+        "soft_score": 0.0,
+        "gate_score": 0.5,
+        "final_score": -0.03629607181422266,
+        "final_signal": "hold"
+      },
+      "momentum_5d": -0.06158899609937096,
+      "momentum_20d": -1.6764290042415642,
+      "ma_alignment": "neutral",
+      "volume_ratio": 1.0636274112497315,
+      "pe_ttm": 95.0,
+      "pe_percentile": 95.0,
+      "pb": 0,
+      "mcap_yi": 0,
+      "announcement": [],
+      "dragon_tiger": [],
+      "confidence": 0.5,
+      "risk_points": []
+    },
+    {
+      "code": "601336",
+      "name": "新华保险",
+      "overall_sentiment": "hold",
+      "overall_focus": "⚪ 观望",
+      "technical": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": null
+      },
+      "fundamental": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": "neutral"
+      },
+      "capital": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": "neutral"
+      },
+      "signal_breakdown": {
+        "hard_score": -0.27943257506471825,
+        "soft_score": 0.0,
+        "gate_score": 0.5,
+        "final_score": -0.036772422825887316,
+        "final_signal": "hold"
+      },
+      "momentum_5d": -1.19760479041916,
+      "momentum_20d": -6.735751295336789,
+      "ma_alignment": "bearish",
+      "volume_ratio": 0.81502650811471,
+      "pe_ttm": 5.032727272727272,
+      "pe_percentile": 5.032727272727272,
+      "pb": 0,
+      "mcap_yi": 0,
+      "announcement": [],
+      "dragon_tiger": [],
+      "confidence": 0.5,
+      "risk_points": []
+    },
+    {
+      "code": "601668",
+      "name": "中国建筑",
+      "overall_sentiment": "hold",
+      "overall_focus": "⚪ 观望",
+      "technical": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": null
+      },
+      "fundamental": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": "neutral"
+      },
+      "capital": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": "neutral"
+      },
+      "signal_breakdown": {
+        "hard_score": -0.2867106500331726,
+        "soft_score": 0.0,
+        "gate_score": 0.5,
+        "final_score": -0.03968425041326905,
+        "final_signal": "hold"
+      },
+      "momentum_5d": -2.4539877300613466,
+      "momentum_20d": -1.6494845360824795,
+      "ma_alignment": "bearish",
+      "volume_ratio": 0.7380898106067522,
+      "pe_ttm": 5.327272727272727,
+      "pe_percentile": 5.327272727272727,
+      "pb": 0,
+      "mcap_yi": 0,
+      "announcement": [],
+      "dragon_tiger": [],
+      "confidence": 0.5,
+      "risk_points": []
+    },
+    {
+      "code": "600050",
+      "name": "中国联通",
+      "overall_sentiment": "hold",
+      "overall_focus": "⚪ 观望",
+      "technical": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": null
+      },
+      "fundamental": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": "neutral"
+      },
+      "capital": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": "neutral"
+      },
+      "signal_breakdown": {
+        "hard_score": -0.34182169453731054,
+        "soft_score": 0.0,
+        "gate_score": 0.5,
+        "final_score": -0.041059482342685624,
+        "final_signal": "hold"
+      },
+      "momentum_5d": -9.349593495934961,
+      "momentum_20d": -0.8888888888888946,
+      "ma_alignment": "neutral",
+      "volume_ratio": 0.6207274210331758,
+      "pe_ttm": 23.18,
+      "pe_percentile": 23.18,
+      "pb": 0,
+      "mcap_yi": 0,
+      "announcement": [],
+      "dragon_tiger": [],
+      "confidence": 0.5,
+      "risk_points": []
+    },
+    {
+      "code": "600036",
+      "name": "招商银行",
+      "overall_sentiment": "hold",
+      "overall_focus": "⚪ 观望",
+      "technical": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": null
+      },
+      "fundamental": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": "neutral"
+      },
+      "capital": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": "neutral"
+      },
+      "signal_breakdown": {
+        "hard_score": -0.3044288788516315,
+        "soft_score": 0.0,
+        "gate_score": 0.5,
+        "final_score": -0.046770955140652604,
+        "final_signal": "hold"
+      },
+      "momentum_5d": -1.4144649052575398,
+      "momentum_20d": -7.045797684952204,
+      "ma_alignment": "bearish",
+      "volume_ratio": 0.7701409448568878,
+      "pe_ttm": 6.93090909090909,
+      "pe_percentile": 6.93090909090909,
+      "pb": 0,
+      "mcap_yi": 0,
+      "announcement": [],
+      "dragon_tiger": [],
+      "confidence": 0.5,
+      "risk_points": []
+    },
+    {
+      "code": "000001",
+      "name": "平安银行",
+      "overall_sentiment": "hold",
+      "overall_focus": "⚪ 观望",
+      "technical": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": null
+      },
+      "fundamental": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": "neutral"
+      },
+      "capital": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": "neutral"
+      },
+      "signal_breakdown": {
+        "hard_score": -0.3674710299180719,
+        "soft_score": 0.0,
+        "gate_score": 0.5,
+        "final_score": -0.04993959337214447,
+        "final_signal": "hold"
+      },
+      "momentum_5d": -1.6574585635359074,
+      "momentum_20d": -2.732240437158473,
+      "ma_alignment": "bearish",
+      "volume_ratio": 0.6003500603427774,
+      "pe_ttm": 5.0,
+      "pe_percentile": 5.0,
+      "pb": 0,
+      "mcap_yi": 0,
+      "announcement": [],
+      "dragon_tiger": [],
+      "confidence": 0.5,
+      "risk_points": []
+    },
+    {
+      "code": "000538",
+      "name": "云南白药",
+      "overall_sentiment": "hold",
+      "overall_focus": "⚪ 观望",
+      "technical": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": null
+      },
+      "fundamental": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": "neutral"
+      },
+      "capital": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": "neutral"
+      },
+      "signal_breakdown": {
+        "hard_score": -0.4080675777836893,
+        "soft_score": 0.0,
+        "gate_score": 0.5,
+        "final_score": -0.05215416457045101,
+        "final_signal": "hold"
+      },
+      "momentum_5d": -2.732992528509637,
+      "momentum_20d": -7.305502846299817,
+      "ma_alignment": "bearish",
+      "volume_ratio": 0.7285762388338218,
+      "pe_ttm": 24.29272727272727,
+      "pe_percentile": 24.29272727272727,
+      "pb": 0,
+      "mcap_yi": 0,
+      "announcement": [],
+      "dragon_tiger": [],
+      "confidence": 0.5,
+      "risk_points": []
+    },
+    {
+      "code": "000661",
+      "name": "长春高新",
+      "overall_sentiment": "hold",
+      "overall_focus": "⚪ 观望",
+      "technical": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": null
+      },
+      "fundamental": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": "neutral"
+      },
+      "capital": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": "neutral"
+      },
+      "signal_breakdown": {
+        "hard_score": -0.32884657024970676,
+        "soft_score": 0.0,
+        "gate_score": 0.5,
+        "final_score": -0.056539449499882696,
+        "final_signal": "hold"
+      },
+      "momentum_5d": -3.4616315662067243,
+      "momentum_20d": -8.385021824029405,
+      "ma_alignment": "bearish",
+      "volume_ratio": 0.9879724800736273,
+      "pe_ttm": 5.0,
+      "pe_percentile": 5.0,
+      "pb": 0,
+      "mcap_yi": 0,
+      "announcement": [],
+      "dragon_tiger": [],
+      "confidence": 0.5,
+      "risk_points": []
+    },
+    {
+      "code": "600016",
+      "name": "民生银行",
+      "overall_sentiment": "hold",
+      "overall_focus": "⚪ 观望",
+      "technical": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": null
+      },
+      "fundamental": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": "neutral"
+      },
+      "capital": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": "neutral"
+      },
+      "signal_breakdown": {
+        "hard_score": -0.3481753814326104,
+        "soft_score": 0.0,
+        "gate_score": 0.5,
+        "final_score": -0.06427015257304418,
+        "final_signal": "hold"
+      },
+      "momentum_5d": -1.4005602240896309,
+      "momentum_20d": -5.882352941176472,
+      "ma_alignment": "bearish",
+      "volume_ratio": 0.7501977638120851,
+      "pe_ttm": 5.409090909090909,
+      "pe_percentile": 5.409090909090909,
+      "pb": 0,
+      "mcap_yi": 0,
+      "announcement": [],
+      "dragon_tiger": [],
+      "confidence": 0.5,
+      "risk_points": []
+    },
+    {
+      "code": "600048",
+      "name": "保利发展",
+      "overall_sentiment": "hold",
+      "overall_focus": "⚪ 观望",
+      "technical": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": null
+      },
+      "fundamental": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": "neutral"
+      },
+      "capital": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": "neutral"
+      },
+      "signal_breakdown": {
+        "hard_score": -0.35078918245477303,
+        "soft_score": 0.0,
+        "gate_score": 0.5,
+        "final_score": -0.06531604378190924,
+        "final_signal": "hold"
+      },
+      "momentum_5d": -2.975206611570247,
+      "momentum_20d": -1.0118043844856595,
+      "ma_alignment": "bearish",
+      "volume_ratio": 0.5615310022519457,
+      "pe_ttm": 5.0,
+      "pe_percentile": 5.0,
+      "pb": 0,
+      "mcap_yi": 0,
+      "announcement": [],
+      "dragon_tiger": [],
+      "confidence": 0.5,
+      "risk_points": []
+    },
+    {
+      "code": "600519",
+      "name": "贵州茅台",
+      "overall_sentiment": "hold",
+      "overall_focus": "⚪ 观望",
+      "technical": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": null
+      },
+      "fundamental": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": "neutral"
+      },
+      "capital": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": "neutral"
+      },
+      "signal_breakdown": {
+        "hard_score": -0.3625025116253359,
+        "soft_score": 0.0,
+        "gate_score": 0.5,
+        "final_score": -0.06924322585013439,
+        "final_signal": "hold"
+      },
+      "momentum_5d": -2.805744520030229,
+      "momentum_20d": -8.770485987938981,
+      "ma_alignment": "bearish",
+      "volume_ratio": 0.9615104198367337,
+      "pe_ttm": 28.67818181818182,
+      "pe_percentile": 28.67818181818182,
+      "pb": 0,
+      "mcap_yi": 0,
+      "announcement": [],
+      "dragon_tiger": [],
+      "confidence": 0.5,
+      "risk_points": []
+    },
+    {
+      "code": "300750",
+      "name": "宁德时代",
+      "overall_sentiment": "hold",
+      "overall_focus": "⚪ 观望",
+      "technical": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": null
+      },
+      "fundamental": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": "neutral"
+      },
+      "capital": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": "neutral"
+      },
+      "signal_breakdown": {
+        "hard_score": -0.362711481075243,
+        "soft_score": 0.0,
+        "gate_score": 0.5,
+        "final_score": -0.0699866896300972,
+        "final_signal": "hold"
+      },
+      "momentum_5d": -3.439349998801622,
+      "momentum_20d": -7.670448034834432,
+      "ma_alignment": "bearish",
+      "volume_ratio": 1.130657515998762,
+      "pe_ttm": 35.43636363636364,
+      "pe_percentile": 35.43636363636364,
+      "pb": 0,
+      "mcap_yi": 0,
+      "announcement": [],
+      "dragon_tiger": [],
+      "confidence": 0.5,
+      "risk_points": []
+    },
+    {
+      "code": "600104",
+      "name": "上汽集团",
+      "overall_sentiment": "hold",
+      "overall_focus": "⚪ 观望",
+      "technical": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": null
+      },
+      "fundamental": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": "neutral"
+      },
+      "capital": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": "neutral"
+      },
+      "signal_breakdown": {
+        "hard_score": -0.3638790258232638,
+        "soft_score": 0.0,
+        "gate_score": 0.5,
+        "final_score": -0.07055146572930553,
+        "final_signal": "hold"
+      },
+      "momentum_5d": -2.529644268774711,
+      "momentum_20d": -10.845986984815614,
+      "ma_alignment": "bearish",
+      "volume_ratio": 0.8239630145087526,
+      "pe_ttm": 19.759999999999998,
+      "pe_percentile": 19.759999999999998,
+      "pb": 0,
+      "mcap_yi": 0,
+      "announcement": [],
+      "dragon_tiger": [],
+      "confidence": 0.5,
+      "risk_points": []
+    },
+    {
+      "code": "601012",
+      "name": "隆基绿能",
+      "overall_sentiment": "hold",
+      "overall_focus": "⚪ 观望",
+      "technical": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": null
+      },
+      "fundamental": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": "neutral"
+      },
+      "capital": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": "neutral"
+      },
+      "signal_breakdown": {
+        "hard_score": -0.3686693011312509,
+        "soft_score": 0.0,
+        "gate_score": 0.5,
+        "final_score": -0.07246860905250037,
+        "final_signal": "hold"
+      },
+      "momentum_5d": -1.915455746367245,
+      "momentum_20d": -15.384615384615385,
+      "ma_alignment": "bearish",
+      "volume_ratio": 0.7343008874598997,
+      "pe_ttm": 5.0,
+      "pe_percentile": 5.0,
+      "pb": 0,
+      "mcap_yi": 0,
+      "announcement": [],
+      "dragon_tiger": [],
+      "confidence": 0.5,
+      "risk_points": []
+    },
+    {
+      "code": "601628",
+      "name": "中国人寿",
+      "overall_sentiment": "hold",
+      "overall_focus": "⚪ 观望",
+      "technical": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": null
+      },
+      "fundamental": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": "neutral"
+      },
+      "capital": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": "neutral"
+      },
+      "signal_breakdown": {
+        "hard_score": -0.37291634740218216,
+        "soft_score": 0.0,
+        "gate_score": 0.5,
+        "final_score": -0.07416664216087289,
+        "final_signal": "hold"
+      },
+      "momentum_5d": -2.6474820143884914,
+      "momentum_20d": -8.764832793959009,
+      "ma_alignment": "bearish",
+      "volume_ratio": 0.7585698604777052,
+      "pe_ttm": 7.618181818181817,
+      "pe_percentile": 7.618181818181817,
+      "pb": 0,
+      "mcap_yi": 0,
+      "announcement": [],
+      "dragon_tiger": [],
+      "confidence": 0.5,
+      "risk_points": []
+    },
+    {
+      "code": "600031",
+      "name": "三一重工",
+      "overall_sentiment": "hold",
+      "overall_focus": "⚪ 观望",
+      "technical": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": null
+      },
+      "fundamental": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": "neutral"
+      },
+      "capital": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": "neutral"
+      },
+      "signal_breakdown": {
+        "hard_score": -0.4006257045360297,
+        "soft_score": 0.0,
+        "gate_score": 0.5,
+        "final_score": -0.0854893812144119,
+        "final_signal": "hold"
+      },
+      "momentum_5d": -2.8880866425992857,
+      "momentum_20d": -4.802831142568264,
+      "ma_alignment": "bearish",
+      "volume_ratio": 0.7219360143612125,
+      "pe_ttm": 30.46181818181818,
+      "pe_percentile": 30.46181818181818,
+      "pb": 0,
+      "mcap_yi": 0,
+      "announcement": [],
+      "dragon_tiger": [],
+      "confidence": 0.5,
+      "risk_points": []
+    },
+    {
+      "code": "601211",
+      "name": "国泰君安",
+      "overall_sentiment": "hold",
+      "overall_focus": "⚪ 观望",
+      "technical": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": null
+      },
+      "fundamental": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": "neutral"
+      },
+      "capital": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": "neutral"
+      },
+      "signal_breakdown": {
+        "hard_score": -0.4114368452992328,
+        "soft_score": 0.0,
+        "gate_score": 0.5,
+        "final_score": -0.08957430791969313,
+        "final_signal": "hold"
+      },
+      "momentum_5d": -1.941747572815522,
+      "momentum_20d": -9.82142857142857,
+      "ma_alignment": "bearish",
+      "volume_ratio": 0.5877392689308959,
+      "pe_ttm": 16.716363636363635,
+      "pe_percentile": 16.716363636363635,
+      "pb": 0,
+      "mcap_yi": 0,
+      "announcement": [],
+      "dragon_tiger": [],
+      "confidence": 0.5,
+      "risk_points": []
+    },
+    {
+      "code": "600585",
+      "name": "海螺水泥",
+      "overall_sentiment": "hold",
+      "overall_focus": "⚪ 观望",
+      "technical": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": null
+      },
+      "fundamental": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": "neutral"
+      },
+      "capital": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": "neutral"
+      },
+      "signal_breakdown": {
+        "hard_score": -0.4178502472134127,
+        "soft_score": 0.0,
+        "gate_score": 0.5,
+        "final_score": -0.09213948988536509,
+        "final_signal": "hold"
+      },
+      "momentum_5d": -3.293413173652693,
+      "momentum_20d": -11.10091743119267,
+      "ma_alignment": "bearish",
+      "volume_ratio": 0.7357126917936139,
+      "pe_ttm": 18.450909090909093,
+      "pe_percentile": 18.450909090909093,
+      "pb": 0,
+      "mcap_yi": 0,
+      "announcement": [],
+      "dragon_tiger": [],
+      "confidence": 0.5,
+      "risk_points": []
+    },
+    {
+      "code": "002304",
+      "name": "洋河股份",
+      "overall_sentiment": "hold",
+      "overall_focus": "⚪ 观望",
+      "technical": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": null
+      },
+      "fundamental": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": "neutral"
+      },
+      "capital": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": "neutral"
+      },
+      "signal_breakdown": {
+        "hard_score": -0.42333806333354,
+        "soft_score": 0.0,
+        "gate_score": 0.5,
+        "final_score": -0.09433579473341601,
+        "final_signal": "hold"
+      },
+      "momentum_5d": -1.4406028368794344,
+      "momentum_20d": -10.016187778227447,
+      "ma_alignment": "bearish",
+      "volume_ratio": 1.4950747859803986,
+      "pe_ttm": 95.0,
+      "pe_percentile": 95.0,
+      "pb": 0,
+      "mcap_yi": 0,
+      "announcement": [],
+      "dragon_tiger": [],
+      "confidence": 0.5,
+      "risk_points": []
+    },
+    {
+      "code": "601288",
+      "name": "农业银行",
+      "overall_sentiment": "hold",
+      "overall_focus": "⚪ 观望",
+      "technical": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": null
+      },
+      "fundamental": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": "neutral"
+      },
+      "capital": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": "neutral"
+      },
+      "signal_breakdown": {
+        "hard_score": -0.4246556432616331,
+        "soft_score": 0.0,
+        "gate_score": 0.5,
+        "final_score": -0.09486233650465324,
+        "final_signal": "hold"
+      },
+      "momentum_5d": -2.4242424242424176,
+      "momentum_20d": -8.910891089108908,
+      "ma_alignment": "bearish",
+      "volume_ratio": 0.5651609869346693,
+      "pe_ttm": 9.352727272727272,
+      "pe_percentile": 9.352727272727272,
+      "pb": 0,
+      "mcap_yi": 0,
+      "announcement": [],
+      "dragon_tiger": [],
+      "confidence": 0.5,
+      "risk_points": []
+    },
+    {
+      "code": "000858",
+      "name": "五粮液",
+      "overall_sentiment": "hold",
+      "overall_focus": "⚪ 观望",
+      "technical": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": null
+      },
+      "fundamental": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": "neutral"
+      },
+      "capital": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": "neutral"
+      },
+      "signal_breakdown": {
+        "hard_score": -0.43094786158004844,
+        "soft_score": 0.0,
+        "gate_score": 0.5,
+        "final_score": -0.09642062603201938,
+        "final_signal": "hold"
+      },
+      "momentum_5d": -1.6711464298235224,
+      "momentum_20d": -16.395071542130367,
+      "ma_alignment": "bearish",
+      "volume_ratio": 0.8613764229786612,
+      "pe_ttm": 39.232727272727274,
+      "pe_percentile": 39.232727272727274,
+      "pb": 0,
+      "mcap_yi": 0,
+      "announcement": [],
+      "dragon_tiger": [],
+      "confidence": 0.5,
+      "risk_points": []
+    },
+    {
+      "code": "600196",
+      "name": "复星医药",
+      "overall_sentiment": "hold",
+      "overall_focus": "⚪ 观望",
+      "technical": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": null
+      },
+      "fundamental": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": "neutral"
+      },
+      "capital": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": "neutral"
+      },
+      "signal_breakdown": {
+        "hard_score": -0.43041160918835003,
+        "soft_score": 0.0,
+        "gate_score": 0.5,
+        "final_score": -0.09676464487534005,
+        "final_signal": "hold"
+      },
+      "momentum_5d": -3.158769742310885,
+      "momentum_20d": -8.948808128175067,
+      "ma_alignment": "bearish",
+      "volume_ratio": 0.732300070243142,
+      "pe_ttm": 26.10909090909091,
+      "pe_percentile": 26.10909090909091,
+      "pb": 0,
+      "mcap_yi": 0,
+      "announcement": [],
+      "dragon_tiger": [],
+      "confidence": 0.5,
+      "risk_points": []
+    },
+    {
+      "code": "601985",
+      "name": "中国核电",
+      "overall_sentiment": "hold",
+      "overall_focus": "⚪ 观望",
+      "technical": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": null
+      },
+      "fundamental": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": "neutral"
+      },
+      "capital": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": "neutral"
+      },
+      "signal_breakdown": {
+        "hard_score": -0.3715176341525921,
+        "soft_score": 0.0,
+        "gate_score": 0.5,
+        "final_score": -0.09983215466004332,
+        "final_signal": "hold"
+      },
+      "momentum_5d": -3.314917127071826,
+      "momentum_20d": -2.343750000000011,
+      "ma_alignment": "bearish",
+      "volume_ratio": 0.8151456264066457,
+      "pe_ttm": 32.589090909090906,
+      "pe_percentile": 32.589090909090906,
+      "pb": 0,
+      "mcap_yi": 0,
+      "announcement": [],
+      "dragon_tiger": [],
+      "confidence": 0.5,
+      "risk_points": []
+    },
+    {
+      "code": "600028",
+      "name": "中国石化",
+      "overall_sentiment": "hold",
+      "overall_focus": "⚪ 观望",
+      "technical": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": null
+      },
+      "fundamental": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": "neutral"
+      },
+      "capital": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": "neutral"
+      },
+      "signal_breakdown": {
+        "hard_score": -0.4883060568033201,
+        "soft_score": 0.0,
+        "gate_score": 0.5,
+        "final_score": -0.11964290632132808,
+        "final_signal": "hold"
+      },
+      "momentum_5d": -4.280155642023342,
+      "momentum_20d": -9.558823529411775,
+      "ma_alignment": "bearish",
+      "volume_ratio": 0.6596221055415381,
+      "pe_ttm": 24.210909090909087,
+      "pe_percentile": 24.210909090909087,
+      "pb": 0,
+      "mcap_yi": 0,
+      "announcement": [],
+      "dragon_tiger": [],
+      "confidence": 0.5,
+      "risk_points": []
+    },
+    {
+      "code": "601888",
+      "name": "中国中免",
+      "overall_sentiment": "hold",
+      "overall_focus": "⚪ 观望",
+      "technical": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": null
+      },
+      "fundamental": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": "neutral"
+      },
+      "capital": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": "neutral"
+      },
+      "signal_breakdown": {
+        "hard_score": -0.4947263104028529,
+        "soft_score": 0.0,
+        "gate_score": 0.5,
+        "final_score": -0.12233131796114118,
+        "final_signal": "hold"
+      },
+      "momentum_5d": -2.254345207365349,
+      "momentum_20d": -14.753114212817053,
+      "ma_alignment": "bearish",
+      "volume_ratio": 0.8390985052076657,
+      "pe_ttm": 45.14,
+      "pe_percentile": 45.14,
+      "pb": 0,
+      "mcap_yi": 0,
+      "announcement": [],
+      "dragon_tiger": [],
+      "confidence": 0.5,
+      "risk_points": []
+    },
+    {
+      "code": "002714",
+      "name": "牧原股份",
+      "overall_sentiment": "hold",
+      "overall_focus": "⚪ 观望",
+      "technical": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": null
+      },
+      "fundamental": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": "neutral"
+      },
+      "capital": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": "neutral"
+      },
+      "signal_breakdown": {
+        "hard_score": -0.5330072830403011,
+        "soft_score": 0.0,
+        "gate_score": 0.5,
+        "final_score": -0.13884142461612042,
+        "final_signal": "hold"
+      },
+      "momentum_5d": -4.922087558743515,
+      "momentum_20d": -14.042933810375668,
+      "ma_alignment": "bearish",
+      "volume_ratio": 0.8036337752482181,
+      "pe_ttm": 33.94727272727273,
+      "pe_percentile": 33.94727272727273,
+      "pb": 0,
+      "mcap_yi": 0,
+      "announcement": [],
+      "dragon_tiger": [],
+      "confidence": 0.5,
+      "risk_points": []
+    },
+    {
+      "code": "600547",
+      "name": "山东黄金",
+      "overall_sentiment": "hold",
+      "overall_focus": "⚪ 观望",
+      "technical": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": null
+      },
+      "fundamental": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": "neutral"
+      },
+      "capital": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": "neutral"
+      },
+      "signal_breakdown": {
+        "hard_score": -0.5229021728924875,
+        "soft_score": 0.0,
+        "gate_score": 0.5,
+        "final_score": -0.13915391575699498,
+        "final_signal": "hold"
+      },
+      "momentum_5d": -3.8387715930902178,
+      "momentum_20d": -19.3020134228188,
+      "ma_alignment": "bearish",
+      "volume_ratio": 0.8463117698625344,
+      "pe_ttm": 40.77090909090909,
+      "pe_percentile": 40.77090909090909,
+      "pb": 0,
+      "mcap_yi": 0,
+      "announcement": [],
+      "dragon_tiger": [],
+      "confidence": 0.5,
+      "risk_points": []
+    },
+    {
+      "code": "600760",
+      "name": "中航沈飞",
+      "overall_sentiment": "hold",
+      "overall_focus": "⚪ 观望",
+      "technical": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": null
+      },
+      "fundamental": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": "neutral"
+      },
+      "capital": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": "neutral"
+      },
+      "signal_breakdown": {
+        "hard_score": -0.5965176534196986,
+        "soft_score": 0.0,
+        "gate_score": 0.5,
+        "final_score": -0.16156597056787952,
+        "final_signal": "hold"
+      },
+      "momentum_5d": -5.168346558009873,
+      "momentum_20d": -11.204819277108435,
+      "ma_alignment": "bearish",
+      "volume_ratio": 1.1299553102676714,
+      "pe_ttm": 59.9,
+      "pe_percentile": 59.9,
+      "pb": 0,
+      "mcap_yi": 0,
+      "announcement": [],
+      "dragon_tiger": [],
+      "confidence": 0.5,
+      "risk_points": []
+    },
+    {
+      "code": "600276",
+      "name": "恒瑞医药",
+      "overall_sentiment": "hold",
+      "overall_focus": "⚪ 观望",
+      "technical": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": null
+      },
+      "fundamental": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": "neutral"
+      },
+      "capital": {
+        "status": "ok",
+        "summary": "",
+        "sentiment": "neutral"
+      },
+      "signal_breakdown": {
+        "hard_score": -0.6689896337632135,
+        "soft_score": 0.0,
+        "gate_score": 0.5,
+        "final_score": -0.19183172910528545,
+        "final_signal": "hold"
+      },
+      "momentum_5d": -5.72191493419798,
+      "momentum_20d": -10.84054834054834,
+      "ma_alignment": "bearish",
+      "volume_ratio": 0.9504104624559548,
+      "pe_ttm": 62.94363636363636,
+      "pe_percentile": 62.94363636363636,
+      "pb": 0,
+      "mcap_yi": 0,
+      "announcement": [],
+      "dragon_tiger": [],
+      "confidence": 0.5,
+      "risk_points": []
     }
   ],
   "failed_symbols": [],

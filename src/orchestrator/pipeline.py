@@ -31,21 +31,60 @@ logger = logging.getLogger(__name__)
 
 
 def _load_watchlist(symbols: list[str] | None = None) -> list[WatchlistItem]:
-    """Load watchlist from YAML or explicit symbols list."""
-    import yaml
+    """Load watchlist from JSON (primary, evolution-managed) or YAML (fallback).
+
+    Priority:
+    1. Explicit symbols list (passed by caller)
+    2. config/watchlist.json (managed by StockPoolManager evolution)
+    3. config/watchlist.yaml (legacy fallback)
+    """
+    import json
 
     settings = get_settings()
-    config_path = Path(__file__).resolve().parent.parent.parent / "config" / "watchlist.yaml"
+    project_root = Path(__file__).resolve().parent.parent.parent
 
     if symbols:
         return [WatchlistItem(code=s, name=s) for s in symbols]
 
-    if config_path.exists():
-        with open(config_path) as f:
-            data = yaml.safe_load(f)
-        return [WatchlistItem(**item) for item in data.get("symbols", [])]
+    # Primary: JSON watchlist (evolution-managed)
+    json_path = project_root / "config" / "watchlist.json"
+    if json_path.exists():
+        try:
+            data = json.loads(json_path.read_text())
+            stock_codes = data if isinstance(data, list) else data.get("stocks", [])
+            # Look up names from stock_meta DB
+            try:
+                from src.data.db_manager import SignalDB
+                db = SignalDB()
+                items = []
+                for code in stock_codes:
+                    meta = db.get_stock(code)
+                    name = meta.get("name", code) if meta else code
+                    items.append(WatchlistItem(code=code, name=name))
+                if items:
+                    logger.info("Loaded watchlist from JSON: %d stocks", len(items))
+                    return items
+            except Exception:
+                # DB not available, use codes as names
+                return [WatchlistItem(code=c, name=c) for c in stock_codes]
+        except Exception as e:
+            logger.warning("Failed to load JSON watchlist: %s, falling back to YAML", e)
 
-    raise FileNotFoundError(f"Watchlist not found: {config_path}")
+    # Fallback: YAML watchlist (legacy)
+    yaml_path = project_root / "config" / "watchlist.yaml"
+    if yaml_path.exists():
+        import yaml
+        try:
+            with open(yaml_path) as f:
+                data = yaml.safe_load(f)
+            items = [WatchlistItem(**item) for item in data.get("symbols", [])]
+            if items:
+                logger.info("Loaded watchlist from YAML (fallback): %d stocks", len(items))
+                return items
+        except Exception as e:
+            logger.warning("Failed to load YAML watchlist: %s", e)
+
+    raise FileNotFoundError(f"Watchlist not found at {json_path} or {yaml_path}")
 
 
 async def run_analysis(

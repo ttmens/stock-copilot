@@ -204,7 +204,29 @@ def _save_latest_json(
     }
 
     json_path = data_dir / "latest.json"
-    json_path.write_text(json.dumps(latest, ensure_ascii=False, indent=2), encoding="utf-8")
+
+    # PROTECT: never overwrite good data with partial data
+    new_count = len(stocks)
+    existing_count = 0
+    if json_path.exists():
+        try:
+            existing = json.loads(json_path.read_text())
+            existing_count = len(existing.get("stocks", []))
+        except Exception:
+            pass
+
+    if new_count == 0 and existing_count > 0:
+        logger.warning("_save_latest_json: skipping — new report has 0 stocks, "
+                        "existing has %d. Protecting against data loss.", existing_count)
+    elif new_count < existing_count and new_count > 0:
+        if new_count < existing_count * 0.8:
+            logger.warning("_save_latest_json: skipping — new report has %d stocks, "
+                            "existing has %d (>20%% drop). Possible partial analysis.",
+                            new_count, existing_count)
+        else:
+            json_path.write_text(json.dumps(latest, ensure_ascii=False, indent=2), encoding="utf-8")
+    else:
+        json_path.write_text(json.dumps(latest, ensure_ascii=False, indent=2), encoding="utf-8")
 
 
 def _load_archive() -> list[dict]:

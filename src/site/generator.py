@@ -911,7 +911,7 @@ def generate_site(report: Report) -> str:
     # Load history from SQLite
     history = _load_history(settings)
 
-    # Write latest.json
+    # Write latest.json — PROTECT: never overwrite good data with partial data
     latest = {
         "meta": meta,
         "market": market,
@@ -920,7 +920,30 @@ def generate_site(report: Report) -> str:
         "archive": archive,
     }
     json_path = data_dir / "latest.json"
-    json_path.write_text(json.dumps(latest, ensure_ascii=False, indent=2), encoding="utf-8")
+    new_count = len(stocks)
+    existing_count = 0
+    if json_path.exists():
+        try:
+            existing = json.loads(json_path.read_text())
+            existing_count = len(existing.get("stocks", []))
+        except Exception:
+            pass
+
+    if new_count == 0 and existing_count > 0:
+        logger.warning("generate_site: skipping latest.json write — new report has 0 stocks, "
+                        "existing has %d. Protecting against data loss.", existing_count)
+    elif new_count < existing_count and new_count > 0:
+        # Allow partial writes only if it's >= 80% of existing (not a drastic drop)
+        if new_count < existing_count * 0.8:
+            logger.warning("generate_site: skipping latest.json write — new report has %d stocks, "
+                            "existing has %d (>20%% drop). Possible partial analysis.",
+                            new_count, existing_count)
+        else:
+            json_path.write_text(json.dumps(latest, ensure_ascii=False, indent=2), encoding="utf-8")
+            logger.info("latest.json updated: %d stocks (was %d)", new_count, existing_count)
+    else:
+        json_path.write_text(json.dumps(latest, ensure_ascii=False, indent=2), encoding="utf-8")
+        logger.info("latest.json updated: %d stocks (was %d)", new_count, existing_count)
 
     # ── Page 1: index.html ──────────────────────────────────────
     tmpl = Template(TPL_HOME)

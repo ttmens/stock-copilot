@@ -452,28 +452,35 @@ def check_report_generation():
 
 # ── 8. Site Generation ───────────────────────────────────────────────
 def check_site_generation():
-    """静态站点生成：HTML 有效性、响应式、深色主题。"""
+    """静态站点生成：验证现有 HTML 文件，不再生成测试报告覆盖线上数据。"""
     print(f"\n{CYAN}━━━ 站点生成检查 ━━━{RESET}")
 
     try:
-        from src.site.generator import generate_site
-        from src.data.models import Report, ReportType
-        from datetime import date, datetime
+        from pathlib import Path
+        import re
+        from src.config import get_settings
+        settings = get_settings()
+        site_dir = Path(settings.site.output_dir)
+        index_path = site_dir / "index.html"
 
-        rpt = Report(
-            report_type=ReportType.PRE,
-            generated_at=datetime.now(),
-            trade_date=date.today(),
-            analyses=[],
-            markdown="# 测试",
-        )
-        html_path = generate_site(rpt)
-        if isinstance(html_path, str):
-            html_path = Path(html_path)
-        if html_path.exists():
-            html = html_path.read_text()
-        else:
-            raise FileNotFoundError(f"Site file not found: {html_path}")
+        if not index_path.exists():
+            report.add("站点: index.html", "站点", False, "index.html 不存在", severity="error")
+            return
+
+        html = index_path.read_text(encoding="utf-8")
+
+        # Count stock links in index
+        import re
+        stock_links = len(re.findall(r'href="stock/\d+\.html"', html))
+
+        # Check latest.json
+        data_dir = Path(settings.site.data_dir)
+        latest_path = data_dir / "latest.json"
+        latest_stocks = 0
+        if latest_path.exists():
+            import json
+            d = json.loads(latest_path.read_text())
+            latest_stocks = len(d.get("stocks", []))
 
         checks = {
             "HTML 输出": len(html) > 500,
@@ -481,6 +488,8 @@ def check_site_generation():
             "viewport 响应式": "viewport" in html.lower(),
             "深色/CSS": "<style" in html.lower() or "stylesheet" in html.lower() or "theme.css" in html.lower(),
             "Stock 标题": "stock" in html.lower() or "A股" in html or "决策" in html,
+            f"个股链接数 ({stock_links})": stock_links > 0,
+            f"latest.json 股票数 ({latest_stocks})": latest_stocks > 0,
         }
 
         for check_name, ok in checks.items():
