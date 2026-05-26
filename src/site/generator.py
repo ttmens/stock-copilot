@@ -22,748 +22,9 @@ from src.data.models import Report
 
 logger = logging.getLogger(__name__)
 
-# ── CSS tokens: Deep Space Intelligence Platform ─────────────────────────
-THEME_CSS = """\
-:root {
-    /* Brand */
-    --rausch: #7b3ff2;
-    --rausch-active: #4a5bff;
-    --rausch-tint: rgba(123,63,242,0.22);
-    --accent-cyan: #00f5ff;
-    --accent-blue: #4a5bff;
-    --accent-purple: #7b3ff2;
-    --accent-warm: #ff6b6b;
-    --gradient-brand: linear-gradient(90deg, #7b3ff2 0%, #4a5bff 50%, #00f5ff 100%);
-
-    /* Surfaces */
-    --canvas-deep: #0a1628;
-    --canvas: #1a2742;
-    --surface-soft: #0f1f3a;
-    --surface-elevated: #1a2742;
-    --surface-elevated-alt: #0f1f3a;
-
-    /* Text */
-    --ink: #ffffff;
-    --body-ink: rgba(255,255,255,0.86);
-    --muted: rgba(255,255,255,0.65);
-    --muted-soft: rgba(255,255,255,0.5);
-    --text-primary: var(--ink);
-    --text-secondary: var(--muted);
-
-    /* Semantic */
-    --bullish: #22C55E;
-    --bearish: #EF4444;
-    --neutral: #94A3B8;
-    --warning: #F59E0B;
-
-    /* Borders */
-    --hairline: rgba(255,255,255,0.14);
-    --hairline-soft: rgba(255,255,255,0.08);
-    --border-strong: rgba(255,255,255,0.22);
-
-    /* Shadows */
-    --shadow-sm: 0 1px 2px rgba(0,0,0,0.35);
-    --shadow-md: 0 6px 20px rgba(0,0,0,0.45);
-    --shadow-lg: 0 16px 48px rgba(0,0,0,0.55);
-
-    /* Radius */
-    --radius-sm: 8px;
-    --radius-md: 14px;
-    --radius-lg: 20px;
-    --radius-full: 9999px;
-
-    /* Page bg gradient */
-    --page-bg-gradient:
-        radial-gradient(ellipse 120% 90% at 0% -10%, rgba(123,63,242,0.18), transparent 52%),
-        radial-gradient(ellipse 90% 70% at 100% 0%, rgba(0,245,255,0.10), transparent 48%);
-
-    /* Typography */
-    --font-sans: Circular, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
-    --font-cn: 'PingFang SC', 'Microsoft YaHei', var(--font-sans);
-    --font-mono: ui-monospace, 'Cascadia Code', 'JetBrains Mono', monospace;
-}
-
-* { box-sizing: border-box; margin: 0; padding: 0; }
-
-body {
-    font-family: var(--font-cn);
-    font-size: 14px;
-    line-height: 1.58;
-    color: var(--body-ink);
-    background-color: var(--canvas-deep);
-    background-image: var(--page-bg-gradient);
-    min-height: 100vh;
-    -webkit-font-smoothing: antialiased;
-}
-
-a { color: var(--accent-cyan); text-decoration: none; }
-a:hover { color: var(--rausch-active); }
-
-/* ── Shell ──────────────────────────────────────────────────── */
-.shell {
-    max-width: 860px;
-    margin: 0 auto;
-    padding: calc(64px + 24px) 20px 80px;
-}
-.shell-wide {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: calc(64px + 24px) 20px 80px;
-}
-
-/* ── Header (glass-morphism) ────────────────────────────────── */
-.site-header {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    min-height: 64px;
-    padding: 12px max(20px, 5vw);
-    background: rgba(10,22,40,0.92);
-    backdrop-filter: blur(16px) saturate(1.1);
-    border-bottom: 1px solid var(--hairline-soft);
-    box-shadow: 0 1px 0 rgba(0,245,255,0.06);
-    z-index: 102;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-}
-.brand {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-.brand-icon {
-    width: 28px; height: 28px;
-    border-radius: var(--radius-sm);
-    background: var(--gradient-brand);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 14px;
-}
-.brand-name {
-    font-size: 16px;
-    font-weight: 600;
-    letter-spacing: -0.02em;
-    color: var(--ink);
-}
-
-/* Nav pills */
-.site-nav {
-    display: flex;
-    gap: 4px;
-    background: rgba(255,255,255,0.06);
-    border: 1px solid var(--hairline-soft);
-    border-radius: var(--radius-full);
-    padding: 4px;
-}
-.site-nav a {
-    padding: 5px 14px;
-    border-radius: var(--radius-full);
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--muted);
-    transition: all 0.18s ease;
-}
-.site-nav a:hover { color: var(--ink); }
-.site-nav a.active {
-    background: rgba(255,255,255,0.12);
-    color: var(--ink);
-    box-shadow: 0 1px 0 rgba(0,245,255,0.1), var(--shadow-sm);
-}
-.header-meta {
-    font-size: 12px;
-    color: var(--muted);
-    font-family: var(--font-mono);
-}
-
-/* ── Page title ─────────────────────────────────────────────── */
-.page-title {
-    font-size: 24px;
-    font-weight: 700;
-    letter-spacing: -0.03em;
-    color: var(--ink);
-    margin-bottom: 24px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-.page-subtitle {
-    font-size: 14px;
-    font-weight: 400;
-    color: var(--muted);
-    margin-bottom: 24px;
-}
-
-/* ── Market Temperature ─────────────────────────────────────── */
-.market-temp {
-    background: var(--canvas);
-    border: 1px solid var(--hairline-soft);
-    border-radius: var(--radius-md);
-    padding: 16px 20px;
-    margin-bottom: 24px;
-    box-shadow: var(--shadow-sm);
-}
-.market-temp-head {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 10px;
-}
-.market-temp-label {
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--muted);
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-}
-.market-temp-index {
-    font-family: var(--font-mono);
-    font-size: 18px;
-    font-weight: 600;
-    color: var(--ink);
-}
-.market-temp-change {
-    font-family: var(--font-mono);
-    font-size: 14px;
-    font-weight: 600;
-}
-.up { color: var(--bullish); }
-.down { color: var(--bearish); }
-
-.signal-distribution {
-    display: flex;
-    gap: 12px;
-    font-size: 13px;
-}
-.sig-stat {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    color: var(--muted);
-}
-.sig-dot {
-    width: 8px; height: 8px;
-    border-radius: 50%;
-}
-.sig-dot.green { background: var(--bullish); }
-.sig-dot.red { background: var(--bearish); }
-.sig-dot.gray { background: var(--neutral); }
-
-/* ── Section titles ─────────────────────────────────────────── */
-.section-title {
-    font-size: 18px;
-    font-weight: 600;
-    color: var(--ink);
-    margin-bottom: 16px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-.section-title .count {
-    font-size: 13px;
-    font-weight: 400;
-    color: var(--muted);
-}
-
-/* ── Stock grid ─────────────────────────────────────────────── */
-.stock-grid {
-    display: grid;
-    gap: 16px;
-    margin-bottom: 24px;
-}
-@media (min-width: 640px) {
-    .stock-grid { grid-template-columns: 1fr 1fr; }
-}
-
-/* ── Narrative card ─────────────────────────────────────────── */
-.narr-card {
-    border: 1px solid var(--hairline-soft);
-    border-radius: var(--radius-md);
-    background: var(--canvas);
-    padding: 16px 18px 14px;
-    box-shadow: var(--shadow-sm);
-    transition: border-color 0.18s ease, box-shadow 0.18s ease;
-}
-.narr-card:hover {
-    border-color: var(--border-strong);
-    box-shadow: var(--shadow-md);
-}
-
-/* Card header: signal pill + stock name */
-.narr-header {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    margin-bottom: 12px;
-}
-.narr-stock {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-}
-.narr-stock-code {
-    font-family: var(--font-mono);
-    font-size: 15px;
-    font-weight: 600;
-    color: var(--ink);
-}
-.narr-stock-name {
-    font-size: 12px;
-    color: var(--muted);
-}
-
-/* Signal badge (pill) */
-.signal-pill {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    padding: 4px 10px;
-    border-radius: var(--radius-full);
-    font-size: 11px;
-    font-weight: 600;
-    white-space: nowrap;
-    flex-shrink: 0;
-}
-.signal-pill.strong-buy,
-.signal-pill.buy {
-    background: rgba(34,197,94,0.15);
-    color: var(--bullish);
-    border: 1px solid rgba(34,197,94,0.3);
-}
-.signal-pill.sell,
-.signal-pill.strong-sell {
-    background: rgba(239,68,68,0.15);
-    color: var(--bearish);
-    border: 1px solid rgba(239,68,68,0.3);
-}
-.signal-pill.hold {
-    background: rgba(148,163,184,0.12);
-    color: var(--neutral);
-    border: 1px solid rgba(148,163,184,0.2);
-}
-
-/* ── Score panel ────────────────────────────────────────────── */
-.score-panel {
-    background: var(--surface-soft);
-    border-radius: var(--radius-sm);
-    padding: 10px 12px;
-    margin-bottom: 12px;
-}
-.score-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 6px;
-}
-.score-label { font-size: 12px; color: var(--muted); }
-.score-value {
-    font-family: var(--font-mono);
-    font-size: 14px;
-    font-weight: 700;
-}
-.score-bar-track {
-    height: 6px;
-    background: rgba(255,255,255,0.06);
-    border-radius: 3px;
-    overflow: hidden;
-    margin-bottom: 6px;
-}
-.score-bar-fill {
-    height: 100%;
-    border-radius: 3px;
-    transition: width 0.3s ease;
-}
-.confidence-row {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    font-size: 11px;
-    color: var(--muted);
-}
-.conf-dots { display: flex; gap: 2px; }
-.conf-dot {
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.1);
-}
-.conf-dot.filled { background: var(--accent-cyan); }
-.conf-value {
-    margin-left: auto;
-    font-family: var(--font-mono);
-    color: var(--accent-cyan);
-    font-weight: 500;
-}
-
-/* Signal breakdown grid */
-.signal-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4px;
-    margin-top: 8px;
-}
-.signal-cell {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 3px 8px;
-    border-radius: 4px;
-    background: rgba(255,255,255,0.02);
-    font-size: 11px;
-}
-.signal-cell-label { color: var(--muted-soft); }
-.signal-cell-val {
-    font-family: var(--font-mono);
-    font-weight: 500;
-}
-
-/* ── Metrics row ────────────────────────────────────────────── */
-.metrics-row {
-    display: flex;
-    gap: 6px;
-    margin-bottom: 12px;
-    flex-wrap: wrap;
-}
-.metric-chip {
-    flex: 1;
-    min-width: 56px;
-    padding: 6px 6px;
-    background: var(--surface-elevated-alt);
-    border-radius: var(--radius-sm);
-    text-align: center;
-    border: 1px solid var(--hairline-soft);
-}
-.metric-chip-label {
-    display: block;
-    font-size: 10px;
-    font-weight: 500;
-    color: var(--muted-soft);
-    margin-bottom: 2px;
-    letter-spacing: 0.02em;
-}
-.metric-chip-val {
-    display: block;
-    font-family: var(--font-mono);
-    font-size: 13px;
-    font-weight: 600;
-}
-
-/* ── Dimension table ────────────────────────────────────────── */
-.dim-table {
-    width: 100%;
-    font-size: 12px;
-    border-collapse: collapse;
-    margin-bottom: 10px;
-}
-.dim-table td {
-    padding: 5px 8px;
-    border-bottom: 1px solid var(--hairline-soft);
-    vertical-align: top;
-}
-.dim-table tr:last-child td { border-bottom: none; }
-.dim-name {
-    font-weight: 600;
-    color: var(--muted);
-    white-space: nowrap;
-    width: 48px;
-}
-.dim-status { width: 24px; text-align: center; }
-.dim-summary {
-    color: var(--body-ink);
-    line-height: 1.4;
-}
-
-/* ── Dragon tiger ───────────────────────────────────────────── */
-.dt-block {
-    margin: 8px 0;
-    padding: 10px 12px;
-    background: var(--surface-soft);
-    border-radius: var(--radius-sm);
-    border-left: 3px solid var(--accent-purple);
-}
-.dt-title {
-    font-size: 11px;
-    font-weight: 600;
-    color: var(--accent-purple);
-    margin-bottom: 6px;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-}
-.dt-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 12px;
-    margin-bottom: 3px;
-}
-.dt-reason { color: var(--muted); }
-.dt-net {
-    font-family: var(--font-mono);
-    font-weight: 600;
-}
-
-/* ── Announcement events ────────────────────────────────────── */
-.ann-block {
-    margin: 8px 0;
-    padding: 10px 12px;
-    background: var(--surface-soft);
-    border-radius: var(--radius-sm);
-    border-left: 3px solid var(--accent-warm);
-}
-.ann-title {
-    font-size: 11px;
-    font-weight: 600;
-    color: var(--accent-warm);
-    margin-bottom: 6px;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-}
-.ann-event {
-    display: flex;
-    gap: 6px;
-    align-items: flex-start;
-    font-size: 12px;
-    margin-bottom: 3px;
-}
-.ann-text { color: var(--body-ink); line-height: 1.4; flex: 1; }
-.ann-conf {
-    font-family: var(--font-mono);
-    font-size: 10px;
-    color: var(--muted-soft);
-    white-space: nowrap;
-}
-
-/* ── Risk points ────────────────────────────────────────────── */
-.risk-block {
-    font-size: 12px;
-    color: var(--warning);
-    background: rgba(245,158,11,0.08);
-    padding: 8px 12px;
-    border-radius: var(--radius-sm);
-    border-left: 3px solid var(--warning);
-    margin-top: 8px;
-    line-height: 1.5;
-}
-
-/* ── Archive / Links ────────────────────────────────────────── */
-.archive-section {
-    background: var(--canvas);
-    border: 1px solid var(--hairline-soft);
-    border-radius: var(--radius-md);
-    padding: 16px 20px;
-    margin-bottom: 24px;
-}
-.archive-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    margin-top: 10px;
-}
-.archive-pill {
-    font-size: 12px;
-    padding: 4px 12px;
-    border-radius: var(--radius-full);
-    border: 1px solid var(--hairline);
-    color: var(--muted);
-    transition: all 0.18s ease;
-}
-.archive-pill:hover {
-    border-color: var(--rausch);
-    color: var(--ink);
-    background: var(--rausch-tint);
-}
-
-/* ── Disclaimer ─────────────────────────────────────────────── */
-.disclaimer {
-    font-size: 12px;
-    color: var(--muted-soft);
-    line-height: 1.6;
-    padding: 12px 16px;
-    background: var(--surface-soft);
-    border-radius: var(--radius-sm);
-    border: 1px solid var(--hairline-soft);
-    margin-bottom: 24px;
-}
-
-/* ── Footer ─────────────────────────────────────────────────── */
-.site-footer {
-    text-align: center;
-    padding: 24px 0;
-    color: var(--muted-soft);
-    font-size: 11px;
-    border-top: 1px solid var(--hairline-soft);
-}
-
-/* ── Empty state ────────────────────────────────────────────── */
-.empty-state {
-    text-align: center;
-    padding: 48px 24px;
-    color: var(--muted);
-}
-.empty-state-icon { font-size: 32px; margin-bottom: 12px; }
-.empty-state-text { font-size: 14px; margin-bottom: 4px; }
-.empty-state-sub { font-size: 12px; color: var(--muted-soft); }
-
-/* ── Back button ────────────────────────────────────────────── */
-.back-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 13px;
-    color: var(--muted);
-    margin-bottom: 20px;
-    padding: 6px 14px;
-    border-radius: var(--radius-full);
-    border: 1px solid var(--hairline-soft);
-    transition: all 0.18s ease;
-}
-.back-link:hover {
-    color: var(--ink);
-    border-color: var(--border-strong);
-    background: var(--canvas);
-}
-
-/* ── Detail page: score breakdown ───────────────────────────── */
-.detail-grid {
-    display: grid;
-    gap: 16px;
-    margin-bottom: 24px;
-}
-@media (min-width: 640px) {
-    .detail-grid { grid-template-columns: 1fr 1fr; }
-}
-.detail-section {
-    background: var(--canvas);
-    border: 1px solid var(--hairline-soft);
-    border-radius: var(--radius-md);
-    padding: 16px 18px;
-    box-shadow: var(--shadow-sm);
-}
-.detail-section-title {
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--ink);
-    margin-bottom: 12px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-}
-.detail-score-big {
-    font-family: var(--font-mono);
-    font-size: 36px;
-    font-weight: 700;
-    text-align: center;
-    margin: 12px 0;
-}
-.detail-score-label {
-    text-align: center;
-    font-size: 12px;
-    color: var(--muted);
-    margin-bottom: 8px;
-}
-
-/* ── History table ──────────────────────────────────────────── */
-.history-table {
-    width: 100%;
-    font-size: 12px;
-    border-collapse: collapse;
-    margin-bottom: 16px;
-}
-.history-table th {
-    padding: 8px 10px;
-    text-align: left;
-    font-weight: 600;
-    color: var(--muted);
-    border-bottom: 1px solid var(--hairline);
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-}
-.history-table td {
-    padding: 8px 10px;
-    border-bottom: 1px solid var(--hairline-soft);
-    font-family: var(--font-mono);
-}
-.history-table tr:hover td {
-    background: rgba(255,255,255,0.02);
-}
-
-/* ── Dashboard: comparison table ────────────────────────────── */
-.comp-table {
-    width: 100%;
-    font-size: 13px;
-    border-collapse: collapse;
-    margin-bottom: 16px;
-}
-.comp-table th {
-    padding: 10px 12px;
-    text-align: left;
-    font-weight: 600;
-    color: var(--muted);
-    border-bottom: 1px solid var(--hairline);
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-}
-.comp-table td {
-    padding: 10px 12px;
-    border-bottom: 1px solid var(--hairline-soft);
-}
-.comp-table .stock-cell {
-    font-family: var(--font-mono);
-    font-weight: 600;
-    color: var(--ink);
-}
-
-/* ── Stats cards ────────────────────────────────────────────── */
-.stats-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    gap: 12px;
-    margin-bottom: 24px;
-}
-.stat-card {
-    background: var(--canvas);
-    border: 1px solid var(--hairline-soft);
-    border-radius: var(--radius-md);
-    padding: 14px 16px;
-    text-align: center;
-}
-.stat-value {
-    font-family: var(--font-mono);
-    font-size: 24px;
-    font-weight: 700;
-    color: var(--ink);
-}
-.stat-label {
-    font-size: 11px;
-    color: var(--muted);
-    margin-top: 4px;
-}
-
-/* ── Responsive ─────────────────────────────────────────────── */
-@media (max-width: 900px) {
-    .shell, .shell-wide { padding: calc(64px + 16px) 16px 80px; }
-    .market-temp-head { flex-direction: column; align-items: flex-start; gap: 8px; }
-    .site-nav { display: none; }
-}
-@media (max-width: 480px) {
-    .stock-grid { grid-template-columns: 1fr; }
-    .signal-grid { grid-template-columns: 1fr; }
-    .metrics-row { flex-wrap: nowrap; overflow-x: auto; }
-    .brand-name { font-size: 14px; }
-    .detail-grid { grid-template-columns: 1fr; }
-    .stats-grid { grid-template-columns: 1fr 1fr; }
-}
-
-/* ── Reduced motion ─────────────────────────────────────────── */
-@media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
-        animation-duration: 0.01ms !important;
-        transition-duration: 0.01ms !important;
-    }
-}
-"""
+# ── CSS: loaded from theme.css (same directory) ─────────────────
+_THEME_CSS_PATH = Path(__file__).parent / "theme.css"
+THEME_CSS = _THEME_CSS_PATH.read_text(encoding="utf-8")
 
 # ── Nav bar (shared across all pages) ──────────────────────────
 NAV_HTML = """
@@ -774,6 +35,15 @@ NAV_HTML = """
 </div>
 """
 
+# Nav bar for pages in subdirectories (e.g. stock/*.html)
+NAV_HTML_SUB = """
+<div class="site-nav">
+    <a href="../index.html"{{ ' class="active"' if page == 'home' else '' }}>首页</a>
+    <a href="../dashboard.html"{{ ' class="active"' if page == 'dashboard' else '' }}>看板</a>
+    <a href="../history.html"{{ ' class="active"' if page == 'history' else '' }}>历史</a>
+</div>
+"""
+
 
 # ── Template: Homepage (index.html) ───────────────────────────
 TPL_HOME = """<!DOCTYPE html>
@@ -781,15 +51,20 @@ TPL_HOME = """<!DOCTYPE html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Stock Copilot — {{ meta.trade_date }} {{ type_label }}</title>
+    <title>智策 NexStrat — {{ meta.trade_date }} {{ type_label }}</title>
     <link rel="stylesheet" href="assets/theme.css">
 </head>
 <body>
 
 <header class="site-header">
     <div class="brand">
-        <div class="brand-icon">📊</div>
-        <span class="brand-name">Stock Copilot</span>
+        <div class="brand-icon">
+            <img src="assets/logo.png" alt="Logo" style="width:36px;height:auto;">
+        </div>
+        <div class="brand-text">
+            <span class="brand-name">智策 NexStrat</span>
+            <span class="brand-tagline">面向投资者的AI智能投研</span>
+        </div>
     </div>
     """ + NAV_HTML.replace("page == 'home'", "True") + """
     <span class="header-meta">{{ meta.trade_date }} {{ type_label }} · {{ meta.generated_at[11:16] }}</span>
@@ -921,7 +196,7 @@ TPL_HOME = """<!DOCTYPE html>
     <div class="disclaimer">{{ disclaimer }}</div>
 
     <footer class="site-footer">
-        Stock Copilot v1.3 · AI 辅助决策 · 不构成投资建议
+        智策 NexStrat v1.3 · AI 辅助决策 · 不构成投资建议
     </footer>
 </div>
 </body>
@@ -935,17 +210,22 @@ TPL_STOCK = """<!DOCTYPE html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>{{ stock.name }} ({{ stock.code }}) — Stock Copilot</title>
+    <title>{{ stock.name }} ({{ stock.code }}) — 智策 NexStrat</title>
     <link rel="stylesheet" href="../assets/theme.css">
 </head>
 <body>
 
 <header class="site-header">
     <div class="brand">
-        <div class="brand-icon">📊</div>
-        <span class="brand-name">Stock Copilot</span>
+        <div class="brand-icon">
+            <img src="../assets/logo.png" alt="Logo" style="width:36px;height:auto;">
+        </div>
+        <div class="brand-text">
+            <span class="brand-name">智策 NexStrat</span>
+            <span class="brand-tagline">面向投资者的AI智能投研</span>
+        </div>
     </div>
-    """ + NAV_HTML + """
+    """ + NAV_HTML_SUB + """
     <span class="header-meta">{{ stock.code }} {{ stock.name }}</span>
 </header>
 
@@ -1117,7 +397,7 @@ TPL_STOCK = """<!DOCTYPE html>
     <div class="disclaimer">{{ disclaimer }}</div>
 
     <footer class="site-footer">
-        Stock Copilot v1.3 · AI 辅助决策 · 不构成投资建议
+        智策 NexStrat v1.3 · AI 辅助决策 · 不构成投资建议
     </footer>
 </div>
 </body>
@@ -1131,15 +411,20 @@ TPL_HISTORY = """<!DOCTYPE html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>历史信号 — Stock Copilot</title>
+    <title>历史信号 — 智策 NexStrat</title>
     <link rel="stylesheet" href="assets/theme.css">
 </head>
 <body>
 
 <header class="site-header">
     <div class="brand">
-        <div class="brand-icon">📊</div>
-        <span class="brand-name">Stock Copilot</span>
+        <div class="brand-icon">
+            <img src="assets/logo.png" alt="Logo" style="width:36px;height:auto;">
+        </div>
+        <div class="brand-text">
+            <span class="brand-name">智策 NexStrat</span>
+            <span class="brand-tagline">面向投资者的AI智能投研</span>
+        </div>
     </div>
     """ + NAV_HTML.replace("page == 'history'", "True") + """
     <span class="header-meta">历史信号</span>
@@ -1239,7 +524,7 @@ TPL_HISTORY = """<!DOCTYPE html>
     <div class="disclaimer">{{ disclaimer }}</div>
 
     <footer class="site-footer">
-        Stock Copilot v1.3 · AI 辅助决策 · 不构成投资建议
+        智策 NexStrat v1.3 · AI 辅助决策 · 不构成投资建议
     </footer>
 </div>
 </body>
@@ -1253,15 +538,20 @@ TPL_DASHBOARD = """<!DOCTYPE html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>数据看板 — Stock Copilot</title>
+    <title>数据看板 — 智策 NexStrat</title>
     <link rel="stylesheet" href="assets/theme.css">
 </head>
 <body>
 
 <header class="site-header">
     <div class="brand">
-        <div class="brand-icon">📊</div>
-        <span class="brand-name">Stock Copilot</span>
+        <div class="brand-icon">
+            <img src="assets/logo.png" alt="Logo" style="width:36px;height:auto;">
+        </div>
+        <div class="brand-text">
+            <span class="brand-name">智策 NexStrat</span>
+            <span class="brand-tagline">面向投资者的AI智能投研</span>
+        </div>
     </div>
     """ + NAV_HTML.replace("page == 'dashboard'", "True") + """
     <span class="header-meta">{{ meta.trade_date }} {{ type_label }}</span>
@@ -1421,7 +711,7 @@ TPL_DASHBOARD = """<!DOCTYPE html>
     <div class="disclaimer">{{ disclaimer }}</div>
 
     <footer class="site-footer">
-        Stock Copilot v1.3 · AI 辅助决策 · 不构成投资建议
+        智策 NexStrat v1.3 · AI 辅助决策 · 不构成投资建议
     </footer>
 </div>
 </body>
