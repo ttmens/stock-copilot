@@ -58,9 +58,19 @@ TPL_HOME = """<!DOCTYPE html>
 
 <header class="site-header">
     <div class="brand">
-        <div class="brand-icon">
-            <img src="assets/logo.png" alt="Logo" style="width:36px;height:auto;">
-        </div>
+    <div class="brand-icon">
+        <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:32px;height:32px">
+            <rect width="32" height="32" rx="8" fill="url(#logo-grad)"/>
+            <path d="M8 22 L14 14 L18 18 L24 10" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M20 10 L24 10 L24 14" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <defs>
+                <linearGradient id="logo-grad" x1="0" y1="0" x2="32" y2="32">
+                    <stop offset="0%" stop-color="#7b3ff2"/>
+                    <stop offset="100%" stop-color="#00f5ff"/>
+                </linearGradient>
+            </defs>
+        </svg>
+    </div>
         <div class="brand-text">
             <span class="brand-name">智策 NexStrat</span>
             <span class="brand-tagline">面向投资者的AI智能投研</span>
@@ -218,8 +228,18 @@ TPL_STOCK = """<!DOCTYPE html>
 <header class="site-header">
     <div class="brand">
         <div class="brand-icon">
-            <img src="../assets/logo.png" alt="Logo" style="width:36px;height:auto;">
-        </div>
+        <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:32px;height:32px">
+            <rect width="32" height="32" rx="8" fill="url(#logo-grad)"/>
+            <path d="M8 22 L14 14 L18 18 L24 10" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M20 10 L24 10 L24 14" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <defs>
+                <linearGradient id="logo-grad" x1="0" y1="0" x2="32" y2="32">
+                    <stop offset="0%" stop-color="#7b3ff2"/>
+                    <stop offset="100%" stop-color="#00f5ff"/>
+                </linearGradient>
+            </defs>
+        </svg>
+    </div>
         <div class="brand-text">
             <span class="brand-name">智策 NexStrat</span>
             <span class="brand-tagline">面向投资者的AI智能投研</span>
@@ -418,9 +438,19 @@ TPL_HISTORY = """<!DOCTYPE html>
 
 <header class="site-header">
     <div class="brand">
-        <div class="brand-icon">
-            <img src="assets/logo.png" alt="Logo" style="width:36px;height:auto;">
-        </div>
+    <div class="brand-icon">
+        <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:32px;height:32px">
+            <rect width="32" height="32" rx="8" fill="url(#logo-grad)"/>
+            <path d="M8 22 L14 14 L18 18 L24 10" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M20 10 L24 10 L24 14" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <defs>
+                <linearGradient id="logo-grad" x1="0" y1="0" x2="32" y2="32">
+                    <stop offset="0%" stop-color="#7b3ff2"/>
+                    <stop offset="100%" stop-color="#00f5ff"/>
+                </linearGradient>
+            </defs>
+        </svg>
+    </div>
         <div class="brand-text">
             <span class="brand-name">智策 NexStrat</span>
             <span class="brand-tagline">面向投资者的AI智能投研</span>
@@ -545,9 +575,19 @@ TPL_DASHBOARD = """<!DOCTYPE html>
 
 <header class="site-header">
     <div class="brand">
-        <div class="brand-icon">
-            <img src="assets/logo.png" alt="Logo" style="width:36px;height:auto;">
-        </div>
+    <div class="brand-icon">
+        <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:32px;height:32px">
+            <rect width="32" height="32" rx="8" fill="url(#logo-grad)"/>
+            <path d="M8 22 L14 14 L18 18 L24 10" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M20 10 L24 10 L24 14" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <defs>
+                <linearGradient id="logo-grad" x1="0" y1="0" x2="32" y2="32">
+                    <stop offset="0%" stop-color="#7b3ff2"/>
+                    <stop offset="100%" stop-color="#00f5ff"/>
+                </linearGradient>
+            </defs>
+        </svg>
+    </div>
         <div class="brand-text">
             <span class="brand-name">智策 NexStrat</span>
             <span class="brand-tagline">面向投资者的AI智能投研</span>

@@ -17,6 +17,43 @@ from src.data.models import AgentResult, AgentStatus
 
 logger = logging.getLogger(__name__)
 
+# ── Dynamic weight loading (evolution engine) ─────────────────────
+
+def _get_optimized_weights() -> dict:
+    """Load optimized fusion weights from config file.
+
+    Falls back to defaults if the config doesn't exist or is invalid.
+    Called on every fuse_signals() call — cached after first load.
+    """
+    if not hasattr(_get_optimized_weights, "_cache"):
+        _get_optimized_weights._cache = None  # type: ignore
+        _get_optimized_weights._mtime = 0  # type: ignore
+
+    import json
+    from pathlib import Path
+    config_path = Path("config/fusion_weights.json")
+
+    try:
+        mtime = config_path.stat().st_mtime if config_path.exists() else 0
+        if mtime > _get_optimized_weights._mtime:  # type: ignore
+            data = json.loads(config_path.read_text())
+            _get_optimized_weights._cache = {  # type: ignore
+                "hard": data.get("hard", 0.40),
+                "soft": data.get("soft", 0.25),
+                "gate": data.get("gate", 0.15),
+                "dragon_tiger": data.get("dragon_tiger", 0.10),
+                "announcement": data.get("announcement", 0.10),
+            }
+            _get_optimized_weights._mtime = mtime  # type: ignore
+    except Exception as e:
+        logger.debug("Using default weights (config load failed: %s)", e)
+
+    return _get_optimized_weights._cache or {  # type: ignore
+        "hard": 0.40, "soft": 0.25, "gate": 0.15,
+        "dragon_tiger": 0.10, "announcement": 0.10,
+    }
+
+
 # ── Signal classification ──────────────────────────────────────────
 
 SIGNAL_LABELS = {
@@ -141,18 +178,27 @@ def fuse_signals(
     has_dragon_tiger = result.data_available.get("dragon_tiger", False)
     has_announcement = result.data_available.get("announcement", False)
 
+    # Load optimized weights if available (evolution engine writes these)
+    _weights = _get_optimized_weights()
+
     if has_hard and has_soft:
-        w_hard, w_soft, w_gate = 0.40, 0.25, 0.15
-        w_dragon_tiger = 0.10 if has_dragon_tiger else 0.0
-        w_announcement = 0.10 if has_announcement else 0.0
+        w_hard = _weights.get("hard", 0.40)
+        w_soft = _weights.get("soft", 0.25)
+        w_gate = _weights.get("gate", 0.15)
+        w_dragon_tiger = _weights.get("dragon_tiger", 0.10) if has_dragon_tiger else 0.0
+        w_announcement = _weights.get("announcement", 0.10) if has_announcement else 0.0
     elif has_hard:
-        w_hard, w_soft, w_gate = 0.60, 0.00, 0.20
-        w_dragon_tiger = 0.10 if has_dragon_tiger else 0.0
-        w_announcement = 0.10 if has_announcement else 0.0
+        w_hard = _weights.get("hard", 0.60)
+        w_soft = 0.00
+        w_gate = _weights.get("gate", 0.20)
+        w_dragon_tiger = _weights.get("dragon_tiger", 0.10) if has_dragon_tiger else 0.0
+        w_announcement = _weights.get("announcement", 0.10) if has_announcement else 0.0
     elif has_soft:
-        w_hard, w_soft, w_gate = 0.00, 0.60, 0.20
-        w_dragon_tiger = 0.10 if has_dragon_tiger else 0.0
-        w_announcement = 0.10 if has_announcement else 0.0
+        w_hard = 0.00
+        w_soft = _weights.get("soft", 0.60)
+        w_gate = _weights.get("gate", 0.20)
+        w_dragon_tiger = _weights.get("dragon_tiger", 0.10) if has_dragon_tiger else 0.0
+        w_announcement = _weights.get("announcement", 0.10) if has_announcement else 0.0
     else:
         # No data at all
         result.final_signal = "hold"

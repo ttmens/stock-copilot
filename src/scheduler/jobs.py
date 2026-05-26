@@ -4,6 +4,7 @@ Schedule (trading days only):
 - 盘前 08:00: 全量分析（含 LLM）+ 站点生成 + 推送 GitHub
 - 盘中 10:00, 11:00, 14:00: 全量分析（含 LLM）+ 站点生成 + 推送 GitHub
 - 盘后 15:30: 全量分析（含 LLM）+ 站点生成 + 推送 GitHub
+- 自我进化 16:00: OODA 循环（验证信号→调参→优化股票池→生成进化报告）
 - 数据库清理 每周日 23:00
 
 Every job runs the FULL analysis pipeline including LLM calls, site
@@ -147,6 +148,36 @@ async def run_db_cleanup():
         logger.error("DB cleanup failed: %s", e)
 
 
+async def run_evolution_cycle():
+    """Self-evolving OODA loop — verify signals, tune weights, evolve stock pool.
+
+    Runs after post-market analysis on trading days.
+    """
+    if not is_trading_day():
+        return
+
+    logger.info("🧬 Running self-evolution cycle (OODA loop)")
+    try:
+        from src.data.db_manager import SignalDB
+        from src.evolution.engine import EvolutionEngine
+
+        db = SignalDB()
+        engine = EvolutionEngine(db=db)
+        report = engine.run_cycle(db=db)
+
+        logger.info("🧬 Evolution complete: win_rate=%.1f%%, weights_changed=%s, "
+                     "evicted=%d, added=%d",
+                     report.win_rate * 100, report.weights_changed,
+                     len(report.evicted), len(report.added))
+
+        if report.errors:
+            for err in report.errors:
+                logger.warning("Evolution warning: %s", err)
+
+    except Exception as e:
+        logger.error("Evolution cycle failed: %s", e, exc_info=True)
+
+
 async def _startup_catch_up():
     """On startup: if today is a trading day and no signals exist for today,
     run a full analysis immediately so the website has today's data."""
@@ -208,6 +239,17 @@ async def _run_scheduler():
         timezone=settings.schedule.timezone,
         id="post_market",
         name="盘后全量分析",
+    )
+
+    # 3.5 Self-evolution OODA loop: 16:00 on trading days (after post-market)
+    scheduler.add_job(
+        run_evolution_cycle,
+        "cron",
+        hour=16, minute=0,
+        day_of_week="mon-fri",
+        timezone=settings.schedule.timezone,
+        id="evolution_cycle",
+        name="自我进化循环",
     )
 
     # 4. Weekly DB cleanup: every Sunday at 23:00

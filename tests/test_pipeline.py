@@ -80,7 +80,7 @@ class TestSiteGenerator:
         content = index.read_text(encoding="utf-8")
         assert "600519" in content
         assert "贵州茅台" in content
-        assert "Stock Copilot" in content
+        assert "智策" in content  # brand name (was "Stock Copilot")
         assert "theme.css" in content
         assert "免责声明" in content or "不构成投资建议" in content
 
