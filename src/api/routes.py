@@ -39,13 +39,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Serve static files from docs/ directory (GitHub Pages source)
-docs_path = Path("docs")
-if docs_path.exists():
-    app.mount("/static", StaticFiles(directory=str(docs_path)), name="static")
-    # Also serve at root for direct access
-    app.mount("/", StaticFiles(directory=str(docs_path), html=True), name="docs")
-
 
 class AnalyzeRequest(BaseModel):
     type: ReportType
@@ -272,3 +265,10 @@ async def get_latest_json():
         else:
             raise HTTPException(status_code=404, detail="latest.json not found")
     return json.loads(json_path.read_text(encoding="utf-8"))
+
+
+# ── Static files (MUST be after all API routes) ──────────────
+docs_path = Path("docs")
+if docs_path.exists():
+    app.mount("/site", StaticFiles(directory=str(docs_path)), name="site")
+    app.mount("/", StaticFiles(directory=str(docs_path), html=True), name="docs")
