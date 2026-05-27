@@ -415,3 +415,117 @@ a:hover { color: var(--accent-blue); }
 
 /* ── Reduced Motion ── */
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; } }
+
+/* ═══════════════════════════════════════════════
+ *  Desktop Web Optimizations (>=1200px)
+ * ═══════════════════════════════════════════════ */
+
+@media (min-width: 1200px) {
+  .shell { max-width: 1200px; padding: 88px 24px 100px; }
+  .shell-wide { max-width: 1400px; padding: 88px 24px 100px; }
+  .stock-grid { grid-template-columns: 1fr 1fr 1fr; }
+}
+
+@media (min-width: 1600px) {
+  .shell { max-width: 1400px; }
+  .shell-wide { max-width: 1600px; }
+  .stock-grid { grid-template-columns: 1fr 1fr 1fr 1fr; }
+}
+
+/* ── Sticky Filter Bar ── */
+.filter-bar { position: sticky; top: 72px; z-index: 50; background: var(--canvas-deep); padding: 12px 0; margin-top: -12px; }
+@media (max-width: 900px) { .filter-bar { position: static; background: none; padding: 0; margin-top: 0; } }
+
+/* ── View Toggle (Cards ↔ Table) ── */
+.view-toggle { display: none; gap: 4px; margin-left: auto; }
+@media (min-width: 900px) { .view-toggle { display: flex; } }
+.view-toggle-btn {
+  min-height: 36px; padding: 0 12px; border-radius: var(--r-sm);
+  border: 1px solid var(--border-soft); background: var(--canvas-alt);
+  color: var(--text-muted); cursor: pointer; font-size: 12px; font-weight: 500;
+  transition: all 0.15s ease; display: flex; align-items: center; gap: 6px;
+}
+.view-toggle-btn:hover { border-color: var(--border-mid); color: var(--text-primary); }
+.view-toggle-btn.active { background: rgba(123,63,242,0.15); border-color: var(--accent-purple); color: var(--accent-purple); }
+.view-toggle-btn svg { width: 16px; height: 16px; }
+
+/* ── Table View ── */
+.table-view { display: none; }
+.table-view.active { display: block; }
+.stock-grid.table-hidden { display: none; }
+
+.stock-table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 13px; }
+.stock-table thead th {
+  position: sticky; top: 128px; z-index: 10;
+  background: var(--surface); padding: 10px 12px; text-align: left;
+  font-weight: 600; color: var(--text-muted); border-bottom: 1px solid var(--border-soft);
+  font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em;
+  cursor: pointer; user-select: none; white-space: nowrap;
+}
+.stock-table thead th:hover { color: var(--text-primary); }
+.stock-table thead th.sorted { color: var(--accent-cyan); }
+.stock-table thead th .sort-icon { margin-left: 4px; opacity: 0.5; font-size: 10px; }
+.stock-table thead th.sorted .sort-icon { opacity: 1; }
+
+.stock-table tbody tr { transition: background 0.1s ease; cursor: pointer; }
+.stock-table tbody tr:hover { background: var(--surface-hover); }
+.stock-table tbody td { padding: 10px 12px; border-bottom: 1px solid var(--border-hair); vertical-align: middle; }
+.stock-table .stock-code { font-family: var(--font-mono); color: var(--accent-cyan); font-weight: 600; }
+.stock-table .stock-name { color: var(--text-secondary); font-size: 12px; }
+
+/* ── Enhanced Card Hover (Desktop) ── */
+@media (min-width: 900px) {
+  .stock-card { position: relative; overflow: hidden; }
+  .stock-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: var(--gradient-brand); opacity: 0; transition: opacity 0.2s ease;
+  }
+  .stock-card:hover::before { opacity: 1; }
+  .stock-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+}
+
+/* ── Keyboard Shortcut Hints ── */
+.kbd-hint { display: none; }
+@media (min-width: 900px) {
+  .kbd-hint {
+    display: inline-flex; align-items: center; gap: 4px;
+    margin-left: 8px; font-size: 10px; color: var(--text-faint);
+  }
+  .kbd {
+    display: inline-block; padding: 1px 5px; border-radius: 3px;
+    background: rgba(255,255,255,0.06); border: 1px solid var(--border-hair);
+    font-family: var(--font-mono); font-size: 10px; line-height: 1.4;
+  }
+}
+
+/* ── Compare Panel (Desktop) ── */
+.compare-panel {
+  display: none; position: fixed; right: 24px; bottom: 80px;
+  width: 320px; background: var(--surface); border: 1px solid var(--border-soft);
+  border-radius: var(--r-lg); box-shadow: var(--shadow-lg); z-index: var(--z-modal);
+  padding: 16px; max-height: 60vh; overflow-y: auto;
+}
+.compare-panel.active { display: block; }
+.compare-panel-title { font-size: 14px; font-weight: 600; color: var(--text-primary); margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; }
+.compare-panel-close { cursor: pointer; color: var(--text-muted); font-size: 18px; line-height: 1; }
+.compare-panel-close:hover { color: var(--text-primary); }
+.compare-item { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--border-hair); }
+.compare-item:last-child { border-bottom: none; }
+.compare-item-code { font-family: var(--font-mono); color: var(--accent-cyan); font-weight: 600; }
+.compare-item-remove { cursor: pointer; color: var(--signal-bear); font-size: 12px; opacity: 0.6; }
+.compare-item-remove:hover { opacity: 1; }
+.compare-bar { height: 4px; background: rgba(255,255,255,0.06); border-radius: 2px; overflow: hidden; margin-top: 4px; }
+.compare-bar-fill { height: 100%; border-radius: 2px; }
+
+/* ── Selection Checkboxes ── */
+@media (min-width: 900px) {
+  .stock-select {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 18px; height: 18px; border: 1px solid var(--border-soft);
+    border-radius: 3px; cursor: pointer; margin-right: 8px; flex-shrink: 0;
+    transition: all 0.15s ease; background: transparent;
+  }
+  .stock-select:hover { border-color: var(--accent-purple); }
+  .stock-select.checked { background: var(--accent-purple); border-color: var(--accent-purple); }
+  .stock-select.checked::after { content: '✓'; color: white; font-size: 12px; line-height: 1; }
+}

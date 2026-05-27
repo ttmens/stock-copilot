@@ -140,6 +140,7 @@ TPL_HOME = """<!DOCTYPE html>
 {# ── Stock List ── #}
 <div class="section-title">
     今日重点 <span class="count" id="stock-count">({{ stocks|length }} 只自选)</span>
+    <span class="kbd-hint"><span class="kbd">V</span> 切换视图</span>
 </div>
 
 <div class="filter-bar" id="filter-bar">
@@ -156,6 +157,25 @@ TPL_HOME = """<!DOCTYPE html>
         <option value="code">按代码</option>
     </select>
     <a href="app/watchlist.html" class="filter-link">管理自选</a>
+    <div class="view-toggle">
+        <button class="view-toggle-btn active" id="btn-view-cards" title="卡片视图 (V)">
+            <svg viewBox="0 0 16 16" fill="currentColor"><rect x="1" y="1" width="6" height="6" rx="1"/><rect x="9" y="1" width="6" height="6" rx="1"/><rect x="1" y="9" width="6" height="6" rx="1"/><rect x="9" y="9" width="6" height="6" rx="1"/></svg>
+            卡片
+        </button>
+        <button class="view-toggle-btn" id="btn-view-table" title="表格视图 (V)">
+            <svg viewBox="0 0 16 16" fill="currentColor"><rect x="1" y="1" width="14" height="3" rx="1"/><rect x="1" y="6" width="14" height="3" rx="1"/><rect x="1" y="11" width="14" height="3" rx="1"/></svg>
+            表格
+        </button>
+    </div>
+</div>
+
+{# ── Compare Panel (Desktop) ── #}
+<div class="compare-panel" id="compare-panel">
+    <div class="compare-panel-title">
+        对比面板 <span id="compare-count">(0)</span>
+        <span class="compare-panel-close" id="compare-close">×</span>
+    </div>
+    <div id="compare-list"></div>
 </div>
 
 {% if not stocks %}
@@ -172,9 +192,12 @@ TPL_HOME = """<!DOCTYPE html>
 <div class="stock-card">
     {# Card Header #}
     <div class="card-header">
-        <div>
-            <div class="card-stock-code">{{ stock.code }}</div>
-            <div class="card-stock-name">{{ stock.name }}</div>
+        <div style="display:flex;align-items:center">
+            <div class="stock-select" data-code="{{ stock.code }}" title="加入对比"></div>
+            <div>
+                <div class="card-stock-code">{{ stock.code }}</div>
+                <div class="card-stock-name">{{ stock.name }}</div>
+            </div>
         </div>
         {% set s = stock.overall_sentiment %}
         {% set badge_cls = 'bullish' if s in ['strong_buy','buy','bullish'] else 'bearish' if s in ['sell','strong_sell'] else 'hold' %}
@@ -240,7 +263,52 @@ TPL_HOME = """<!DOCTYPE html>
 {% endfor %}
 </div>
 
-{# ── Archive ── #}
+{# ── Table View (Desktop) ── #}
+<div class="table-view" id="table-view">
+<div class="table-scroll" style="margin-bottom:24px">
+<table class="stock-table" id="stock-table">
+    <thead>
+        <tr>
+            <th data-sort="code" style="width:100px">代码 <span class="sort-icon">↕</span></th>
+            <th style="width:100px">名称</th>
+            <th style="width:80px">信号</th>
+            <th data-sort="score" class="sorted">评分 <span class="sort-icon">↓</span></th>
+            <th style="width:80px">5日动量</th>
+            <th style="width:70px">均线</th>
+            <th style="width:60px">量比</th>
+            <th style="width:60px">PE</th>
+            <th style="width:70px">置信度</th>
+            <th style="width:60px">龙虎</th>
+            <th style="width:60px">公告</th>
+        </tr>
+    </thead>
+    <tbody>
+{% for stock in stocks %}
+{% set s = stock.overall_sentiment %}
+{% set badge_cls = 'bullish' if s in ['strong_buy','buy','bullish'] else 'bearish' if s in ['sell','strong_sell'] else 'hold' %}
+        <tr data-code="{{ stock.code }}" data-name="{{ stock.name }}" data-signal="{{ s }}" data-score="{{ stock.signal_breakdown.final_score }}" data-confidence="{{ stock.confidence }}">
+            <td class="stock-code"><a href="{% if use_app_pages %}app/stock.html?code={{ stock.code }}{% else %}stock/{{ stock.code }}.html{% endif %}" style="text-decoration:none;color:inherit">{{ stock.code }}</a></td>
+            <td><span class="stock-name">{{ stock.name }}</span></td>
+            <td><span class="signal-badge {{ badge_cls }}">{{ stock.overall_focus }}</span></td>
+            <td>
+                <div class="score-mini">
+                    <span class="score-mini-val" style="color:{{ '#22C55E' if stock.signal_breakdown.final_score > 0.2 else '#EF4444' if stock.signal_breakdown.final_score < -0.2 else '#94A3B8' }}">{{ '%+.3f'|format(stock.signal_breakdown.final_score) }}</span>
+                    <div class="score-mini-bar"><div class="score-mini-fill" style="width:{{ ((stock.signal_breakdown.final_score + 1) / 2 * 100)|round }}%;background:{{ '#22C55E' if stock.signal_breakdown.final_score > 0.2 else '#EF4444' if stock.signal_breakdown.final_score < -0.2 else '#94A3B8' }}"></div></div>
+                </div>
+            </td>
+            <td style="color:{{ '#22C55E' if (stock.momentum_5d or 0) > 0 else '#EF4444' if (stock.momentum_5d or 0) < 0 else 'var(--text-muted)' }}">{{ '%+.1f'|format(stock.momentum_5d) if stock.momentum_5d is not none else '-' }}%</td>
+            <td>{{ {'bullish': '多头', 'bearish': '空头', 'neutral': '交叉'}.get(stock.ma_alignment, '-') }}</td>
+            <td>{{ '%.2f'|format(stock.volume_ratio) if stock.volume_ratio is not none else '-' }}</td>
+            <td>{{ '%.1f'|format(stock.pe_ttm) if stock.pe_ttm is not none else '-' }}</td>
+            <td>{{ (stock.confidence * 100)|round(0) }}%</td>
+            <td>{% if stock.signal_breakdown.has_dragon_tiger %}<span style="color:var(--dim-dragon)">●</span>{% else %}<span style="color:var(--text-faint)">—</span>{% endif %}</td>
+            <td>{% if stock.signal_breakdown.has_announcement %}<span style="color:var(--dim-announce)">●</span>{% else %}<span style="color:var(--text-faint)">—</span>{% endif %}</td>
+        </tr>
+{% endfor %}
+    </tbody>
+</table>
+</div>
+</div>
 {% if archive %}
 <div class="archive-section">
     <div style="font-size:13px;font-weight:600;color:var(--text-primary);margin-bottom:4px;">📁 历史报告</div>
@@ -258,6 +326,165 @@ TPL_HOME = """<!DOCTYPE html>
 </div>
 
 {{ bottom_nav }}
+
+{# ── Desktop JavaScript: View Toggle, Table Sort, Compare Panel, Keyboard ── #}
+<script>
+(function() {
+  'use strict';
+  if (typeof window === 'undefined') return;
+
+  // ── View Toggle ──
+  const gridEl = document.getElementById('stock-grid');
+  const tableEl = document.getElementById('table-view');
+  const btnCards = document.getElementById('btn-view-cards');
+  const btnTable = document.getElementById('btn-view-table');
+  let isTableView = false;
+
+  function setView(table) {
+    isTableView = table;
+    if (table) {
+      gridEl && gridEl.classList.add('table-hidden');
+      tableEl && tableEl.classList.add('active');
+      btnCards && btnCards.classList.remove('active');
+      btnTable && btnTable.classList.add('active');
+      localStorage.setItem('nexstrat-view', 'table');
+    } else {
+      gridEl && gridEl.classList.remove('table-hidden');
+      tableEl && tableEl.classList.remove('active');
+      btnCards && btnCards.classList.add('active');
+      btnTable && btnTable.classList.remove('active');
+      localStorage.setItem('nexstrat-view', 'cards');
+    }
+  }
+
+  // Restore preference
+  if (localStorage.getItem('nexstrat-view') === 'table') setView(true);
+
+  btnCards && btnCards.addEventListener('click', () => setView(false));
+  btnTable && btnTable.addEventListener('click', () => setView(true));
+
+  // ── Table Sort ──
+  const stockTable = document.getElementById('stock-table');
+  if (stockTable) {
+    const headers = stockTable.querySelectorAll('th[data-sort]');
+    let sortKey = 'score';
+    let sortAsc = false;
+
+    headers.forEach(th => {
+      th.addEventListener('click', () => {
+        const key = th.dataset.sort;
+        if (key === sortKey) { sortAsc = !sortAsc; }
+        else { sortKey = key; sortAsc = true; }
+
+        headers.forEach(h => h.classList.remove('sorted'));
+        th.classList.add('sorted');
+        th.querySelector('.sort-icon').textContent = sortAsc ? '↑' : '↓';
+
+        const tbody = stockTable.querySelector('tbody');
+        const rows = Array.from(tbody.querySelectorAll('tr'));
+        rows.sort((a, b) => {
+          let va = a.dataset[sortKey] || '';
+          let vb = b.dataset[sortKey] || '';
+          if (sortKey === 'score') { va = parseFloat(va) || 0; vb = parseFloat(vb) || 0; }
+          else if (sortKey === 'confidence') { va = parseFloat(va) || 0; vb = parseFloat(vb) || 0; }
+          else { va = va.toLowerCase(); vb = vb.toLowerCase(); }
+          if (va < vb) return sortAsc ? -1 : 1;
+          if (va > vb) return sortAsc ? 1 : -1;
+          return 0;
+        });
+        rows.forEach(r => tbody.appendChild(r));
+      });
+    });
+
+    // Click row to navigate
+    stockTable.querySelectorAll('tbody tr').forEach(tr => {
+      tr.addEventListener('click', (e) => {
+        if (e.target.tagName === 'A') return;
+        const code = tr.dataset.code;
+        if (code) window.location.href = 'app/stock.html?code=' + code;
+      });
+    });
+  }
+
+  // ── Compare Panel ──
+  const comparePanel = document.getElementById('compare-panel');
+  const compareList = document.getElementById('compare-list');
+  const compareCount = document.getElementById('compare-count');
+  const compareClose = document.getElementById('compare-close');
+  let compareStocks = [];
+
+  function updateCompare() {
+    if (!compareList) return;
+    compareCount && (compareCount.textContent = '(' + compareStocks.length + ')');
+    if (compareStocks.length === 0) {
+      compareList.innerHTML = '<div style="color:var(--text-muted);font-size:12px;text-align:center;padding:16px">点击卡片左上角复选框添加对比</div>';
+      comparePanel && comparePanel.classList.remove('active');
+      return;
+    }
+    comparePanel && comparePanel.classList.add('active');
+    compareList.innerHTML = compareStocks.map(s => {
+      const score = s.score || 0;
+      const color = score > 0.2 ? '#22C55E' : score < -0.2 ? '#EF4444' : '#94A3B8';
+      const width = ((score + 1) / 2 * 100).toFixed(0);
+      return '<div class="compare-item">' +
+        '<div><span class="compare-item-code">' + s.code + '</span> <span style="color:var(--text-muted);font-size:12px">' + s.name + '</span>' +
+        '<div class="compare-bar"><div class="compare-bar-fill" style="width:' + width + '%;background:' + color + '"></div></div></div>' +
+        '<span class="compare-item-remove" data-code="' + s.code + '">×</span></div>';
+    }).join('');
+
+    compareList.querySelectorAll('.compare-item-remove').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const code = btn.dataset.code;
+        compareStocks = compareStocks.filter(s => s.code !== code);
+        updateCompare();
+        document.querySelectorAll('.stock-select[data-code="' + code + '"]').forEach(el => el.classList.remove('checked'));
+      });
+    });
+  }
+
+  document.querySelectorAll('.stock-select').forEach(el => {
+    el.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const code = el.dataset.code;
+      const card = el.closest('.stock-card-link') || el.closest('tr');
+      if (!card) return;
+      const name = card.dataset.name || '';
+      const score = parseFloat(card.dataset.score) || 0;
+
+      if (compareStocks.some(s => s.code === code)) {
+        compareStocks = compareStocks.filter(s => s.code !== code);
+        el.classList.remove('checked');
+      } else {
+        if (compareStocks.length >= 5) { alert('最多对比 5 只股票'); return; }
+        compareStocks.push({ code, name, score });
+        el.classList.add('checked');
+      }
+      updateCompare();
+    });
+  });
+
+  compareClose && compareClose.addEventListener('click', () => {
+    comparePanel && comparePanel.classList.remove('active');
+  });
+
+  updateCompare();
+
+  // ── Keyboard Shortcuts ──
+  document.addEventListener('keydown', (e) => {
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'SELECT') return;
+    if (e.key === 'v' || e.key === 'V') {
+      e.preventDefault();
+      setView(!isTableView);
+    }
+    if (e.key === 'Escape') {
+      comparePanel && comparePanel.classList.remove('active');
+    }
+  });
+})();
+</script>
+
 <script src="app/app.js" defer></script>
 </body>
 </html>
