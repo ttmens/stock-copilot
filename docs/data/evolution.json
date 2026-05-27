@@ -1,0 +1,18 @@
+{
+  "cycle_id": "evo-0001",
+  "date": "2026-05-27",
+  "win_rate": 0.0,
+  "avg_return": -1.78,
+  "sharpe_like": 0.0,
+  "signals_verified": 1,
+  "weights": {
+    "hard": 0.5,
+    "soft": 0.309,
+    "gate": 0.191
+  },
+  "pool_size": 50,
+  "evicted_count": 0,
+  "added_count": 0,
+  "summary": "验证了 1 个信号，胜率 0.0%，平均收益 -1.78%。 信号权重已自动调整。",
+  "status": "act"
+}

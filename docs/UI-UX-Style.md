@@ -1,6 +1,8 @@
+> **已废弃为 SSOT** — 视觉规范请以 [DESIGN.md](./DESIGN.md) 为准。本文档仅作人类可读摘要。
+
 # UI / UX 视觉设计规范
 
-> 本文档提取自 `assets/site-chrome.css`、`assets/brief-page.css`、`assets/anmunuo-theme.css`，供新页面、子应用或外部项目复用全站统一风格。
+> 历史说明：早期版本引用 `site-chrome.css` / `anmunuo-theme.css`；现行实现为单一 `assets/theme.css`（见 DESIGN.md）。
 
 ---
 

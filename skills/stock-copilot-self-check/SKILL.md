@@ -7,7 +7,11 @@ license: MIT
 metadata:
   hermes:
     tags: [stock-copilot, self-check, health, verification, maintenance]
-    related_skills: [systematic-debugging, requesting-code-review]
+    related_skills:
+      - systematic-debugging
+      - requesting-code-review
+      - docs-hygiene
+      - ui-acceptance-review
 ---
 
 # Stock Copilot 系统自检
@@ -21,6 +25,19 @@ Stock Copilot 全链路系统的自动化健康检查工具，覆盖 10 大检�
 - 发现可修复问题时自动修复
 
 核心脚本位于 `scripts/self_check.py`，无需额外依赖，直接运行即可。
+
+## 扩展检查（文档 + UI）
+
+站点相关改动后， additionally 运行：
+
+```bash
+python scripts/check_docs_ssot.py --project-root .
+python scripts/ui_acceptance.py --quick   # UI 改动
+python scripts/ui_acceptance.py --full    # Phase Ship / G3
+```
+
+- `check_docs_ssot.py`：08/13 SSOT、DESIGN.md、src↔docs theme.css sync
+- `ui_acceptance.py`：免责声明、token、IA/交互/静动混合（full 模式）
 
 ## When to Use
 

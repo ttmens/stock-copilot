@@ -1,21 +1,24 @@
 {
-  "hard": 0.5,
-  "soft": 0.3086,
-  "gate": 0.1914,
+  "hard": 0.4,
+  "soft": 0.25,
+  "gate": 0.15,
   "dragon_tiger": 0.1,
   "announcement": 0.1,
-  "version": 2,
-  "last_updated": "2026-05-27T16:01:05.028048",
+  "version": 3,
+  "last_updated": "2026-05-27T00:00:00",
   "history": [
     {
-      "version": 2,
+      "version": 3,
       "weights": {
-        "hard": 0.5,
-        "soft": 0.309,
-        "gate": 0.191
+        "hard": 0.4,
+        "soft": 0.25,
+        "gate": 0.15,
+        "dragon_tiger": 0.1,
+        "announcement": 0.1
       },
       "win_rate": 0.0,
-      "updated_at": "2026-05-27T16:01:05.028048"
+      "updated_at": "2026-05-27T00:00:00",
+      "note": "Phase D: normalized to sum=1.0"
     }
   ]
 }

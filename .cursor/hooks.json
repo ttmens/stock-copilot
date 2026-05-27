@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "hooks": {
+    "beforeShellExecution": [
+      {
+        "command": ".cursor/hooks/pre-quality-gate.sh",
+        "matcher": "git commit"
+      }
+    ],
+    "stop": [
+      {
+        "command": ".cursor/hooks/on-stop-ui-reminder.sh"
+      }
+    ]
+  }
+}

@@ -11,7 +11,8 @@
 | 产品 / 需求 | [design/01-DESIGN.md](design/01-DESIGN.md)、[design/02-MVP-SPEC.md](design/02-MVP-SPEC.md) |
 | 现行状态 SSOT | [design/08-CURRENT-STATUS.md](design/08-CURRENT-STATUS.md) |
 | API | [design/05-API-SPEC.md](design/05-API-SPEC.md) |
-| UI 视觉 SSOT | [UI-UX-Style.md](UI-UX-Style.md) |
+| UI 视觉 SSOT | [DESIGN.md](DESIGN.md) |
+| Agent 工作流 | [workflow_state.yaml](workflow_state.yaml) |
 | Phase C 交付 | [design/14-PHASE-C-PLAN.md](design/14-PHASE-C-PLAN.md) |
 | 决策记录 | [DECISIONS.md](DECISIONS.md) |
 

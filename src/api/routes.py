@@ -86,7 +86,7 @@ async def health_check():
         host_ip = "unknown"
     return {
         "status": "ok",
-        "version": "2.0.0",
+        "version": "1.5.0",
         "last_published": pub,
         "watchlist_count": len(wl),
         "api_base": f"http://{host_ip}:8000",

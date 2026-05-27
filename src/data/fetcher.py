@@ -7,7 +7,7 @@ Single-stock failures never block others.
 import asyncio
 import logging
 import time
-from datetime import datetime
+from datetime import date, datetime, timedelta
 from typing import Optional
 
 import akshare as ak
@@ -271,6 +271,8 @@ class DataFetcher:
                     ))
                 except Exception:
                     continue
+            cutoff = date.today() - timedelta(days=self.announcement_days)
+            announcements = [a for a in announcements if a.date >= cutoff]
             return announcements
         except Exception as e:
             errors.append(f"akshare_announcements: {e}")

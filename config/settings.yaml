@@ -22,8 +22,8 @@ llm:
       priority: 2
 
 schedule:
-  pre_market: "08:00"
-  post_market: "15:30"
+  pre_market: "08:30"
+  post_market: "16:00"
   timezone: "Asia/Shanghai"
   intraday_hours: [10, 11, 14]
   evolution: "16:00"

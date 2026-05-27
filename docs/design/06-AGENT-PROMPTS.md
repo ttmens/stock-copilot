@@ -13,13 +13,15 @@ src/agents/base.py         → BaseAgent (统一 LLM 调用 + 重试)
 src/agents/technical.py    → TechnicalAgent (技术面分析)
 src/agents/fundamental.py  → FundamentalAgent (公告/基本面分析)
 src/agents/capital.py      → CapitalAgent (资金流向分析)
-```
+src/agents/announcement.py → AnnouncementAgent (公告事件分析)
 
----
+Pipeline (`src/orchestrator/pipeline.py`) 并行调用 Technical / Fundamental / Capital + Announcement；
+FundamentalAgent 独立 LLM 分析公告基本面，仅在 LLM unavailable 时降级复用 Announcement 结果。
+```
 
 ## 通用 System Prompt
 
-所有 3 个 Agent 使用相同的 System Prompt（定义在各自模块中）：
+所有 Agent 使用相同的 System Prompt（定义在各自模块中）：
 
 ```
 你是 A 股投研分析助手，仅基于用户提供的数据进行分析。

@@ -1,0 +1,36 @@
+project: stock-copilot
+mode: phase_increment
+current_phase: acceptance
+target_phase: phase_d
+gates:
+  g1_research: approved
+  g2_design: approved
+  g3_ui_acceptance: approved
+acceptance:
+  functional: pass
+  ux: pass
+  ops: pass
+artifacts:
+  ssot_status: docs/design/08-CURRENT-STATUS.md
+  decisions: docs/DECISIONS.md
+  design_tokens: docs/DESIGN.md
+  phase_plan: docs/design/15-PHASE-D-PLAN.md
+  g3_evidence: docs/archive/phase-d-g3/acceptance-evidence.md
+  ui_acceptance_report: docs/ui-acceptance-report.md
+checkpoints:
+  - phase: phase_d_plan
+    completed_at: "2026-05-27"
+    artifacts:
+      - docs/plans/2026-05-27-phase-d.md
+      - docs/design/15-PHASE-D-PLAN.md
+  - phase: phase_d_build
+    completed_at: "2026-05-27"
+    artifacts:
+      - tests/test_phase_d.py
+      - config/fusion_weights.json
+  - phase: phase_d_g3
+    completed_at: "2026-05-27"
+    artifacts:
+      - docs/archive/phase-d-g3/acceptance-evidence.md
+      - docs/ui-acceptance-report.md
+blockers: []

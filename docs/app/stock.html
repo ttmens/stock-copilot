@@ -170,23 +170,30 @@
 
   if (!code) { showError("缺少股票代码"); return; }
 
-  let stock = null;
-  try {
-    const res = await fetch("../data/latest.json");
-    if (!res.ok) throw new Error("HTTP " + res.status);
-    const data = await res.json();
-    stock = (data.stocks || []).find(function(s) { return s.code === code; });
-  } catch (e) {
-    showError("无法加载数据：" + e.message);
-    return;
+  function findStock(data) {
+    return (data.stocks || []).find(function(s) { return s.code === code; });
   }
 
-  if (!stock) { showError("未找到股票 " + code); return; }
+  function renderStock(stock) {
+    loadingEl.style.display = "none";
+    contentEl.style.display = "block";
+    document.title = stock.name + " (" + stock.code + ") — 智策 NexStrat";
+    contentEl.innerHTML = buildHtml(stock);
+  }
 
-  loadingEl.style.display = "none";
-  contentEl.style.display = "block";
-  document.title = stock.name + " (" + stock.code + ") — 智策 NexStrat";
+  function scoreClass(val, threshold) {
+    if (val > threshold) return "signal-score-bull";
+    if (val < -threshold) return "signal-score-bear";
+    return "signal-score-hold";
+  }
 
+  function priceClass(val) {
+    if (val > 0) return "change-up";
+    if (val < 0) return "change-down";
+    return "";
+  }
+
+  function buildHtml(stock) {
   var sb = stock.signal_breakdown || {};
   var s = stock.overall_sentiment || "hold";
   var badgeCls = (s === "strong_buy" || s === "buy" || s === "bullish") ? "bullish" :
@@ -208,11 +215,11 @@
   html += '<div class="detail-section">';
   html += '<div class="detail-section-title">🎯 AI 决策评分</div>';
   html += '<div class="big-score">';
-  var scoreColor = (sb.final_score > 0.2) ? '#22C55E' : (sb.final_score < -0.2) ? '#EF4444' : '#94A3B8';
-  html += '<div class="big-score-value" style="color:' + scoreColor + '">' + (sb.final_score >= 0 ? '+' : '') + (sb.final_score || 0).toFixed(3) + '</div>';
+  var scoreCls = scoreClass(sb.final_score || 0, 0.2);
+  html += '<div class="big-score-value ' + scoreCls + '">' + (sb.final_score >= 0 ? '+' : '') + (sb.final_score || 0).toFixed(3) + '</div>';
   html += '<div class="big-score-label">置信度 ' + Math.round((stock.confidence || 0) * 100) + '%</div>';
   var barWidth = ((sb.final_score || 0) + 1) / 2 * 100;
-  html += '<div class="big-score-bar"><div class="big-score-fill" style="width:' + barWidth.toFixed(1) + '%;background:' + scoreColor + '"></div></div>';
+  html += '<div class="big-score-bar"><div class="big-score-fill signal-bar-' + scoreCls.replace('signal-score-', '') + '" style="width:' + barWidth.toFixed(1) + '%"></div></div>';
   html += '</div>';
 
   // 5-Layer dims
@@ -228,10 +235,11 @@
   dims.forEach(function(d) {
     var val = d[1] || 0;
     var threshold = d[3] !== undefined ? d[3] : 0;
-    var c = val > threshold ? '#22C55E' : val < threshold ? '#EF4444' : 'var(--text-muted)';
+    var cls = scoreClass(val, threshold === 0.5 ? 0 : 0);
+    if (threshold === 0.5) cls = val > threshold ? 'signal-score-bull' : val < threshold ? 'signal-score-bear' : 'signal-score-hold';
     html += '<div class="dim-card">';
     html += '<span class="dim-card-label"><span class="dim-card-dot" style="background:' + d[2] + '"></span>' + d[0] + '</span>';
-    html += '<span class="dim-card-value" style="color:' + c + '">' + (val >= 0 ? '+' : '') + val.toFixed(3) + '</span>';
+    html += '<span class="dim-card-value ' + cls + '">' + (val >= 0 ? '+' : '') + val.toFixed(3) + '</span>';
     html += '</div>';
   });
   html += '</div></div>';
@@ -242,18 +250,16 @@
   html += '<div class="metrics-row" style="flex-wrap:wrap">';
 
   if (stock.momentum_5d != null) {
-    var c5 = stock.momentum_5d > 0 ? '#22C55E' : stock.momentum_5d < 0 ? '#EF4444' : 'var(--text-secondary)';
-    html += '<div class="metric-chip" style="min-width:80px"><span class="metric-chip-label">5日动量</span><span class="metric-chip-val" style="color:' + c5 + '">' + (stock.momentum_5d >= 0 ? '+' : '') + stock.momentum_5d.toFixed(1) + '%</span></div>';
+    html += '<div class="metric-chip" style="min-width:80px"><span class="metric-chip-label">5日动量</span><span class="metric-chip-val ' + priceClass(stock.momentum_5d) + '">' + (stock.momentum_5d >= 0 ? '+' : '') + stock.momentum_5d.toFixed(1) + '%</span></div>';
   }
   if (stock.momentum_20d != null) {
-    var c20 = stock.momentum_20d > 0 ? '#22C55E' : stock.momentum_20d < 0 ? '#EF4444' : 'var(--text-secondary)';
-    html += '<div class="metric-chip" style="min-width:80px"><span class="metric-chip-label">20日动量</span><span class="metric-chip-val" style="color:' + c20 + '">' + (stock.momentum_20d >= 0 ? '+' : '') + stock.momentum_20d.toFixed(1) + '%</span></div>';
+    html += '<div class="metric-chip" style="min-width:80px"><span class="metric-chip-label">20日动量</span><span class="metric-chip-val ' + priceClass(stock.momentum_20d) + '">' + (stock.momentum_20d >= 0 ? '+' : '') + stock.momentum_20d.toFixed(1) + '%</span></div>';
   }
   if (stock.ma_alignment) {
     var ma = stock.ma_alignment;
-    var maCls = ma === 'bullish' ? '#22C55E' : ma === 'bearish' ? '#EF4444' : 'var(--text-secondary)';
+    var maCls = ma === 'bullish' ? 'signal-score-bull' : ma === 'bearish' ? 'signal-score-bear' : 'signal-score-hold';
     var maLabel = ma === 'bullish' ? '多头' : ma === 'bearish' ? '空头' : '交叉';
-    html += '<div class="metric-chip" style="min-width:80px"><span class="metric-chip-label">均线排列</span><span class="metric-chip-val" style="color:' + maCls + '">' + maLabel + '</span></div>';
+    html += '<div class="metric-chip" style="min-width:80px"><span class="metric-chip-label">均线排列</span><span class="metric-chip-val ' + maCls + '">' + maLabel + '</span></div>';
   }
   if (stock.volume_ratio != null) {
     html += '<div class="metric-chip"><span class="metric-chip-label">量比</span><span class="metric-chip-val">' + stock.volume_ratio.toFixed(2) + '</span></div>';
@@ -297,9 +303,9 @@
     stock.dragon_tiger.forEach(function(dt) {
       html += '<div class="dt-block">';
       html += '<div class="dt-title">' + (dt.reason || '') + '</div>';
-      var netColor = dt.net_buy > 0 ? '#22C55E' : '#EF4444';
+      var netCls = priceClass(dt.net_buy);
       var netVal = Math.abs(dt.net_buy) >= 10000 ? (dt.net_buy >= 0 ? '+' : '') + dt.net_buy.toFixed(0) : (dt.net_buy >= 0 ? '+' : '') + (dt.net_buy / 10000).toFixed(2) + '万';
-      html += '<div class="dt-row"><span style="color:var(--text-muted)">净额</span><span style="color:' + netColor + ';font-family:var(--font-mono);font-weight:600">' + netVal + '</span></div>';
+      html += '<div class="dt-row"><span style="color:var(--text-muted)">净额</span><span class="' + netCls + '" style="font-family:var(--font-mono);font-weight:600">' + netVal + '</span></div>';
       html += '</div>';
     });
     html += '</div>';
@@ -328,8 +334,29 @@
   // Disclaimer
   html += '<div class="disclaimer">⚠️ 本报告仅供个人研究参考，不构成投资建议。报告内容基于公开数据和 AI 分析生成，可能存在错误或遗漏。股市有风险，决策需谨慎。作者不对任何投资损失承担责任。</div>';
   html += '<footer class="site-footer">智策 NexStrat v2.0 · AI 辅助决策 · 不构成投资建议</footer>';
+  return html;
+  }
 
-  contentEl.innerHTML = html;
+  try {
+    var cached = localStorage.getItem("stock_copilot_latest");
+    if (cached) {
+      var cachedData = JSON.parse(cached);
+      var cachedStock = findStock(cachedData);
+      if (cachedStock) renderStock(cachedStock);
+    }
+  } catch (_) {}
+
+  try {
+    const res = await fetch("../data/latest.json");
+    if (!res.ok) throw new Error("HTTP " + res.status);
+    const data = await res.json();
+    localStorage.setItem("stock_copilot_latest", JSON.stringify(data));
+    var stock = findStock(data);
+    if (!stock) { showError("未找到股票 " + code); return; }
+    renderStock(stock);
+  } catch (e) {
+    if (contentEl.style.display !== "block") showError("无法加载数据：" + e.message);
+  }
 })();
 </script>
 </body>

@@ -1,7 +1,16 @@
 # Stock Copilot 当前系统状态（SSOT）
 
-> **版本 v1.4.0 (Phase C)** | 更新 2026-05-26  
+> **版本 v1.5.0 (Phase D)** | 更新 2026-05-27  
 > 代码仓库: `ttmens/stock-copilot` | 线上: https://ttmens.github.io/stock-copilot/
+
+## Phase D 要点（设计债清零）
+
+- **FundamentalAgent**: pipeline 真实 LLM 调用（Announcement 仅作 unavailable 降级）
+- **门控接线**: `_detect_gate_flags` → `fuse_signals(is_suspended, limit_up_down)`
+- **站点不重算 fusion**: `generate_site` 使用 pipeline 输出的 `signal_breakdown` / `key_basis`
+- **UI**: 价格色（红涨绿跌）与信号色分离；首页卡片 L2（summary + key_basis）；静动混合（config.js + intraday）
+- **数据**: `announcement_days` 过滤公告；`news` 写入 latest.json
+- **权重**: `fusion_weights.json` 五层 sum=1.0
 
 ## Phase C 要点
 
@@ -59,16 +68,16 @@ watchlist.yaml
      ├─ K线: AkShare (重试1次) → Sina → Tencent
      ├─ 估值: Eastmoney push2 → Tencent
      ├─ 资金流: Eastmoney push2 → AkShare
-     ├─ 公告: AkShare → 空列表
-     ├─ 新闻: 暂时禁用 (返回空)
+     ├─ 公告: AkShare → 空列表（近 N 日过滤，config `announcement_days`）
+     ├─ 新闻: AkShare stock_news_em → `StockSnapshot.news` → latest.json
      └─ 龙虎榜: Eastmoney datacenter
   → StockSnapshot (统一 Pydantic 模型)
   → compute_hard_signals() (确定性量化因子)
   → 4 LLM Agent 并行 (Technical / Fundamental / Capital / Announcement)
      └─ LLMClient (fallback 模式: DeepSeek → DashScope)
-  → fuse_signals() (5层加权融合)
-  → generate_report() (Markdown + latest.json)
-  → generate_site() (Jinja2 HTML → site/index.html)
+  → fuse_signals() (5层加权: 硬40% + 软25% + 门控15% + 龙虎10% + 公告10%，可 evolution 覆盖)
+  → generate_report() (Markdown + StockAnalysis 含 fusion 字段)
+  → generate_site() (Jinja2 HTML — **不重算 fusion**)
   → _sync_to_docs() (同步到 docs/ 供 GitHub Pages)
   → SignalDB.save() (持久化到 SQLite)
   → Notifier.send() (企微 Webhook / SMTP)

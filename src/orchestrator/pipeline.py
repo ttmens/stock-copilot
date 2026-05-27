@@ -11,6 +11,7 @@ from src.data.calendar import is_trading_day
 from src.data.fetcher import DataFetcher, fetch_all
 from src.data.models import (
     AgentResult,
+    AgentStatus,
     MarketOverview,
     Report,
     ReportType,
@@ -21,6 +22,7 @@ from src.data.models import (
 from src.agents.technical import TechnicalAgent
 from src.agents.capital import CapitalAgent
 from src.agents.announcement import AnnouncementAgent
+from src.agents.fundamental import FundamentalAgent
 from src.reports.generator import generate_report
 from src.watchlist.manager import WatchlistManager
 
@@ -53,7 +55,7 @@ def _load_watchlist(symbols: list[str] | None = None) -> list[WatchlistItem]:
 
 
 def _fundamental_from_announcement(ann: AgentResult, snap: StockSnapshot) -> AgentResult:
-    """Rule-based fundamental layer from announcement LLM (no duplicate LLM call)."""
+    """Fallback when FundamentalAgent LLM is unavailable."""
     return AgentResult(
         agent_name="fundamental",
         status=ann.status,
@@ -62,6 +64,66 @@ def _fundamental_from_announcement(ann: AgentResult, snap: StockSnapshot) -> Age
         focus_points=list(ann.focus_points),
         risk_points=list(ann.risk_points),
     )
+
+
+def _detect_gate_flags(snap: StockSnapshot) -> tuple[bool, bool]:
+    """Detect suspension and limit-up/down from latest bar."""
+    bars = snap.bars or []
+    if not bars:
+        return False, False
+    last = bars[-1]
+    if last.volume == 0:
+        return True, False
+    if len(bars) < 2 or bars[-2].close <= 0:
+        return False, False
+    pct = (last.close - bars[-2].close) / bars[-2].close * 100
+    limit = 4.8 if "ST" in snap.name.upper() else 9.8
+    return False, abs(pct) >= limit
+
+
+def _build_key_basis(
+    t_result: AgentResult,
+    c_result: AgentResult,
+    a_result: AgentResult,
+    f_result: AgentResult,
+    hard,
+    fused,
+) -> list[str]:
+    """Top 3 key basis lines for homepage pyramid L2."""
+    basis: list[str] = []
+    if hard.ma_alignment:
+        ma_label = {"bullish": "均线多头排列", "bearish": "均线空头排列", "neutral": "均线交叉"}.get(
+            hard.ma_alignment, hard.ma_alignment,
+        )
+        basis.append(f"技术：{ma_label}")
+    if hard.momentum_5d is not None:
+        basis.append(f"5日动量 {hard.momentum_5d:+.1f}%")
+    for agent, prefix in [
+        (t_result, "技术"),
+        (f_result, "基本面"),
+        (c_result, "资金"),
+        (a_result, "公告"),
+    ]:
+        if agent.status == AgentStatus.OK and agent.focus_points:
+            basis.append(f"{prefix}：{agent.focus_points[0]}")
+        elif agent.status == AgentStatus.OK and agent.summary:
+            text = agent.summary[:48] + ("…" if len(agent.summary) > 48 else "")
+            basis.append(f"{prefix}：{text}")
+    if fused.data_available.get("dragon_tiger"):
+        basis.append("龙虎榜：近期有席位异动")
+    return basis[:3]
+
+
+def _build_overall_summary(fused, t_result: AgentResult, f_result: AgentResult) -> str:
+    """One-line summary for card L2."""
+    label = fused.signal_label.replace("🟢 ", "").replace("🔴 ", "").replace("⚪ ", "")
+    if t_result.status == AgentStatus.OK and t_result.summary:
+        lead = t_result.summary[:80] + ("…" if len(t_result.summary) > 80 else "")
+        return f"{label} — {lead}"
+    if f_result.status == AgentStatus.OK and f_result.summary:
+        lead = f_result.summary[:80] + ("…" if len(f_result.summary) > 80 else "")
+        return f"{label} — {lead}"
+    return f"{label}，综合评分 {fused.final_score:+.2f}"
 
 
 async def run_analysis(
@@ -168,6 +230,7 @@ async def _analyze_and_fuse(
     tech = TechnicalAgent()
     cap = CapitalAgent()
     ann = AnnouncementAgent()
+    fund = FundamentalAgent()
     concurrency = max(1, settings.pipeline.llm_concurrency)
     sem = asyncio.Semaphore(concurrency)
 
@@ -180,27 +243,51 @@ async def _analyze_and_fuse(
                 capital=snap.capital,
             )
             ann_titles = [a.title for a in snap.announcements] if snap.announcements else []
-            t_result, c_result, a_result = await asyncio.gather(
+            t_result, c_result, a_result, f_result = await asyncio.gather(
                 tech.analyze(snap),
                 cap.analyze(snap),
                 ann.analyze(snap.code, snap.name, ann_titles),
+                fund.analyze(snap),
             )
-            f_result = _fundamental_from_announcement(a_result, snap)
+            if f_result.status == AgentStatus.UNAVAILABLE and a_result.status == AgentStatus.OK:
+                f_result = _fundamental_from_announcement(a_result, snap)
 
             agents = {
                 "technical": t_result,
                 "fundamental": f_result,
                 "capital": c_result,
             }
+            is_suspended, limit_up_down = _detect_gate_flags(snap)
             fused = fuse_signals(
                 code=snap.code,
                 name=snap.name,
                 hard=hard,
                 agents=agents,
                 is_st="ST" in snap.name,
+                is_suspended=is_suspended,
+                limit_up_down=limit_up_down,
                 dragon_tiger_entries=[e.model_dump() for e in snap.dragon_tiger] if snap.dragon_tiger else None,
                 announcement_result=a_result,
             )
+            key_basis = _build_key_basis(t_result, c_result, a_result, f_result, hard, fused)
+            overall_summary = _build_overall_summary(fused, t_result, f_result)
+            signal_breakdown = {
+                "hard_score": round(fused.hard_score, 3),
+                "soft_score": round(fused.soft_score, 3),
+                "gate_score": round(fused.gate_score, 3),
+                "dragon_tiger_score": round(fused.dragon_tiger_score, 3),
+                "announcement_score": round(fused.announcement_score, 3),
+                "final_score": round(fused.final_score, 3),
+                "has_dragon_tiger": fused.data_available.get("dragon_tiger", False),
+                "has_announcement": fused.data_available.get("announcement", False),
+            }
+            hard_metrics = {
+                "hard_score": round(hard.composite_score, 3),
+                "momentum_20d": round(hard.momentum_20d, 2) if hard.momentum_20d else None,
+                "momentum_5d": round(hard.momentum_5d, 2) if hard.momentum_5d else None,
+                "ma_alignment": hard.ma_alignment,
+                "volume_ratio": round(hard.volume_ratio, 2) if hard.volume_ratio else None,
+            }
             analysis = StockAnalysis(
                 snapshot=snap,
                 technical=t_result,
@@ -209,6 +296,11 @@ async def _analyze_and_fuse(
                 announcement=a_result,
                 overall_sentiment=fused.final_signal,
                 overall_focus=fused.signal_label,
+                overall_summary=overall_summary,
+                key_basis=key_basis,
+                confidence=round(fused.confidence, 2),
+                signal_breakdown=signal_breakdown,
+                hard_metrics=hard_metrics,
             )
             return snap.code, analysis, fused, hard
 

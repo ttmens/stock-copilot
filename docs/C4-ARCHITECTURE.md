@@ -306,7 +306,7 @@ flowchart TB
 |------|------|
 | [design/01-DESIGN.md](design/01-DESIGN.md) | 整体方案设计 |
 | [design/03-ARCHITECTURE.md](design/03-ARCHITECTURE.md) | 技术架构与目录结构 |
-| [design/13-CURRENT-STATUS.md](design/13-CURRENT-STATUS.md) | 当前系统状态（综合） |
+| [design/08-CURRENT-STATUS.md](design/08-CURRENT-STATUS.md) | 当前系统状态 SSOT |
 | [RUNBOOK.md](RUNBOOK.md) | 运维手册 |
 | [UI-UX-Style.md](UI-UX-Style.md) | UI/UX 设计规范 |
 

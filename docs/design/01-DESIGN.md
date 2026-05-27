@@ -87,7 +87,7 @@ watchlist.yaml
 - 动态权重：数据不可用时自动重新分配
 - ST/停牌股直接过滤
 - 置信度 = 层间一致性 + 信号强度 + 数据完整度
-- 详见 `13-CURRENT-STATUS.md` §5
+- 详见 `08-CURRENT-STATUS.md` §5
 
 ## 7. 非功能需求
 

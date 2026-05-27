@@ -119,6 +119,11 @@ class StockAnalysis(BaseModel):
     ))
     overall_sentiment: str = "neutral"
     overall_focus: str = ""
+    overall_summary: str = ""
+    key_basis: list[str] = Field(default_factory=list)
+    confidence: float = 0.0
+    signal_breakdown: dict = Field(default_factory=dict)
+    hard_metrics: dict = Field(default_factory=dict)
 
 
 class MarketOverview(BaseModel):

@@ -1,6 +1,6 @@
 # Stock Copilot Web UI 产品说明 (Phase C)
 
-> **视觉 SSOT**: [../UI-UX-Style.md](../UI-UX-Style.md)  
+> **视觉 SSOT**: [../DESIGN.md](../DESIGN.md)  
 > 实现: `src/site/generator.py` + `src/site/app/` + `docs/assets/theme.css`
 
 ## Phase C 交互
@@ -34,23 +34,28 @@
 
 ---
 
-## 2. 设计系统生成（必做）
+## 2. 设计系统（必做）
 
-Hermes **必须**在实现页面前，通过以下方式之一生成设计系统：
+按 [DECISIONS.md](../../DECISIONS.md)：采用 **手动 token + 单文件 theme.css**，零 CDN。
 
-### 方式 A：ui-ux-pro-max（推荐）
+1. 维护 SSOT：[docs/DESIGN.md](../../DESIGN.md)
+2. 实现：[src/site/theme.css](../../src/site/theme.css)
+3. 发布 sync：`docs/assets/theme.css`
+4. UI 改动前读 `design-system-md` skill；验收用 `scripts/ui_acceptance.py`
 
-```bash
-python3 ~/.cursor/skills/ui-ux-pro-max/scripts/search.py \
-  "fintech stock market dashboard dark professional data visualization" \
-  --design-system -p "Stock Copilot"
-```
+默认 token（与 theme.css 一致）：
 
-将输出整理到 `stock-copilot/docs/DESIGN-SYSTEM.md`。
+| Token | 值 | 用途 |
+|-------|-----|------|
+| `--canvas-deep` | `#0a1628` | 页面背景 |
+| `--canvas` | `#1a2742` | 卡片背景 |
+| `--accent-purple` | `#7b3ff2` | 品牌强调 |
+| `--price-up` / `--price-down` | 红/绿 | A 股价格 |
+| `--signal-bull` / `--signal-bear` | 绿/红 | 信号语义 |
 
-### 方式 B：参考成熟 Fintech Dark Dashboard 模式
+~~方式 A：ui-ux-pro-max~~ — 已否决，见 DECISIONS.md 2026-05-24
 
-若 ui-ux-pro-max 不可用，采用以下默认设计系统（写入 DESIGN-SYSTEM.md 并注明来源）：
+### 历史方式 B 参考 token
 
 | Token | 值 | 用途 |
 |-------|-----|------|

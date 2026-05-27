@@ -17,15 +17,21 @@
       "name": "中远海控",
       "overall_sentiment": "buy",
       "overall_focus": "🟢 看多",
+      "overall_summary": "🟢 看多 — 股价近期从13.93低点反弹，均线系统MA5、MA10、MA20呈多头排列，最新收盘14.56站稳在各均线上方。5月20日放量阳线突破后，高位震荡整理，量能有所…",
+      "key_basis": [
+        "技术：均线多头排列",
+        "5日动量 +3.9%",
+        "技术：股价近期从13.93低点反弹，均线系统MA5、MA10、MA20呈多头排列，最新收盘14.56站…"
+      ],
       "confidence": 0.97,
       "hard_score": 0.35,
       "momentum_20d": 0.76,
       "momentum_5d": 3.85,
       "ma_alignment": "bullish",
       "volume_ratio": 0.76,
-      "pe_ttm": 8.8,
-      "pb": 0.93,
-      "mcap_yi": 2196.0,
+      "pe_ttm": null,
+      "pb": null,
+      "mcap_yi": null,
       "technical": {
         "status": "ok",
         "summary": "股价近期从13.93低点反弹，均线系统MA5、MA10、MA20呈多头排列，最新收盘14.56站稳在各均线上方。5月20日放量阳线突破后，高位震荡整理，量能有所萎缩但整体趋势向上。短期支撑关注MA5（14.60）附近，上方压力位在14.9-15.0区间。技术面偏强，若后续量能配合，有望继续上行。",
@@ -47,13 +53,8 @@
         "sentiment": "neutral",
         "key_events": []
       },
-      "risk_points": [
-        "高位缩量可能引发回调，需关注MA10支撑",
-        "若跌破近期低点14.0，多头趋势可能转弱",
-        "整体成交量较前期高峰有所下降，上攻动能不足",
-        "主力资金流出若持续，可能打压股价",
-        "北向资金数据缺失，资金情绪判断可能不全面"
-      ],
+      "news": [],
+      "risk_points": [],
       "signal_breakdown": {
         "hard_score": 0.351,
         "soft_score": 1.0,
@@ -71,15 +72,21 @@
       "name": "恒瑞医药",
       "overall_sentiment": "sell",
       "overall_focus": "🔴 看空",
+      "overall_summary": "🔴 看空 — 恒瑞医药近期持续下跌，均线呈现空头排列（MA5<MA10<MA20），最新收盘价49.2元位于所有均线下方，趋势明显偏弱。成交量在下跌过程中未见显著放大，但亦无…",
+      "key_basis": [
+        "技术：均线空头排列",
+        "5日动量 -4.6%",
+        "技术：恒瑞医药近期持续下跌，均线呈现空头排列（MA5<MA10<MA20），最新收盘价49.2元位于所…"
+      ],
       "confidence": 0.96,
       "hard_score": -0.7,
       "momentum_20d": -12.77,
       "momentum_5d": -4.63,
       "ma_alignment": "bearish",
       "volume_ratio": 0.82,
-      "pe_ttm": 41.2,
-      "pb": 5.36,
-      "mcap_yi": 3343.0,
+      "pe_ttm": null,
+      "pb": null,
+      "mcap_yi": null,
       "technical": {
         "status": "ok",
         "summary": "恒瑞医药近期持续下跌，均线呈现空头排列（MA5<MA10<MA20），最新收盘价49.2元位于所有均线下方，趋势明显偏弱。成交量在下跌过程中未见显著放大，但亦无明显缩量止跌信号，短期反弹动能不足。下方支撑关注近期低点48.8元附近，若跌破则可能进一步下探。上方压力参考MA5（50.3元）及前高点。整体技术面偏空，需等待止跌企稳信号。",
@@ -101,13 +108,8 @@
         "sentiment": "neutral",
         "key_events": []
       },
-      "risk_points": [
-        "均线系统全面压制，反弹空间有限",
-        "若跌破48.8元支撑，可能加速下跌",
-        "市场情绪偏弱，缺乏做多催化",
-        "北向数据缺失，分析基础不完整",
-        "单一主力资金数据可能存在误导"
-      ],
+      "news": [],
+      "risk_points": [],
       "signal_breakdown": {
         "hard_score": -0.704,
         "soft_score": -1.0,
@@ -125,15 +127,21 @@
       "name": "洋河股份",
       "overall_sentiment": "sell",
       "overall_focus": "🔴 看空",
+      "overall_summary": "🔴 看空 — 洋河股份近期处于下跌通道，当前股价44.19元低于所有均线（MA5=44.344, MA10=45.211, MA20=47.072），均线呈空头排列。5月中旬…",
+      "key_basis": [
+        "技术：均线空头排列",
+        "5日动量 -2.1%",
+        "技术：洋河股份近期处于下跌通道，当前股价44.19元低于所有均线（MA5=44.344, MA10=4…"
+      ],
       "confidence": 0.95,
       "hard_score": -0.65,
       "momentum_20d": -11.67,
       "momentum_5d": -2.13,
       "ma_alignment": "bearish",
       "volume_ratio": 0.84,
-      "pe_ttm": 67.1,
-      "pb": 1.38,
-      "mcap_yi": 681.0,
+      "pe_ttm": null,
+      "pb": null,
+      "mcap_yi": null,
       "technical": {
         "status": "ok",
         "summary": "洋河股份近期处于下跌通道，当前股价44.19元低于所有均线（MA5=44.344, MA10=45.211, MA20=47.072），均线呈空头排列。5月中旬以来连续阴跌，虽在5月25日出现放量反弹，但次日缩量回落，未能有效突破均线压制。成交量整体萎缩，多头无力组织反击。下方支撑关注前期低点43.32元，若跌破则可能打开进一步下行空间。短期趋势偏空，需等待止跌信号。",
@@ -155,13 +163,8 @@
         "sentiment": "neutral",
         "key_events": []
       },
-      "risk_points": [
-        "均线空头压制，反弹可能受阻于均线",
-        "成交量持续萎缩，市场参与度低",
-        "若跌破43.32元前低，可能加速下跌",
-        "单日主力资金流向代表性较弱",
-        "北向资金缺失影响全面判断"
-      ],
+      "news": [],
+      "risk_points": [],
       "signal_breakdown": {
         "hard_score": -0.646,
         "soft_score": -1.0,
@@ -179,15 +182,21 @@
       "name": "牧原股份",
       "overall_sentiment": "sell",
       "overall_focus": "🔴 看空",
+      "overall_summary": "🔴 看空 — 牧原股份近期持续走弱，均线呈空头排列（MA5<MA10<MA20），价格已跌破所有均线，5月18日放量下跌后低位震荡，反弹无力。20日均线42.04构成上方强压…",
+      "key_basis": [
+        "技术：均线空头排列",
+        "5日动量 -4.0%",
+        "技术：牧原股份近期持续走弱，均线呈空头排列（MA5<MA10<MA20），价格已跌破所有均线，5月18…"
+      ],
       "confidence": 0.92,
       "hard_score": -0.5,
       "momentum_20d": -10.99,
       "momentum_5d": -3.95,
       "ma_alignment": "bearish",
       "volume_ratio": 0.77,
-      "pe_ttm": 22.3,
-      "pb": 2.6,
-      "mcap_yi": 2180.0,
+      "pe_ttm": null,
+      "pb": null,
+      "mcap_yi": null,
       "technical": {
         "status": "ok",
         "summary": "牧原股份近期持续走弱，均线呈空头排列（MA5<MA10<MA20），价格已跌破所有均线，5月18日放量下跌后低位震荡，反弹无力。20日均线42.04构成上方强压力，短期支撑关注前期低点38.08附近。成交量在下跌过程中有所放大，显示抛压较重，近期缩量横盘表明市场信心不足，趋势偏空。",
@@ -209,12 +218,8 @@
         "sentiment": "neutral",
         "key_events": []
       },
-      "risk_points": [
-        "若跌破38.08附近支撑，可能加速下探",
-        "反弹若不能站回40元上方，弱势格局难改",
-        "北向数据缺失，分析视角不完整",
-        "主力净流出可能反映短期压力"
-      ],
+      "news": [],
+      "risk_points": [],
       "signal_breakdown": {
         "hard_score": -0.505,
         "soft_score": -1.0,
@@ -232,15 +237,21 @@
       "name": "五 粮 液",
       "overall_sentiment": "sell",
       "overall_focus": "🔴 看空",
+      "overall_summary": "🔴 看空 — 股价自4月底以来持续下跌，从101元附近跌至83元，跌幅约18%。均线呈空头排列，MA5、MA10、MA20依次向下，且股价始终受均线压制。5月6日跳空大跌伴随…",
+      "key_basis": [
+        "技术：均线空头排列",
+        "5日动量 -2.8%",
+        "技术：股价自4月底以来持续下跌，从101元附近跌至83元，跌幅约18%。均线呈空头排列，MA5、MA1…"
+      ],
       "confidence": 0.92,
       "hard_score": -0.49,
       "momentum_20d": -17.61,
       "momentum_5d": -2.82,
       "ma_alignment": "bearish",
       "volume_ratio": 0.8,
-      "pe_ttm": 25.8,
-      "pb": 2.54,
-      "mcap_yi": 3256.0,
+      "pe_ttm": null,
+      "pb": null,
+      "mcap_yi": null,
       "technical": {
         "status": "ok",
         "summary": "股价自4月底以来持续下跌，从101元附近跌至83元，跌幅约18%。均线呈空头排列，MA5、MA10、MA20依次向下，且股价始终受均线压制。5月6日跳空大跌伴随巨量，之后反弹无力，量能萎缩，显示空方主导。近期低点83.02附近或有一定支撑，但若跌破可能打开下行空间。整体技术面偏弱，建议观望。",
@@ -262,12 +273,8 @@
         "sentiment": "neutral",
         "key_events": []
       },
-      "risk_points": [
-        "持续下跌未现止跌信号，短期均线继续压制",
-        "成交量未能放大，反弹动能不足",
-        "仅单日数据无法确认资金趋势",
-        "北向资金缺席，外资态度不明"
-      ],
+      "news": [],
+      "risk_points": [],
       "signal_breakdown": {
         "hard_score": -0.489,
         "soft_score": -1.0,
@@ -285,15 +292,21 @@
       "name": "海螺水泥",
       "overall_sentiment": "sell",
       "overall_focus": "🔴 看空",
+      "overall_summary": "🔴 看空 — 股价近期持续下行，最新收盘19.5元低于MA5(19.656)、MA10(20.104)及MA20(20.671)，均线呈现空头排列，趋势偏弱。成交量在下跌过程…",
+      "key_basis": [
+        "技术：均线空头排列",
+        "5日动量 -2.5%",
+        "技术：股价近期持续下行，最新收盘19.5元低于MA5(19.656)、MA10(20.104)及MA2…"
+      ],
       "confidence": 0.91,
       "hard_score": -0.45,
       "momentum_20d": -9.93,
       "momentum_5d": -2.45,
       "ma_alignment": "bearish",
       "volume_ratio": 0.53,
-      "pe_ttm": 13.4,
-      "pb": 0.54,
-      "mcap_yi": 1044.0,
+      "pe_ttm": null,
+      "pb": null,
+      "mcap_yi": null,
       "technical": {
         "status": "ok",
         "summary": "股价近期持续下行，最新收盘19.5元低于MA5(19.656)、MA10(20.104)及MA20(20.671)，均线呈现空头排列，趋势偏弱。成交量在下跌过程中有所放大，但近期反弹无力且缩量，资金参与度低。下方19元附近或有一定支撑，但整体空头格局明显，短期难以扭转。",
@@ -315,13 +328,8 @@
         "sentiment": "neutral",
         "key_events": []
       },
-      "risk_points": [
-        "均线系统全面下压，上方压力层层累积",
-        "下跌过程中量能配合不足，缺乏抄底资金",
-        "若跌破19元支撑，可能加速下行",
-        "资金数据不完整，分析结论不确定性高",
-        "主力净流入金额过小，可能为短期波动"
-      ],
+      "news": [],
+      "risk_points": [],
       "signal_breakdown": {
         "hard_score": -0.45,
         "soft_score": -1.0,
@@ -339,15 +347,21 @@
       "name": "农业银行",
       "overall_sentiment": "sell",
       "overall_focus": "🔴 看空",
+      "overall_summary": "🔴 看空 — 农业银行近期股价持续下跌，均线系统呈空头排列（MA20>MA10>MA5>收盘价），趋势明显向下。最新收盘价6.42元，低于所有短期均线，上方MA5在6.458…",
+      "key_basis": [
+        "技术：均线空头排列",
+        "5日动量 -3.0%",
+        "技术：农业银行近期股价持续下跌，均线系统呈空头排列（MA20>MA10>MA5>收盘价），趋势明显向下…"
+      ],
       "confidence": 0.91,
       "hard_score": -0.38,
       "momentum_20d": -8.68,
       "momentum_5d": -3.02,
       "ma_alignment": "bearish",
       "volume_ratio": 0.79,
-      "pe_ttm": 7.5,
-      "pb": 0.79,
-      "mcap_yi": 22084.0,
+      "pe_ttm": null,
+      "pb": null,
+      "mcap_yi": null,
       "technical": {
         "status": "ok",
         "summary": "农业银行近期股价持续下跌，均线系统呈空头排列（MA20>MA10>MA5>收盘价），趋势明显向下。最新收盘价6.42元，低于所有短期均线，上方MA5在6.458附近构成短期压力。成交量在下跌过程中有所放大，但近几日缩量，显示多头承接意愿不强。下方近期低点6.37（5月21日低点）可能构成短期支撑，但若跌破则可能进一步下探。整体技术面偏弱，未见明确止跌信号。",
@@ -369,13 +383,8 @@
         "sentiment": "neutral",
         "key_events": []
       },
-      "risk_points": [
-        "若跌破6.37元支撑，可能加速下跌",
-        "均线发散向下，趋势延续风险",
-        "上涨时量能不足，反弹高度有限",
-        "主力持续流出可能压制股价",
-        "缺乏北向资金指引"
-      ],
+      "news": [],
+      "risk_points": [],
       "signal_breakdown": {
         "hard_score": -0.376,
         "soft_score": -1.0,
@@ -393,15 +402,21 @@
       "name": "上汽集团",
       "overall_sentiment": "sell",
       "overall_focus": "🔴 看空",
+      "overall_summary": "🔴 看空 — 上汽集团近期股价持续下跌，最新收盘价12.26元，低于MA5（12.37）、MA10（12.65）和MA20（13.14），均线呈现空头排列。量能方面，下跌过程…",
+      "key_basis": [
+        "技术：均线空头排列",
+        "5日动量 -3.0%",
+        "技术：上汽集团近期股价持续下跌，最新收盘价12.26元，低于MA5（12.37）、MA10（12.65…"
+      ],
       "confidence": 0.91,
       "hard_score": -0.36,
       "momentum_20d": -11.74,
       "momentum_5d": -3.01,
       "ma_alignment": "bearish",
       "volume_ratio": 0.91,
-      "pe_ttm": 13.8,
-      "pb": 0.46,
-      "mcap_yi": 1393.0,
+      "pe_ttm": null,
+      "pb": null,
+      "mcap_yi": null,
       "technical": {
         "status": "ok",
         "summary": "上汽集团近期股价持续下跌，最新收盘价12.26元，低于MA5（12.37）、MA10（12.65）和MA20（13.14），均线呈现空头排列。量能方面，下跌过程中成交量有所放大，显示抛压较重。短期关注前低12.18支撑，若跌破则可能进一步下探。上方压力位参考12.40-12.50区域。整体技术面偏空。",
@@ -423,12 +438,8 @@
         "sentiment": "neutral",
         "key_events": []
       },
-      "risk_points": [
-        "成交量放大伴随下跌，抛压较重",
-        "若跌破12.18支撑，可能加速下跌",
-        "单日主力净流出幅度较大，可能反映短期抛压",
-        "北向资金数据缺失，信息不完整增加判断不确定性"
-      ],
+      "news": [],
+      "risk_points": [],
       "signal_breakdown": {
         "hard_score": -0.356,
         "soft_score": -1.0,
@@ -446,15 +457,21 @@
       "name": "贵州茅台",
       "overall_sentiment": "sell",
       "overall_focus": "🔴 看空",
+      "overall_summary": "🔴 看空 — 贵州茅台近20日持续下跌，收盘价从1458.49跌至1273.38，跌幅约12.7%。均线空头排列（MA5<MA10<MA20），股价运行于所有均线下方。近期下…",
+      "key_basis": [
+        "技术：均线空头排列",
+        "5日动量 -3.9%",
+        "技术：贵州茅台近20日持续下跌，收盘价从1458.49跌至1273.38，跌幅约12.7%。均线空头排…"
+      ],
       "confidence": 0.9,
       "hard_score": -0.42,
       "momentum_20d": -10.26,
       "momentum_5d": -3.85,
       "ma_alignment": "bearish",
       "volume_ratio": 0.94,
-      "pe_ttm": 19.7,
-      "pb": 6.02,
-      "mcap_yi": 16317.0,
+      "pe_ttm": null,
+      "pb": null,
+      "mcap_yi": null,
       "technical": {
         "status": "ok",
         "summary": "贵州茅台近20日持续下跌，收盘价从1458.49跌至1273.38，跌幅约12.7%。均线空头排列（MA5<MA10<MA20），股价运行于所有均线下方。近期下跌伴随成交量放大，如5月22日放量下跌至1290.2，5月26日再创新低1273.38，量价配合显示抛压沉重。当前无明确止跌信号，趋势偏空。",
@@ -476,13 +493,8 @@
         "sentiment": "neutral",
         "key_events": []
       },
-      "risk_points": [
-        "股价在所有均线下方，空头趋势明确",
-        "放量下跌表明市场抛压较大",
-        "前期低点1277已被跌破，可能进一步下探",
-        "单日数据无法代表趋势，警惕一日游资金",
-        "北向资金缺席，内外资合力情况未知"
-      ],
+      "news": [],
+      "risk_points": [],
       "signal_breakdown": {
         "hard_score": -0.423,
         "soft_score": -1.0,
@@ -500,15 +512,21 @@
       "name": "中国中免",
       "overall_sentiment": "sell",
       "overall_focus": "🔴 看空",
+      "overall_summary": "🔴 看空 — 股价处于明显的下降通道，均线呈现空头排列（MA5<MA10<MA20），且价格持续在MA5下方运行，反弹无力。近期成交量在下跌过程中放大，显示抛压较重。5月26…",
+      "key_basis": [
+        "技术：均线空头排列",
+        "5日动量 -3.1%",
+        "技术：股价处于明显的下降通道，均线呈现空头排列（MA5<MA10<MA20），且价格持续在MA5下方运…"
+      ],
       "confidence": 0.9,
       "hard_score": -0.42,
       "momentum_20d": -14.71,
       "momentum_5d": -3.14,
       "ma_alignment": "bearish",
       "volume_ratio": 1.18,
-      "pe_ttm": 29.2,
-      "pb": 2.02,
-      "mcap_yi": 1168.0,
+      "pe_ttm": null,
+      "pb": null,
+      "mcap_yi": null,
       "technical": {
         "status": "ok",
         "summary": "股价处于明显的下降通道，均线呈现空头排列（MA5<MA10<MA20），且价格持续在MA5下方运行，反弹无力。近期成交量在下跌过程中放大，显示抛压较重。5月26日低点55.55为短期支撑，但整体趋势偏空，均线压制明显，反弹空间有限。",
@@ -530,12 +548,8 @@
         "sentiment": "neutral",
         "key_events": []
       },
-      "risk_points": [
-        "均线空头排列，反弹后可能继续下探",
-        "若跌破55.55元，可能加速下跌",
-        "北向数据缺失，分析不完整",
-        "单日主力流出不足以确认趋势"
-      ],
+      "news": [],
+      "risk_points": [],
       "signal_breakdown": {
         "hard_score": -0.422,
         "soft_score": -1.0,
@@ -553,15 +567,21 @@
       "name": "中国石化",
       "overall_sentiment": "sell",
       "overall_focus": "🔴 看空",
+      "overall_summary": "🔴 看空 — 近一个月股价持续下跌，从5.39元跌至4.87元，跌幅约9.6%。均线系统呈现空头排列（MA5<MA10<MA20），且股价始终受压于短期均线。成交量在下跌过程…",
+      "key_basis": [
+        "技术：均线空头排列",
+        "5日动量 -5.1%",
+        "技术：近一个月股价持续下跌，从5.39元跌至4.87元，跌幅约9.6%。均线系统呈现空头排列（MA5<…"
+      ],
       "confidence": 0.9,
       "hard_score": -0.39,
       "momentum_20d": -10.64,
       "momentum_5d": -5.07,
       "ma_alignment": "bearish",
       "volume_ratio": 1.09,
-      "pe_ttm": 16.4,
-      "pb": 0.7,
-      "mcap_yi": 5841.0,
+      "pe_ttm": null,
+      "pb": null,
+      "mcap_yi": null,
       "technical": {
         "status": "ok",
         "summary": "近一个月股价持续下跌，从5.39元跌至4.87元，跌幅约9.6%。均线系统呈现空头排列（MA5<MA10<MA20），且股价始终受压于短期均线。成交量在下跌过程中未明显放大，但偶有放量下跌，显示抛压持续。当前价格已跌破所有均线支撑，下方无明显技术支持，短期趋势偏弱。",
@@ -583,12 +603,8 @@
         "sentiment": "neutral",
         "key_events": []
       },
-      "risk_points": [
-        "均线空头排列，反弹可能受到MA5或MA10压制",
-        "若继续放量下跌，可能加速寻底",
-        "数据不完整可能导致分析偏差",
-        "若后续北向资金同步流出，可能加大调整压力"
-      ],
+      "news": [],
+      "risk_points": [],
       "signal_breakdown": {
         "hard_score": -0.386,
         "soft_score": -1.0,
@@ -606,15 +622,21 @@
       "name": "中航沈飞",
       "overall_sentiment": "sell",
       "overall_focus": "🔴 看空",
+      "overall_summary": "🔴 看空 — 当前股价43.64处于所有均线下方，MA5、MA10、MA20呈空头排列（5日<10日<20日），表明短期、中期趋势均向下。近期连续下跌，5月26日放量跌破44…",
+      "key_basis": [
+        "技术：均线空头排列",
+        "5日动量 -7.3%",
+        "技术：当前股价43.64处于所有均线下方，MA5、MA10、MA20呈空头排列（5日<10日<20日）…"
+      ],
       "confidence": 0.9,
       "hard_score": -0.67,
       "momentum_20d": -11.53,
       "momentum_5d": -7.35,
       "ma_alignment": "bearish",
       "volume_ratio": 0.84,
-      "pe_ttm": 37.2,
-      "pb": 5.25,
-      "mcap_yi": 1210.0,
+      "pe_ttm": null,
+      "pb": null,
+      "mcap_yi": null,
       "technical": {
         "status": "ok",
         "summary": "当前股价43.64处于所有均线下方，MA5、MA10、MA20呈空头排列（5日<10日<20日），表明短期、中期趋势均向下。近期连续下跌，5月26日放量跌破44元支撑，空头动能增强。成交量在下跌过程中有所放大，显示抛压持续。上方均线形成多重压力，短期反弹空间有限。",
@@ -636,13 +658,8 @@
         "sentiment": "neutral",
         "key_events": []
       },
-      "risk_points": [
-        "趋势向下且无企稳迹象，存在继续破位风险",
-        "均线系统下移形成反压，反弹空间受限",
-        "若跌破43元整数关口，可能加速下跌",
-        "主力资金流出可能反映短期谨慎情绪",
-        "缺乏北向资金数据，资金面判断不完整"
-      ],
+      "news": [],
+      "risk_points": [],
       "signal_breakdown": {
         "hard_score": -0.67,
         "soft_score": -0.533,
@@ -660,15 +677,21 @@
       "name": "保利发展",
       "overall_sentiment": "sell",
       "overall_focus": "🔴 看空",
+      "overall_summary": "🔴 看空 — 保利发展近期股价持续下跌，最新收盘价5.85元，低于MA5（5.898）、MA10（6.075）和MA20（6.154），均线呈空头排列，显示下行趋势。成交量在…",
+      "key_basis": [
+        "技术：均线空头排列",
+        "5日动量 -5.2%",
+        "技术：保利发展近期股价持续下跌，最新收盘价5.85元，低于MA5（5.898）、MA10（6.075）…"
+      ],
       "confidence": 0.89,
       "hard_score": -0.36,
       "momentum_20d": -0.34,
       "momentum_5d": -5.19,
       "ma_alignment": "bearish",
       "volume_ratio": 0.75,
-      "pe_ttm": -372.4,
-      "pb": 0.35,
-      "mcap_yi": 679.0,
+      "pe_ttm": null,
+      "pb": null,
+      "mcap_yi": null,
       "technical": {
         "status": "ok",
         "summary": "保利发展近期股价持续下跌，最新收盘价5.85元，低于MA5（5.898）、MA10（6.075）和MA20（6.154），均线呈空头排列，显示下行趋势。成交量在下跌过程中放大，如5月21日放量下跌，表明抛压较重。此前从高点6.64回落，连续收阴，反弹无力。短期支撑位关注前期低点5.69附近，若跌破可能进一步下探；上方压力位在MA5和MA10附近。整体技术面偏空，需关注量能变化和关键支撑位的有效性。",
@@ -690,13 +713,8 @@
         "sentiment": "neutral",
         "key_events": []
       },
-      "risk_points": [
-        "若跌破5.69支撑，可能加速下跌",
-        "均线空头压制，反弹空间受限",
-        "量能未明显萎缩，下跌动能仍存",
-        "数据不完整，分析存在局限性",
-        "主力资金连续流出可能暗示短期压力"
-      ],
+      "news": [],
+      "risk_points": [],
       "signal_breakdown": {
         "hard_score": -0.359,
         "soft_score": -1.0,
@@ -714,15 +732,21 @@
       "name": "云南白药",
       "overall_sentiment": "sell",
       "overall_focus": "🔴 看空",
+      "overall_summary": "🔴 看空 — 该股近期持续下跌，从54.43元跌至48.85元，跌幅超10%。均线系统呈空头排列：MA5(49.806) < MA10(50.482) < MA20(51.9…",
+      "key_basis": [
+        "技术：均线空头排列",
+        "5日动量 -4.0%",
+        "技术：该股近期持续下跌，从54.43元跌至48.85元，跌幅超10%。均线系统呈空头排列：MA5(49…"
+      ],
       "confidence": 0.89,
       "hard_score": -0.35,
       "momentum_20d": -10.0,
       "momentum_5d": -3.99,
       "ma_alignment": "bearish",
       "volume_ratio": 1.1,
-      "pe_ttm": 16.9,
-      "pb": 2.26,
-      "mcap_yi": 887.0,
+      "pe_ttm": null,
+      "pb": null,
+      "mcap_yi": null,
       "technical": {
         "status": "ok",
         "summary": "该股近期持续下跌，从54.43元跌至48.85元，跌幅超10%。均线系统呈空头排列：MA5(49.806) < MA10(50.482) < MA20(51.918)，短期均线向下发散，压制明显。量能方面，4月30日放量下跌后，成交量逐步萎缩，表明市场参与度下降，资金离场意愿较强。当前股价处于所有均线下方，且创近期新低，未见明显止跌信号。下方支撑需关注前期低点或整数关口，上方压力位关注MA5和MA10。",
@@ -744,13 +768,8 @@
         "sentiment": "neutral",
         "key_events": []
       },
-      "risk_points": [
-        "均线空头排列且发散，下跌趋势可能延续",
-        "成交量萎缩，反弹缺乏动能，存在进一步下探风险",
-        "若跌破前低48.66元，可能加速下跌",
-        "数据不完整，结论不可靠",
-        "单日数据可能受偶然因素影响"
-      ],
+      "news": [],
+      "risk_points": [],
       "signal_breakdown": {
         "hard_score": -0.353,
         "soft_score": -1.0,
@@ -768,15 +787,21 @@
       "name": "招商银行",
       "overall_sentiment": "sell",
       "overall_focus": "🔴 看空",
+      "overall_summary": "🔴 看空 — 招商银行近期持续下跌，均线呈空头排列（MA5<MA10<MA20），短期趋势偏弱。股价从39.38元回落至37元附近，且未能有效反弹。4月29日出现放量长阴，随…",
+      "key_basis": [
+        "技术：均线空头排列",
+        "5日动量 -1.0%",
+        "技术：招商银行近期持续下跌，均线呈空头排列（MA5<MA10<MA20），短期趋势偏弱。股价从39.3…"
+      ],
       "confidence": 0.89,
       "hard_score": -0.34,
       "momentum_20d": -7.06,
       "momentum_5d": -0.99,
       "ma_alignment": "bearish",
       "volume_ratio": 0.76,
-      "pe_ttm": 6.2,
-      "pb": 0.82,
-      "mcap_yi": 9331.0,
+      "pe_ttm": null,
+      "pb": null,
+      "mcap_yi": null,
       "technical": {
         "status": "ok",
         "summary": "招商银行近期持续下跌，均线呈空头排列（MA5<MA10<MA20），短期趋势偏弱。股价从39.38元回落至37元附近，且未能有效反弹。4月29日出现放量长阴，随后成交量逐步萎缩，表明市场参与度下降，多头缺乏承接。当前价格在37元整数关口附近获得短暂支撑，但上方均线构成明显压力，短期内若无法放量突破，存在继续下探风险。",
@@ -798,11 +823,8 @@
         "sentiment": "neutral",
         "key_events": []
       },
-      "risk_points": [
-        "若持续缩量且无法站上MA5，空头趋势可能延续",
-        "跌破36.9元支撑后可能加速下行",
-        "主力资金净流入为零，可能缺乏方向性信号"
-      ],
+      "news": [],
+      "risk_points": [],
       "signal_breakdown": {
         "hard_score": -0.344,
         "soft_score": -1.0,
@@ -820,15 +842,21 @@
       "name": "东方财富",
       "overall_sentiment": "sell",
       "overall_focus": "🔴 看空",
+      "overall_summary": "🔴 看空 — 最近20个交易日股价先涨后跌，形成高点21.60后回落，当前价格19.61处于短期均线MA5(19.80)和MA10(19.83)之下，均线呈空头排列（MA5<…",
+      "key_basis": [
+        "技术：均线空头排列",
+        "5日动量 -0.3%",
+        "技术：最近20个交易日股价先涨后跌，形成高点21.60后回落，当前价格19.61处于短期均线MA5(1…"
+      ],
       "confidence": 0.88,
       "hard_score": -0.23,
       "momentum_20d": -0.46,
       "momentum_5d": -0.31,
       "ma_alignment": "bearish",
       "volume_ratio": 0.9,
-      "pe_ttm": 23.6,
-      "pb": 3.24,
-      "mcap_yi": 3099.0,
+      "pe_ttm": null,
+      "pb": null,
+      "mcap_yi": null,
       "technical": {
         "status": "ok",
         "summary": "最近20个交易日股价先涨后跌，形成高点21.60后回落，当前价格19.61处于短期均线MA5(19.80)和MA10(19.83)之下，均线呈空头排列（MA5<MA10<MA20），表明短期趋势偏弱。成交量在5月21日脉冲式放大后未能持续，随后缩量调整，上行动能不足。整体技术面偏空。",
@@ -850,12 +878,8 @@
         "sentiment": "neutral",
         "key_events": []
       },
-      "risk_points": [
-        "均线系统空头压制，若跌破19.36可能进一步下探前低",
-        "反弹无量则延续震荡或阴跌走势",
-        "主力资金大幅流出可能对股价形成短期压制",
-        "市场情绪偏弱时，资金流出可能加剧下跌风险"
-      ],
+      "news": [],
+      "risk_points": [],
       "signal_breakdown": {
         "hard_score": -0.233,
         "soft_score": -1.0,
@@ -873,15 +897,21 @@
       "name": "中国联通",
       "overall_sentiment": "sell",
       "overall_focus": "🔴 看空",
+      "overall_summary": "🔴 看空 — 当前股价4.45低于MA5（4.532）、MA10（4.665）和MA20（4.6025），均线未形成多头排列。近期股价自5月19日高点5.11快速回落，连续多…",
+      "key_basis": [
+        "技术：均线交叉",
+        "5日动量 -10.1%",
+        "技术：当前股价4.45低于MA5（4.532）、MA10（4.665）和MA20（4.6025），均线…"
+      ],
       "confidence": 0.88,
       "hard_score": -0.3,
       "momentum_20d": -1.11,
       "momentum_5d": -10.1,
       "ma_alignment": "neutral",
       "volume_ratio": 0.59,
-      "pe_ttm": 15.8,
-      "pb": 0.8,
-      "mcap_yi": 1369.0,
+      "pe_ttm": null,
+      "pb": null,
+      "mcap_yi": null,
       "technical": {
         "status": "ok",
         "summary": "当前股价4.45低于MA5（4.532）、MA10（4.665）和MA20（4.6025），均线未形成多头排列。近期股价自5月19日高点5.11快速回落，连续多日下跌且成交量在下跌日放大，显示抛压较重。5月22日放量下跌，随后缩量整理，短期空头动能较强。下方支撑关注前期低点4.42附近，若跌破则可能进一步下探。整体趋势转弱，需警惕继续调整风险。",
@@ -903,12 +933,8 @@
         "sentiment": "neutral",
         "key_events": []
       },
-      "risk_points": [
-        "连续放量下跌后未出现企稳信号，空头力量占优",
-        "若跌破4.42支撑，可能开启新一轮下跌",
-        "北向资金数据缺失，分析不完整",
-        "主力单日净流出，但持续性待观察"
-      ],
+      "news": [],
+      "risk_points": [],
       "signal_breakdown": {
         "hard_score": -0.3,
         "soft_score": -1.0,
@@ -926,15 +952,21 @@
       "name": "比亚迪",
       "overall_sentiment": "sell",
       "overall_focus": "🔴 看空",
+      "overall_summary": "🔴 看空 — 比亚迪近期股价呈下跌趋势，均线空头排列（MA5<MA10<MA20），最新收盘价96.55低于所有均线。反弹尝试在MA10（95.73）附近受阻，成交量整体萎缩…",
+      "key_basis": [
+        "技术：均线交叉",
+        "5日动量 +0.6%",
+        "技术：比亚迪近期股价呈下跌趋势，均线空头排列（MA5<MA10<MA20），最新收盘价96.55低于所…"
+      ],
       "confidence": 0.88,
       "hard_score": -0.21,
       "momentum_20d": -3.43,
       "momentum_5d": 0.57,
       "ma_alignment": "neutral",
       "volume_ratio": 0.84,
-      "pe_ttm": 31.5,
-      "pb": 3.74,
-      "mcap_yi": 8681.0,
+      "pe_ttm": null,
+      "pb": null,
+      "mcap_yi": null,
       "technical": {
         "status": "ok",
         "summary": "比亚迪近期股价呈下跌趋势，均线空头排列（MA5<MA10<MA20），最新收盘价96.55低于所有均线。反弹尝试在MA10（95.73）附近受阻，成交量整体萎缩，反弹缺乏量能支撑。下方支撑关注92.61低点，若跌破则可能进一步下探。短期技术面偏弱，需等待均线走平或放量突破压力位。",
@@ -956,13 +988,8 @@
         "sentiment": "neutral",
         "key_events": []
       },
-      "risk_points": [
-        "股价持续在均线下方运行，趋势偏空",
-        "若跌破92.61支撑，可能加速下跌",
-        "成交量低迷，反弹无力",
-        "主力流出可能延续，加大股价下行压力",
-        "缺乏北向资金验证，资金面判断不完整"
-      ],
+      "news": [],
+      "risk_points": [],
       "signal_breakdown": {
         "hard_score": -0.207,
         "soft_score": -1.0,
@@ -980,15 +1007,21 @@
       "name": "中国神华",
       "overall_sentiment": "sell",
       "overall_focus": "🔴 看空",
+      "overall_summary": "🔴 看空 — 中国神华近期股价持续走弱，均线系统呈现空头排列（MA5<MA10<MA20），价格运行于所有均线下方。5月7日放量下跌后，反弹力度不足，近期在45元附近震荡后再…",
+      "key_basis": [
+        "技术：均线空头排列",
+        "5日动量 -2.8%",
+        "技术：中国神华近期股价持续走弱，均线系统呈现空头排列（MA5<MA10<MA20），价格运行于所有均线…"
+      ],
       "confidence": 0.87,
       "hard_score": -0.27,
       "momentum_20d": -4.64,
       "momentum_5d": -2.76,
       "ma_alignment": "bearish",
       "volume_ratio": 1.08,
-      "pe_ttm": 19.4,
-      "pb": 2.0,
-      "mcap_yi": 9999.0,
+      "pe_ttm": null,
+      "pb": null,
+      "mcap_yi": null,
       "technical": {
         "status": "ok",
         "summary": "中国神华近期股价持续走弱，均线系统呈现空头排列（MA5<MA10<MA20），价格运行于所有均线下方。5月7日放量下跌后，反弹力度不足，近期在45元附近震荡后再度下行，5月26日创出阶段新低44.35元。成交量在下跌过程中放大，显示抛压较重，多头承接意愿不强。当前面临MA5（45.16）和MA10（45.34）的压制，短期趋势偏空。需关注前低44.35元支撑是否有效，若跌破可能打开下行空间。",
@@ -1010,12 +1043,8 @@
         "sentiment": "neutral",
         "key_events": []
       },
-      "risk_points": [
-        "股价跌破44.35元前低，可能加速下跌",
-        "均线空头发散，短期难以扭转趋势，反弹空间受限",
-        "大盘环境若转弱，煤炭板块可能承压加剧回调",
-        "北向资金数据缺失，无法判断外资态度"
-      ],
+      "news": [],
+      "risk_points": [],
       "signal_breakdown": {
         "hard_score": -0.274,
         "soft_score": -1.0,
@@ -1033,15 +1062,21 @@
       "name": "山西汾酒",
       "overall_sentiment": "sell",
       "overall_focus": "🔴 看空",
+      "overall_summary": "🔴 看空 — 最近20个交易日，山西汾酒股价从141.95元持续下跌至126.68元，跌幅约10.8%。均线系统呈现空头排列（MA5=129.28<MA10=130.53<M…",
+      "key_basis": [
+        "技术：均线空头排列",
+        "5日动量 -2.4%",
+        "技术：最近20个交易日，山西汾酒股价从141.95元持续下跌至126.68元，跌幅约10.8%。均线系…"
+      ],
       "confidence": 0.87,
       "hard_score": -0.25,
       "momentum_20d": -11.03,
       "momentum_5d": -2.39,
       "ma_alignment": "bearish",
       "volume_ratio": 1.18,
-      "pe_ttm": 14.3,
-      "pb": 3.48,
-      "mcap_yi": 1569.0,
+      "pe_ttm": null,
+      "pb": null,
+      "mcap_yi": null,
       "technical": {
         "status": "ok",
         "summary": "最近20个交易日，山西汾酒股价从141.95元持续下跌至126.68元，跌幅约10.8%。均线系统呈现空头排列（MA5=129.28<MA10=130.53<MA20=135.72），股价始终受短期均线压制，反弹无力。成交量保持相对稳定，未见明显缩量止跌信号。近期低点逐次下移，5月26日盘中创出126.01元新低，空头趋势明确。短期支撑关注125元整数关口，若跌破则可能进一步下探。",
@@ -1063,10 +1098,8 @@
         "sentiment": "neutral",
         "key_events": []
       },
-      "risk_points": [
-        "均线空头排列，短期反弹可能受均线压制",
-        "成交量未明显萎缩，抛压持续，存在加速下跌风险"
-      ],
+      "news": [],
+      "risk_points": [],
       "signal_breakdown": {
         "hard_score": -0.253,
         "soft_score": -1.0,
@@ -1084,15 +1117,21 @@
       "name": "三一重工",
       "overall_sentiment": "sell",
       "overall_focus": "🔴 看空",
+      "overall_summary": "🔴 看空 — 股价18.88处于MA5(19.006)、MA10(19.619)、MA20(20.091)下方，均线呈空头排列。近期从5月11日高点21.84持续回落，连续多…",
+      "key_basis": [
+        "技术：均线空头排列",
+        "5日动量 -2.2%",
+        "技术：股价18.88处于MA5(19.006)、MA10(19.619)、MA20(20.091)下方…"
+      ],
       "confidence": 0.87,
       "hard_score": -0.25,
       "momentum_20d": -3.67,
       "momentum_5d": -2.23,
       "ma_alignment": "bearish",
       "volume_ratio": 1.09,
-      "pe_ttm": 20.2,
-      "pb": 1.88,
-      "mcap_yi": 1698.0,
+      "pe_ttm": null,
+      "pb": null,
+      "mcap_yi": null,
       "technical": {
         "status": "ok",
         "summary": "股价18.88处于MA5(19.006)、MA10(19.619)、MA20(20.091)下方，均线呈空头排列。近期从5月11日高点21.84持续回落，连续多日收阴，成交量在下跌过程中放大，显示抛压较重。短线支撑在18.58（5月26日低点），若跌破则可能进一步下探。上方MA5构成第一压力位，突破需量能配合。整体趋势偏弱，操作上需谨慎。",
@@ -1114,11 +1153,8 @@
         "sentiment": "neutral",
         "key_events": []
       },
-      "risk_points": [
-        "均线系统空头排列，反弹空间受压制",
-        "近期放量下跌，资金流出明显，可能延续调整",
-        "主力短期流出需警惕"
-      ],
+      "news": [],
+      "risk_points": [],
       "signal_breakdown": {
         "hard_score": -0.248,
         "soft_score": -1.0,
@@ -1136,15 +1172,21 @@
       "name": "复星医药",
       "overall_sentiment": "sell",
       "overall_focus": "🔴 看空",
+      "overall_summary": "🔴 看空 — 近20个交易日股价持续下跌，从25.38元降至23.17元，跌幅约8.7%。均线系统呈空头排列（MA5<MA10<MA20），当前股价位于所有均线下方，短期趋势…",
+      "key_basis": [
+        "技术：均线空头排列",
+        "5日动量 -4.2%",
+        "技术：近20个交易日股价持续下跌，从25.38元降至23.17元，跌幅约8.7%。均线系统呈空头排列（…"
+      ],
       "confidence": 0.87,
       "hard_score": -0.52,
       "momentum_20d": -9.39,
       "momentum_5d": -4.22,
       "ma_alignment": "bearish",
       "volume_ratio": 0.57,
-      "pe_ttm": 17.9,
-      "pb": 1.27,
-      "mcap_yi": 623.0,
+      "pe_ttm": null,
+      "pb": null,
+      "mcap_yi": null,
       "technical": {
         "status": "ok",
         "summary": "近20个交易日股价持续下跌，从25.38元降至23.17元，跌幅约8.7%。均线系统呈空头排列（MA5<MA10<MA20），当前股价位于所有均线下方，短期趋势偏空。成交量在下跌过程中有所放大，显示抛压较强。关注下方23元整数关口支撑，若有效跌破可能继续下行；上方MA5与MA10构成短期压力。",
@@ -1166,12 +1208,8 @@
         "sentiment": "neutral",
         "key_events": []
       },
-      "risk_points": [
-        "若持续放量跌破23元，可能加速下行",
-        "均线空头排列下，反弹容易受MA5和MA10压制",
-        "北向资金动向不明，存在不确定性",
-        "主力净流入力度不足，难以推动趋势性行情"
-      ],
+      "news": [],
+      "risk_points": [],
       "signal_breakdown": {
         "hard_score": -0.523,
         "soft_score": -0.533,
@@ -1189,15 +1227,21 @@
       "name": "中国核电",
       "overall_sentiment": "sell",
       "overall_focus": "🔴 看空",
+      "overall_summary": "🔴 看空 — 近期股价从9.07元跌至8.75元，MA5(8.792) < MA10(8.965) < MA20(9.014)，形成空头排列，表明短期趋势偏弱。5月21日放量…",
+      "key_basis": [
+        "技术：均线空头排列",
+        "5日动量 -5.1%",
+        "技术：近期股价从9.07元跌至8.75元，MA5(8.792) < MA10(8.965) < MA2…"
+      ],
       "confidence": 0.87,
       "hard_score": -0.52,
       "momentum_20d": -3.74,
       "momentum_5d": -5.1,
       "ma_alignment": "bearish",
       "volume_ratio": 0.57,
-      "pe_ttm": 21.8,
-      "pb": 1.49,
-      "mcap_yi": 1794.0,
+      "pe_ttm": null,
+      "pb": null,
+      "mcap_yi": null,
       "technical": {
         "status": "ok",
         "summary": "近期股价从9.07元跌至8.75元，MA5(8.792) < MA10(8.965) < MA20(9.014)，形成空头排列，表明短期趋势偏弱。5月21日放量下跌后连续三日低位整理，反弹力度有限，成交量萎缩，多头动能不足。下方8.70附近暂有支撑，但均线压制明显，若无法放量突破均线，后续可能继续下探。",
@@ -1219,12 +1263,8 @@
         "sentiment": "neutral",
         "key_events": []
       },
-      "risk_points": [
-        "空头排列持续，反弹乏力可能加速下跌",
-        "成交量萎缩显示市场参与度降低，资金观望情绪浓厚",
-        "无北向资金数据，缺乏外资流向参考",
-        "若主力持续流出可能引发调整"
-      ],
+      "news": [],
+      "risk_points": [],
       "signal_breakdown": {
         "hard_score": -0.522,
         "soft_score": -0.533,
@@ -1242,15 +1282,21 @@
       "name": "中国人寿",
       "overall_sentiment": "sell",
       "overall_focus": "🔴 看空",
+      "overall_summary": "🔴 看空 — 中国人寿近20个交易日股价从36.78持续下跌至33.80，跌幅约8%，形成明显下降趋势。均线系统呈空头排列，MA5（34.008）<MA10（34.733）<…",
+      "key_basis": [
+        "技术：均线空头排列",
+        "5日动量 -2.6%",
+        "技术：中国人寿近20个交易日股价从36.78持续下跌至33.80，跌幅约8%，形成明显下降趋势。均线系…"
+      ],
       "confidence": 0.86,
       "hard_score": -0.19,
       "momentum_20d": -8.35,
       "momentum_5d": -2.62,
       "ma_alignment": "bearish",
       "volume_ratio": 1.35,
-      "pe_ttm": 6.5,
-      "pb": 1.58,
-      "mcap_yi": 9457.0,
+      "pe_ttm": null,
+      "pb": null,
+      "mcap_yi": null,
       "technical": {
         "status": "ok",
         "summary": "中国人寿近20个交易日股价从36.78持续下跌至33.80，跌幅约8%，形成明显下降趋势。均线系统呈空头排列，MA5（34.008）<MA10（34.733）<MA20（35.882），且股价始终运行于各均线下方，反弹力度微弱。成交量在下跌过程中间歇性放大，如5月13日、5月21日，显示抛压较重，市场情绪偏空。当前价格接近近期低点33.48，若继续破位可能打开下行空间。整体技术面弱势，暂无见底信号。",
@@ -1272,10 +1318,8 @@
         "sentiment": "neutral",
         "key_events": []
       },
-      "risk_points": [
-        "均线空头排列且发散，股价持续受压制，反弹动能不足",
-        "成交量未明显萎缩，若继续放量下跌则可能加速探底"
-      ],
+      "news": [],
+      "risk_points": [],
       "signal_breakdown": {
         "hard_score": -0.191,
         "soft_score": -1.0,
@@ -1293,15 +1337,21 @@
       "name": "青岛啤酒",
       "overall_sentiment": "sell",
       "overall_focus": "🔴 看空",
+      "overall_summary": "🔴 看空 — 青岛啤酒近期股价呈下跌趋势，最新收盘价60.43元，低于MA5、MA10和MA20，均线已形成空头排列。从63.41高点回落以来，成交量在下跌过程中放大，5月2…",
+      "key_basis": [
+        "技术：均线空头排列",
+        "5日动量 -2.0%",
+        "技术：青岛啤酒近期股价呈下跌趋势，最新收盘价60.43元，低于MA5、MA10和MA20，均线已形成空…"
+      ],
       "confidence": 0.85,
       "hard_score": -0.17,
       "momentum_20d": -2.52,
       "momentum_5d": -2.04,
       "ma_alignment": "bearish",
       "volume_ratio": 1.2,
-      "pe_ttm": 17.7,
-      "pb": 2.55,
-      "mcap_yi": 827.0,
+      "pe_ttm": null,
+      "pb": null,
+      "mcap_yi": null,
       "technical": {
         "status": "ok",
         "summary": "青岛啤酒近期股价呈下跌趋势，最新收盘价60.43元，低于MA5、MA10和MA20，均线已形成空头排列。从63.41高点回落以来，成交量在下跌过程中放大，5月25日和26日连续放量下挫，显示卖压增强。当前股价跌破60元整数关口附近，短期支撑关注59元附近。技术面整体偏空，尚无企稳迹象。",
@@ -1323,12 +1373,8 @@
         "sentiment": "neutral",
         "key_events": []
       },
-      "risk_points": [
-        "股价持续创新低，下方支撑不明",
-        "若无法快速收复MA5，可能加速下跌",
-        "北向数据缺失，无法全面判断资金动向",
-        "单一交易日小额流入不足以确认趋势"
-      ],
+      "news": [],
+      "risk_points": [],
       "signal_breakdown": {
         "hard_score": -0.169,
         "soft_score": -1.0,
@@ -1346,15 +1392,21 @@
       "name": "工商银行",
       "overall_sentiment": "sell",
       "overall_focus": "🔴 看空",
+      "overall_summary": "🔴 看空 — 股价处于下跌趋势中，均线空头排列（MA5<MA10<MA20），最新价7.18位于所有均线下方。近期在7.13-7.22区间低位震荡，反弹乏力，成交量萎缩，上攻…",
+      "key_basis": [
+        "技术：均线交叉",
+        "5日动量 -1.1%",
+        "技术：股价处于下跌趋势中，均线空头排列（MA5<MA10<MA20），最新价7.18位于所有均线下方。…"
+      ],
       "confidence": 0.85,
       "hard_score": -0.14,
       "momentum_20d": -5.28,
       "momentum_5d": -1.1,
       "ma_alignment": "neutral",
       "volume_ratio": 0.79,
-      "pe_ttm": 6.8,
-      "pb": 0.65,
-      "mcap_yi": 25376.0,
+      "pe_ttm": null,
+      "pb": null,
+      "mcap_yi": null,
       "technical": {
         "status": "ok",
         "summary": "股价处于下跌趋势中，均线空头排列（MA5<MA10<MA20），最新价7.18位于所有均线下方。近期在7.13-7.22区间低位震荡，反弹乏力，成交量萎缩，上攻动能不足。MACD指标可能处于死叉状态，短期均线持续下压，整体走势偏弱。需关注7.0整数关口支撑及均线能否走平。",
@@ -1376,12 +1428,8 @@
         "sentiment": "neutral",
         "key_events": []
       },
-      "risk_points": [
-        "均线空头排列压制反弹空间",
-        "成交量萎缩表明市场参与度低",
-        "若跌破7.0可能加速下跌",
-        "北向资金数据缺失，无法全面评估资金态度"
-      ],
+      "news": [],
+      "risk_points": [],
       "signal_breakdown": {
         "hard_score": -0.14,
         "soft_score": -1.0,
@@ -1399,15 +1447,21 @@
       "name": "长春高新",
       "overall_sentiment": "sell",
       "overall_focus": "🔴 看空",
+      "overall_summary": "🔴 看空 — 股价自5月中旬以来持续走低，近期创出77.76元新低，均线系统呈空头排列（MA5 < MA10 < MA20），表明中期趋势偏空。成交量在下跌过程中多次放大，显…",
+      "key_basis": [
+        "技术：均线空头排列",
+        "5日动量 -6.7%",
+        "技术：股价自5月中旬以来持续走低，近期创出77.76元新低，均线系统呈空头排列（MA5 < MA10 …"
+      ],
       "confidence": 0.85,
       "hard_score": -0.41,
       "momentum_20d": -9.18,
       "momentum_5d": -6.74,
       "ma_alignment": "bearish",
       "volume_ratio": 0.93,
-      "pe_ttm": -736.5,
-      "pb": 1.39,
-      "mcap_yi": 309.0,
+      "pe_ttm": null,
+      "pb": null,
+      "mcap_yi": null,
       "technical": {
         "status": "ok",
         "summary": "股价自5月中旬以来持续走低，近期创出77.76元新低，均线系统呈空头排列（MA5 < MA10 < MA20），表明中期趋势偏空。成交量在下跌过程中多次放大，显示抛压较重，且未出现有效缩量止跌信号。5月11日放量大阳线后连续回落，形成量价背离，后续反弹乏力。当前股价已跌破所有均线，下方无明显支撑，需关注77元附近是否形成短期支撑。",
@@ -1429,12 +1483,8 @@
         "sentiment": "neutral",
         "key_events": []
       },
-      "risk_points": [
-        "若持续放量下跌，可能加速下行风险",
-        "反弹若无法站上MA5，则弱势延续",
-        "单日数据不足以判断趋势，存在波动风险",
-        "若主力持续流出可能引发调整压力"
-      ],
+      "news": [],
+      "risk_points": [],
       "signal_breakdown": {
         "hard_score": -0.41,
         "soft_score": -0.533,
@@ -1452,15 +1502,21 @@
       "name": "中国太保",
       "overall_sentiment": "sell",
       "overall_focus": "🔴 看空",
+      "overall_summary": "🔴 看空 — 中国太保近期走势持续走弱，股价从4月底的37.62元高点回落至5月25日的32.81元低点，随后略有反弹，最新收盘33.22元。均线系统呈现空头排列，MA5、M…",
+      "key_basis": [
+        "技术：均线交叉",
+        "5日动量 -1.4%",
+        "技术：中国太保近期走势持续走弱，股价从4月底的37.62元高点回落至5月25日的32.81元低点，随后…"
+      ],
       "confidence": 0.84,
       "hard_score": -0.1,
       "momentum_20d": -10.12,
       "momentum_5d": -1.45,
       "ma_alignment": "neutral",
       "volume_ratio": 1.17,
-      "pe_ttm": 5.8,
-      "pb": 0.98,
-      "mcap_yi": 3139.0,
+      "pe_ttm": null,
+      "pb": null,
+      "mcap_yi": null,
       "technical": {
         "status": "ok",
         "summary": "中国太保近期走势持续走弱，股价从4月底的37.62元高点回落至5月25日的32.81元低点，随后略有反弹，最新收盘33.22元。均线系统呈现空头排列，MA5、MA10、MA20依次向下，且股价位于所有均线下方，表明短期、中期趋势均偏空。成交量在下跌过程中有所放大，显示抛压较重，而反弹时量能并未有效配合，反弹力度有限。当前股价在33元附近获得短暂支撑，但上方34元、35元区域阻力明显，需关注能否放量突破。整体技术面偏弱，下行风险尚未解除。",
@@ -1482,13 +1538,8 @@
         "sentiment": "neutral",
         "key_events": []
       },
-      "risk_points": [
-        "若反弹无力，可能继续下探寻底",
-        "上方均线构成多重压力，突破难度较大",
-        "成交量持续萎缩可能导致反弹夭折",
-        "北向资金数据缺失导致分析不全面",
-        "主力资金流出可能引发短期调整"
-      ],
+      "news": [],
+      "risk_points": [],
       "signal_breakdown": {
         "hard_score": -0.097,
         "soft_score": -1.0,
@@ -1506,15 +1557,21 @@
       "name": "平安银行",
       "overall_sentiment": "sell",
       "overall_focus": "🔴 看空",
+      "overall_summary": "🔴 看空 — 平安银行近期日线呈空头排列，MA5(10.724) < MA10(10.852) < MA20(11.097)，短期趋势向下。股价自4月底高点11.52持续回落…",
+      "key_basis": [
+        "技术：均线交叉",
+        "5日动量 -0.6%",
+        "技术：平安银行近期日线呈空头排列，MA5(10.724) < MA10(10.852) < MA20(…"
+      ],
       "confidence": 0.84,
       "hard_score": -0.09,
       "momentum_20d": -1.91,
       "momentum_5d": -0.64,
       "ma_alignment": "neutral",
       "volume_ratio": 0.76,
-      "pe_ttm": 4.8,
-      "pb": 0.45,
-      "mcap_yi": 2088.0,
+      "pe_ttm": null,
+      "pb": null,
+      "mcap_yi": null,
       "technical": {
         "status": "ok",
         "summary": "平安银行近期日线呈空头排列，MA5(10.724) < MA10(10.852) < MA20(11.097)，短期趋势向下。股价自4月底高点11.52持续回落至5月26日收盘10.79，跌幅明显。近期低点10.64-10.68区域形成支撑，但反弹力度有限，量能整体萎缩，无明显资金介入迹象。均线系统对股价形成压制，MA10和MA20分别构成短期和中期阻力。综合看，技术面偏弱，需关注能否有效站上MA10扭转颓势。",
@@ -1536,12 +1593,8 @@
         "sentiment": "neutral",
         "key_events": []
       },
-      "risk_points": [
-        "股价受MA10(10.85)与MA20(11.10)双重压制，反弹空间受限",
-        "下跌趋势延续中，前期高点11.52构成强压力，反转需放量突破",
-        "量能未现放大信号，资金观望情绪浓厚，需警惕破位风险",
-        "主力资金单日净流出，但无连续数据佐证"
-      ],
+      "news": [],
+      "risk_points": [],
       "signal_breakdown": {
         "hard_score": -0.094,
         "soft_score": -1.0,
@@ -1559,15 +1612,21 @@
       "name": "浦发银行",
       "overall_sentiment": "buy",
       "overall_focus": "🟢 看多",
+      "overall_summary": "🟢 看多 — 股价自4月底高点9.62回落至5月20日低点8.75后反弹，最新收盘9.27。均线系统呈现空头排列，MA5（9.022）与MA10（9.026）粘合，MA20（…",
+      "key_basis": [
+        "技术：均线交叉",
+        "5日动量 +3.6%",
+        "技术：股价自4月底高点9.62回落至5月20日低点8.75后反弹，最新收盘9.27。均线系统呈现空头排…"
+      ],
       "confidence": 0.65,
       "hard_score": 0.27,
       "momentum_20d": -2.83,
       "momentum_5d": 3.58,
       "ma_alignment": "neutral",
       "volume_ratio": 1.52,
-      "pe_ttm": 6.2,
-      "pb": 0.42,
-      "mcap_yi": 3141.0,
+      "pe_ttm": null,
+      "pb": null,
+      "mcap_yi": null,
       "technical": {
         "status": "ok",
         "summary": "股价自4月底高点9.62回落至5月20日低点8.75后反弹，最新收盘9.27。均线系统呈现空头排列，MA5（9.022）与MA10（9.026）粘合，MA20（9.128）构成上方压力。最近一根日线放量上涨（成交量1.46亿，为20日次高），显示短期有止跌反弹动力，但中期趋势仍然偏弱。关注股价能否有效突破MA20并站稳，若受阻可能再次下探8.75附近支撑。整体多空信号交织，方向不明朗。",
@@ -1589,12 +1648,8 @@
         "sentiment": "neutral",
         "key_events": []
       },
-      "risk_points": [
-        "均线空头排列，中期趋势偏弱",
-        "前期低点8.75若被跌破可能加速下行",
-        "数据不完整导致判断偏差",
-        "主力净流入金额较小，缺乏方向性指示"
-      ],
+      "news": [],
+      "risk_points": [],
       "signal_breakdown": {
         "hard_score": 0.27,
         "soft_score": 0.0,
@@ -1612,15 +1667,21 @@
       "name": "隆基绿能",
       "overall_sentiment": "sell",
       "overall_focus": "🔴 看空",
+      "overall_summary": "🔴 看空 — 股价近期持续下跌，从4月24日的17.39元跌至5月26日的14.60元，跌幅明显。均线系统呈空头排列（MA5=14.93 < MA10=15.37 < MA2…",
+      "key_basis": [
+        "技术：均线空头排列",
+        "5日动量 -4.2%",
+        "技术：股价近期持续下跌，从4月24日的17.39元跌至5月26日的14.60元，跌幅明显。均线系统呈空…"
+      ],
       "confidence": 0.84,
       "hard_score": -0.38,
       "momentum_20d": -16.71,
       "momentum_5d": -4.2,
       "ma_alignment": "bearish",
       "volume_ratio": 0.96,
-      "pe_ttm": -15.8,
-      "pb": 2.16,
-      "mcap_yi": 1088.0,
+      "pe_ttm": null,
+      "pb": null,
+      "mcap_yi": null,
       "technical": {
         "status": "ok",
         "summary": "股价近期持续下跌，从4月24日的17.39元跌至5月26日的14.60元，跌幅明显。均线系统呈空头排列（MA5=14.93 < MA10=15.37 < MA20=16.05），短期均线加速下移。下跌过程中成交量多次放大，如4月29日和5月15日，显示抛压较重。5月26日再创新低14.39元，收盘14.60元，未出现止跌迹象。整体趋势向下，空头主导市场，短期可能继续探底。",
@@ -1642,13 +1703,8 @@
         "sentiment": "neutral",
         "key_events": []
       },
-      "risk_points": [
-        "下跌趋势加速，无明显支撑位",
-        "反弹力度不足，每次反弹均被空头压制",
-        "市场情绪偏弱，可能进一步下探至前期低点",
-        "主力流出可能预示短期调整",
-        "北向资金动向不明"
-      ],
+      "news": [],
+      "risk_points": [],
       "signal_breakdown": {
         "hard_score": -0.383,
         "soft_score": -0.533,
@@ -1666,15 +1722,21 @@
       "name": "中国平安",
       "overall_sentiment": "sell",
       "overall_focus": "🔴 看空",
+      "overall_summary": "🔴 看空 — 中国平安近20个交易日股价从57.78元持续下跌至54.27元，跌幅约6%。均线系统呈现空头排列，MA5（54.008）<MA10（54.985）<MA20（5…",
+      "key_basis": [
+        "技术：均线交叉",
+        "5日动量 -0.4%",
+        "技术：中国平安近20个交易日股价从57.78元持续下跌至54.27元，跌幅约6%。均线系统呈现空头排列…"
+      ],
       "confidence": 0.83,
       "hard_score": -0.06,
       "momentum_20d": -6.24,
       "momentum_5d": -0.39,
       "ma_alignment": "neutral",
       "volume_ratio": 1.01,
-      "pe_ttm": 7.3,
-      "pb": 0.95,
-      "mcap_yi": 9646.0,
+      "pe_ttm": null,
+      "pb": null,
+      "mcap_yi": null,
       "technical": {
         "status": "ok",
         "summary": "中国平安近20个交易日股价从57.78元持续下跌至54.27元，跌幅约6%。均线系统呈现空头排列，MA5（54.008）<MA10（54.985）<MA20（57.028），短期趋势偏弱。下跌过程中成交量明显放大，如5月13-15日连续放量下挫，但反弹时量能不足，显示市场抛压较重。近期在53.5-55区间窄幅震荡，5月25-26日小幅反弹但受MA5压制，未能有效突破。下方关键支撑在53.47-53.68区域，若跌破可能进一步下探；上方压力关注MA10（约55）及MA20（约57）。整体技术面偏空，短期需谨慎。",
@@ -1696,13 +1758,8 @@
         "sentiment": "neutral",
         "key_events": []
       },
-      "risk_points": [
-        "股价持续下跌，跌破支撑可能加速下行",
-        "量价背离，放量下跌后缩量反弹，反弹力度有限",
-        "均线发散向下，中期趋势转弱",
-        "北向资金数据缺失，无法评估外资态度",
-        "仅靠一日主力数据无法确认趋势"
-      ],
+      "news": [],
+      "risk_points": [],
       "signal_breakdown": {
         "hard_score": -0.062,
         "soft_score": -1.0,
@@ -1720,15 +1777,21 @@
       "name": "中国建筑",
       "overall_sentiment": "sell",
       "overall_focus": "🔴 看空",
+      "overall_summary": "🔴 看空 — 近20个交易日股价从4.84元震荡下跌至4.76元，期间在5月11日冲高至5.0元后连续回落，跌破MA5、MA10和MA20，均线呈现空头排列（MA5<MA10…",
+      "key_basis": [
+        "技术：均线空头排列",
+        "5日动量 -2.7%",
+        "技术：近20个交易日股价从4.84元震荡下跌至4.76元，期间在5月11日冲高至5.0元后连续回落，跌…"
+      ],
       "confidence": 0.83,
       "hard_score": -0.32,
       "momentum_20d": -1.86,
       "momentum_5d": -2.66,
       "ma_alignment": "bearish",
       "volume_ratio": 0.66,
-      "pe_ttm": 5.2,
-      "pb": 0.39,
-      "mcap_yi": 1954.0,
+      "pe_ttm": null,
+      "pb": null,
+      "mcap_yi": null,
       "technical": {
         "status": "ok",
         "summary": "近20个交易日股价从4.84元震荡下跌至4.76元，期间在5月11日冲高至5.0元后连续回落，跌破MA5、MA10和MA20，均线呈现空头排列（MA5<MA10<MA20）。成交量在下跌过程中逐步萎缩，说明市场参与度下降，多头抵抗意愿弱。4.75元附近是近期低点，具有一定支撑，但上方均线密集形成压力。整体趋势偏空，短期难以扭转。",
@@ -1750,12 +1813,8 @@
         "sentiment": "neutral",
         "key_events": []
       },
-      "risk_points": [
-        "均线空头排列压制，反弹空间有限",
-        "成交量持续低迷，多头缺乏上攻动能，存在继续探底风险",
-        "主力资金持续流出可能压制股价",
-        "北向资金缺席情况下市场方向不明确"
-      ],
+      "news": [],
+      "risk_points": [],
       "signal_breakdown": {
         "hard_score": -0.319,
         "soft_score": -0.533,
@@ -1773,15 +1832,21 @@
       "name": "华泰证券",
       "overall_sentiment": "sell",
       "overall_focus": "🔴 看空",
+      "overall_summary": "🔴 看空 — 从技术面看，华泰证券均线呈空头排列（MA5<MA10<MA20），最新收盘价18.69位于MA20下方，短期反弹受制于中长期均线压力。近期走势自4月底高点回落，…",
+      "key_basis": [
+        "技术：均线交叉",
+        "5日动量 -0.1%",
+        "技术：从技术面看，华泰证券均线呈空头排列（MA5<MA10<MA20），最新收盘价18.69位于MA2…"
+      ],
       "confidence": 0.82,
       "hard_score": -0.02,
       "momentum_20d": -2.04,
       "momentum_5d": -0.05,
       "ma_alignment": "neutral",
       "volume_ratio": 0.94,
-      "pe_ttm": 9.5,
-      "pb": 0.94,
-      "mcap_yi": 1669.0,
+      "pe_ttm": null,
+      "pb": null,
+      "mcap_yi": null,
       "technical": {
         "status": "ok",
         "summary": "从技术面看，华泰证券均线呈空头排列（MA5<MA10<MA20），最新收盘价18.69位于MA20下方，短期反弹受制于中长期均线压力。近期走势自4月底高点回落，5月15日放量下跌后虽有所反弹，但量能未能有效放大，5月22日再次放量下探，显示空头力量较强。支撑位关注18.1附近低点，若跌破则可能进一步下行。整体趋势偏弱，需警惕均线压制和量能不足的风险。",
@@ -1803,13 +1868,8 @@
         "sentiment": "neutral",
         "key_events": []
       },
-      "risk_points": [
-        "放量下跌可能开启新一轮调整",
-        "均线密集压制，突破难度较大",
-        "若缩量反弹失败，可能加速下行",
-        "北向资金缺失，分析基础不完整",
-        "主力资金净流出可能暗示短期承压"
-      ],
+      "news": [],
+      "risk_points": [],
       "signal_breakdown": {
         "hard_score": -0.018,
         "soft_score": -1.0,
@@ -1827,15 +1887,21 @@
       "name": "民生银行",
       "overall_sentiment": "sell",
       "overall_focus": "🔴 看空",
+      "overall_summary": "🔴 看空 — 民生银行近20个交易日股价从3.75持续下跌至3.52，均线呈空头排列（MA5=3.53 < MA10≈3.57 < MA20≈3.64），表明短期趋势偏空。成…",
+      "key_basis": [
+        "技术：均线空头排列",
+        "5日动量 -1.7%",
+        "技术：民生银行近20个交易日股价从3.75持续下跌至3.52，均线呈空头排列（MA5=3.53 < M…"
+      ],
       "confidence": 0.83,
       "hard_score": -0.31,
       "momentum_20d": -5.88,
       "momentum_5d": -1.68,
       "ma_alignment": "bearish",
       "volume_ratio": 0.75,
-      "pe_ttm": 5.2,
-      "pb": 0.27,
-      "mcap_yi": 1528.0,
+      "pe_ttm": null,
+      "pb": null,
+      "mcap_yi": null,
       "technical": {
         "status": "ok",
         "summary": "民生银行近20个交易日股价从3.75持续下跌至3.52，均线呈空头排列（MA5=3.53 < MA10≈3.57 < MA20≈3.64），表明短期趋势偏空。成交量在下跌过程中放大，5月18日放量下跌至3.57，随后低位震荡，反弹无力。当前股价在3.50附近获得支撑但未形成有效反弹，上方压力位MA10（3.57）及MA20（3.64）构成阻力。整体量价配合不佳，市场情绪偏向悲观，短期内下行风险较大。",
@@ -1857,13 +1923,8 @@
         "sentiment": "neutral",
         "key_events": []
       },
-      "risk_points": [
-        "若跌破3.50支撑，可能加速下跌",
-        "均线压制明显，反弹空间有限",
-        "大盘或板块走弱可能进一步拖累股价",
-        "北向资金数据暂不可用，信息不完整",
-        "主力小幅净流出，若持续累积可能对短期情绪构成压力"
-      ],
+      "news": [],
+      "risk_points": [],
       "signal_breakdown": {
         "hard_score": -0.305,
         "soft_score": -0.533,
@@ -1881,15 +1942,21 @@
       "name": "长江电力",
       "overall_sentiment": "hold",
       "overall_focus": "⚪ 观望",
+      "overall_summary": "⚪ 观望 — 从近20日数据看，股价在4月30日放量冲高至27.32后回调，于5月22日触及低点26.56，随后连续反弹，5月26日放量上涨至27.14，站上MA20（26.…",
+      "key_basis": [
+        "技术：均线交叉",
+        "5日动量 -0.4%",
+        "技术：从近20日数据看，股价在4月30日放量冲高至27.32后回调，于5月22日触及低点26.56，随…"
+      ],
       "confidence": 0.62,
       "hard_score": 0.13,
       "momentum_20d": 0.71,
       "momentum_5d": -0.4,
       "ma_alignment": "neutral",
       "volume_ratio": 1.53,
-      "pe_ttm": 18.5,
-      "pb": 2.92,
-      "mcap_yi": 6665.0,
+      "pe_ttm": null,
+      "pb": null,
+      "mcap_yi": null,
       "technical": {
         "status": "ok",
         "summary": "从近20日数据看，股价在4月30日放量冲高至27.32后回调，于5月22日触及低点26.56，随后连续反弹，5月26日放量上涨至27.14，站上MA20（26.93）。成交量显著放大，显示多头力量增强。但均线系统仍呈空头排列（MA5<MA10<MA20），短期趋势尚未完全逆转。当前股价处于均线交汇区域，方向选择关键。关注能否站稳MA20并带动短期均线上穿。",
@@ -1911,12 +1978,8 @@
         "sentiment": "neutral",
         "key_events": []
       },
-      "risk_points": [
-        "均线空头排列未改，上方MA10（26.90）和MA5（26.79）可能形成压力",
-        "若成交量萎缩，反弹可能夭折，需警惕二次探底",
-        "北向资金缺失导致资金面分析不完整",
-        "单日主力净流入可能为短期波动，需更多交易日验证"
-      ],
+      "news": [],
+      "risk_points": [],
       "signal_breakdown": {
         "hard_score": 0.134,
         "soft_score": 0.0,
@@ -1934,15 +1997,21 @@
       "name": "宁德时代",
       "overall_sentiment": "hold",
       "overall_focus": "⚪ 观望",
+      "overall_summary": "⚪ 观望 — 股价处于下跌趋势，均线呈空头排列（MA5<MA10<MA20），近期低点402.5后小幅反弹至414.8，但量能放大未能有效突破MA10（约414.3）和MA2…",
+      "key_basis": [
+        "技术：均线交叉",
+        "5日动量 +0.0%",
+        "技术：股价处于下跌趋势，均线呈空头排列（MA5<MA10<MA20），近期低点402.5后小幅反弹至4…"
+      ],
       "confidence": 0.6,
       "hard_score": 0.0,
       "momentum_20d": -6.77,
       "momentum_5d": 0.01,
       "ma_alignment": "neutral",
       "volume_ratio": 1.58,
-      "pe_ttm": 24.3,
-      "pb": 5.87,
-      "mcap_yi": 19191.0,
+      "pe_ttm": null,
+      "pb": null,
+      "mcap_yi": null,
       "technical": {
         "status": "ok",
         "summary": "股价处于下跌趋势，均线呈空头排列（MA5<MA10<MA20），近期低点402.5后小幅反弹至414.8，但量能放大未能有效突破MA10（约414.3）和MA20（约427.4），反弹力度偏弱。上方压力明显，短期支撑关注400整数关口。趋势尚未反转，需警惕进一步下行风险。",
@@ -1964,13 +2033,8 @@
         "sentiment": "neutral",
         "key_events": []
       },
-      "risk_points": [
-        "均线空头排列，下跌趋势未改变",
-        "近期反弹量价配合不佳，可能为技术性反抽",
-        "前低402.5附近支撑薄弱，存在破位风险",
-        "北向资金数据缺失，无法全面评估资金面",
-        "仅单日数据，资金方向存在不确定性"
-      ],
+      "news": [],
+      "risk_points": [],
       "signal_breakdown": {
         "hard_score": 0.001,
         "soft_score": -1.0,
@@ -1988,15 +2052,21 @@
       "name": "工业富联",
       "overall_sentiment": "hold",
       "overall_focus": "⚪ 观望",
+      "overall_summary": "⚪ 观望 — 股价近期自低点反弹，均线系统呈黏合向上态势，MA5与MA10接近，MA20支撑有效。量能温和放大，但尚未有效突破前高70.84，短期多空博弈，方向不明。需关注后…",
+      "key_basis": [
+        "技术：均线多头排列",
+        "5日动量 +2.1%",
+        "技术：股价近期自低点反弹，均线系统呈黏合向上态势，MA5与MA10接近，MA20支撑有效。量能温和放大…"
+      ],
       "confidence": 0.61,
       "hard_score": 0.15,
       "momentum_20d": 3.03,
       "momentum_5d": 2.07,
       "ma_alignment": "bullish",
       "volume_ratio": 0.85,
-      "pe_ttm": 34.2,
-      "pb": 7.89,
-      "mcap_yi": 13907.0,
+      "pe_ttm": null,
+      "pb": null,
+      "mcap_yi": null,
       "technical": {
         "status": "ok",
         "summary": "股价近期自低点反弹，均线系统呈黏合向上态势，MA5与MA10接近，MA20支撑有效。量能温和放大，但尚未有效突破前高70.84，短期多空博弈，方向不明。需关注后续能否放量突破关键压力位，以及均线能否形成多头排列。",
@@ -2018,13 +2088,8 @@
         "sentiment": "neutral",
         "key_events": []
       },
-      "risk_points": [
-        "前高70.84附近存在较大压力",
-        "若缩量回调可能考验MA10或MA20支撑",
-        "市场情绪波动可能导致股价宽幅震荡",
-        "单一交易日数据不足以判断方向",
-        "北向资金缺席，资金面分析不完整"
-      ],
+      "news": [],
+      "risk_points": [],
       "signal_breakdown": {
         "hard_score": 0.148,
         "soft_score": 0.0,
@@ -2042,15 +2107,21 @@
       "name": "国泰君安",
       "overall_sentiment": "hold",
       "overall_focus": "⚪ 观望",
+      "overall_summary": "⚪ 观望 — 该股近期呈明显下跌趋势，均线系统已形成空头排列（MA5<MA10<MA20），最新收盘价15.30低于所有短期均线。成交量在下跌过程中有所放大，尤其是5月7日、…",
+      "key_basis": [
+        "技术：均线交叉",
+        "5日动量 -1.1%",
+        "技术：该股近期呈明显下跌趋势，均线系统已形成空头排列（MA5<MA10<MA20），最新收盘价15.3…"
+      ],
       "confidence": 0.8,
       "hard_score": -0.17,
       "momentum_20d": -8.87,
       "momentum_5d": -1.1,
       "ma_alignment": "neutral",
       "volume_ratio": 0.83,
-      "pe_ttm": 12.2,
-      "pb": 0.82,
-      "mcap_yi": 2683.0,
+      "pe_ttm": null,
+      "pb": null,
+      "mcap_yi": null,
       "technical": {
         "status": "ok",
         "summary": "该股近期呈明显下跌趋势，均线系统已形成空头排列（MA5<MA10<MA20），最新收盘价15.30低于所有短期均线。成交量在下跌过程中有所放大，尤其是5月7日、11日、13日、21日出现放量阴线，显示抛压较重。价格从16.72高点持续回落至15.30，累计跌幅超8%，且未出现有效反弹。短期支撑位在15.01（5月25日低点），若跌破可能进一步下探；上方压力位在MA10附近（约15.41），反弹空间有限。整体空头格局明确，需警惕继续下行风险。",
@@ -2072,13 +2143,8 @@
         "sentiment": "neutral",
         "key_events": []
       },
-      "risk_points": [
-        "均线空头排列且持续向下发散，中期趋势偏空",
-        "下跌过程中多次放量，说明主动卖压较大",
-        "近期低点15.01若被有效跌破，可能开启新一轮下跌",
-        "北向资金数据暂时缺失，导致分析维度不完整",
-        "单日主力小幅净流出，若持续可能对股价形成压力"
-      ],
+      "news": [],
+      "risk_points": [],
       "signal_breakdown": {
         "hard_score": -0.173,
         "soft_score": -0.533,
@@ -2096,15 +2162,21 @@
       "name": "药明康德",
       "overall_sentiment": "hold",
       "overall_focus": "⚪ 观望",
+      "overall_summary": "⚪ 观望 — 药明康德近期股价在100-110区间震荡，最新收盘104.11元，站上MA5和MA10，但MA20（105.75）构成中期压力。均线呈现MA5<MA10<MA2…",
+      "key_basis": [
+        "技术：均线交叉",
+        "5日动量 +2.3%",
+        "技术：药明康德近期股价在100-110区间震荡，最新收盘104.11元，站上MA5和MA10，但MA2…"
+      ],
       "confidence": 0.6,
       "hard_score": 0.1,
       "momentum_20d": 3.91,
       "momentum_5d": 2.28,
       "ma_alignment": "neutral",
       "volume_ratio": 0.83,
-      "pe_ttm": 15.2,
-      "pb": 3.64,
-      "mcap_yi": 3062.0,
+      "pe_ttm": null,
+      "pb": null,
+      "mcap_yi": null,
       "technical": {
         "status": "ok",
         "summary": "药明康德近期股价在100-110区间震荡，最新收盘104.11元，站上MA5和MA10，但MA20（105.75）构成中期压力。均线呈现MA5<MA10<MA20的空头排列，短期反弹受制于中期均线。成交量较前期萎缩，上攻动能不足。4月28日跳空缺口及后续冲高回落形成套牢区，105-110区域阻力明显。下方100元附近有支撑，但若量能无法放大，突破MA20难度较大，短期维持震荡整理格局。",
@@ -2126,13 +2198,8 @@
         "sentiment": "neutral",
         "key_events": []
       },
-      "risk_points": [
-        "中期均线空头排列，反弹若量能不济可能再度回落",
-        "上方110元附近存在较大套牢盘压力",
-        "近期波动率收窄，可能面临方向选择，警惕破位风险",
-        "主力资金持续流出可能压制股价",
-        "北向资金数据缺失，外部资金面方向不明"
-      ],
+      "news": [],
+      "risk_points": [],
       "signal_breakdown": {
         "hard_score": 0.101,
         "soft_score": 0.0,
@@ -2150,15 +2217,21 @@
       "name": "美的集团",
       "overall_sentiment": "hold",
       "overall_focus": "⚪ 观望",
+      "overall_summary": "⚪ 观望 — 近20日股价先反弹后回落，当前收盘价79.55元，跌破MA5（80.53）、MA10（81.12）及MA20（80.73），均线呈空头排列。量能在前期反弹高点后…",
+      "key_basis": [
+        "技术：均线交叉",
+        "5日动量 -1.8%",
+        "技术：近20日股价先反弹后回落，当前收盘价79.55元，跌破MA5（80.53）、MA10（81.12…"
+      ],
       "confidence": 0.79,
       "hard_score": -0.12,
       "momentum_20d": -0.38,
       "momentum_5d": -1.79,
       "ma_alignment": "neutral",
       "volume_ratio": 0.74,
-      "pe_ttm": 13.8,
-      "pb": 2.62,
-      "mcap_yi": 6091.0,
+      "pe_ttm": null,
+      "pb": null,
+      "mcap_yi": null,
       "technical": {
         "status": "ok",
         "summary": "近20日股价先反弹后回落，当前收盘价79.55元，跌破MA5（80.53）、MA10（81.12）及MA20（80.73），均线呈空头排列。量能在前期反弹高点后逐步萎缩，显示上攻动力不足。短期趋势偏弱，关注能否在前期低点78.79附近获得支撑。",
@@ -2180,13 +2253,8 @@
         "sentiment": "neutral",
         "key_events": []
       },
-      "risk_points": [
-        "股价继续下行跌破78元整数关口",
-        "反弹受阻于MA5或MA10压制",
-        "量能持续低迷导致弱势延续",
-        "北向资金数据缺失，资金面信息不完整",
-        "单日资金流入规模较小，不足以形成明确趋势"
-      ],
+      "news": [],
+      "risk_points": [],
       "signal_breakdown": {
         "hard_score": -0.122,
         "soft_score": -0.533,
@@ -2204,15 +2272,21 @@
       "name": "兴业银行",
       "overall_sentiment": "hold",
       "overall_focus": "⚪ 观望",
+      "overall_summary": "⚪ 观望 — 兴业银行近期股价处于空头排列（MA5<MA10<MA20），但5月26日收于17.83元，站上MA5和MA10，短期反弹力度较强。成交量在反弹过程中温和放大，显…",
+      "key_basis": [
+        "技术：均线交叉",
+        "5日动量 +1.9%",
+        "技术：兴业银行近期股价处于空头排列（MA5<MA10<MA20），但5月26日收于17.83元，站上M…"
+      ],
       "confidence": 0.59,
       "hard_score": 0.07,
       "momentum_20d": -2.03,
       "momentum_5d": 1.89,
       "ma_alignment": "neutral",
       "volume_ratio": 1.0,
-      "pe_ttm": 4.9,
-      "pb": 0.46,
-      "mcap_yi": 3809.0,
+      "pe_ttm": null,
+      "pb": null,
+      "mcap_yi": null,
       "technical": {
         "status": "ok",
         "summary": "兴业银行近期股价处于空头排列（MA5<MA10<MA20），但5月26日收于17.83元，站上MA5和MA10，短期反弹力度较强。成交量在反弹过程中温和放大，显示资金参与度提升，但尚未突破MA20（17.749）这一关键压力位。整体趋势仍偏弱，若后续能有效站稳MA20并放量，则有望扭转空头格局，否则可能继续震荡筑底。",
@@ -2234,12 +2308,8 @@
         "sentiment": "neutral",
         "key_events": []
       },
-      "risk_points": [
-        "均线仍为空头排列，反弹可能受阻",
-        "若放量下跌将重新确认下行趋势",
-        "北向资金数据缺失，资金面分析不完整",
-        "单日主力净流入规模较小，不足以确认趋势"
-      ],
+      "news": [],
+      "risk_points": [],
       "signal_breakdown": {
         "hard_score": 0.068,
         "soft_score": 0.0,
@@ -2257,15 +2327,21 @@
       "name": "中国移动",
       "overall_sentiment": "hold",
       "overall_focus": "⚪ 观望",
+      "overall_summary": "⚪ 观望 — 近20日股价先涨后跌，最高触及103.36后回落，目前报97.19。均线系统显示短期均线MA5（97.14）下穿MA20（97.3065），MA10（98.14…",
+      "key_basis": [
+        "技术：均线多头排列",
+        "5日动量 -3.8%",
+        "技术：近20日股价先涨后跌，最高触及103.36后回落，目前报97.19。均线系统显示短期均线MA5（…"
+      ],
       "confidence": 0.59,
       "hard_score": 0.06,
       "momentum_20d": 1.4,
       "momentum_5d": -3.77,
       "ma_alignment": "bullish",
       "volume_ratio": 0.69,
-      "pe_ttm": 15.6,
-      "pb": 1.49,
-      "mcap_yi": 21145.0,
+      "pe_ttm": null,
+      "pb": null,
+      "mcap_yi": null,
       "technical": {
         "status": "ok",
         "summary": "近20日股价先涨后跌，最高触及103.36后回落，目前报97.19。均线系统显示短期均线MA5（97.14）下穿MA20（97.3065），MA10（98.144）仍在上方，呈现走平交织状态，方向不明。成交量在冲高时显著放大，回落时萎缩，反弹缩量，表明多头动能不足。股价处于短期均线下方，但未破前期低点，多空胶着。关注能否收复MA10（98.14）及前期高点压力。",
@@ -2287,13 +2363,8 @@
         "sentiment": "neutral",
         "key_events": []
       },
-      "risk_points": [
-        "MA5与MA20死叉，短期均线空头排列风险",
-        "反弹缩量，若继续无量可能再次下跌",
-        "大盘系统性风险或行业利空",
-        "北向资金数据为空，无法评估外资态度",
-        "单日主力净流入金额较小，代表性有限"
-      ],
+      "news": [],
+      "risk_points": [],
       "signal_breakdown": {
         "hard_score": 0.058,
         "soft_score": 0.0,
@@ -2311,15 +2382,21 @@
       "name": "格力电器",
       "overall_sentiment": "hold",
       "overall_focus": "⚪ 观望",
+      "overall_summary": "⚪ 观望 — 格力电器近期从高点40.88回落，短期均线MA5 (38.92) 低于MA10 (39.47) 和MA20 (39.44)，呈现空头排列。股价在38.4-39.…",
+      "key_basis": [
+        "技术：均线交叉",
+        "5日动量 -1.7%",
+        "技术：格力电器近期从高点40.88回落，短期均线MA5 (38.92) 低于MA10 (39.47) …"
+      ],
       "confidence": 0.78,
       "hard_score": -0.09,
       "momentum_20d": 5.19,
       "momentum_5d": -1.72,
       "ma_alignment": "neutral",
       "volume_ratio": 0.62,
-      "pe_ttm": 7.4,
-      "pb": 1.42,
-      "mcap_yi": 2163.0,
+      "pe_ttm": null,
+      "pb": null,
+      "mcap_yi": null,
       "technical": {
         "status": "ok",
         "summary": "格力电器近期从高点40.88回落，短期均线MA5 (38.92) 低于MA10 (39.47) 和MA20 (39.44)，呈现空头排列。股价在38.4-39.0区间窄幅震荡，量能萎缩，反弹乏力。4月29日放量冲高后持续回落，显示上方抛压较重。目前支撑位38.4附近，若跌破则可能加速下行。均线死叉风险加大，短期趋势偏空。",
@@ -2341,13 +2418,8 @@
         "sentiment": "neutral",
         "key_events": []
       },
-      "risk_points": [
-        "若跌破38.4支撑，可能开启新一轮下跌",
-        "均线空头排列下，反弹空间受限",
-        "前期高点40.88形成强阻力，需放量突破才能扭转趋势",
-        "主力资金连续流出可能引发调整",
-        "北向资金缺席导致信号不完整"
-      ],
+      "news": [],
+      "risk_points": [],
       "signal_breakdown": {
         "hard_score": -0.087,
         "soft_score": -0.533,
@@ -2365,15 +2437,21 @@
       "name": "山东黄金",
       "overall_sentiment": "hold",
       "overall_focus": "⚪ 观望",
+      "overall_summary": "⚪ 观望 — 山东黄金近期持续下跌，从35.84跌至31.46，跌幅超12%。均线系统呈空头排列（MA5<MA10<MA20），趋势偏空。昨日放量反弹，收涨约4.7%，但未能…",
+      "key_basis": [
+        "技术：均线交叉",
+        "5日动量 +2.0%",
+        "技术：山东黄金近期持续下跌，从35.84跌至31.46，跌幅超12%。均线系统呈空头排列（MA5<MA…"
+      ],
       "confidence": 0.77,
       "hard_score": -0.01,
       "momentum_20d": -12.22,
       "momentum_5d": 1.98,
       "ma_alignment": "neutral",
       "volume_ratio": 1.45,
-      "pe_ttm": 26.7,
-      "pb": 4.31,
-      "mcap_yi": 1378.0,
+      "pe_ttm": null,
+      "pb": null,
+      "mcap_yi": null,
       "technical": {
         "status": "ok",
         "summary": "山东黄金近期持续下跌，从35.84跌至31.46，跌幅超12%。均线系统呈空头排列（MA5<MA10<MA20），趋势偏空。昨日放量反弹，收涨约4.7%，但未能站上MA10。成交量在下跌过程中放大，反弹时也放量，显示多空分歧。上方均线压制明显，下方29.5附近为近期支撑。短期反弹持续性需观察量能配合。",
@@ -2395,13 +2473,8 @@
         "sentiment": "neutral",
         "key_events": []
       },
-      "risk_points": [
-        "均线空头排列，反弹可能受阻",
-        "前期低点29.5若跌破，将打开下行空间",
-        "成交量虽放大，但若后续缩量，反弹或夭折",
-        "主力资金净流出可能反映短期获利了结或避险情绪",
-        "北向数据缺失，无法全面评估外资态度"
-      ],
+      "news": [],
+      "risk_points": [],
       "signal_breakdown": {
         "hard_score": -0.006,
         "soft_score": -0.533,
@@ -2419,15 +2492,21 @@
       "name": "伊利股份",
       "overall_sentiment": "hold",
       "overall_focus": "⚪ 观望",
+      "overall_summary": "⚪ 观望 — 伊利股份近期冲高至27.99后回落，连续下跌至26.19附近，随后小幅反弹至26.58。当前股价位于MA5(26.59)、MA10(27.07)和MA20(26…",
+      "key_basis": [
+        "技术：均线交叉",
+        "5日动量 -2.4%",
+        "技术：伊利股份近期冲高至27.99后回落，连续下跌至26.19附近，随后小幅反弹至26.58。当前股价…"
+      ],
       "confidence": 0.56,
       "hard_score": -0.1,
       "momentum_20d": 5.18,
       "momentum_5d": -2.39,
       "ma_alignment": "neutral",
       "volume_ratio": 0.68,
-      "pe_ttm": 13.9,
-      "pb": 2.83,
-      "mcap_yi": 1684.0,
+      "pe_ttm": null,
+      "pb": null,
+      "mcap_yi": null,
       "technical": {
         "status": "ok",
         "summary": "伊利股份近期冲高至27.99后回落，连续下跌至26.19附近，随后小幅反弹至26.58。当前股价位于MA5(26.59)、MA10(27.07)和MA20(26.97)下方，均线呈空头排列。成交量在下跌过程中有所萎缩，反弹时略有放大但未形成有效突破。短期趋势偏弱，但26.20附近形成支撑，多空博弈中。需观察后续能否放量突破5日均线。",
@@ -2449,13 +2528,8 @@
         "sentiment": "neutral",
         "key_events": []
       },
-      "risk_points": [
-        "反弹力度不足，可能再次下探支撑",
-        "股价未能站上均线，下跌趋势未扭转",
-        "若跌破26.19，可能进一步下探",
-        "北向数据缺失，无法判断外资态度",
-        "单日主力流入规模有限，持续性待观察"
-      ],
+      "news": [],
+      "risk_points": [],
       "signal_breakdown": {
         "hard_score": -0.096,
         "soft_score": 0.0,
@@ -2473,15 +2547,21 @@
       "name": "京沪高铁",
       "overall_sentiment": "hold",
       "overall_focus": "⚪ 观望",
+      "overall_summary": "⚪ 观望 — 股价近期从5.05元高点回落，当前4.86元已跌破MA5、MA10和MA20，短期均线呈空头排列，MA5下穿MA10形成死叉。成交量在5月12日放巨量后逐步萎缩…",
+      "key_basis": [
+        "技术：均线多头排列",
+        "5日动量 -2.4%",
+        "技术：股价近期从5.05元高点回落，当前4.86元已跌破MA5、MA10和MA20，短期均线呈空头排列…"
+      ],
       "confidence": 0.55,
       "hard_score": 0.06,
       "momentum_20d": -1.22,
       "momentum_5d": -2.41,
       "ma_alignment": "bullish",
       "volume_ratio": 0.72,
-      "pe_ttm": 17.9,
-      "pb": 1.13,
-      "mcap_yi": 2388.0,
+      "pe_ttm": null,
+      "pb": null,
+      "mcap_yi": null,
       "technical": {
         "status": "ok",
         "summary": "股价近期从5.05元高点回落，当前4.86元已跌破MA5、MA10和MA20，短期均线呈空头排列，MA5下穿MA10形成死叉。成交量在5月12日放巨量后逐步萎缩，显示多头动能衰竭，后续若无法快速收复均线，可能进一步下探。下方支撑位关注4.83元（近期低点），上方压力位在4.91-4.94元区间。整体技术面偏弱，需警惕继续调整风险。",
@@ -2503,12 +2583,8 @@
         "sentiment": "neutral",
         "key_events": []
       },
-      "risk_points": [
-        "短期均线继续发散，形成空头加速",
-        "若跌破4.83元，可能开启新一轮下跌",
-        "单日资金流向代表性不足，须警惕短期波动",
-        "北向资金缺席可能导致分析维度不完整"
-      ],
+      "news": [],
+      "risk_points": [],
       "signal_breakdown": {
         "hard_score": 0.061,
         "soft_score": -0.533,
@@ -2526,15 +2602,21 @@
       "name": "中信证券",
       "overall_sentiment": "hold",
       "overall_focus": "⚪ 观望",
+      "overall_summary": "⚪ 观望 — 股价当前处于MA5、MA10、MA20下方，均线呈空头排列，短期趋势偏弱。近期从5月6日高点27.84回落，多次反弹受阻于均线，5月21日放量冲高回落后持续走低…",
+      "key_basis": [
+        "技术：均线交叉",
+        "5日动量 -0.2%",
+        "技术：股价当前处于MA5、MA10、MA20下方，均线呈空头排列，短期趋势偏弱。近期从5月6日高点27…"
+      ],
       "confidence": 0.55,
       "hard_score": 0.09,
       "momentum_20d": -1.02,
       "momentum_5d": -0.23,
       "ma_alignment": "neutral",
       "volume_ratio": 1.3,
-      "pe_ttm": 11.3,
-      "pb": 1.31,
-      "mcap_yi": 3819.0,
+      "pe_ttm": null,
+      "pb": null,
+      "mcap_yi": null,
       "technical": {
         "status": "ok",
         "summary": "股价当前处于MA5、MA10、MA20下方，均线呈空头排列，短期趋势偏弱。近期从5月6日高点27.84回落，多次反弹受阻于均线，5月21日放量冲高回落后持续走低，5月26日虽小幅反弹但成交量未能有效放大，显示多头乏力。支撑位关注25.8附近，若跌破可能进一步下探；上方压力位26.5-27.0。整体量价关系不利，市场情绪谨慎。",
@@ -2556,12 +2638,8 @@
         "sentiment": "neutral",
         "key_events": []
       },
-      "risk_points": [
-        "均线空头压制明显，反弹缺乏持续性",
-        "近期高点27.84后价格重心下移，趋势转弱",
-        "仅1日数据，趋势代表性有限",
-        "主力资金流出显示短期抛压，需警惕持续性"
-      ],
+      "news": [],
+      "risk_points": [],
       "signal_breakdown": {
         "hard_score": 0.094,
         "soft_score": -0.533,
@@ -2579,15 +2657,21 @@
       "name": "新华保险",
       "overall_sentiment": "hold",
       "overall_focus": "⚪ 观望",
+      "overall_summary": "⚪ 观望 — 当前股价60.16元，位于MA5(59.38)之上，但低于MA10(60.51)和MA20(62.34)，均线呈空头排列，趋势偏空。近日从高点67.16持续下跌…",
+      "key_basis": [
+        "技术：均线交叉",
+        "5日动量 -0.5%",
+        "技术：当前股价60.16元，位于MA5(59.38)之上，但低于MA10(60.51)和MA20(62…"
+      ],
       "confidence": 0.55,
       "hard_score": 0.11,
       "momentum_20d": -4.28,
       "momentum_5d": -0.45,
       "ma_alignment": "neutral",
       "volume_ratio": 1.59,
-      "pe_ttm": 5.0,
-      "pb": 1.48,
-      "mcap_yi": 1832.0,
+      "pe_ttm": null,
+      "pb": null,
+      "mcap_yi": null,
       "technical": {
         "status": "ok",
         "summary": "当前股价60.16元，位于MA5(59.38)之上，但低于MA10(60.51)和MA20(62.34)，均线呈空头排列，趋势偏空。近日从高点67.16持续下跌至低点58.3后反弹，但反弹量能不足，5月26日放量却未能有效突破MA10，显示上方压力较大。短期支撑位在58.3附近，若跌破则可能继续下探；压力位关注MA10及MA20。",
@@ -2609,12 +2693,8 @@
         "sentiment": "neutral",
         "key_events": []
       },
-      "risk_points": [
-        "均线空头排列，趋势向下压力较大",
-        "近期低点58.3若被跌破，可能加速下跌",
-        "主力资金净流出可能压制短期股价",
-        "北向数据缺失增加判断不确定性"
-      ],
+      "news": [],
+      "risk_points": [],
       "signal_breakdown": {
         "hard_score": 0.108,
         "soft_score": -0.533,
@@ -2632,15 +2712,21 @@
       "name": "科大讯飞",
       "overall_sentiment": "hold",
       "overall_focus": "⚪ 观望",
+      "overall_summary": "⚪ 观望 — 股价近期在47-50元区间震荡，最新收盘49.25元站上MA5、MA10及MA20，但均线尚未形成明确多头排列（MA5略低于MA10）。近两日量能有所放大，尤其…",
+      "key_basis": [
+        "技术：均线交叉",
+        "5日动量 +0.3%",
+        "技术：股价近期在47-50元区间震荡，最新收盘49.25元站上MA5、MA10及MA20，但均线尚未形…"
+      ],
       "confidence": 0.55,
       "hard_score": -0.15,
       "momentum_20d": 0.74,
       "momentum_5d": 0.26,
       "ma_alignment": "neutral",
       "volume_ratio": 1.34,
-      "pe_ttm": 139.9,
-      "pb": 5.29,
-      "mcap_yi": 1207.0,
+      "pe_ttm": null,
+      "pb": null,
+      "mcap_yi": null,
       "technical": {
         "status": "ok",
         "summary": "股价近期在47-50元区间震荡，最新收盘49.25元站上MA5、MA10及MA20，但均线尚未形成明确多头排列（MA5略低于MA10）。近两日量能有所放大，尤其是5月26日成交量显著增加，显示资金活跃度提升。但前期高点50.88元附近存在明显压力，且股价多次冲高回落，表明上攻动能仍显不足。整体呈现震荡偏强格局，方向有待突破确认。",
@@ -2662,13 +2748,8 @@
         "sentiment": "neutral",
         "key_events": []
       },
-      "risk_points": [
-        "若股价无法站稳均线，可能重回调整",
-        "前高50.88元附近压力较大，突破需持续放量",
-        "量能若萎缩，反弹持续性存疑",
-        "单日数据不足以判断趋势",
-        "北向资金动向未知，无法评估外资态度"
-      ],
+      "news": [],
+      "risk_points": [],
       "signal_breakdown": {
         "hard_score": -0.154,
         "soft_score": 0.0,

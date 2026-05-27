@@ -18,11 +18,193 @@ from pathlib import Path
 from jinja2 import Template
 
 from src.config import get_settings
-from src.data.models import Report
+from src.data.models import Report, StockAnalysis
 
 logger = logging.getLogger(__name__)
 
-# ── CSS: loaded from theme.css ────────────────────────────────
+
+def _analysis_to_stock_dict(a: StockAnalysis) -> dict:
+    """Build site/JSON stock dict from pipeline output — no refusion."""
+    snap = a.snapshot
+    sb = dict(a.signal_breakdown or {})
+    if "final_score" not in sb:
+        sb.setdefault("final_score", 0)
+        sb.setdefault("hard_score", 0)
+        sb.setdefault("soft_score", 0)
+        sb.setdefault("gate_score", 0)
+        sb.setdefault("dragon_tiger_score", 0)
+        sb.setdefault("announcement_score", 0)
+    hm = a.hard_metrics or {}
+    valuation = snap.valuation
+
+    dt_entries = []
+    for dt in snap.dragon_tiger[:5]:
+        dt_entries.append({
+            "date": dt.date, "reason": dt.reason, "net_buy": dt.net_buy,
+            "buy_amount": dt.buy_amount, "sell_amount": dt.sell_amount,
+            "participants": dt.participants[:5] if dt.participants else [],
+        })
+
+    ann_events = []
+    if a.announcement.status.value != "unavailable" and a.announcement.raw_json:
+        ann_events = a.announcement.raw_json.get("key_events", [])
+
+    news_items = [
+        {"title": n.title, "url": n.url, "date": n.date, "source": n.source}
+        for n in (snap.news or [])[:5]
+    ]
+
+    stock = {
+        "code": snap.code,
+        "name": snap.name,
+        "overall_sentiment": a.overall_sentiment,
+        "overall_focus": a.overall_focus,
+        "overall_summary": a.overall_summary,
+        "key_basis": a.key_basis,
+        "confidence": a.confidence,
+        "hard_score": hm.get("hard_score", sb.get("hard_score")),
+        "momentum_20d": hm.get("momentum_20d"),
+        "momentum_5d": hm.get("momentum_5d"),
+        "ma_alignment": hm.get("ma_alignment"),
+        "volume_ratio": hm.get("volume_ratio"),
+        "pe_ttm": round(valuation.pe_ttm, 1) if valuation and valuation.pe_ttm else None,
+        "pb": round(valuation.pb, 2) if valuation and valuation.pb else None,
+        "mcap_yi": round(valuation.mcap / 1e8, 0) if valuation else None,
+        "technical": {
+            "status": a.technical.status.value,
+            "summary": a.technical.summary,
+            "sentiment": a.technical.sentiment,
+        },
+        "fundamental": {
+            "status": a.fundamental.status.value,
+            "summary": a.fundamental.summary,
+            "sentiment": a.fundamental.sentiment,
+        },
+        "capital": {
+            "status": a.capital.status.value,
+            "summary": a.capital.summary,
+            "sentiment": a.capital.sentiment,
+        },
+        "announcement": {
+            "status": a.announcement.status.value,
+            "summary": a.announcement.summary,
+            "sentiment": a.announcement.sentiment,
+            "key_events": ann_events,
+        },
+        "news": news_items,
+        "risk_points": [
+            r for agent in [a.technical, a.fundamental, a.capital, a.announcement]
+            for r in agent.risk_points
+        ],
+        "signal_breakdown": sb,
+        "dragon_tiger": dt_entries,
+    }
+    return _enrich_stock_dict(stock)
+
+
+def _enrich_stock_dict(stock: dict) -> dict:
+    """Fill L2 fields for legacy JSON or partial pipeline output."""
+    out = dict(stock)
+    sb = out.get("signal_breakdown") or {}
+    if not out.get("overall_summary"):
+        focus = out.get("overall_focus", "")
+        tech = (out.get("technical") or {}).get("summary", "")
+        if tech:
+            out["overall_summary"] = f"{focus} — {tech[:80]}{'…' if len(tech) > 80 else ''}"
+        elif focus:
+            out["overall_summary"] = f"{focus}，综合评分 {sb.get('final_score', 0):+.2f}"
+    if not out.get("key_basis"):
+        basis: list[str] = []
+        ma = out.get("ma_alignment")
+        if ma:
+            label = {"bullish": "均线多头排列", "bearish": "均线空头排列", "neutral": "均线交叉"}.get(ma, ma)
+            basis.append(f"技术：{label}")
+        m5 = out.get("momentum_5d")
+        if m5 is not None:
+            basis.append(f"5日动量 {m5:+.1f}%")
+        for key, prefix in [("technical", "技术"), ("fundamental", "基本面"), ("capital", "资金")]:
+            summary = (out.get(key) or {}).get("summary")
+            if summary:
+                basis.append(f"{prefix}：{summary[:48]}{'…' if len(summary) > 48 else ''}")
+                break
+        out["key_basis"] = basis[:3]
+    out.setdefault("news", [])
+    return out
+
+
+def report_from_latest_json(path: Path) -> Report:
+    """Rebuild a Report from published latest.json (for site regeneration)."""
+    from datetime import date
+
+    from src.data.models import (
+        AgentResult,
+        AgentStatus,
+        MarketOverview,
+        ReportType,
+        StockSnapshot,
+    )
+
+    data = json.loads(path.read_text(encoding="utf-8"))
+    meta = data["meta"]
+
+    def _agent(name: str, block: dict | None) -> AgentResult:
+        block = block or {}
+        status_raw = block.get("status", "unavailable")
+        try:
+            status = AgentStatus(status_raw)
+        except ValueError:
+            status = AgentStatus.UNAVAILABLE
+        return AgentResult(
+            agent_name=name,
+            status=status,
+            summary=block.get("summary", ""),
+            sentiment=block.get("sentiment", "neutral"),
+        )
+
+    analyses: list[StockAnalysis] = []
+    for raw in data.get("stocks", []):
+        s = _enrich_stock_dict(raw)
+        snap = StockSnapshot(code=s["code"], name=s["name"], fetched_at=datetime.now())
+        analyses.append(StockAnalysis(
+            snapshot=snap,
+            technical=_agent("technical", s.get("technical")),
+            fundamental=_agent("fundamental", s.get("fundamental")),
+            capital=_agent("capital", s.get("capital")),
+            announcement=_agent("announcement", s.get("announcement")),
+            overall_sentiment=s.get("overall_sentiment", "hold"),
+            overall_focus=s.get("overall_focus", ""),
+            overall_summary=s.get("overall_summary", ""),
+            key_basis=s.get("key_basis", []),
+            confidence=s.get("confidence", 0),
+            signal_breakdown=s.get("signal_breakdown") or {},
+            hard_metrics={
+                "hard_score": s.get("hard_score"),
+                "momentum_5d": s.get("momentum_5d"),
+                "momentum_20d": s.get("momentum_20d"),
+                "ma_alignment": s.get("ma_alignment"),
+                "volume_ratio": s.get("volume_ratio"),
+            },
+        ))
+
+    market = None
+    if data.get("market"):
+        m = data["market"]
+        market = MarketOverview(
+            index_name=m.get("index_name", "上证指数"),
+            close=m.get("close"),
+            change_pct=m.get("change_pct"),
+        )
+
+    report_type = ReportType.PRE if meta.get("report_type") == "pre" else ReportType.POST
+    return Report(
+        report_type=report_type,
+        generated_at=datetime.fromisoformat(meta["generated_at"]),
+        trade_date=date.fromisoformat(meta["trade_date"]),
+        market=market,
+        analyses=analyses,
+        failed_symbols=data.get("failed_symbols", []),
+    )
+
 _THEME_CSS_PATH = Path(__file__).parent / "theme.css"
 THEME_CSS = _THEME_CSS_PATH.read_text(encoding="utf-8")
 
@@ -188,32 +370,32 @@ TPL_HOME = """<!DOCTYPE html>
 
 <div class="stock-grid" id="stock-grid">
 {% for stock in stocks %}
-<a href="{% if use_app_pages %}app/stock.html?code={{ stock.code }}{% else %}stock/{{ stock.code }}.html{% endif %}" class="stock-card-link" data-code="{{ stock.code }}" data-name="{{ stock.name }}" data-signal="{{ stock.overall_sentiment }}" data-score="{{ stock.signal_breakdown.final_score }}" data-confidence="{{ stock.confidence }}">
+{% set score = stock.signal_breakdown.final_score %}
+{% set score_cls = 'signal-score-bull' if score > 0.2 else 'signal-score-bear' if score < -0.2 else 'signal-score-hold' %}
+{% set bar_cls = 'signal-bar-bull' if score > 0.2 else 'signal-bar-bear' if score < -0.2 else 'signal-bar-hold' %}
+{% set detail_href = 'app/stock.html?code=' ~ stock.code if use_app_pages else 'stock/' ~ stock.code ~ '.html' %}
+<div class="stock-card-link" data-code="{{ stock.code }}" data-name="{{ stock.name }}" data-signal="{{ stock.overall_sentiment }}" data-score="{{ score }}" data-confidence="{{ stock.confidence }}">
 <div class="stock-card">
-    {# Card Header #}
     <div class="card-header">
-        <div style="display:flex;align-items:center">
+        <a href="{{ detail_href }}" class="card-title-link" style="display:flex;align-items:center;text-decoration:none;color:inherit;flex:1">
             <div class="stock-select" data-code="{{ stock.code }}" title="加入对比"></div>
             <div>
                 <div class="card-stock-code">{{ stock.code }}</div>
                 <div class="card-stock-name">{{ stock.name }}</div>
             </div>
-        </div>
+        </a>
         {% set s = stock.overall_sentiment %}
         {% set badge_cls = 'bullish' if s in ['strong_buy','buy','bullish'] else 'bearish' if s in ['sell','strong_sell'] else 'hold' %}
         <span class="signal-badge {{ badge_cls }}">{{ stock.overall_focus }}</span>
     </div>
 
-    {# L1 Decision Card — Seeking Alpha style #}
     <div class="decision-card">
         <div class="decision-score-row">
             <span class="decision-score-label">综合评分</span>
-            <span class="decision-score-value" style="color:{{ '#22C55E' if stock.signal_breakdown.final_score > 0.2 else '#EF4444' if stock.signal_breakdown.final_score < -0.2 else '#94A3B8' }}">
-                {{ '%+.3f'|format(stock.signal_breakdown.final_score) }}
-            </span>
+            <span class="decision-score-value {{ score_cls }}">{{ '%+.3f'|format(score) }}</span>
         </div>
         <div class="decision-bar-track">
-            <div class="decision-bar-fill" style="width:{{ ((stock.signal_breakdown.final_score + 1) / 2 * 100)|round(1) }}%; background:{{ '#22C55E' if stock.signal_breakdown.final_score > 0.2 else '#EF4444' if stock.signal_breakdown.final_score < -0.2 else '#94A3B8' }}"></div>
+            <div class="decision-bar-fill {{ bar_cls }}" style="width:{{ ((score + 1) / 2 * 100)|round(1) }}%"></div>
         </div>
         <div class="decision-confidence">
             <span>置信度</span>
@@ -226,20 +408,34 @@ TPL_HOME = """<!DOCTYPE html>
         </div>
     </div>
 
-    {# Metrics Chips #}
+    {% if stock.overall_summary %}
+    <p class="card-summary">{{ stock.overall_summary }}</p>
+    {% endif %}
+    {% if stock.key_basis %}
+    <ul class="key-basis-list">
+        {% for item in stock.key_basis %}
+        <li>{{ item }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
     <div class="metrics-row">
         {% if stock.momentum_5d is not none %}
-        <div class="metric-chip" style="{{ 'border-color:rgba(34,197,94,0.3)' if stock.momentum_5d > 0 else 'border-color:rgba(239,68,68,0.3)' if stock.momentum_5d < 0 else '' }}">
+        <div class="metric-chip">
             <span class="metric-chip-label">5日</span>
-            <span class="metric-chip-val" style="color:{{ '#22C55E' if stock.momentum_5d > 0 else '#EF4444' if stock.momentum_5d < 0 else 'var(--text-secondary)' }}">{{ '%+.1f'|format(stock.momentum_5d) }}%</span>
+            <span class="metric-chip-val {{ 'change-up' if stock.momentum_5d > 0 else 'change-down' if stock.momentum_5d < 0 else '' }}">{{ '%+.1f'|format(stock.momentum_5d) }}%</span>
         </div>
         {% endif %}
         {% if stock.ma_alignment %}
-        <div class="metric-chip" style="{{ 'border-color:rgba(34,197,94,0.3)' if stock.ma_alignment == 'bullish' else 'border-color:rgba(239,68,68,0.3)' if stock.ma_alignment == 'bearish' else '' }}">
+        <div class="metric-chip">
             <span class="metric-chip-label">均线</span>
-            <span class="metric-chip-val" style="color:{{ '#22C55E' if stock.ma_alignment == 'bullish' else '#EF4444' if stock.ma_alignment == 'bearish' else 'var(--text-secondary)' }}">{{ {'bullish': '多头', 'bearish': '空头', 'neutral': '交叉'}[stock.ma_alignment] }}</span>
+            <span class="metric-chip-val {{ 'signal-score-bull' if stock.ma_alignment == 'bullish' else 'signal-score-bear' if stock.ma_alignment == 'bearish' else 'signal-score-hold' }}">{{ {'bullish': '多头', 'bearish': '空头', 'neutral': '交叉'}[stock.ma_alignment] }}</span>
         </div>
         {% endif %}
+        <div class="metric-chip intraday">
+            <span class="metric-chip-label">日内</span>
+            <span class="metric-chip-val">—</span>
+        </div>
         {% if stock.volume_ratio is not none %}
         <div class="metric-chip">
             <span class="metric-chip-label">量比</span>
@@ -254,12 +450,21 @@ TPL_HOME = """<!DOCTYPE html>
         {% endif %}
     </div>
 
-    {# Risk #}
+    <details class="card-accordion">
+        <summary>展开摘要</summary>
+        <div class="card-accordion-body">
+            {% if stock.technical.summary %}<p><strong>技术</strong> {{ stock.technical.summary[:120] }}{% if stock.technical.summary|length > 120 %}…{% endif %}</p>{% endif %}
+            {% if stock.fundamental.summary %}<p><strong>基本面</strong> {{ stock.fundamental.summary[:120] }}{% if stock.fundamental.summary|length > 120 %}…{% endif %}</p>{% endif %}
+            {% if stock.capital.summary %}<p><strong>资金</strong> {{ stock.capital.summary[:120] }}{% if stock.capital.summary|length > 120 %}…{% endif %}</p>{% endif %}
+        </div>
+    </details>
+
     {% if stock.risk_points %}
     <div class="risk-block">⚠ {{ stock.risk_points[:1] | join('') }}</div>
     {% endif %}
+    <a href="{{ detail_href }}" class="card-detail-link">查看详情 →</a>
 </div>
-</a>
+</div>
 {% endfor %}
 </div>
 
@@ -285,18 +490,21 @@ TPL_HOME = """<!DOCTYPE html>
     <tbody>
 {% for stock in stocks %}
 {% set s = stock.overall_sentiment %}
+{% set score = stock.signal_breakdown.final_score %}
+{% set score_cls = 'signal-score-bull' if score > 0.2 else 'signal-score-bear' if score < -0.2 else 'signal-score-hold' %}
+{% set bar_cls = 'signal-bar-bull' if score > 0.2 else 'signal-bar-bear' if score < -0.2 else 'signal-bar-hold' %}
 {% set badge_cls = 'bullish' if s in ['strong_buy','buy','bullish'] else 'bearish' if s in ['sell','strong_sell'] else 'hold' %}
-        <tr data-code="{{ stock.code }}" data-name="{{ stock.name }}" data-signal="{{ s }}" data-score="{{ stock.signal_breakdown.final_score }}" data-confidence="{{ stock.confidence }}">
+        <tr data-code="{{ stock.code }}" data-name="{{ stock.name }}" data-signal="{{ s }}" data-score="{{ score }}" data-confidence="{{ stock.confidence }}">
             <td class="stock-code"><a href="{% if use_app_pages %}app/stock.html?code={{ stock.code }}{% else %}stock/{{ stock.code }}.html{% endif %}" style="text-decoration:none;color:inherit">{{ stock.code }}</a></td>
             <td><span class="stock-name">{{ stock.name }}</span></td>
             <td><span class="signal-badge {{ badge_cls }}">{{ stock.overall_focus }}</span></td>
             <td>
                 <div class="score-mini">
-                    <span class="score-mini-val" style="color:{{ '#22C55E' if stock.signal_breakdown.final_score > 0.2 else '#EF4444' if stock.signal_breakdown.final_score < -0.2 else '#94A3B8' }}">{{ '%+.3f'|format(stock.signal_breakdown.final_score) }}</span>
-                    <div class="score-mini-bar"><div class="score-mini-fill" style="width:{{ ((stock.signal_breakdown.final_score + 1) / 2 * 100)|round }}%;background:{{ '#22C55E' if stock.signal_breakdown.final_score > 0.2 else '#EF4444' if stock.signal_breakdown.final_score < -0.2 else '#94A3B8' }}"></div></div>
+                    <span class="score-mini-val {{ score_cls }}">{{ '%+.3f'|format(score) }}</span>
+                    <div class="score-mini-bar"><div class="score-mini-fill {{ bar_cls }}" style="width:{{ ((score + 1) / 2 * 100)|round }}%"></div></div>
                 </div>
             </td>
-            <td style="color:{{ '#22C55E' if (stock.momentum_5d or 0) > 0 else '#EF4444' if (stock.momentum_5d or 0) < 0 else 'var(--text-muted)' }}">{{ '%+.1f'|format(stock.momentum_5d) if stock.momentum_5d is not none else '-' }}%</td>
+            <td class="{{ 'change-up' if (stock.momentum_5d or 0) > 0 else 'change-down' if (stock.momentum_5d or 0) < 0 else '' }}">{{ '%+.1f'|format(stock.momentum_5d) if stock.momentum_5d is not none else '-' }}%</td>
             <td>{{ {'bullish': '多头', 'bearish': '空头', 'neutral': '交叉'}.get(stock.ma_alignment, '-') }}</td>
             <td>{{ '%.2f'|format(stock.volume_ratio) if stock.volume_ratio is not none else '-' }}</td>
             <td>{{ '%.1f'|format(stock.pe_ttm) if stock.pe_ttm is not none else '-' }}</td>
@@ -485,6 +693,7 @@ TPL_HOME = """<!DOCTYPE html>
 })();
 </script>
 
+<script src="app/config.js"></script>
 <script src="app/app.js" defer></script>
 </body>
 </html>
@@ -1037,76 +1246,14 @@ def generate_site(report: Report, target_dir: str | None = None) -> str:
     bearish_count = 0
 
     for a in report.analyses:
-        snap = a.snapshot
-        bars = snap.bars or []
-        ma = getattr(snap, 'ma', None)
-        valuation = getattr(snap, 'valuation', None)
-        capital = getattr(snap, 'capital', None)
-
-        from src.data.hard_signals import compute_hard_signals
-        from src.data.signal_fusion import fuse_signals
-
-        hard = compute_hard_signals(
-            bars=bars,
-            ma=ma if ma and ma.ma5 else None,
-            valuation=valuation,
-            capital=capital,
-        )
-        agents = {"technical": a.technical, "fundamental": a.fundamental, "capital": a.capital}
-        fused = fuse_signals(
-            code=snap.code, name=snap.name,
-            hard=hard, agents=agents,
-            is_st="ST" in snap.name,
-            dragon_tiger_entries=[e.model_dump() for e in snap.dragon_tiger] if snap.dragon_tiger else None,
-            announcement_result=a.announcement,
-        )
-
-        if fused.final_signal in ('strong_buy', 'buy'):
+        stock = _analysis_to_stock_dict(a)
+        if stock["overall_sentiment"] in ("strong_buy", "buy"):
             bullish_count += 1
-        elif fused.final_signal in ('sell', 'strong_sell'):
+        elif stock["overall_sentiment"] in ("sell", "strong_sell"):
             bearish_count += 1
         else:
             hold_count += 1
-
-        dt_entries = []
-        for dt in snap.dragon_tiger[:5]:
-            dt_entries.append({
-                "date": dt.date, "reason": dt.reason, "net_buy": dt.net_buy,
-                "buy_amount": dt.buy_amount, "sell_amount": dt.sell_amount,
-                "participants": dt.participants[:5] if dt.participants else [],
-            })
-
-        ann_events = []
-        if a.announcement.status.value != "unavailable" and a.announcement.raw_json:
-            ann_events = a.announcement.raw_json.get("key_events", [])
-
-        stocks.append({
-            "code": snap.code, "name": snap.name,
-            "overall_sentiment": fused.final_signal,
-            "overall_focus": fused.signal_label,
-            "confidence": round(fused.confidence, 2),
-            "hard_score": round(hard.composite_score, 2),
-            "momentum_20d": round(hard.momentum_20d, 2) if hard.momentum_20d else None,
-            "momentum_5d": round(hard.momentum_5d, 2) if hard.momentum_5d else None,
-            "ma_alignment": hard.ma_alignment,
-            "volume_ratio": round(hard.volume_ratio, 2) if hard.volume_ratio else None,
-            "pe_ttm": round(valuation.pe_ttm, 1) if valuation and valuation.pe_ttm else None,
-            "pb": round(valuation.pb, 2) if valuation and valuation.pb else None,
-            "mcap_yi": round(valuation.mcap / 1e8, 0) if valuation else None,
-            "technical": {"status": a.technical.status.value, "summary": a.technical.summary, "sentiment": a.technical.sentiment},
-            "fundamental": {"status": a.fundamental.status.value, "summary": a.fundamental.summary, "sentiment": a.fundamental.sentiment},
-            "capital": {"status": a.capital.status.value, "summary": a.capital.summary, "sentiment": a.capital.sentiment},
-            "announcement": {"status": a.announcement.status.value, "summary": a.announcement.summary, "sentiment": a.announcement.sentiment, "key_events": ann_events},
-            "risk_points": [r for agent in [a.technical, a.fundamental, a.capital, a.announcement] for r in agent.risk_points],
-            "signal_breakdown": {
-                "hard_score": round(fused.hard_score, 3), "soft_score": round(fused.soft_score, 3),
-                "gate_score": round(fused.gate_score, 3), "dragon_tiger_score": round(fused.dragon_tiger_score, 3),
-                "announcement_score": round(fused.announcement_score, 3), "final_score": round(fused.final_score, 3),
-                "has_dragon_tiger": fused.data_available.get("dragon_tiger", False),
-                "has_announcement": fused.data_available.get("announcement", False),
-            },
-            "dragon_tiger": dt_entries,
-        })
+        stocks.append(stock)
 
     stocks.sort(key=lambda s: abs(s["signal_breakdown"]["final_score"]), reverse=True)
 

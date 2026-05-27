@@ -22,7 +22,7 @@
 | 06 | [06-AGENT-PROMPTS.md](06-AGENT-PROMPTS.md) | LLM Prompt |
 | 07 | [07-DATA-SOURCES.md](07-DATA-SOURCES.md) | 数据源与 Provider |
 | 08 | **[08-CURRENT-STATUS.md](08-CURRENT-STATUS.md)** | **现行系统状态 SSOT** |
-| 09 | [09-UI-PRODUCT.md](09-UI-PRODUCT.md) | Web UI 产品说明（视觉见 `../UI-UX-Style.md`） |
+| 09 | [09-UI-PRODUCT.md](09-UI-PRODUCT.md) | Web UI 产品说明（视觉见 `../DESIGN.md`） |
 | 14 | [14-PHASE-C-PLAN.md](14-PHASE-C-PLAN.md) | Phase C 交付与验收 |
 
 ### 历史文档（archive/）
