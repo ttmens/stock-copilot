@@ -158,8 +158,10 @@
   <p class="wl-msg" id="wl-msg"></p>
 </div>
 
-<script src="../app/config.js"></script>
 <script>
+// 新的 watchlist.html 前端逻辑 - 支持 localStorage 作为 API 的降级方案
+// 在 GitHub Pages 上使用 localStorage，在服务器上优先使用 API
+
 (function () {
   "use strict";
 
@@ -168,7 +170,6 @@
 
   // Auto-detect API when served from FastAPI (same origin)
   if (!API && window.location.hostname !== "ttmens.github.io" && window.location.hostname !== "localhost" && window.location.hostname !== "127.0.0.1") {
-    // Try same-origin API
     API = window.location.origin;
   }
   if (!API && (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1")) {
@@ -205,14 +206,45 @@
 
   let currentWatchlist = [];
   let latestSignals = {};
+  let useLocalStorage = false;
 
-  function setApiStatus(online) {
+  // localStorage 键名
+  const LS_KEY = 'stock_copilot_watchlist';
+
+  // 从 localStorage 加载/保存
+  function loadFromLocalStorage() {
+    try {
+      const stored = localStorage.getItem(LS_KEY);
+      if (stored) {
+        currentWatchlist = JSON.parse(stored);
+        return true;
+      }
+    } catch (e) {
+      console.warn('Failed to load watchlist from localStorage:', e);
+    }
+    return false;
+  }
+
+  function saveToLocalStorage() {
+    try {
+      localStorage.setItem(LS_KEY, JSON.stringify(currentWatchlist));
+    } catch (e) {
+      console.warn('Failed to save watchlist to localStorage:', e);
+    }
+  }
+
+  function setApiStatus(online, mode) {
     statusDot.className = "status-dot " + (online ? "online" : "offline");
-    apiStatus.textContent = online ? "API 已连接" : "静态模式";
-    if (online) {
+    if (mode === 'api') {
+      apiStatus.textContent = "API 已连接";
+      actionsBar.style.display = "flex";
+      document.getElementById("btn-import") && (document.getElementById("btn-import").style.display = "none");
+    } else if (mode === 'local') {
+      apiStatus.textContent = "本地模式 (数据保存在浏览器)";
       actionsBar.style.display = "flex";
       document.getElementById("btn-import") && (document.getElementById("btn-import").style.display = "none");
     } else {
+      apiStatus.textContent = "只读模式";
       actionsBar.style.display = "none";
     }
   }
@@ -240,7 +272,7 @@
         <td>${item.name}</td>
         <td><span class="sentiment-badge ${bucket}">${label}</span></td>
         <td style="font-family:monospace;color:${score >= 0 ? '#22C55E' : '#EF4444'}">${score >= 0 ? '+' : ''}${score.toFixed(3)}</td>
-        <td>${API ? `<button class="rm-btn" data-code="${item.code}">删除</button>` : ""}</td>
+        <td><button class="rm-btn" data-code="${item.code}">删除</button></td>
       </tr>`;
     }).join("");
 
@@ -250,30 +282,62 @@
   }
 
   async function loadWatchlist() {
+    // 1. 尝试 API
     if (API) {
       try {
         const res = await fetch(`${API}/api/watchlist`);
         if (res.ok) {
           const data = await res.json();
           currentWatchlist = (data.stocks || []).map(s => ({ code: s.code, name: s.name }));
-          setApiStatus(true);
+          setApiStatus(true, 'api');
           renderTable();
           loadSignals();
           return;
         }
-      } catch (e) { /* fall through */ }
+      } catch (e) {
+        console.warn('API failed, falling back to localStorage:', e);
+      }
     }
-    setApiStatus(false);
-    // Fallback: load from latest.json
+
+    // 2. 尝试 localStorage
+    if (loadFromLocalStorage()) {
+      setApiStatus(true, 'local');
+      renderTable();
+      loadSignalsFromJson();
+      return;
+    }
+
+    // 3. 最后尝试从 latest.json 加载
+    setApiStatus(false, 'readonly');
     try {
       const res = await fetch("../data/latest.json");
       const data = await res.json();
       currentWatchlist = (data.stocks || []).map(s => ({ code: s.code, name: s.name }));
+      saveToLocalStorage(); // 保存到 localStorage
       renderTable();
+      loadSignalsFromJson();
     } catch (_) {
       currentWatchlist = [];
       renderTable();
     }
+  }
+
+  function loadSignalsFromJson() {
+    // 从 latest.json 加载信号数据（无 API 时使用）
+    fetch("../data/latest.json")
+      .then(res => res.json())
+      .then(data => {
+        (data.stocks || []).forEach(s => {
+          latestSignals[s.code] = {
+            final_signal: s.overall_sentiment || "hold",
+            final_score: s.signal_breakdown?.final_score || 0,
+            signal_label: s.overall_sentiment === "bullish" ? "🟢 看多" :
+                          s.overall_sentiment === "bearish" ? "🔴 看空" : "⚪ 观望",
+          };
+        });
+        renderTable();
+      })
+      .catch(() => {});
   }
 
   async function loadSignals() {
@@ -282,40 +346,60 @@
       const res = await fetch(`${API}/site/latest.json`);
       if (res.ok) {
         const data = await res.json();
-        // Build a lookup from stocks
         (data.stocks || []).forEach(s => {
           latestSignals[s.code] = {
             final_signal: s.overall_sentiment || "hold",
-            final_score: 0,
+            final_score: s.signal_breakdown?.final_score || 0,
             signal_label: s.overall_sentiment === "bullish" ? "🟢 看多" :
                           s.overall_sentiment === "bearish" ? "🔴 看空" : "⚪ 观望",
           };
         });
-        // Also try to get scores from the DB via intraday
         renderTable();
       }
     } catch (_) {}
   }
 
   async function removeStock(code) {
-    if (!API) return;
-    await fetch(`${API}/api/watchlist/${code}`, { method: "DELETE" });
+    if (API) {
+      // API 模式：通过 API 删除
+      try {
+        await fetch(`${API}/api/watchlist/${code}`, { method: "DELETE" });
+      } catch (e) {
+        console.warn('API delete failed, removing locally:', e);
+      }
+    }
+    // 同时更新 localStorage
     currentWatchlist = currentWatchlist.filter(i => i.code !== code);
+    saveToLocalStorage();
     renderTable();
   }
 
   async function addStock(code, name) {
-    if (!API) { alert("静态模式下无法添加，请启动 API 服务"); return; }
     const resolvedName = name || STOCK_DB[code] || code;
-    await fetch(`${API}/api/watchlist`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ code, name: resolvedName }),
-    });
-    currentWatchlist.push({ code, name: resolvedName });
+
+    if (API) {
+      // 尝试通过 API 添加
+      try {
+        await fetch(`${API}/api/watchlist`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ code, name: resolvedName }),
+        });
+      } catch (e) {
+        console.warn('API add failed, saving locally:', e);
+      }
+    }
+
+    // 同时保存到 localStorage
+    if (!currentWatchlist.some(i => i.code === code)) {
+      currentWatchlist.push({ code, name: resolvedName });
+      saveToLocalStorage();
+    }
     renderTable();
     searchInput.value = "";
     searchResults.style.display = "none";
+    msg.textContent = `已添加 ${code} ${resolvedName}`;
+    setTimeout(() => { msg.textContent = ""; }, 3000);
   }
 
   // Search functionality
@@ -330,7 +414,6 @@
       ).slice(0, 10);
 
       if (results.length === 0) {
-        // If it looks like a 6-digit code, allow adding directly
         if (/^\d{6}$/.test(q)) {
           searchResults.innerHTML = `<div class="item" data-code="${q}" data-name="${q}"><span class="code">${q}</span><span class="name">直接添加</span></div>`;
           searchResults.style.display = "block";
@@ -355,29 +438,20 @@
           item.style.pointerEvents = "none";
         } else {
           item.addEventListener("click", () => {
-            if (API) {
-              addStock(item.dataset.code, item.dataset.name);
-            } else {
-              // In static mode, add locally
-              currentWatchlist.push({ code: item.dataset.code, name: item.dataset.name });
-              renderTable();
-              searchInput.value = "";
-              searchResults.style.display = "none";
-            }
+            addStock(item.dataset.code, item.dataset.name);
           });
         }
       });
     }, 200);
   });
 
-  // Add button (for direct code entry)
+  // Add button
   document.getElementById("btn-add").addEventListener("click", () => {
     const val = searchInput.value.trim();
     if (!val) return;
     if (/^\d{6}$/.test(val)) {
       addStock(val, STOCK_DB[val] || val);
     } else {
-      // Try to find matching stock
       const found = Object.entries(STOCK_DB).find(([code, name]) => name.includes(val));
       if (found) {
         addStock(found[0], found[1]);
@@ -388,24 +462,44 @@
   // Import default template
   document.getElementById("btn-import")?.addEventListener("click", async () => {
     if (API) {
-      await fetch(`${API}/api/watchlist/import-default`, { method: "POST" });
-      loadWatchlist();
+      try {
+        await fetch(`${API}/api/watchlist/import-default`, { method: "POST" });
+      } catch (e) {}
     }
+    // 本地模式：导入默认 10 只
+    const defaultStocks = ["600519", "000858", "000333", "601318", "600036", "600900", "601166", "600276", "300750", "000001"];
+    for (const code of defaultStocks) {
+      if (!currentWatchlist.some(i => i.code === code)) {
+        currentWatchlist.push({ code, name: STOCK_DB[code] || code });
+      }
+    }
+    saveToLocalStorage();
+    renderTable();
+    msg.textContent = "已导入默认 10 只股票";
+    setTimeout(() => { msg.textContent = ""; }, 3000);
   });
 
   // Clear all
   document.getElementById("btn-clear")?.addEventListener("click", async () => {
     if (!confirm("确定要清空所有自选股吗？")) return;
-    for (const item of [...currentWatchlist]) {
-      await fetch(`${API}/api/watchlist/${item.code}`, { method: "DELETE" });
+    if (API) {
+      for (const item of [...currentWatchlist]) {
+        try {
+          await fetch(`${API}/api/watchlist/${item.code}`, { method: "DELETE" });
+        } catch (e) {}
+      }
     }
     currentWatchlist = [];
+    saveToLocalStorage();
     renderTable();
   });
 
   // Analyze all
   document.getElementById("btn-analyze")?.addEventListener("click", async () => {
-    if (!API) return;
+    if (!API) {
+      msg.textContent = "分析功能需要 API 服务，请通过服务器 IP:8000 访问";
+      return;
+    }
     const jobStatus = document.getElementById("job-status");
     jobStatus.classList.add("active");
     document.getElementById("job-title").textContent = "盘后分析中...";
@@ -426,7 +520,10 @@
 
   // Fast analyze
   document.getElementById("btn-analyze-fast")?.addEventListener("click", async () => {
-    if (!API) return;
+    if (!API) {
+      msg.textContent = "分析功能需要 API 服务，请通过服务器 IP:8000 访问";
+      return;
+    }
     const jobStatus = document.getElementById("job-status");
     jobStatus.classList.add("active");
     document.getElementById("job-title").textContent = "快速分析中...";
