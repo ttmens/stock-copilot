@@ -2,85 +2,334 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>个股详情 — 智策 NexStrat</title>
 <link rel="stylesheet" href="../assets/theme.css">
 <style>
-.detail-shell { max-width: 960px; margin: 0 auto; padding: 1.5rem; }
-.layer-grid { display: grid; gap: 1rem; margin-top: 1.5rem; }
-.layer-card { background: var(--card-bg, #1a1f2e); border-radius: 12px; padding: 1rem; border: 1px solid rgba(255,255,255,0.06); }
+/* ── Detail Shell — MUST clear fixed header (64px) ── */
+.detail-shell { max-width: 860px; margin: 0 auto; padding: 88px 16px 100px; }
+@media (max-width: 900px) { .detail-shell { padding: 80px 12px 100px; } }
+@media (max-width: 480px) {
+  .detail-shell { padding: 72px 10px 96px; }
+  .page-title { font-size: 18px; }
+  .big-score-value { font-size: 32px; }
+  .dim-grid { grid-template-columns: 1fr; }
+}
+
+/* ── Back link ── */
+.back-link {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 13px; color: var(--text-muted); margin-bottom: 16px;
+  padding: 6px 12px; border-radius: var(--r-full);
+  border: 1px solid var(--border-hair); transition: all 0.15s ease;
+}
+.back-link:hover { color: var(--text-primary); border-color: var(--border-mid); background: var(--surface); }
+
+.page-title { font-size: 22px; font-weight: 700; color: var(--text-primary); margin-bottom: 8px; letter-spacing: -0.02em; }
+.page-subtitle { font-size: 14px; color: var(--text-muted); margin-bottom: 20px; }
+
+/* ── Detail Sections ── */
+.detail-grid { display: grid; gap: 16px; margin-bottom: 24px; }
+@media (min-width: 640px) { .detail-grid { grid-template-columns: 1fr 1fr; } }
+
+.detail-section {
+  background: var(--surface); border: 1px solid var(--border-soft);
+  border-radius: var(--r-lg); padding: 18px; box-shadow: var(--shadow-sm);
+}
+.detail-section-title { font-size: 14px; font-weight: 600; color: var(--text-primary); margin-bottom: 14px; display: flex; align-items: center; gap: 6px; }
+
+.big-score { text-align: center; margin: 12px 0; }
+.big-score-value { font-family: var(--font-mono); font-size: 42px; font-weight: 800; letter-spacing: -0.04em; line-height: 1; }
+.big-score-label { font-size: 13px; color: var(--text-muted); margin-top: 6px; }
+.big-score-bar { height: 6px; background: rgba(255,255,255,0.06); border-radius: 3px; overflow: hidden; margin-top: 12px; }
+.big-score-fill { height: 100%; border-radius: 3px; transition: width 0.3s ease; }
+
+/* 5-Layer Dimension Cards */
+.dim-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 16px; }
+.dim-card {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 8px 10px; border-radius: var(--r-sm);
+  background: var(--canvas-alt); border: 1px solid var(--border-hair);
+}
+.dim-card-label { font-size: 12px; font-weight: 500; color: var(--text-muted); display: flex; align-items: center; gap: 6px; }
+.dim-card-dot { width: 6px; height: 6px; border-radius: 50%; display: inline-block; }
+.dim-card-value { font-family: var(--font-mono); font-size: 13px; font-weight: 700; }
+
+/* Metrics */
+.metrics-row { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 10px; }
+.metric-chip {
+  flex: 1; min-width: 56px; padding: 6px 4px;
+  background: var(--canvas-alt); border-radius: var(--r-sm);
+  text-align: center; border: 1px solid var(--border-hair);
+}
+.metric-chip-label { display: block; font-size: 10px; font-weight: 500; color: var(--text-faint); margin-bottom: 2px; }
+.metric-chip-val { display: block; font-family: var(--font-mono); font-size: 13px; font-weight: 600; }
+
+/* LLM Analysis Table */
+.llm-table { width: 100%; font-size: 13px; border-collapse: collapse; }
+.llm-table td { padding: 8px 0; border-bottom: 1px solid var(--border-hair); vertical-align: top; }
+.llm-table tr:last-child td { border-bottom: none; }
+.llm-table .dim-icon { width: 36px; text-align: center; font-size: 14px; }
+.llm-table .dim-label { font-weight: 600; color: var(--text-secondary); min-width: 56px; }
+.llm-table .dim-text { color: var(--text-secondary); line-height: 1.5; }
+
+/* Dragon Tiger */
+.dt-block { margin: 8px 0; padding: 10px 12px; background: var(--canvas-alt); border-radius: var(--r-sm); border-left: 3px solid var(--dim-dragon); }
+.dt-title { font-size: 11px; font-weight: 600; color: var(--dim-dragon); margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.04em; }
+.dt-row { display: flex; justify-content: space-between; align-items: center; font-size: 12px; margin-bottom: 2px; }
+
+/* Announcement */
+.ann-block { margin: 8px 0; padding: 10px 12px; background: var(--canvas-alt); border-radius: var(--r-sm); border-left: 3px solid var(--dim-announce); }
+.ann-event { display: flex; gap: 6px; align-items: flex-start; font-size: 12px; margin-bottom: 4px; }
+.ann-text { color: var(--text-secondary); line-height: 1.4; flex: 1; }
+.ann-conf { font-family: var(--font-mono); font-size: 10px; color: var(--text-faint); white-space: nowrap; }
+
+/* Risk */
+.risk-block { font-size: 12px; color: var(--dim-risk); background: rgba(245,158,11,0.06); padding: 8px 10px; border-radius: var(--r-sm); border-left: 3px solid var(--dim-risk); line-height: 1.5; margin-bottom: 16px; }
+
+/* Loading / Empty */
+.loading-state { text-align: center; padding: 60px 20px; color: var(--text-muted); }
+.loading-spinner { display: inline-block; width: 32px; height: 32px; border: 3px solid var(--border-hair); border-top-color: var(--accent-cyan); border-radius: 50%; animation: spin 0.8s linear infinite; margin-bottom: 12px; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Signal Badge */
+.signal-badge { display: inline-flex; align-items: center; gap: 4px; padding: 4px 10px; border-radius: var(--r-full); font-size: 11px; font-weight: 700; }
+.signal-badge.bullish { background: rgba(34,197,94,0.15); color: var(--signal-bull); border: 1px solid rgba(34,197,94,0.3); }
+.signal-badge.bearish { background: rgba(239,68,68,0.15); color: var(--signal-bear); border: 1px solid rgba(239,68,68,0.3); }
+.signal-badge.hold { background: rgba(148,163,184,0.12); color: var(--signal-hold); border: 1px solid rgba(148,163,184,0.2); }
+
+/* Disclaimer / Footer */
+.disclaimer { font-size: 12px; color: var(--text-faint); line-height: 1.6; padding: 12px 14px; background: var(--canvas-alt); border-radius: var(--r-sm); border: 1px solid var(--border-hair); margin-bottom: 24px; }
+.site-footer { text-align: center; padding: 20px 0; color: var(--text-faint); font-size: 11px; border-top: 1px solid var(--border-hair); }
 </style>
 </head>
 <body>
+
 <header class="site-header">
-  <div class="brand"><span class="brand-name">智策 NexStrat</span></div>
+  <div class="brand">
+    <div class="brand-icon">
+      <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:32px;height:32px">
+        <rect width="32" height="32" rx="8" fill="url(#logo-grad)"/>
+        <path d="M8 22 L14 14 L18 18 L24 10" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M20 10 L24 10 L24 14" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <defs><linearGradient id="logo-grad" x1="0" y1="0" x2="32" y2="32"><stop offset="0%" stop-color="#7b3ff2"/><stop offset="100%" stop-color="#00f5ff"/></linearGradient></defs>
+      </svg>
+    </div>
+    <div class="brand-text">
+      <span class="brand-name">智策 NexStrat</span>
+      <span class="brand-tagline">面向投资者的AI智能投研</span>
+    </div>
+  </div>
   <div class="site-nav">
     <a href="../index.html">首页</a>
     <a href="../dashboard.html">看板</a>
     <a href="watchlist.html">自选</a>
+    <a href="../history.html">历史</a>
   </div>
 </header>
+
 <div class="detail-shell">
-  <div id="loading">加载中…</div>
-  <div id="content" style="display:none">
-    <h1 id="title"></h1>
-    <div id="signal-pill" class="signal-pill hold"></div>
-    <div class="score-panel" id="score-panel"></div>
-    <div class="layer-grid" id="layers"></div>
+  <div id="loading" class="loading-state">
+    <div class="loading-spinner"></div>
+    <div>加载中…</div>
   </div>
+  <div id="content" style="display:none"></div>
 </div>
-<script src="config.js"></script>
+
+<nav class="bottom-nav">
+    <div class="bottom-nav-inner">
+        <a href="../index.html">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            首页
+        </a>
+        <a href="../dashboard.html">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+            看板
+        </a>
+        <a href="watchlist.html">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            自选
+        </a>
+        <a href="../history.html">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            历史
+        </a>
+    </div>
+</nav>
+
 <script>
 (async function () {
   const params = new URLSearchParams(location.search);
   const code = params.get("code");
-  if (!code) { document.getElementById("loading").textContent = "缺少股票代码"; return; }
+  const contentEl = document.getElementById("content");
+  const loadingEl = document.getElementById("loading");
+
+  function showError(msg) {
+    loadingEl.innerHTML = '<div style="font-size:32px;margin-bottom:12px">⚠️</div><div style="font-size:16px;color:var(--text-secondary)">' + msg + '</div>';
+  }
+
+  if (!code) { showError("缺少股票代码"); return; }
 
   let stock = null;
   try {
     const res = await fetch("../data/latest.json");
+    if (!res.ok) throw new Error("HTTP " + res.status);
     const data = await res.json();
-    stock = (data.stocks || []).find(s => s.code === code);
+    stock = (data.stocks || []).find(function(s) { return s.code === code; });
   } catch (e) {
-    document.getElementById("loading").textContent = "无法加载数据";
-    return;
-  }
-  if (!stock) {
-    document.getElementById("loading").textContent = `未找到 ${code}`;
+    showError("无法加载数据：" + e.message);
     return;
   }
 
-  document.getElementById("loading").style.display = "none";
-  document.getElementById("content").style.display = "block";
-  document.title = `${stock.name} (${stock.code}) — 智策 NexStrat`;
-  document.getElementById("title").textContent = `${stock.code} ${stock.name}`;
-  const pill = document.getElementById("signal-pill");
-  pill.textContent = stock.overall_focus || stock.overall_sentiment;
-  pill.className = "signal-pill " + (stock.overall_sentiment || "hold");
+  if (!stock) { showError("未找到股票 " + code); return; }
 
-  const sb = stock.signal_breakdown || {};
-  document.getElementById("score-panel").innerHTML = `
-    <div class="score-row"><span>综合评分</span><span>${(sb.final_score ?? 0).toFixed(3)}</span></div>
-    <div class="score-row"><span>硬信号</span><span>${(sb.hard_score ?? 0).toFixed(3)}</span></div>
-    <div class="score-row"><span>软信号</span><span>${(sb.soft_score ?? 0).toFixed(3)}</span></div>
-  `;
+  loadingEl.style.display = "none";
+  contentEl.style.display = "block";
+  document.title = stock.name + " (" + stock.code + ") — 智策 NexStrat";
 
-  const layers = [
-    ["技术面", stock.technical],
-    ["基本面", stock.fundamental],
-    ["资金面", stock.capital],
-    ["公告", stock.announcement],
+  var sb = stock.signal_breakdown || {};
+  var s = stock.overall_sentiment || "hold";
+  var badgeCls = (s === "strong_buy" || s === "buy" || s === "bullish") ? "bullish" :
+                 (s === "sell" || s === "strong_sell") ? "bearish" : "hold";
+
+  var html = '';
+
+  // Back link
+  html += '<a href="../index.html" class="back-link">← 返回</a>';
+
+  // Title
+  html += '<div class="page-title">' + stock.code + ' <span style="font-weight:400;color:var(--text-muted)">' + stock.name + '</span></div>';
+
+  // Signal badge
+  html += '<div style="margin-bottom:20px"><span class="signal-badge ' + badgeCls + '" style="font-size:13px;padding:6px 14px">' + (stock.overall_focus || s) + '</span></div>';
+
+  // Score + 5-layer
+  html += '<div class="detail-grid">';
+  html += '<div class="detail-section">';
+  html += '<div class="detail-section-title">🎯 AI 决策评分</div>';
+  html += '<div class="big-score">';
+  var scoreColor = (sb.final_score > 0.2) ? '#22C55E' : (sb.final_score < -0.2) ? '#EF4444' : '#94A3B8';
+  html += '<div class="big-score-value" style="color:' + scoreColor + '">' + (sb.final_score >= 0 ? '+' : '') + (sb.final_score || 0).toFixed(3) + '</div>';
+  html += '<div class="big-score-label">置信度 ' + Math.round((stock.confidence || 0) * 100) + '%</div>';
+  var barWidth = ((sb.final_score || 0) + 1) / 2 * 100;
+  html += '<div class="big-score-bar"><div class="big-score-fill" style="width:' + barWidth.toFixed(1) + '%;background:' + scoreColor + '"></div></div>';
+  html += '</div>';
+
+  // 5-Layer dims
+  html += '<div class="dim-grid">';
+  var dims = [
+    ['硬信号 40%', sb.hard_score, 'var(--dim-hard)'],
+    ['软信号 25%', sb.soft_score, 'var(--dim-soft)'],
+    ['门控 15%', sb.gate_score, 'var(--dim-gate)', 0.5],
   ];
-  document.getElementById("layers").innerHTML = layers.map(([label, agent]) => {
-    if (!agent) return "";
-    return `<div class="layer-card"><h3>${label}</h3><p>${agent.summary || "—"}</p></div>`;
-  }).join("");
+  if (sb.has_dragon_tiger) dims.push(['龙虎 10%', sb.dragon_tiger_score, 'var(--dim-dragon)']);
+  if (sb.has_announcement) dims.push(['公告 10%', sb.announcement_score, 'var(--dim-announce)']);
 
-  if (stock.dragon_tiger && stock.dragon_tiger.length) {
-    const dt = stock.dragon_tiger.map(d => `<li>${d.date} ${d.reason} 净买 ${(d.net_buy/1e8).toFixed(2)}亿</li>`).join("");
-    document.getElementById("layers").insertAdjacentHTML("beforeend",
-      `<div class="layer-card"><h3>龙虎榜</h3><ul>${dt}</ul></div>`);
+  dims.forEach(function(d) {
+    var val = d[1] || 0;
+    var threshold = d[3] !== undefined ? d[3] : 0;
+    var c = val > threshold ? '#22C55E' : val < threshold ? '#EF4444' : 'var(--text-muted)';
+    html += '<div class="dim-card">';
+    html += '<span class="dim-card-label"><span class="dim-card-dot" style="background:' + d[2] + '"></span>' + d[0] + '</span>';
+    html += '<span class="dim-card-value" style="color:' + c + '">' + (val >= 0 ? '+' : '') + val.toFixed(3) + '</span>';
+    html += '</div>';
+  });
+  html += '</div></div>';
+
+  // Hard metrics
+  html += '<div class="detail-section">';
+  html += '<div class="detail-section-title">📈 硬信号指标</div>';
+  html += '<div class="metrics-row" style="flex-wrap:wrap">';
+
+  if (stock.momentum_5d != null) {
+    var c5 = stock.momentum_5d > 0 ? '#22C55E' : stock.momentum_5d < 0 ? '#EF4444' : 'var(--text-secondary)';
+    html += '<div class="metric-chip" style="min-width:80px"><span class="metric-chip-label">5日动量</span><span class="metric-chip-val" style="color:' + c5 + '">' + (stock.momentum_5d >= 0 ? '+' : '') + stock.momentum_5d.toFixed(1) + '%</span></div>';
   }
+  if (stock.momentum_20d != null) {
+    var c20 = stock.momentum_20d > 0 ? '#22C55E' : stock.momentum_20d < 0 ? '#EF4444' : 'var(--text-secondary)';
+    html += '<div class="metric-chip" style="min-width:80px"><span class="metric-chip-label">20日动量</span><span class="metric-chip-val" style="color:' + c20 + '">' + (stock.momentum_20d >= 0 ? '+' : '') + stock.momentum_20d.toFixed(1) + '%</span></div>';
+  }
+  if (stock.ma_alignment) {
+    var ma = stock.ma_alignment;
+    var maCls = ma === 'bullish' ? '#22C55E' : ma === 'bearish' ? '#EF4444' : 'var(--text-secondary)';
+    var maLabel = ma === 'bullish' ? '多头' : ma === 'bearish' ? '空头' : '交叉';
+    html += '<div class="metric-chip" style="min-width:80px"><span class="metric-chip-label">均线排列</span><span class="metric-chip-val" style="color:' + maCls + '">' + maLabel + '</span></div>';
+  }
+  if (stock.volume_ratio != null) {
+    html += '<div class="metric-chip"><span class="metric-chip-label">量比</span><span class="metric-chip-val">' + stock.volume_ratio.toFixed(2) + '</span></div>';
+  }
+  if (stock.pe_ttm != null) {
+    html += '<div class="metric-chip"><span class="metric-chip-label">PE</span><span class="metric-chip-val">' + stock.pe_ttm.toFixed(1) + '</span></div>';
+  }
+  if (stock.pb != null) {
+    html += '<div class="metric-chip"><span class="metric-chip-label">PB</span><span class="metric-chip-val">' + stock.pb.toFixed(2) + '</span></div>';
+  }
+  if (stock.mcap_yi != null) {
+    html += '<div class="metric-chip" style="min-width:80px"><span class="metric-chip-label">总市值</span><span class="metric-chip-val">' + Math.round(stock.mcap_yi) + '亿</span></div>';
+  }
+  html += '</div></div></div>';
+
+  // LLM Analysis
+  var dims_llm = [
+    ['🔧', '技术面', stock.technical],
+    ['📊', '基本面', stock.fundamental],
+    ['💰', '资金面', stock.capital],
+    ['📢', '公告', stock.announcement],
+  ];
+  var has_llm = dims_llm.some(function(d) { return d[2] && d[2].status !== 'unavailable'; });
+  if (has_llm) {
+    html += '<div class="detail-section" style="margin-bottom:16px">';
+    html += '<div class="detail-section-title">🤖 LLM 分析维度</div>';
+    html += '<table class="llm-table">';
+    dims_llm.forEach(function(d) {
+      var agent = d[2];
+      if (!agent || agent.status === 'unavailable') return;
+      var icon = agent.status === 'ok' ? '✅' : '❌';
+      html += '<tr><td class="dim-icon">' + icon + '</td><td class="dim-label">' + d[1] + '</td><td class="dim-text">' + (agent.summary || '—') + '</td></tr>';
+    });
+    html += '</table></div>';
+  }
+
+  // Dragon Tiger
+  if (stock.dragon_tiger && stock.dragon_tiger.length > 0) {
+    html += '<div class="detail-section" style="margin-bottom:16px">';
+    html += '<div class="detail-section-title">🐉 龙虎榜</div>';
+    stock.dragon_tiger.forEach(function(dt) {
+      html += '<div class="dt-block">';
+      html += '<div class="dt-title">' + (dt.reason || '') + '</div>';
+      var netColor = dt.net_buy > 0 ? '#22C55E' : '#EF4444';
+      var netVal = Math.abs(dt.net_buy) >= 10000 ? (dt.net_buy >= 0 ? '+' : '') + dt.net_buy.toFixed(0) : (dt.net_buy >= 0 ? '+' : '') + (dt.net_buy / 10000).toFixed(2) + '万';
+      html += '<div class="dt-row"><span style="color:var(--text-muted)">净额</span><span style="color:' + netColor + ';font-family:var(--font-mono);font-weight:600">' + netVal + '</span></div>';
+      html += '</div>';
+    });
+    html += '</div>';
+  }
+
+  // Announcements
+  if (stock.announcement && stock.announcement.key_events && stock.announcement.key_events.length > 0) {
+    html += '<div class="detail-section" style="margin-bottom:16px">';
+    html += '<div class="detail-section-title">📢 公告关键事件</div>';
+    stock.announcement.key_events.slice(0, 5).forEach(function(evt) {
+      var emoji = evt.impact === 'positive' ? '🟢' : evt.impact === 'negative' ? '🔴' : '⚪';
+      html += '<div class="ann-block"><div class="ann-event">';
+      html += '<span>' + emoji + '</span>';
+      html += '<span class="ann-text">' + (evt.event || '') + '</span>';
+      if (evt.confidence) html += '<span class="ann-conf">' + Math.round(evt.confidence * 100) + '%</span>';
+      html += '</div></div>';
+    });
+    html += '</div>';
+  }
+
+  // Risk
+  if (stock.risk_points && stock.risk_points.length > 0) {
+    html += '<div class="risk-block">⚠ 风险提示：' + stock.risk_points.join('、') + '</div>';
+  }
+
+  // Disclaimer
+  html += '<div class="disclaimer">⚠️ 本报告仅供个人研究参考，不构成投资建议。报告内容基于公开数据和 AI 分析生成，可能存在错误或遗漏。股市有风险，决策需谨慎。作者不对任何投资损失承担责任。</div>';
+  html += '<footer class="site-footer">智策 NexStrat v2.0 · AI 辅助决策 · 不构成投资建议</footer>';
+
+  contentEl.innerHTML = html;
 })();
 </script>
 </body>
