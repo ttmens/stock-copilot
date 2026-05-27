@@ -2,82 +2,109 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>自选股管理 — 智策 NexStrat</title>
 <link rel="stylesheet" href="../assets/theme.css">
 <style>
-.wl-shell { max-width: 800px; margin: 2rem auto; padding: 0 1rem; }
-.wl-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 0.5rem; }
-.wl-header h1 { margin: 0; }
-.wl-stats { display: flex; gap: 1rem; font-size: 0.85rem; color: var(--text-secondary); }
-.wl-stat { background: var(--bg-card); padding: 0.4rem 0.8rem; border-radius: 8px; }
+.wl-shell { max-width: 800px; margin: 0 auto; padding: 88px 16px 100px; }
+@media (max-width: 900px) { .wl-shell { padding: 72px 12px 96px; } }
+@media (max-width: 480px) { .wl-shell { padding: 68px 10px 92px; } }
 
-/* Search & Add */
-.wl-add { display: flex; gap: 0.5rem; margin-bottom: 1.5rem; flex-wrap: wrap; align-items: flex-start; }
-.wl-add .input-wrap { flex: 1; min-width: 200px; position: relative; }
-.wl-add input { width: 100%; padding: 0.6rem; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); background: var(--bg-card, var(--canvas)); color: var(--text-primary); font-size: 0.9rem; min-height: 44px; box-sizing: border-box; }
-.wl-add input:focus { outline: none; border-color: #7b3ff2; }
-.wl-add button { padding: 0.6rem 1.2rem; border-radius: 8px; border: none; background: #7b3ff2; color: #fff; cursor: pointer; font-size: 0.9rem; white-space: nowrap; min-height: 44px; margin-top: 0; }
+.wl-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 8px; }
+.wl-header h1 { font-size: 20px; font-weight: 700; color: var(--text-primary); margin: 0; }
+.wl-stats { display: flex; gap: 8px; font-size: 12px; }
+.wl-stat { display: inline-flex; align-items: center; gap: 4px; background: var(--surface); padding: 4px 10px; border-radius: var(--r-full); color: var(--text-secondary); border: 1px solid var(--border-hair); }
+
+/* Status dot */
+.status-dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; }
+.status-dot.online { background: var(--signal-bull); }
+.status-dot.offline { background: var(--signal-bear); }
+
+/* Add stock — wrap for positioning */
+.input-wrap { position: relative; margin-bottom: 16px; }
+.wl-add { display: flex; gap: 8px; flex-wrap: wrap; }
+.wl-add input {
+  flex: 1; min-width: 120px; min-height: var(--touch);
+  padding: 0 14px; border-radius: var(--r-full);
+  background: var(--canvas-alt); border: 1px solid var(--border-soft);
+  color: var(--text-primary); font-size: 14px; font-family: var(--font-cn);
+  outline: none; transition: border-color 0.15s ease;
+}
+.wl-add input:focus { border-color: var(--accent-cyan); }
+.wl-add button {
+  min-height: var(--touch); padding: 0 18px; border-radius: var(--r-full);
+  border: none; background: var(--accent-purple); color: #fff; cursor: pointer;
+  font-size: 13px; font-weight: 600; font-family: var(--font-cn); white-space: nowrap;
+  transition: background 0.15s ease;
+}
 .wl-add button:hover { background: #6a2de0; }
-.wl-add button.secondary { background: rgba(255,255,255,0.1); }
-
-/* Search results dropdown — positioned relative to .input-wrap */
-.search-results { position: absolute; top: calc(100% + 4px); left: 0; right: 0; background: var(--bg-card, var(--canvas)); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; max-height: 200px; overflow-y: auto; z-index: 200; display: none; box-shadow: 0 8px 24px rgba(0,0,0,0.4); }
 
 /* Search results dropdown */
+.search-results {
+  position: absolute; top: calc(100% + 4px); left: 0; right: 0;
+  background: var(--surface); border: 1px solid var(--border-soft);
+  border-radius: var(--r-md); max-height: 220px; overflow-y: auto;
+  z-index: var(--z-dropdown); display: none;
+  box-shadow: var(--shadow-md);
+}
+.search-results .item {
+  padding: 10px 14px; cursor: pointer; display: flex; justify-content: space-between;
+  border-bottom: 1px solid var(--border-hair); transition: background 0.1s ease;
+}
+.search-results .item:last-child { border-bottom: none; }
+.search-results .item:hover { background: var(--surface-hover); }
+.search-results .item .code { font-family: var(--font-mono); color: var(--accent-cyan); font-weight: 600; font-size: 13px; }
+.search-results .item .name { color: var(--text-secondary); font-size: 12px; }
 
-/* Watchlist table */
-.wl-table-wrap { overflow-x: auto; }
-.wl-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
-.wl-table th { text-align: left; padding: 0.6rem 0.5rem; border-bottom: 2px solid rgba(255,255,255,0.1); color: var(--text-secondary); font-weight: 500; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; }
-.wl-table td { padding: 0.6rem 0.5rem; border-bottom: 1px solid rgba(255,255,255,0.05); vertical-align: middle; }
-.wl-table tr:hover td { background: rgba(255,255,255,0.03); }
-.wl-table .stock-code { font-family: monospace; color: #7b3ff2; }
-.wl-table .sentiment-badge { display: inline-block; padding: 0.2rem 0.6rem; border-radius: 999px; font-size: 0.75rem; }
-.sentiment-badge.bullish { background: rgba(34,197,94,0.15); color: #22C55E; }
-.sentiment-badge.bearish { background: rgba(239,68,68,0.15); color: #EF4444; }
-.sentiment-badge.neutral { background: rgba(148,163,184,0.15); color: #94A3B8; }
-
-.rm-btn { padding: 0.3rem 0.6rem; border-radius: 6px; border: 1px solid rgba(239,68,68,0.3); background: transparent; color: #EF4444; cursor: pointer; font-size: 0.8rem; }
-.rm-btn:hover { background: rgba(239,68,68,0.15); }
-
-/* Actions bar */
-.wl-actions { display: flex; gap: 0.5rem; margin-bottom: 1rem; flex-wrap: wrap; }
-.wl-actions button { padding: 0.5rem 1rem; border-radius: 8px; border: none; cursor: pointer; font-size: 0.85rem; }
-.wl-actions .analyze-btn { background: #7b3ff2; color: #fff; }
+/* Actions */
+.wl-actions { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
+.wl-actions button {
+  min-height: var(--touch); padding: 0 14px; border-radius: var(--r-full);
+  border: none; cursor: pointer; font-size: 13px; font-weight: 600; font-family: var(--font-cn);
+  transition: all 0.15s ease;
+}
+.wl-actions .analyze-btn { background: var(--accent-purple); color: #fff; }
 .wl-actions .analyze-btn:hover { background: #6a2de0; }
-.wl-actions .clear-btn { background: rgba(239,68,68,0.15); color: #EF4444; border: 1px solid rgba(239,68,68,0.3); }
+.wl-actions .analyze-fast { background: rgba(255,255,255,0.08); color: var(--text-secondary); border: 1px solid var(--border-soft); }
+.wl-actions .clear-btn { background: rgba(239,68,68,0.12); color: var(--signal-bear); border: 1px solid rgba(239,68,68,0.25); }
 
 /* Job status */
-.job-status { background: var(--bg-card); border-radius: 8px; padding: 1rem; margin-bottom: 1rem; display: none; }
+.job-status { background: var(--surface); border: 1px solid var(--border-soft); border-radius: var(--r-md); padding: 14px 16px; margin-bottom: 16px; display: none; }
 .job-status.active { display: block; }
-.job-bar { height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; overflow: hidden; margin-top: 0.5rem; }
-.job-bar-fill { height: 100%; background: #7b3ff2; border-radius: 3px; transition: width 0.3s; }
+.job-status-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+.job-status-title { font-size: 14px; font-weight: 600; color: var(--text-primary); }
+.job-status-pct { font-family: var(--font-mono); font-size: 13px; color: var(--accent-cyan); font-weight: 600; }
+.job-bar { height: 5px; background: rgba(255,255,255,0.06); border-radius: 3px; overflow: hidden; }
+.job-bar-fill { height: 100%; background: var(--accent-purple); border-radius: 3px; transition: width 0.3s ease; }
+.job-msg { font-size: 12px; color: var(--text-muted); margin-top: 6px; }
 
-/* Status indicator */
-.status-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 0.3rem; }
-.status-dot.online { background: #22C55E; }
-.status-dot.offline { background: #EF4444; }
+/* Table */
+.wl-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.wl-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.wl-table th { text-align: left; padding: 10px 8px; border-bottom: 1px solid var(--border-soft); color: var(--text-muted); font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em; }
+.wl-table td { padding: 10px 8px; border-bottom: 1px solid var(--border-hair); vertical-align: middle; }
+.wl-table tr:hover td { background: var(--surface-hover); }
+.wl-table .stock-code { font-family: var(--font-mono); color: var(--accent-cyan); font-weight: 600; }
+.wl-table .stock-link { color: inherit; text-decoration: none; }
+.wl-table .stock-link:hover { text-decoration: underline; }
 
-.empty-state { text-align: center; padding: 3rem; color: var(--text-secondary); }
-.wl-msg { color: var(--text-secondary); font-size: 0.85rem; margin-top: 1rem; }
+.sentiment-badge { display: inline-flex; align-items: center; gap: 3px; padding: 3px 8px; border-radius: var(--r-full); font-size: 11px; font-weight: 600; }
+.sentiment-badge.bullish { background: rgba(34,197,94,0.15); color: var(--signal-bull); border: 1px solid rgba(34,197,94,0.3); }
+.sentiment-badge.bearish { background: rgba(239,68,68,0.15); color: var(--signal-bear); border: 1px solid rgba(239,68,68,0.3); }
+.sentiment-badge.neutral { background: rgba(148,163,184,0.12); color: var(--signal-hold); border: 1px solid rgba(148,163,184,0.2); }
 
-/* Mobile responsive */
-@media (max-width: 480px) {
-  .wl-shell { margin: 1rem auto; padding: 0 0.75rem; }
-  .wl-header { flex-direction: column; align-items: flex-start; }
-  .wl-header h1 { font-size: 1.2rem; }
-  .wl-add { flex-direction: column; }
-  .wl-add .input-wrap { min-width: 0; }
-  .wl-add button { width: 100%; }
-  .wl-table { font-size: 0.8rem; }
-  .wl-table th, .wl-table td { padding: 0.5rem 0.3rem; }
-  .wl-actions { flex-direction: column; }
-  .wl-actions button { width: 100%; }
-}
+.rm-btn { min-height: 32px; padding: 4px 10px; border-radius: var(--r-full); border: 1px solid rgba(239,68,68,0.25); background: transparent; color: var(--signal-bear); cursor: pointer; font-size: 12px; font-weight: 500; transition: all 0.15s ease; }
+.rm-btn:hover { background: rgba(239,68,68,0.12); }
+
+.empty-state { text-align: center; padding: 48px 20px; color: var(--text-muted); }
+.empty-state-icon { font-size: 32px; margin-bottom: 12px; }
+.empty-state-text { font-size: 14px; margin-bottom: 4px; color: var(--text-secondary); }
+.empty-state-sub { font-size: 12px; color: var(--text-faint); }
+.empty-state button { margin-top: 16px; min-height: var(--touch); padding: 0 20px; border-radius: var(--r-full); border: none; background: var(--accent-purple); color: #fff; cursor: pointer; font-size: 13px; font-weight: 600; }
 </style>
 </head>
 <body>
+
 <header class="site-header">
   <div class="brand">
     <div class="brand-icon">
@@ -95,7 +122,9 @@
   </div>
   <div class="site-nav">
     <a href="../index.html">首页</a>
+    <a href="../dashboard.html">看板</a>
     <a href="watchlist.html" class="active">自选</a>
+    <a href="../history.html">历史</a>
   </div>
 </header>
 
@@ -110,28 +139,28 @@
 
   <!-- Job Status -->
   <div class="job-status" id="job-status">
-    <div style="display:flex;justify-content:space-between;align-items:center">
-      <strong id="job-title">分析中</strong>
-      <span id="job-pct" style="color:var(--text-secondary);font-size:0.85rem">0%</span>
+    <div class="job-status-head">
+      <span class="job-status-title" id="job-title">分析中</span>
+      <span class="job-status-pct" id="job-pct">0%</span>
     </div>
     <div class="job-bar"><div class="job-bar-fill" id="job-bar-fill" style="width:0%"></div></div>
-    <div id="job-msg" style="font-size:0.85rem;color:var(--text-secondary);margin-top:0.3rem"></div>
+    <div class="job-msg" id="job-msg"></div>
   </div>
 
   <!-- Add stock -->
-  <div class="wl-add">
-    <div class="input-wrap">
-      <input name="code" id="input-code" placeholder="输入代码或名称搜索（如 600519 或 茅台）" required aria-label="搜索股票代码或名称" role="combobox">
-      <div class="search-results" id="search-results"></div>
+  <div class="input-wrap">
+    <div class="wl-add">
+      <input name="code" id="input-code" placeholder="搜索代码或名称（如 600519 或 茅台）" autocomplete="off">
+      <button type="button" id="btn-add">加入自选</button>
     </div>
-    <button type="button" id="btn-add">加入自选</button>
+    <div class="search-results" id="search-results"></div>
   </div>
 
   <!-- Actions -->
   <div class="wl-actions" id="wl-actions" style="display:none">
     <button class="analyze-btn" id="btn-analyze">🔍 立即分析全部</button>
-    <button class="analyze-btn secondary" id="btn-analyze-fast" style="background:rgba(255,255,255,0.1);color:var(--text-primary)">⚡ 快速分析（无LLM）</button>
-    <button class="clear-btn" id="btn-clear">清空自选</button>
+    <button class="analyze-fast" id="btn-analyze-fast">⚡ 快速分析</button>
+    <button class="clear-btn" id="btn-clear">清空</button>
   </div>
 
   <!-- Watchlist table -->
@@ -150,432 +179,12 @@
     </table>
   </div>
   <div id="empty-state" class="empty-state" style="display:none">
-    <p>暂无自选股</p>
-    <p style="font-size:0.85rem">搜索上方输入框添加股票，或点击下方按钮导入默认模板</p>
-    <button type="button" id="btn-import" style="padding:0.6rem 1.2rem;border-radius:8px;border:none;background:#7b3ff2;color:#fff;cursor:pointer;margin-top:1rem">导入默认模板（10只）</button>
+    <div class="empty-state-icon">📭</div>
+    <div class="empty-state-text">暂无自选股</div>
+    <div class="empty-state-sub">搜索上方输入框添加股票</div>
+    <button type="button" id="btn-import">导入默认模板</button>
   </div>
-
-  <p class="wl-msg" id="wl-msg"></p>
 </div>
-
-<script>
-// 新的 watchlist.html 前端逻辑 - 支持 localStorage 作为 API 的降级方案
-// 在 GitHub Pages 上使用 localStorage，在服务器上优先使用 API
-
-(function () {
-  "use strict";
-
-  const cfg = window.STOCK_COPILOT || {};
-  let API = (cfg.API_BASE || "").replace(/\/$/, "");
-
-  // Auto-detect API when served from FastAPI (same origin)
-  if (!API && window.location.hostname !== "ttmens.github.io" && window.location.hostname !== "localhost" && window.location.hostname !== "127.0.0.1") {
-    API = window.location.origin;
-  }
-  if (!API && (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1")) {
-    API = "http://127.0.0.1:8000";
-  }
-
-  const body = document.getElementById("wl-body");
-  const emptyState = document.getElementById("empty-state");
-  const tableWrap = document.querySelector(".wl-table-wrap");
-  const actionsBar = document.getElementById("wl-actions");
-  const statusDot = document.getElementById("status-dot");
-  const apiStatus = document.getElementById("api-status");
-  const wlCount = document.getElementById("wl-count");
-  const msg = document.getElementById("wl-msg");
-  const searchInput = document.getElementById("input-code");
-  const searchResults = document.getElementById("search-results");
-
-  // Stock lookup cache (common A-share stocks)
-  const STOCK_DB = {
-    "600519":"贵州茅台","000858":"五粮液","000333":"美的集团","601318":"中国平安",
-    "600036":"招商银行","600900":"长江电力","601166":"兴业银行","600276":"恒瑞医药",
-    "300750":"宁德时代","000001":"平安银行","601398":"工商银行","600031":"三一重工",
-    "601888":"中国中免","600585":"海螺水泥","002714":"牧原股份","600809":"山西汾酒",
-    "600000":"浦发银行","601816":"京沪高铁","600887":"伊利股份","002304":"洋河股份",
-    "600050":"中国联通","601919":"中远海控","600028":"中国石化","601288":"农业银行",
-    "600941":"中国移动","601088":"中国神华","002594":"比亚迪","601668":"中国建筑",
-    "000651":"格力电器","600104":"上汽集团","601628":"中国人寿","600030":"中信证券",
-    "601012":"隆基绿能","300059":"东方财富","601336":"新华保险","000661":"长春高新",
-    "600760":"中航沈飞","603259":"药明康德","002230":"科大讯飞","601211":"国泰君安",
-    "600196":"复星医药","600547":"山东黄金","601985":"中国核电","601601":"中国太保",
-    "601688":"华泰证券","600048":"保利发展","600600":"青岛啤酒","000538":"云南白药",
-    "601138":"工业富联","600016":"民生银行",
-  };
-
-  let currentWatchlist = [];
-  let latestSignals = {};
-  let useLocalStorage = false;
-
-  // localStorage 键名
-  const LS_KEY = 'stock_copilot_watchlist';
-
-  // 从 localStorage 加载/保存
-  function loadFromLocalStorage() {
-    try {
-      const stored = localStorage.getItem(LS_KEY);
-      if (stored) {
-        currentWatchlist = JSON.parse(stored);
-        return true;
-      }
-    } catch (e) {
-      console.warn('Failed to load watchlist from localStorage:', e);
-    }
-    return false;
-  }
-
-  function saveToLocalStorage() {
-    try {
-      localStorage.setItem(LS_KEY, JSON.stringify(currentWatchlist));
-    } catch (e) {
-      console.warn('Failed to save watchlist to localStorage:', e);
-    }
-  }
-
-  function setApiStatus(online, mode) {
-    statusDot.className = "status-dot " + (online ? "online" : "offline");
-    if (mode === 'api') {
-      apiStatus.textContent = "API 已连接";
-      actionsBar.style.display = "flex";
-      document.getElementById("btn-import") && (document.getElementById("btn-import").style.display = "none");
-    } else if (mode === 'local') {
-      apiStatus.textContent = "本地模式 (数据保存在浏览器)";
-      actionsBar.style.display = "flex";
-      document.getElementById("btn-import") && (document.getElementById("btn-import").style.display = "none");
-    } else {
-      apiStatus.textContent = "只读模式";
-      actionsBar.style.display = "none";
-    }
-  }
-
-  function renderTable() {
-    if (currentWatchlist.length === 0) {
-      tableWrap.style.display = "none";
-      emptyState.style.display = "block";
-      return;
-    }
-    tableWrap.style.display = "block";
-    emptyState.style.display = "none";
-    wlCount.textContent = currentWatchlist.length;
-
-    body.innerHTML = currentWatchlist.map(item => {
-      const sig = latestSignals[item.code] || {};
-      const signal = sig.final_signal || "hold";
-      const score = sig.final_score || 0;
-      const label = sig.signal_label || "⚪ 观望";
-      const bucket = signal.includes("buy") || signal === "bullish" ? "bullish" :
-                     signal.includes("sell") || signal === "bearish" ? "bearish" : "neutral";
-
-      return `<tr data-code="${item.code}">
-        <td class="stock-code">${item.code}</td>
-        <td>${item.name}</td>
-        <td><span class="sentiment-badge ${bucket}">${label}</span></td>
-        <td style="font-family:monospace;color:${score >= 0 ? '#22C55E' : '#EF4444'}">${score >= 0 ? '+' : ''}${score.toFixed(3)}</td>
-        <td><button class="rm-btn" data-code="${item.code}">删除</button></td>
-      </tr>`;
-    }).join("");
-
-    body.querySelectorAll(".rm-btn").forEach(btn => {
-      btn.addEventListener("click", () => removeStock(btn.dataset.code));
-    });
-  }
-
-  async function loadWatchlist() {
-    // 1. 尝试 API
-    if (API) {
-      try {
-        const res = await fetch(`${API}/api/watchlist`);
-        if (res.ok) {
-          const data = await res.json();
-          currentWatchlist = (data.stocks || []).map(s => ({ code: s.code, name: s.name }));
-          setApiStatus(true, 'api');
-          renderTable();
-          loadSignals();
-          return;
-        }
-      } catch (e) {
-        console.warn('API failed, falling back to localStorage:', e);
-      }
-    }
-
-    // 2. 尝试 localStorage
-    if (loadFromLocalStorage()) {
-      setApiStatus(true, 'local');
-      renderTable();
-      loadSignalsFromJson();
-      return;
-    }
-
-    // 3. 最后尝试从 latest.json 加载
-    setApiStatus(false, 'readonly');
-    try {
-      const res = await fetch("../data/latest.json");
-      const data = await res.json();
-      currentWatchlist = (data.stocks || []).map(s => ({ code: s.code, name: s.name }));
-      saveToLocalStorage(); // 保存到 localStorage
-      renderTable();
-      loadSignalsFromJson();
-    } catch (_) {
-      currentWatchlist = [];
-      renderTable();
-    }
-  }
-
-  function loadSignalsFromJson() {
-    // 从 latest.json 加载信号数据（无 API 时使用）
-    fetch("../data/latest.json")
-      .then(res => res.json())
-      .then(data => {
-        (data.stocks || []).forEach(s => {
-          latestSignals[s.code] = {
-            final_signal: s.overall_sentiment || "hold",
-            final_score: s.signal_breakdown?.final_score || 0,
-            signal_label: s.overall_sentiment === "bullish" ? "🟢 看多" :
-                          s.overall_sentiment === "bearish" ? "🔴 看空" : "⚪ 观望",
-          };
-        });
-        renderTable();
-      })
-      .catch(() => {});
-  }
-
-  async function loadSignals() {
-    if (!API) return;
-    try {
-      const res = await fetch(`${API}/site/latest.json`);
-      if (res.ok) {
-        const data = await res.json();
-        (data.stocks || []).forEach(s => {
-          latestSignals[s.code] = {
-            final_signal: s.overall_sentiment || "hold",
-            final_score: s.signal_breakdown?.final_score || 0,
-            signal_label: s.overall_sentiment === "bullish" ? "🟢 看多" :
-                          s.overall_sentiment === "bearish" ? "🔴 看空" : "⚪ 观望",
-          };
-        });
-        renderTable();
-      }
-    } catch (_) {}
-  }
-
-  async function removeStock(code) {
-    if (API) {
-      // API 模式：通过 API 删除
-      try {
-        await fetch(`${API}/api/watchlist/${code}`, { method: "DELETE" });
-      } catch (e) {
-        console.warn('API delete failed, removing locally:', e);
-      }
-    }
-    // 同时更新 localStorage
-    currentWatchlist = currentWatchlist.filter(i => i.code !== code);
-    saveToLocalStorage();
-    renderTable();
-  }
-
-  async function addStock(code, name) {
-    const resolvedName = name || STOCK_DB[code] || code;
-
-    if (API) {
-      // 尝试通过 API 添加
-      try {
-        await fetch(`${API}/api/watchlist`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ code, name: resolvedName }),
-        });
-      } catch (e) {
-        console.warn('API add failed, saving locally:', e);
-      }
-    }
-
-    // 同时保存到 localStorage
-    if (!currentWatchlist.some(i => i.code === code)) {
-      currentWatchlist.push({ code, name: resolvedName });
-      saveToLocalStorage();
-    }
-    renderTable();
-    searchInput.value = "";
-    searchResults.style.display = "none";
-    msg.textContent = `已添加 ${code} ${resolvedName}`;
-    setTimeout(() => { msg.textContent = ""; }, 3000);
-  }
-
-  // Search functionality
-  let searchTimeout;
-  searchInput.addEventListener("input", function () {
-    clearTimeout(searchTimeout);
-    const q = this.value.trim();
-    if (!q) { searchResults.style.display = "none"; return; }
-    searchTimeout = setTimeout(() => {
-      const results = Object.entries(STOCK_DB).filter(([code, name]) =>
-        code.includes(q) || name.includes(q)
-      ).slice(0, 10);
-
-      if (results.length === 0) {
-        if (/^\d{6}$/.test(q)) {
-          searchResults.innerHTML = `<div class="item" data-code="${q}" data-name="${q}"><span class="code">${q}</span><span class="name">直接添加</span></div>`;
-          searchResults.style.display = "block";
-        } else {
-          searchResults.style.display = "none";
-        }
-        return;
-      }
-
-      searchResults.innerHTML = results.map(([code, name]) => {
-        const inWl = currentWatchlist.some(i => i.code === code);
-        return `<div class="item" data-code="${code}" data-name="${name}">
-          <span class="code">${code}</span>
-          <span class="name">${name}${inWl ? " (已在自选)" : ""}</span>
-        </div>`;
-      }).join("");
-      searchResults.style.display = "block";
-
-      searchResults.querySelectorAll(".item").forEach(item => {
-        if (item.dataset.code && currentWatchlist.some(i => i.code === item.dataset.code)) {
-          item.style.opacity = "0.5";
-          item.style.pointerEvents = "none";
-        } else {
-          item.addEventListener("click", () => {
-            addStock(item.dataset.code, item.dataset.name);
-          });
-        }
-      });
-    }, 200);
-  });
-
-  // Add button
-  document.getElementById("btn-add").addEventListener("click", () => {
-    const val = searchInput.value.trim();
-    if (!val) return;
-    if (/^\d{6}$/.test(val)) {
-      addStock(val, STOCK_DB[val] || val);
-    } else {
-      const found = Object.entries(STOCK_DB).find(([code, name]) => name.includes(val));
-      if (found) {
-        addStock(found[0], found[1]);
-      }
-    }
-  });
-
-  // Import default template
-  document.getElementById("btn-import")?.addEventListener("click", async () => {
-    if (API) {
-      try {
-        await fetch(`${API}/api/watchlist/import-default`, { method: "POST" });
-      } catch (e) {}
-    }
-    // 本地模式：导入默认 10 只
-    const defaultStocks = ["600519", "000858", "000333", "601318", "600036", "600900", "601166", "600276", "300750", "000001"];
-    for (const code of defaultStocks) {
-      if (!currentWatchlist.some(i => i.code === code)) {
-        currentWatchlist.push({ code, name: STOCK_DB[code] || code });
-      }
-    }
-    saveToLocalStorage();
-    renderTable();
-    msg.textContent = "已导入默认 10 只股票";
-    setTimeout(() => { msg.textContent = ""; }, 3000);
-  });
-
-  // Clear all
-  document.getElementById("btn-clear")?.addEventListener("click", async () => {
-    if (!confirm("确定要清空所有自选股吗？")) return;
-    if (API) {
-      for (const item of [...currentWatchlist]) {
-        try {
-          await fetch(`${API}/api/watchlist/${item.code}`, { method: "DELETE" });
-        } catch (e) {}
-      }
-    }
-    currentWatchlist = [];
-    saveToLocalStorage();
-    renderTable();
-  });
-
-  // Analyze all
-  document.getElementById("btn-analyze")?.addEventListener("click", async () => {
-    if (!API) {
-      msg.textContent = "分析功能需要 API 服务，请通过服务器 IP:8000 访问";
-      return;
-    }
-    const jobStatus = document.getElementById("job-status");
-    jobStatus.classList.add("active");
-    document.getElementById("job-title").textContent = "盘后分析中...";
-    document.getElementById("job-msg").textContent = "正在启动分析任务";
-
-    try {
-      const res = await fetch(`${API}/api/jobs`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ type: "post", mode: "full", publish: true }),
-      });
-      const data = await res.json();
-      pollJob(data.job_id);
-    } catch (e) {
-      document.getElementById("job-msg").textContent = "启动失败: " + e.message;
-    }
-  });
-
-  // Fast analyze
-  document.getElementById("btn-analyze-fast")?.addEventListener("click", async () => {
-    if (!API) {
-      msg.textContent = "分析功能需要 API 服务，请通过服务器 IP:8000 访问";
-      return;
-    }
-    const jobStatus = document.getElementById("job-status");
-    jobStatus.classList.add("active");
-    document.getElementById("job-title").textContent = "快速分析中...";
-    document.getElementById("job-msg").textContent = "仅计算硬信号（无 LLM）";
-
-    try {
-      const res = await fetch(`${API}/api/jobs`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ type: "post", mode: "fast", publish: false }),
-      });
-      const data = await res.json();
-      pollJob(data.job_id);
-    } catch (e) {
-      document.getElementById("job-msg").textContent = "启动失败: " + e.message;
-    }
-  });
-
-  async function pollJob(jobId) {
-    const interval = setInterval(async () => {
-      try {
-        const res = await fetch(`${API}/api/jobs/${jobId}`);
-        const job = await res.json();
-        const pct = Math.round((job.progress || 0) * 100);
-        document.getElementById("job-bar-fill").style.width = pct + "%";
-        document.getElementById("job-pct").textContent = pct + "%";
-        document.getElementById("job-msg").textContent = job.message || "";
-
-        if (job.status === "completed" || job.status === "failed") {
-          clearInterval(interval);
-          document.getElementById("job-title").textContent =
-            job.status === "completed" ? "✅ 分析完成" : "❌ 分析失败";
-          setTimeout(() => {
-            document.getElementById("job-status").classList.remove("active");
-            loadWatchlist();
-          }, 3000);
-        }
-      } catch (_) { clearInterval(interval); }
-    }, 2000);
-  }
-
-  // Close search on outside click
-  document.addEventListener("click", (e) => {
-    if (!e.target.closest(".wl-add")) {
-      searchResults.style.display = "none";
-    }
-  });
-
-  // Init
-  loadWatchlist();
-})();
-</script>
 
 <nav class="bottom-nav">
     <div class="bottom-nav-inner">
@@ -597,5 +206,281 @@
         </a>
     </div>
 </nav>
+
+<script>
+(function () {
+  "use strict";
+
+  // Auto-detect API
+  let API = "";
+  if (window.location.hostname !== "ttmens.github.io") {
+    API = window.location.origin;
+  }
+  if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
+    API = "http://127.0.0.1:8000";
+  }
+
+  const body = document.getElementById("wl-body");
+  const emptyState = document.getElementById("empty-state");
+  const tableWrap = document.querySelector(".wl-table-wrap");
+  const actionsBar = document.getElementById("wl-actions");
+  const statusDot = document.getElementById("status-dot");
+  const apiStatus = document.getElementById("api-status");
+  const wlCount = document.getElementById("wl-count");
+  const searchInput = document.getElementById("input-code");
+  const searchResults = document.getElementById("search-results");
+
+  const STOCK_DB = {
+    "600519":"贵州茅台","000858":"五粮液","000333":"美的集团","601318":"中国平安",
+    "600036":"招商银行","600900":"长江电力","601166":"兴业银行","600276":"恒瑞医药",
+    "300750":"宁德时代","000001":"平安银行","601398":"工商银行","600031":"三一重工",
+    "601888":"中国中免","600585":"海螺水泥","002714":"牧原股份","600809":"山西汾酒",
+    "600000":"浦发银行","601816":"京沪高铁","600887":"伊利股份","002304":"洋河股份",
+    "600050":"中国联通","601919":"中远海控","600028":"中国石化","601288":"农业银行",
+    "600941":"中国移动","601088":"中国神华","002594":"比亚迪","601668":"中国建筑",
+    "000651":"格力电器","600104":"上汽集团","601628":"中国人寿","600030":"中信证券",
+    "601012":"隆基绿能","300059":"东方财富","601336":"新华保险","000661":"长春高新",
+    "600760":"中航沈飞","603259":"药明康德","002230":"科大讯飞","601211":"国泰君安",
+    "600196":"复星医药","600547":"山东黄金","601985":"中国核电","601601":"中国太保",
+    "601688":"华泰证券","600048":"保利发展","600600":"青岛啤酒","000538":"云南白药",
+    "601138":"工业富联","600016":"民生银行",
+  };
+
+  let currentWatchlist = [];
+  let latestSignals = {};
+
+  function setApiStatus(online) {
+    statusDot.className = "status-dot " + (online ? "online" : "offline");
+    apiStatus.textContent = online ? "已连接" : "静态模式";
+    actionsBar.style.display = online ? "flex" : "none";
+  }
+
+  function signalBadge(signal) {
+    const bucket = signal.includes("buy") || signal === "bullish" ? "bullish" :
+                   signal.includes("sell") || signal === "bearish" ? "bearish" : "neutral";
+    return bucket;
+  }
+
+  function renderTable() {
+    if (currentWatchlist.length === 0) {
+      tableWrap.style.display = "none";
+      emptyState.style.display = "block";
+      wlCount.textContent = "0";
+      return;
+    }
+    tableWrap.style.display = "block";
+    emptyState.style.display = "none";
+    wlCount.textContent = currentWatchlist.length;
+
+    body.innerHTML = currentWatchlist.map(item => {
+      const sig = latestSignals[item.code] || {};
+      const signal = sig.final_signal || "hold";
+      const score = sig.final_score != null ? sig.final_score : 0;
+      const label = sig.signal_label || "⚪ 观望";
+      const bucket = signalBadge(signal);
+
+      return `<tr data-code="${item.code}">
+        <td class="stock-code"><a class="stock-link" href="../app/stock.html?code=${item.code}">${item.code}</a></td>
+        <td>${item.name}</td>
+        <td><span class="sentiment-badge ${bucket}">${label}</span></td>
+        <td style="font-family:var(--font-mono);color:${score >= 0 ? 'var(--signal-bull)' : 'var(--signal-bear)'}">${score >= 0 ? '+' : ''}${Number(score).toFixed(3)}</td>
+        <td>${API ? `<button class="rm-btn" data-code="${item.code}">删除</button>` : ""}</td>
+      </tr>`;
+    }).join("");
+
+    body.querySelectorAll(".rm-btn").forEach(btn => {
+      btn.addEventListener("click", () => removeStock(btn.dataset.code));
+    });
+  }
+
+  async function loadWatchlist() {
+    if (API) {
+      try {
+        const res = await fetch(`${API}/api/watchlist`);
+        if (res.ok) {
+          const data = await res.json();
+          currentWatchlist = (data.stocks || []).map(s => ({ code: s.code, name: s.name }));
+          setApiStatus(true);
+          renderTable();
+          loadSignals();
+          return;
+        }
+      } catch (e) {}
+    }
+    setApiStatus(false);
+    try {
+      const res = await fetch("../data/latest.json");
+      const data = await res.json();
+      currentWatchlist = (data.stocks || []).map(s => ({ code: s.code, name: s.name }));
+      renderTable();
+    } catch (_) {
+      currentWatchlist = [];
+      renderTable();
+    }
+  }
+
+  async function loadSignals() {
+    if (!API) return;
+    try {
+      const res = await fetch(`${API}/site/latest.json`);
+      if (res.ok) {
+        const data = await res.json();
+        (data.stocks || []).forEach(s => {
+          latestSignals[s.code] = {
+            final_signal: s.overall_sentiment || "hold",
+            final_score: s.signal_breakdown ? s.signal_breakdown.final_score : 0,
+            signal_label: s.overall_focus || "⚪ 观望",
+          };
+        });
+        renderTable();
+      }
+    } catch (_) {}
+  }
+
+  async function removeStock(code) {
+    if (!API) return;
+    await fetch(`${API}/api/watchlist/${code}`, { method: "DELETE" });
+    currentWatchlist = currentWatchlist.filter(i => i.code !== code);
+    renderTable();
+  }
+
+  async function addStock(code, name) {
+    if (!API) { alert("静态模式下无法添加，请启动 API 服务"); return; }
+    const resolvedName = name || STOCK_DB[code] || code;
+    await fetch(`${API}/api/watchlist`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ code, name: resolvedName }),
+    });
+    currentWatchlist.push({ code, name: resolvedName });
+    renderTable();
+    searchInput.value = "";
+    searchResults.style.display = "none";
+  }
+
+  // Search
+  let searchTimeout;
+  searchInput.addEventListener("input", function () {
+    clearTimeout(searchTimeout);
+    const q = this.value.trim();
+    if (!q) { searchResults.style.display = "none"; return; }
+    searchTimeout = setTimeout(() => {
+      const results = Object.entries(STOCK_DB).filter(([code, name]) =>
+        code.includes(q) || name.includes(q)
+      ).slice(0, 10);
+
+      if (results.length === 0) {
+        if (/^\d{6}$/.test(q)) {
+          searchResults.innerHTML = `<div class="item" data-code="${q}" data-name="${q}"><span class="code">${q}</span><span class="name">直接添加</span></div>`;
+          searchResults.style.display = "block";
+        } else { searchResults.style.display = "none"; }
+        return;
+      }
+
+      searchResults.innerHTML = results.map(([code, name]) => {
+        const inWl = currentWatchlist.some(i => i.code === code);
+        return `<div class="item" data-code="${code}" data-name="${name}">
+          <span class="code">${code}</span>
+          <span class="name">${name}${inWl ? " (已在自选)" : ""}</span>
+        </div>`;
+      }).join("");
+      searchResults.style.display = "block";
+
+      searchResults.querySelectorAll(".item").forEach(item => {
+        if (currentWatchlist.some(i => i.code === item.dataset.code)) {
+          item.style.opacity = "0.4";
+          item.style.pointerEvents = "none";
+        } else {
+          item.addEventListener("click", () => {
+            if (API) {
+              addStock(item.dataset.code, item.dataset.name);
+            } else {
+              currentWatchlist.push({ code: item.dataset.code, name: item.dataset.name });
+              renderTable();
+              searchInput.value = "";
+              searchResults.style.display = "none";
+            }
+          });
+        }
+      });
+    }, 200);
+  });
+
+  document.getElementById("btn-add").addEventListener("click", () => {
+    const val = searchInput.value.trim();
+    if (!val) return;
+    if (/^\d{6}$/.test(val)) { addStock(val, STOCK_DB[val] || val); }
+    else {
+      const found = Object.entries(STOCK_DB).find(([code, name]) => name.includes(val));
+      if (found) addStock(found[0], found[1]);
+    }
+  });
+
+  document.getElementById("btn-import")?.addEventListener("click", async () => {
+    if (API) { await fetch(`${API}/api/watchlist/import-default`, { method: "POST" }); loadWatchlist(); }
+  });
+
+  document.getElementById("btn-clear")?.addEventListener("click", async () => {
+    if (!confirm("确定要清空所有自选股吗？")) return;
+    for (const item of [...currentWatchlist]) { await fetch(`${API}/api/watchlist/${item.code}`, { method: "DELETE" }); }
+    currentWatchlist = [];
+    renderTable();
+  });
+
+  document.getElementById("btn-analyze")?.addEventListener("click", async () => {
+    if (!API) return;
+    const jobStatus = document.getElementById("job-status");
+    jobStatus.classList.add("active");
+    document.getElementById("job-title").textContent = "盘后分析中...";
+    document.getElementById("job-msg").textContent = "正在启动分析任务";
+    try {
+      const res = await fetch(`${API}/api/jobs`, {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ type: "post", mode: "full", publish: true }),
+      });
+      const data = await res.json();
+      pollJob(data.job_id);
+    } catch (e) { document.getElementById("job-msg").textContent = "启动失败: " + e.message; }
+  });
+
+  document.getElementById("btn-analyze-fast")?.addEventListener("click", async () => {
+    if (!API) return;
+    const jobStatus = document.getElementById("job-status");
+    jobStatus.classList.add("active");
+    document.getElementById("job-title").textContent = "快速分析中...";
+    document.getElementById("job-msg").textContent = "仅计算硬信号（无 LLM）";
+    try {
+      const res = await fetch(`${API}/api/jobs`, {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ type: "post", mode: "fast", publish: false }),
+      });
+      const data = await res.json();
+      pollJob(data.job_id);
+    } catch (e) { document.getElementById("job-msg").textContent = "启动失败: " + e.message; }
+  });
+
+  async function pollJob(jobId) {
+    const interval = setInterval(async () => {
+      try {
+        const res = await fetch(`${API}/api/jobs/${jobId}`);
+        const job = await res.json();
+        const pct = Math.round((job.progress || 0) * 100);
+        document.getElementById("job-bar-fill").style.width = pct + "%";
+        document.getElementById("job-pct").textContent = pct + "%";
+        document.getElementById("job-msg").textContent = job.message || "";
+        if (job.status === "completed" || job.status === "failed") {
+          clearInterval(interval);
+          document.getElementById("job-title").textContent = job.status === "completed" ? "✅ 分析完成" : "❌ 分析失败";
+          setTimeout(() => { jobStatus.classList.remove("active"); loadWatchlist(); }, 3000);
+        }
+      } catch (_) { clearInterval(interval); }
+    }, 2000);
+  }
+
+  document.addEventListener("click", (e) => { if (!e.target.closest(".input-wrap")) { searchResults.style.display = "none"; } });
+
+  loadWatchlist();
+})();
+</script>
 </body>
 </html>

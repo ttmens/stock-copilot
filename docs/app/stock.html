@@ -2,18 +2,13 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>个股详情 — 智策 NexStrat</title>
 <link rel="stylesheet" href="../assets/theme.css">
 <style>
 .detail-shell { max-width: 960px; margin: 0 auto; padding: 1.5rem; }
 .layer-grid { display: grid; gap: 1rem; margin-top: 1.5rem; }
-.layer-card { background: var(--bg-card, var(--canvas)); border-radius: 12px; padding: 1rem; border: 1px solid rgba(255,255,255,0.06); }
-.layer-card p { overflow-wrap: break-word; word-break: break-word; }
-@media (max-width: 480px) {
-  .detail-shell { padding: 1rem; }
-  .layer-card { padding: 0.75rem; }
-}
+.layer-card { background: var(--card-bg, #1a1f2e); border-radius: 12px; padding: 1rem; border: 1px solid rgba(255,255,255,0.06); }
 </style>
 </head>
 <body>
@@ -26,8 +21,7 @@
   </div>
 </header>
 <div class="detail-shell">
-  <a href="../index.html" class="back-link">← 返回首页</a>
-  <div id="loading" role="status" aria-live="polite">加载中…</div>
+  <div id="loading">加载中…</div>
   <div id="content" style="display:none">
     <h1 id="title"></h1>
     <div id="signal-pill" class="signal-pill hold"></div>
@@ -89,26 +83,5 @@
   }
 })();
 </script>
-
-<nav class="bottom-nav">
-    <div class="bottom-nav-inner">
-        <a href="../index.html">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-            首页
-        </a>
-        <a href="../dashboard.html">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-            看板
-        </a>
-        <a href="watchlist.html">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-            自选
-        </a>
-        <a href="../history.html">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-            历史
-        </a>
-    </div>
-</nav>
 </body>
 </html>
