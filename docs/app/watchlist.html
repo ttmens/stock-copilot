@@ -13,19 +13,18 @@
 .wl-stat { background: var(--bg-card); padding: 0.4rem 0.8rem; border-radius: 8px; }
 
 /* Search & Add */
-.wl-add { display: flex; gap: 0.5rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
-.wl-add input { flex: 1; min-width: 100px; padding: 0.6rem; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); background: var(--bg-card); color: var(--text-primary); font-size: 0.9rem; }
+.wl-add { display: flex; gap: 0.5rem; margin-bottom: 1.5rem; flex-wrap: wrap; align-items: flex-start; }
+.wl-add .input-wrap { flex: 1; min-width: 200px; position: relative; }
+.wl-add input { width: 100%; padding: 0.6rem; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); background: var(--bg-card, var(--canvas)); color: var(--text-primary); font-size: 0.9rem; min-height: 44px; box-sizing: border-box; }
 .wl-add input:focus { outline: none; border-color: #7b3ff2; }
-.wl-add button { padding: 0.6rem 1.2rem; border-radius: 8px; border: none; background: #7b3ff2; color: #fff; cursor: pointer; font-size: 0.9rem; white-space: nowrap; }
+.wl-add button { padding: 0.6rem 1.2rem; border-radius: 8px; border: none; background: #7b3ff2; color: #fff; cursor: pointer; font-size: 0.9rem; white-space: nowrap; min-height: 44px; margin-top: 0; }
 .wl-add button:hover { background: #6a2de0; }
 .wl-add button.secondary { background: rgba(255,255,255,0.1); }
 
+/* Search results dropdown — positioned relative to .input-wrap */
+.search-results { position: absolute; top: calc(100% + 4px); left: 0; right: 0; background: var(--bg-card, var(--canvas)); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; max-height: 200px; overflow-y: auto; z-index: 200; display: none; box-shadow: 0 8px 24px rgba(0,0,0,0.4); }
+
 /* Search results dropdown */
-.search-results { position: absolute; background: var(--bg-card); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; max-height: 200px; overflow-y: auto; z-index: 100; width: 100%; display: none; }
-.search-results .item { padding: 0.5rem 0.8rem; cursor: pointer; display: flex; justify-content: space-between; }
-.search-results .item:hover { background: rgba(123,63,242,0.2); }
-.search-results .item .code { font-family: monospace; color: #7b3ff2; }
-.search-results .item .name { color: var(--text-secondary); font-size: 0.85rem; }
 
 /* Watchlist table */
 .wl-table-wrap { overflow-x: auto; }
@@ -62,6 +61,20 @@
 
 .empty-state { text-align: center; padding: 3rem; color: var(--text-secondary); }
 .wl-msg { color: var(--text-secondary); font-size: 0.85rem; margin-top: 1rem; }
+
+/* Mobile responsive */
+@media (max-width: 480px) {
+  .wl-shell { margin: 1rem auto; padding: 0 0.75rem; }
+  .wl-header { flex-direction: column; align-items: flex-start; }
+  .wl-header h1 { font-size: 1.2rem; }
+  .wl-add { flex-direction: column; }
+  .wl-add .input-wrap { min-width: 0; }
+  .wl-add button { width: 100%; }
+  .wl-table { font-size: 0.8rem; }
+  .wl-table th, .wl-table td { padding: 0.5rem 0.3rem; }
+  .wl-actions { flex-direction: column; }
+  .wl-actions button { width: 100%; }
+}
 </style>
 </head>
 <body>
@@ -107,8 +120,10 @@
 
   <!-- Add stock -->
   <div class="wl-add">
-    <input name="code" id="input-code" placeholder="输入代码或名称搜索（如 600519 或 茅台）" required style="position:relative">
-    <div class="search-results" id="search-results"></div>
+    <div class="input-wrap">
+      <input name="code" id="input-code" placeholder="输入代码或名称搜索（如 600519 或 茅台）" required aria-label="搜索股票代码或名称" role="combobox">
+      <div class="search-results" id="search-results"></div>
+    </div>
     <button type="button" id="btn-add">加入自选</button>
   </div>
 

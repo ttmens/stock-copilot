@@ -2,13 +2,18 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>个股详情 — 智策 NexStrat</title>
 <link rel="stylesheet" href="../assets/theme.css">
 <style>
 .detail-shell { max-width: 960px; margin: 0 auto; padding: 1.5rem; }
 .layer-grid { display: grid; gap: 1rem; margin-top: 1.5rem; }
-.layer-card { background: var(--card-bg, #1a1f2e); border-radius: 12px; padding: 1rem; border: 1px solid rgba(255,255,255,0.06); }
+.layer-card { background: var(--bg-card, var(--canvas)); border-radius: 12px; padding: 1rem; border: 1px solid rgba(255,255,255,0.06); }
+.layer-card p { overflow-wrap: break-word; word-break: break-word; }
+@media (max-width: 480px) {
+  .detail-shell { padding: 1rem; }
+  .layer-card { padding: 0.75rem; }
+}
 </style>
 </head>
 <body>
@@ -21,7 +26,8 @@
   </div>
 </header>
 <div class="detail-shell">
-  <div id="loading">加载中…</div>
+  <a href="../index.html" class="back-link">← 返回首页</a>
+  <div id="loading" role="status" aria-live="polite">加载中…</div>
   <div id="content" style="display:none">
     <h1 id="title"></h1>
     <div id="signal-pill" class="signal-pill hold"></div>

@@ -496,7 +496,7 @@ TPL_HISTORY = """<!DOCTYPE html>
     {% for code, data in history.items() %}
     <div style="margin-bottom:32px">
         <div class="section-title">
-            <a href="stock/{{ code }}.html" style="text-decoration:none;color:inherit">
+            <a href="{% if use_app_pages %}app/stock.html?code={{ code }}{% else %}stock/{{ code }}.html{% endif %}" style="text-decoration:none;color:inherit">
                 {{ code }} {{ data.name }}
             </a>
             <span class="count">({{ data.records|length }} 条记录)</span>
@@ -524,6 +524,7 @@ TPL_HISTORY = """<!DOCTYPE html>
             </div>
         </div>
 
+        <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;margin-bottom:16px">
         <table class="history-table">
             <thead>
                 <tr>
@@ -566,6 +567,7 @@ TPL_HISTORY = """<!DOCTYPE html>
                 {% endfor %}
             </tbody>
         </table>
+        </div>
     </div>
     {% endfor %}
 
@@ -671,7 +673,7 @@ TPL_DASHBOARD = """<!DOCTYPE html>
                     else 'hold' %}
                 <tr>
                     <td class="stock-cell">
-                        <a href="stock/{{ stock.code }}.html" style="text-decoration:none;color:inherit">
+                        <a href="{% if use_app_pages %}app/stock.html?code={{ stock.code }}{% else %}stock/{{ stock.code }}.html{% endif %}" style="text-decoration:none;color:inherit">
                             {{ stock.code }}<br>
                             <span style="font-size:11px;color:var(--muted);font-weight:400">{{ stock.name }}</span>
                         </a>
@@ -715,7 +717,7 @@ TPL_DASHBOARD = """<!DOCTYPE html>
             {% for stock in stocks %}
             <tr>
                 <td class="stock-cell">
-                    <a href="stock/{{ stock.code }}.html" style="text-decoration:none;color:inherit">
+                    <a href="{% if use_app_pages %}app/stock.html?code={{ stock.code }}{% else %}stock/{{ stock.code }}.html{% endif %}" style="text-decoration:none;color:inherit">
                         {{ stock.code }} {{ stock.name }}
                     </a>
                 </td>
@@ -1008,6 +1010,7 @@ def generate_site(report: Report, target_dir: str | None = None) -> str:
     history_html = tmpl.render(
         history=history, disclaimer=meta["disclaimer"],
         meta=meta, type_label=type_label,
+        use_app_pages=use_app_pages,
     )
     (site_dir / "history.html").write_text(history_html, encoding="utf-8")
 
@@ -1017,6 +1020,7 @@ def generate_site(report: Report, target_dir: str | None = None) -> str:
         meta=meta, type_label=type_label, market=market,
         stocks=stocks, disclaimer=meta["disclaimer"],
         bullish_count=bullish_count, hold_count=hold_count, bearish_count=bearish_count,
+        use_app_pages=use_app_pages,
     )
     (site_dir / "dashboard.html").write_text(dash_html, encoding="utf-8")
 

@@ -1,4 +1,3 @@
-
 :root {
     /* Brand */
     --rausch: #7b3ff2;
@@ -16,6 +15,7 @@
     --surface-soft: #0f1f3a;
     --surface-elevated: #1a2742;
     --surface-elevated-alt: #0f1f3a;
+    --bg-card: var(--canvas);
 
     /* Text */
     --ink: #ffffff;
@@ -46,6 +46,22 @@
     --radius-md: 14px;
     --radius-lg: 20px;
     --radius-full: 9999px;
+
+    /* Spacing */
+    --space-xs: 4px;
+    --space-sm: 8px;
+    --space-md: 12px;
+    --space-lg: 16px;
+    --space-xl: 24px;
+
+    /* Layout */
+    --header-height: 64px;
+
+    /* z-index layers */
+    --z-header: 100;
+    --z-dropdown: 110;
+    --z-modal: 200;
+    --z-toast: 300;
 
     /* Page bg gradient */
     --page-bg-gradient:
@@ -96,7 +112,7 @@ a:hover { color: var(--rausch-active); }
     backdrop-filter: blur(16px) saturate(1.1);
     border-bottom: 1px solid var(--hairline-soft);
     box-shadow: 0 1px 0 rgba(0,245,255,0.06);
-    z-index: 102;
+    z-index: var(--z-header);
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -219,7 +235,8 @@ a:hover { color: var(--rausch-active); }
 
 .signal-distribution {
     display: flex;
-    gap: 12px;
+    flex-wrap: wrap;
+    gap: 8px;
     font-size: 13px;
 }
 .sig-stat {
@@ -250,6 +267,53 @@ a:hover { color: var(--rausch-active); }
     font-size: 13px;
     font-weight: 400;
     color: var(--muted);
+}
+
+/* ── Filter bar ─────────────────────────────────────────────── */
+.filter-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 20px;
+    align-items: center;
+}
+.filter-bar input[type="search"],
+.filter-bar select {
+    flex: 1;
+    min-width: 120px;
+    padding: 10px 14px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--hairline);
+    background: var(--surface-soft);
+    color: var(--body-ink);
+    font-size: 14px;
+    font-family: var(--font-cn);
+    min-height: 44px;
+}
+.filter-bar input[type="search"]:focus,
+.filter-bar select:focus {
+    outline: none;
+    border-color: var(--accent-cyan);
+    box-shadow: 0 0 0 2px rgba(0,245,255,0.15);
+}
+.filter-bar input[type="search"]::placeholder {
+    color: var(--muted-soft);
+}
+.filter-link {
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 16px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--hairline);
+    color: var(--accent-cyan);
+    font-size: 13px;
+    white-space: nowrap;
+    min-height: 44px;
+    transition: all 0.18s ease;
+}
+.filter-link:hover {
+    background: var(--rausch-tint);
+    border-color: var(--rausch);
 }
 
 /* ── Stock grid ─────────────────────────────────────────────── */
@@ -733,13 +797,37 @@ a:hover { color: var(--rausch-active); }
     .market-temp-head { flex-direction: column; align-items: flex-start; gap: 8px; }
     .site-nav { display: none; }
 }
+@media (max-width: 640px) {
+    .site-nav a { padding: 12px 16px; font-size: 14px; }
+    .back-link { padding: 10px 18px; font-size: 14px; }
+    .rm-btn { padding: 8px 12px; font-size: 13px; min-height: 44px; }
+}
 @media (max-width: 480px) {
+    .shell, .shell-wide { padding: calc(56px + 12px) 12px 60px; }
+    .site-header { padding: 8px 12px; min-height: 52px; }
+    .header-meta { display: none; }
+    .brand-icon { width: 28px; height: 28px; }
+    .brand-tagline { display: none; }
+    .brand-name { font-size: 14px; }
     .stock-grid { grid-template-columns: 1fr; }
     .signal-grid { grid-template-columns: 1fr; }
-    .metrics-row { flex-wrap: nowrap; overflow-x: auto; }
-    .brand-name { font-size: 14px; }
+    .metrics-row { flex-wrap: wrap; }
+    .metric-chip { min-width: 70px; }
     .detail-grid { grid-template-columns: 1fr; }
     .stats-grid { grid-template-columns: 1fr 1fr; }
+    .page-title { font-size: 20px; margin-bottom: 16px; }
+    .page-subtitle { font-size: 13px; margin-bottom: 16px; }
+    .signal-distribution { gap: 6px; font-size: 12px; }
+    .narr-card { padding: 12px 14px 10px; }
+    .filter-bar { flex-direction: column; }
+    .filter-bar input,
+    .filter-bar select { min-width: 0; }
+    .history-table, .dim-table { font-size: 11px; }
+    .history-table th, .history-table td { padding: 6px 8px; }
+    .comp-table { font-size: 12px; }
+    .comp-table th, .comp-table td { padding: 8px 10px; }
+    .disclaimer { font-size: 11px; padding: 10px 12px; }
+    .archive-section { padding: 12px 14px; }
 }
 
 /* ── Reduced motion ─────────────────────────────────────────── */
