@@ -10,6 +10,7 @@ from typing import Optional
 
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 
 from src.config import get_settings
@@ -22,16 +23,28 @@ settings = get_settings()
 app = FastAPI(
     title="Stock Copilot API",
     description="A股个人投研助手 API",
-    version="1.4.0",
+    version="1.5.0",
 )
 
+# CORS: allow GitHub Pages, localhost, and server IP access
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=settings.api.cors_origins,
+    allow_origins=settings.api.cors_origins + [
+        "https://ttmens.github.io",
+        "http://localhost:8000",
+        "http://127.0.0.1:8000",
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# Serve static files from docs/ directory (GitHub Pages source)
+docs_path = Path("docs")
+if docs_path.exists():
+    app.mount("/static", StaticFiles(directory=str(docs_path)), name="static")
+    # Also serve at root for direct access
+    app.mount("/", StaticFiles(directory=str(docs_path), html=True), name="docs")
 
 
 class AnalyzeRequest(BaseModel):
@@ -68,12 +81,17 @@ class ReportResponse(BaseModel):
 @app.get("/health")
 async def health_check():
     from src.data.db_manager import SignalDB
+    from src.watchlist.manager import WatchlistManager
     db = SignalDB()
     pub = db.get_last_published()
+    wl = WatchlistManager().list_dicts()
     return {
         "status": "ok",
-        "version": "1.4.0",
+        "version": "1.5.0",
         "last_published": pub,
+        "watchlist_count": len(wl),
+        "api_base": "http://127.0.0.1:8000",
+        "github_pages": "https://ttmens.github.io/stock-copilot/",
     }
 
 

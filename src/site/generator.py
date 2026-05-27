@@ -44,6 +44,30 @@ NAV_HTML_SUB = """
 </div>
 """
 
+# Bottom navigation (mobile)
+BOTTOM_NAV = """
+<nav class="bottom-nav">
+    <div class="bottom-nav-inner">
+        <a href="index.html"{{ ' class="active"' if page == 'home' else '' }}>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            首页
+        </a>
+        <a href="dashboard.html"{{ ' class="active"' if page == 'dashboard' else '' }}>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+            看板
+        </a>
+        <a href="app/watchlist.html"{{ ' class="active"' if page == 'watchlist' else '' }}>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            自选
+        </a>
+        <a href="history.html"{{ ' class="active"' if page == 'history' else '' }}>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            历史
+        </a>
+    </div>
+</nav>
+"""
+
 
 # ── Template: Homepage (index.html) ───────────────────────────
 TPL_HOME = """<!DOCTYPE html>
@@ -222,10 +246,11 @@ TPL_HOME = """<!DOCTYPE html>
     <div class="disclaimer">{{ disclaimer }}</div>
 
     <footer class="site-footer">
-        智策 NexStrat v1.4 · AI 辅助决策 · 不构成投资建议
+        智策 NexStrat v1.5 · AI 辅助决策 · 不构成投资建议
     </footer>
 </div>
-<script src="app/config.js"></script>
+
+{{ bottom_nav }}
 <script src="app/app.js" defer></script>
 </body>
 </html>
@@ -435,9 +460,11 @@ TPL_STOCK = """<!DOCTYPE html>
     <div class="disclaimer">{{ disclaimer }}</div>
 
     <footer class="site-footer">
-        智策 NexStrat v1.3 · AI 辅助决策 · 不构成投资建议
+        智策 NexStrat v1.5 · AI 辅助决策 · 不构成投资建议
     </footer>
 </div>
+
+{{ bottom_nav }}
 </body>
 </html>
 """
@@ -574,9 +601,11 @@ TPL_HISTORY = """<!DOCTYPE html>
     <div class="disclaimer">{{ disclaimer }}</div>
 
     <footer class="site-footer">
-        智策 NexStrat v1.3 · AI 辅助决策 · 不构成投资建议
+        智策 NexStrat v1.5 · AI 辅助决策 · 不构成投资建议
     </footer>
 </div>
+
+{{ bottom_nav }}
 </body>
 </html>
 """
@@ -771,9 +800,11 @@ TPL_DASHBOARD = """<!DOCTYPE html>
     <div class="disclaimer">{{ disclaimer }}</div>
 
     <footer class="site-footer">
-        智策 NexStrat v1.3 · AI 辅助决策 · 不构成投资建议
+        智策 NexStrat v1.5 · AI 辅助决策 · 不构成投资建议
     </footer>
 </div>
+
+{{ bottom_nav }}
 </body>
 </html>
 """
@@ -987,6 +1018,8 @@ def generate_site(report: Report, target_dir: str | None = None) -> str:
         stocks=stocks, archive=archive, disclaimer=meta["disclaimer"],
         bullish_count=bullish_count, hold_count=hold_count, bearish_count=bearish_count,
         use_app_pages=use_app_pages,
+        bottom_nav=BOTTOM_NAV,
+        page="home",
     )
     index_path = site_dir / "index.html"
     index_path.write_text(html, encoding="utf-8")
@@ -1000,6 +1033,8 @@ def generate_site(report: Report, target_dir: str | None = None) -> str:
             stock_html = tmpl.render(
                 stock=stock, disclaimer=meta["disclaimer"],
                 meta=meta, type_label=type_label,
+                bottom_nav=BOTTOM_NAV.replace('index.html', '../index.html').replace('dashboard.html', '../dashboard.html').replace('app/watchlist.html', '../app/watchlist.html').replace('history.html', '../history.html'),
+                page="stock",
             )
             (stock_dir / f"{stock['code']}.html").write_text(stock_html, encoding="utf-8")
     else:
@@ -1011,6 +1046,8 @@ def generate_site(report: Report, target_dir: str | None = None) -> str:
         history=history, disclaimer=meta["disclaimer"],
         meta=meta, type_label=type_label,
         use_app_pages=use_app_pages,
+        bottom_nav=BOTTOM_NAV,
+        page="history",
     )
     (site_dir / "history.html").write_text(history_html, encoding="utf-8")
 
@@ -1021,6 +1058,8 @@ def generate_site(report: Report, target_dir: str | None = None) -> str:
         stocks=stocks, disclaimer=meta["disclaimer"],
         bullish_count=bullish_count, hold_count=hold_count, bearish_count=bearish_count,
         use_app_pages=use_app_pages,
+        bottom_nav=BOTTOM_NAV,
+        page="dashboard",
     )
     (site_dir / "dashboard.html").write_text(dash_html, encoding="utf-8")
 
