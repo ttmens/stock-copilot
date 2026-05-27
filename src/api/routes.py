@@ -21,12 +21,28 @@ logger = logging.getLogger(__name__)
 settings = get_settings()
 
 app = FastAPI(
-    title="Stock Copilot API",
-    description="A股个人投研助手 API",
-    version="1.5.0",
+    title="智策 NexStrat API",
+    description="A股AI智能投研助手 — 5层信号融合 + LLM分析",
+    version="2.0.0",
 )
 
-# CORS: allow GitHub Pages, localhost, and server IP access
+# ── Optional API auth middleware ──────────────────────────────
+auth_token = None
+_auth_env = settings.api.auth_token_env
+if _auth_env:
+    import os as _os
+    auth_token = _os.environ.get(_auth_env)
+
+if auth_token:
+    from fastapi import Depends, Security
+    from fastapi.security import APIKeyHeader
+    api_key_header = APIKeyHeader(name="X-API-Key", auto_error=False)
+    async def verify_api_key(api_key: str = Security(api_key_header)):
+        if api_key != auth_token:
+            raise HTTPException(status_code=401, detail="Invalid API key")
+    app.dependency_overrides.setdefault(lambda: None, verify_api_key)
+
+# CORS
 app.add_middleware(
     CORSMiddleware,
     allow_origins=settings.api.cors_origins + [
@@ -75,20 +91,57 @@ class ReportResponse(BaseModel):
 async def health_check():
     from src.data.db_manager import SignalDB
     from src.watchlist.manager import WatchlistManager
+    import socket
+    from datetime import datetime
+
     db = SignalDB()
     pub = db.get_last_published()
     wl = WatchlistManager().list_dicts()
-    # Get server IP for CORS
-    import socket
     try:
         host_ip = socket.gethostbyname(socket.gethostname())
     except Exception:
         host_ip = "unknown"
+
+    # Data freshness check
+    data_fresh = "unknown"
+    latest_path = Path("docs/data/latest.json")
+    if latest_path.exists():
+        mtime = latest_path.stat().st_mtime
+        age_hours = (datetime.now().timestamp() - mtime) / 3600
+        if age_hours < 24:
+            data_fresh = "fresh"
+        elif age_hours < 72:
+            data_fresh = "stale"
+        else:
+            data_fresh = "expired"
+
+    # DB stats
+    try:
+        import sqlite3
+        db_path = Path("data/signals.db")
+        db_stats = {}
+        if db_path.exists():
+            conn = sqlite3.connect(str(db_path))
+            cur = conn.cursor()
+            cur.execute("SELECT COUNT(*) FROM signals")
+            db_stats["signal_count"] = cur.fetchone()[0]
+            cur.execute("SELECT COUNT(DISTINCT code) FROM signals")
+            db_stats["unique_stocks"] = cur.fetchone()[0]
+            cur.execute("SELECT MAX(trade_date) FROM signals")
+            last_date = cur.fetchone()[0]
+            db_stats["last_signal_date"] = last_date
+            conn.close()
+    except Exception:
+        db_stats = {}
+
     return {
         "status": "ok",
-        "version": "1.5.0",
-        "last_published": pub,
+        "version": "2.0.0",
+        "product": "智策 NexStrat",
+        "data_freshness": data_fresh,
         "watchlist_count": len(wl),
+        "db_stats": db_stats,
+        "last_published": pub,
         "api_base": f"http://{host_ip}:8000",
         "github_pages": "https://ttmens.github.io/stock-copilot/",
         "design_system": "v2.0 (Seeking Alpha + TradingView inspired)",
@@ -265,6 +318,56 @@ async def get_latest_json():
         else:
             raise HTTPException(status_code=404, detail="latest.json not found")
     return json.loads(json_path.read_text(encoding="utf-8"))
+
+
+@app.get("/api/system/status")
+async def system_status():
+    """Comprehensive system status: DB, data freshness, scheduler jobs, evolution."""
+    from src.data.db_manager import SignalDB
+    import sqlite3
+    from datetime import datetime
+
+    result = {"status": "ok", "timestamp": datetime.now().isoformat()}
+
+    # DB stats
+    try:
+        db_path = Path("data/signals.db")
+        if db_path.exists():
+            conn = sqlite3.connect(str(db_path))
+            cur = conn.cursor()
+            cur.execute("SELECT COUNT(*) FROM signals")
+            result["signal_count"] = cur.fetchone()[0]
+            cur.execute("SELECT COUNT(DISTINCT code) FROM signals")
+            result["unique_stocks"] = cur.fetchone()[0]
+            cur.execute("SELECT MAX(trade_date) FROM signals")
+            result["last_signal_date"] = cur.fetchone()[0]
+            cur.execute("SELECT COUNT(*) FROM jobs WHERE status = 'completed'")
+            result["completed_jobs"] = cur.fetchone()[0]
+            cur.execute("SELECT COUNT(*) FROM jobs WHERE status = 'failed'")
+            result["failed_jobs"] = cur.fetchone()[0]
+            conn.close()
+    except Exception as e:
+        result["db_error"] = str(e)
+
+    # Data freshness
+    latest_path = Path("docs/data/latest.json")
+    if latest_path.exists():
+        mtime = latest_path.stat().st_mtime
+        age_hours = (datetime.now().timestamp() - mtime) / 3600
+        result["data_age_hours"] = round(age_hours, 1)
+        result["data_freshness"] = "fresh" if age_hours < 24 else "stale" if age_hours < 72 else "expired"
+
+    # Evolution status
+    evo_path = Path("docs/data/evolution.json")
+    if evo_path.exists():
+        result["evolution_enabled"] = True
+        try:
+            evo = json.loads(evo_path.read_text())
+            result["evolution_runs"] = len(evo.get("history", []))
+        except Exception:
+            pass
+
+    return result
 
 
 # ── Static files (MUST be after all API routes) ──────────────

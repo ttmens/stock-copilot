@@ -1,7 +1,7 @@
 project: stock-copilot
 mode: phase_increment
-current_phase: acceptance
-target_phase: phase_d
+current_phase: phase_e
+target_phase: phase_e
 gates:
   g1_research: approved
   g2_design: approved
@@ -15,22 +15,21 @@ artifacts:
   decisions: docs/DECISIONS.md
   design_tokens: docs/DESIGN.md
   phase_plan: docs/design/15-PHASE-D-PLAN.md
-  g3_evidence: docs/archive/phase-d-g3/acceptance-evidence.md
-  ui_acceptance_report: docs/ui-acceptance-report.md
+  self_check: scripts/self_check.py
 checkpoints:
-  - phase: phase_d_plan
+  - phase: phase_d_complete
     completed_at: "2026-05-27"
     artifacts:
       - docs/plans/2026-05-27-phase-d.md
-      - docs/design/15-PHASE-D-PLAN.md
-  - phase: phase_d_build
-    completed_at: "2026-05-27"
-    artifacts:
       - tests/test_phase_d.py
-      - config/fusion_weights.json
-  - phase: phase_d_g3
+      - docs/ui-acceptance-report.md
+  - phase: phase_e_system_hardening
     completed_at: "2026-05-27"
     artifacts:
-      - docs/archive/phase-d-g3/acceptance-evidence.md
-      - docs/ui-acceptance-report.md
+      - scripts/self_check.py
+      - src/api/routes.py (health + system status + auth)
+      - config/fusion_weights.json (v3)
 blockers: []
+last_docs_hygiene:
+  status: pass
+  checked_at: "2026-05-27"
