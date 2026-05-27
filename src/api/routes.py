@@ -85,13 +85,20 @@ async def health_check():
     db = SignalDB()
     pub = db.get_last_published()
     wl = WatchlistManager().list_dicts()
+    # Get server IP for CORS
+    import socket
+    try:
+        host_ip = socket.gethostbyname(socket.gethostname())
+    except Exception:
+        host_ip = "unknown"
     return {
         "status": "ok",
-        "version": "1.5.0",
+        "version": "2.0.0",
         "last_published": pub,
         "watchlist_count": len(wl),
-        "api_base": "http://127.0.0.1:8000",
+        "api_base": f"http://{host_ip}:8000",
         "github_pages": "https://ttmens.github.io/stock-copilot/",
+        "design_system": "v2.0 (Seeking Alpha + TradingView inspired)",
     }
 
 
