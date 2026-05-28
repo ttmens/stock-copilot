@@ -474,17 +474,17 @@ TPL_HOME = """<!DOCTYPE html>
 <table class="stock-table" id="stock-table">
     <thead>
         <tr>
-            <th data-sort="code" style="width:100px">代码 <span class="sort-icon">↕</span></th>
-            <th style="width:100px">名称</th>
-            <th style="width:80px">信号</th>
-            <th data-sort="score" class="sorted">评分 <span class="sort-icon">↓</span></th>
-            <th style="width:80px">5日动量</th>
-            <th style="width:70px">均线</th>
-            <th style="width:60px">量比</th>
-            <th style="width:60px">PE</th>
-            <th style="width:70px">置信度</th>
-            <th style="width:60px">龙虎</th>
-            <th style="width:60px">公告</th>
+            <th data-sort="code" class="col-code">代码 <span class="sort-icon">↕</span></th>
+            <th class="col-name">名称</th>
+            <th class="col-signal">信号</th>
+            <th data-sort="score" class="col-score sorted">评分 <span class="sort-icon">↓</span></th>
+            <th class="col-momentum">5日动量</th>
+            <th class="col-ma">均线</th>
+            <th class="col-volume">量比</th>
+            <th class="col-pe">PE</th>
+            <th class="col-confidence">置信度</th>
+            <th class="col-dragon">龙虎</th>
+            <th class="col-announce">公告</th>
         </tr>
     </thead>
     <tbody>
@@ -497,7 +497,7 @@ TPL_HOME = """<!DOCTYPE html>
         <tr data-code="{{ stock.code }}" data-name="{{ stock.name }}" data-signal="{{ s }}" data-score="{{ score }}" data-confidence="{{ stock.confidence }}">
             <td class="stock-code"><a href="{% if use_app_pages %}app/stock.html?code={{ stock.code }}{% else %}stock/{{ stock.code }}.html{% endif %}" style="text-decoration:none;color:inherit">{{ stock.code }}</a></td>
             <td><span class="stock-name">{{ stock.name }}</span></td>
-            <td><span class="signal-badge {{ badge_cls }}">{{ stock.overall_focus }}</span></td>
+            <td><span class="signal-badge {{ badge_cls }}" title="{{ stock.overall_focus }}">{{ stock.overall_focus[:20] }}{% if stock.overall_focus|length > 20 %}…{% endif %}</span></td>
             <td>
                 <div class="score-mini">
                     <span class="score-mini-val {{ score_cls }}">{{ '%+.3f'|format(score) }}</span>
