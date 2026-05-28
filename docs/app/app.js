@@ -91,6 +91,25 @@
     } catch (_) {}
   }
 
+  function showEmptyState(containerId) {
+    const el = document.getElementById(containerId);
+    if (!el) return;
+    const visible = el.querySelectorAll(".stock-card-link[style*='display: none'], .stock-card-link:not([style])");
+    const allHidden = [...el.querySelectorAll(".stock-card-link")].every(c => c.style.display === "none");
+    if (allHidden && el.querySelectorAll(".stock-card-link").length > 0) {
+      let emptyEl = el.querySelector(".empty-state");
+      if (!emptyEl) {
+        emptyEl = document.createElement("div");
+        emptyEl.className = "empty-state";
+        emptyEl.innerHTML = '<div class="empty-state-icon">📭</div><div class="empty-state-text">暂无匹配的股票</div><div class="empty-state-sub">尝试调整筛选条件</div>';
+        el.appendChild(emptyEl);
+      }
+    } else {
+      const emptyEl = el.querySelector(".empty-state");
+      if (emptyEl) emptyEl.remove();
+    }
+  }
+
   async function loadPublishedMeta() {
     if (!API) return;
     try {
