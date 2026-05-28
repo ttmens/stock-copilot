@@ -534,14 +534,25 @@ a:hover { color: var(--accent-blue); }
 .compare-bar-fill { height: 100%; border-radius: 2px; }
 
 /* ── Selection Checkboxes ── */
-@media (min-width: 900px) {
-  .stock-select {
-    display: inline-flex; align-items: center; justify-content: center;
-    width: 18px; height: 18px; border: 1px solid var(--border-soft);
-    border-radius: 3px; cursor: pointer; margin-right: 8px; flex-shrink: 0;
-    transition: all 0.15s ease; background: transparent;
-  }
-  .stock-select:hover { border-color: var(--accent-purple); }
-  .stock-select.checked { background: var(--accent-purple); border-color: var(--accent-purple); }
-  .stock-select.checked::after { content: '✓'; color: white; font-size: 12px; line-height: 1; }
+.stock-select {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 18px; height: 18px; border: 1px solid var(--border-soft);
+  border-radius: 3px; cursor: pointer; margin-right: 8px; flex-shrink: 0;
+  transition: all 0.15s ease; background: transparent;
 }
+.stock-select.checked { background: var(--accent-purple); border-color: var(--accent-purple); }
+.stock-select.checked::after { content: '✓'; color: white; font-size: 12px; line-height: 1; }
+@media (min-width: 900px) {
+  .stock-select:hover { border-color: var(--accent-purple); }
+}
+
+/* ── Score Mini (Table View) ── */
+.score-mini { display: flex; flex-direction: column; gap: 3px; min-width: 60px; }
+.score-mini-val { font-family: var(--font-mono); font-size: 14px; font-weight: 700; line-height: 1; }
+.score-mini-bar { height: 4px; background: rgba(255,255,255,0.06); border-radius: 2px; overflow: hidden; }
+.score-mini-fill { height: 100%; border-radius: 2px; transition: width 0.3s ease; }
+
+/* ── Signal Badge Overflow Protection ── */
+.signal-badge { max-width: 160px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+@media (min-width: 640px) { .signal-badge { max-width: 200px; } }
+@media (min-width: 1200px) { .signal-badge { max-width: 240px; } }
