@@ -91,6 +91,25 @@
     } catch (_) {}
   }
 
+  function showEmptyState() {
+    const grid = document.getElementById("stock-grid");
+    if (!grid) return;
+    const allCards = [...grid.querySelectorAll(".stock-card-link")];
+    if (!allCards.length) return;
+    const allHidden = allCards.every(c => c.style.display === "none");
+    let emptyEl = grid.querySelector(".empty-state");
+    if (allHidden) {
+      if (!emptyEl) {
+        emptyEl = document.createElement("div");
+        emptyEl.className = "empty-state";
+        emptyEl.innerHTML = '<div class="empty-state-icon">📭</div><div class="empty-state-text">暂无匹配的股票</div><div class="empty-state-sub">尝试调整筛选条件</div>';
+        grid.appendChild(emptyEl);
+      }
+    } else if (emptyEl) {
+      emptyEl.remove();
+    }
+  }
+
   async function loadPublishedMeta() {
     if (!API) return;
     try {
@@ -112,7 +131,21 @@
   document.getElementById("filter-signal")?.addEventListener("change", applyFilters);
   document.getElementById("filter-sort")?.addEventListener("change", applyFilters);
 
-  applyFilters();
+  // Wrap applyFilters to also show empty state
+  const _origApply = applyFilters;
+  function applyFiltersWithEmpty() {
+    _origApply();
+    showEmptyState();
+  }
+  // Re-bind events
+  document.getElementById("filter-search")?.removeEventListener("input", applyFilters);
+  document.getElementById("filter-signal")?.removeEventListener("change", applyFilters);
+  document.getElementById("filter-sort")?.removeEventListener("change", applyFilters);
+  document.getElementById("filter-search")?.addEventListener("input", applyFiltersWithEmpty);
+  document.getElementById("filter-signal")?.addEventListener("change", applyFiltersWithEmpty);
+  document.getElementById("filter-sort")?.addEventListener("change", applyFiltersWithEmpty);
+
+  applyFiltersWithEmpty();
   cacheLatestJson();
   mergeIntraday();
   loadPublishedMeta();
