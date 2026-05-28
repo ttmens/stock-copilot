@@ -150,7 +150,7 @@ def main():
         (".compare-panel", "对比面板"),
         ("@media (min-width: 1200px)", "1200px 断点"),
         ("@media (min-width: 1600px)", "1600px 断点"),
-        ("@media (max-width: 480px)", "480px 断点"),
+        ("@media (min-width: 480px)", "480px 断点"),
         ("env(safe-area-inset-bottom", "刘海适配"),
         ("prefers-reduced-motion", "无障碍"),
     ]

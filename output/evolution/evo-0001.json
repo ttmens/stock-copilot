@@ -1,10 +1,10 @@
 {
   "cycle_id": "evo-0001",
-  "date": "2026-05-27",
+  "date": "2026-05-28",
   "win_rate": 0.0,
-  "avg_return": -1.78,
+  "avg_return": 0.0,
   "sharpe_like": 0.0,
-  "signals_verified": 1,
+  "signals_verified": 0,
   "old_weights": {
     "hard": 0.4,
     "soft": 0.25,
@@ -13,17 +13,19 @@
     "announcement": 0.1
   },
   "new_weights": {
-    "hard": 0.5,
-    "soft": 0.309,
-    "gate": 0.191
+    "hard": 0.4,
+    "soft": 0.25,
+    "gate": 0.15,
+    "dragon_tiger": 0.1,
+    "announcement": 0.1
   },
-  "weights_changed": true,
+  "weights_changed": false,
   "pool_size": 50,
   "evicted": [],
   "added": [],
   "data_source_health": {},
   "errors": [],
-  "summary": "验证了 1 个信号，胜率 0.0%，平均收益 -1.78%。 信号权重已自动调整。",
+  "summary": "权重保持稳定，无需调整。",
   "recommendations": [
     "系统运行良好，继续保持"
   ]
