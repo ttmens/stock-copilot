@@ -209,7 +209,7 @@ _THEME_CSS_PATH = Path(__file__).parent / "theme.css"
 THEME_CSS = _THEME_CSS_PATH.read_text(encoding="utf-8")
 
 # ── Shared header brand SVG ───────────────────────────────────
-BRAND_SVG = """<svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:32px;height:32px">
+BRAND_SVG = """<svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" class="brand-svg">
     <rect width="32" height="32" rx="8" fill="url(#logo-grad)"/>
     <path d="M8 22 L14 14 L18 18 L24 10" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
     <path d="M20 10 L24 10 L24 14" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -294,7 +294,7 @@ TPL_HOME = """<!DOCTYPE html>
     <div class="signal-dashboard-head">
         <div>
             <span class="signal-dashboard-label">市场温度</span>
-            <span class="signal-dashboard-value" style="margin-left:8px">{{ market.index_name }} {{ "%.2f"|format(market.close) }}</span>
+            <span class="signal-dashboard-value">{{ market.index_name }} {{ "%.2f"|format(market.close) }}</span>
             {% if market.change_pct >= 0 %}
             <span class="signal-dashboard-change change-up">+{{ "%.2f"|format(market.change_pct) }}%</span>
             {% else %}
@@ -377,7 +377,7 @@ TPL_HOME = """<!DOCTYPE html>
 <div class="stock-card-link" data-code="{{ stock.code }}" data-name="{{ stock.name }}" data-signal="{{ stock.overall_sentiment }}" data-score="{{ score }}" data-confidence="{{ stock.confidence }}">
 <div class="stock-card">
     <div class="card-header">
-        <a href="{{ detail_href }}" class="card-title-link" style="display:flex;align-items:center;text-decoration:none;color:inherit;flex:1">
+        <a href="{{ detail_href }}" class="card-title-link">
             <div class="stock-select" data-code="{{ stock.code }}" title="加入对比"></div>
             <div>
                 <div class="card-stock-code">{{ stock.code }}</div>
@@ -470,7 +470,7 @@ TPL_HOME = """<!DOCTYPE html>
 
 {# ── Table View (Desktop) ── #}
 <div class="table-view" id="table-view">
-<div class="table-scroll" style="margin-bottom:24px">
+<div class="table-scroll table-scroll-main">
 <table class="stock-table" id="stock-table">
     <thead>
         <tr>
@@ -495,7 +495,7 @@ TPL_HOME = """<!DOCTYPE html>
 {% set bar_cls = 'signal-bar-bull' if score > 0.2 else 'signal-bar-bear' if score < -0.2 else 'signal-bar-hold' %}
 {% set badge_cls = 'bullish' if s in ['strong_buy','buy','bullish'] else 'bearish' if s in ['sell','strong_sell'] else 'hold' %}
         <tr data-code="{{ stock.code }}" data-name="{{ stock.name }}" data-signal="{{ s }}" data-score="{{ score }}" data-confidence="{{ stock.confidence }}">
-            <td class="stock-code"><a href="{% if use_app_pages %}app/stock.html?code={{ stock.code }}{% else %}stock/{{ stock.code }}.html{% endif %}" style="text-decoration:none;color:inherit">{{ stock.code }}</a></td>
+            <td class="stock-code"><a href="{% if use_app_pages %}app/stock.html?code={{ stock.code }}{% else %}stock/{{ stock.code }}.html{% endif %}" class="stock-code-link">{{ stock.code }}</a></td>
             <td><span class="stock-name">{{ stock.name }}</span></td>
             <td><span class="signal-badge {{ badge_cls }}" title="{{ stock.overall_focus }}">{{ stock.overall_focus[:20] }}{% if stock.overall_focus|length > 20 %}…{% endif %}</span></td>
             <td>
@@ -509,8 +509,8 @@ TPL_HOME = """<!DOCTYPE html>
             <td>{{ '%.2f'|format(stock.volume_ratio) if stock.volume_ratio is not none else '-' }}</td>
             <td>{{ '%.1f'|format(stock.pe_ttm) if stock.pe_ttm is not none else '-' }}</td>
             <td>{{ (stock.confidence * 100)|round(0) }}%</td>
-            <td>{% if stock.signal_breakdown.has_dragon_tiger %}<span style="color:var(--dim-dragon)">●</span>{% else %}<span style="color:var(--text-faint)">—</span>{% endif %}</td>
-            <td>{% if stock.signal_breakdown.has_announcement %}<span style="color:var(--dim-announce)">●</span>{% else %}<span style="color:var(--text-faint)">—</span>{% endif %}</td>
+            <td>{% if stock.signal_breakdown.has_dragon_tiger %}<span class="text-dragon">●</span>{% else %}<span class="text-faint">—</span>{% endif %}</td>
+            <td>{% if stock.signal_breakdown.has_announcement %}<span class="text-announce">●</span>{% else %}<span class="text-faint">—</span>{% endif %}</td>
         </tr>
 {% endfor %}
     </tbody>
@@ -519,7 +519,7 @@ TPL_HOME = """<!DOCTYPE html>
 </div>
 {% if archive %}
 <div class="archive-section">
-    <div style="font-size:13px;font-weight:600;color:var(--text-primary);margin-bottom:4px;">📁 历史报告</div>
+    <div class="archive-title">📁 历史报告</div>
     <div class="archive-list">
         {% for item in archive[:10] %}
         <a class="archive-pill" href="archive/{{ item.date }}-{{ item.type }}.html">{{ item.date }} {{ '盘前' if item.type == 'pre' else '盘后' }}</a>
@@ -625,7 +625,7 @@ TPL_HOME = """<!DOCTYPE html>
     if (!compareList) return;
     compareCount && (compareCount.textContent = '(' + compareStocks.length + ')');
     if (compareStocks.length === 0) {
-      compareList.innerHTML = '<div style="color:var(--text-muted);font-size:12px;text-align:center;padding:16px">点击卡片左上角复选框添加对比</div>';
+      compareList.innerHTML = '<div class="empty-hint">点击卡片左上角复选框添加对比</div>';
       comparePanel && comparePanel.classList.remove('active');
       return;
     }
@@ -635,7 +635,7 @@ TPL_HOME = """<!DOCTYPE html>
       const color = score > 0.2 ? '#22C55E' : score < -0.2 ? '#EF4444' : '#94A3B8';
       const width = ((score + 1) / 2 * 100).toFixed(0);
       return '<div class="compare-item">' +
-        '<div><span class="compare-item-code">' + s.code + '</span> <span style="color:var(--text-muted);font-size:12px">' + s.name + '</span>' +
+        '<div><span class="compare-item-code">' + s.code + '</span> <span class="compare-item-name">' + s.name + '</span>' +
         '<div class="compare-bar"><div class="compare-bar-fill" style="width:' + width + '%;background:' + color + '"></div></div></div>' +
         '<span class="compare-item-remove" data-code="' + s.code + '">×</span></div>';
     }).join('');
@@ -730,13 +730,13 @@ TPL_STOCK = """<!DOCTYPE html>
 
 {# ── L1: Decision Header ── #}
 <div class="page-title">
-    {{ stock.code }} <span style="font-weight:400;color:var(--text-muted)">{{ stock.name }}</span>
+    {{ stock.code }} <span class="stock-name-muted">{{ stock.name }}</span>
 </div>
 
 {% set s = stock.overall_sentiment %}
 {% set badge_cls = 'bullish' if s in ['strong_buy','buy','bullish'] else 'bearish' if s in ['sell','strong_sell'] else 'hold' %}
-<div style="margin-bottom:20px">
-    <span class="signal-badge {{ badge_cls }}" style="font-size:13px;padding:6px 14px">{{ stock.overall_focus }}</span>
+<div class="detail-signal-row">
+    <span class="signal-badge {{ badge_cls }} signal-badge-lg">{{ stock.overall_focus }}</span>
 </div>
 
 {# ── L1: Big Score + 5-Layer Breakdown ── #}
@@ -753,28 +753,28 @@ TPL_STOCK = """<!DOCTYPE html>
             </div>
         </div>
         {# 5-Layer Dimension Cards #}
-        <div class="dim-grid" style="margin-top:16px">
+        <div class="dim-grid dim-grid-detail">
             <div class="dim-card">
-                <span class="dim-card-label"><span class="dim-card-dot" style="background:var(--dim-hard)"></span>硬信号 40%</span>
+                <span class="dim-card-label"><span class="dim-card-dot" class="dot-hard"></span>硬信号 40%</span>
                 <span class="dim-card-value" style="color:{{ '#22C55E' if stock.signal_breakdown.hard_score > 0 else '#EF4444' if stock.signal_breakdown.hard_score < 0 else 'var(--text-muted)' }}">{{ '%+.3f'|format(stock.signal_breakdown.hard_score) }}</span>
             </div>
             <div class="dim-card">
-                <span class="dim-card-label"><span class="dim-card-dot" style="background:var(--dim-soft)"></span>软信号 25%</span>
+                <span class="dim-card-label"><span class="dim-card-dot" class="dot-soft"></span>软信号 25%</span>
                 <span class="dim-card-value" style="color:{{ '#22C55E' if stock.signal_breakdown.soft_score > 0 else '#EF4444' if stock.signal_breakdown.soft_score < 0 else 'var(--text-muted)' }}">{{ '%+.3f'|format(stock.signal_breakdown.soft_score) }}</span>
             </div>
             <div class="dim-card">
-                <span class="dim-card-label"><span class="dim-card-dot" style="background:var(--dim-gate)"></span>门控 15%</span>
+                <span class="dim-card-label"><span class="dim-card-dot" class="dot-gate"></span>门控 15%</span>
                 <span class="dim-card-value" style="color:{{ '#22C55E' if stock.signal_breakdown.gate_score > 0.5 else '#EF4444' if stock.signal_breakdown.gate_score < 0.5 else 'var(--text-muted)' }}">{{ '%+.3f'|format(stock.signal_breakdown.gate_score) }}</span>
             </div>
             {% if stock.signal_breakdown.has_dragon_tiger %}
             <div class="dim-card">
-                <span class="dim-card-label"><span class="dim-card-dot" style="background:var(--dim-dragon)"></span>龙虎 10%</span>
+                <span class="dim-card-label"><span class="dim-card-dot" class="dot-dragon"></span>龙虎 10%</span>
                 <span class="dim-card-value" style="color:{{ '#22C55E' if stock.signal_breakdown.dragon_tiger_score > 0 else '#EF4444' if stock.signal_breakdown.dragon_tiger_score < 0 else 'var(--text-muted)' }}">{{ '%+.3f'|format(stock.signal_breakdown.dragon_tiger_score) }}</span>
             </div>
             {% endif %}
             {% if stock.signal_breakdown.has_announcement %}
             <div class="dim-card">
-                <span class="dim-card-label"><span class="dim-card-dot" style="background:var(--dim-announce)"></span>公告 10%</span>
+                <span class="dim-card-label"><span class="dim-card-dot" class="dot-announce"></span>公告 10%</span>
                 <span class="dim-card-value" style="color:{{ '#22C55E' if stock.signal_breakdown.announcement_score > 0 else '#EF4444' if stock.signal_breakdown.announcement_score < 0 else 'var(--text-muted)' }}">{{ '%+.3f'|format(stock.signal_breakdown.announcement_score) }}</span>
             </div>
             {% endif %}
@@ -786,19 +786,19 @@ TPL_STOCK = """<!DOCTYPE html>
         <div class="detail-section-title">📈 硬信号指标</div>
         <div class="metrics-row" style="flex-wrap:wrap">
             {% if stock.momentum_5d is not none %}
-            <div class="metric-chip" style="min-width:80px">
+            <div class="metric-chip" class="min-w-lg">
                 <span class="metric-chip-label">5日动量</span>
                 <span class="metric-chip-val" style="color:{{ '#22C55E' if stock.momentum_5d > 0 else '#EF4444' if stock.momentum_5d < 0 else 'var(--text-secondary)' }}">{{ '%+.1f'|format(stock.momentum_5d) }}%</span>
             </div>
             {% endif %}
             {% if stock.momentum_20d is not none %}
-            <div class="metric-chip" style="min-width:80px">
+            <div class="metric-chip" class="min-w-lg">
                 <span class="metric-chip-label">20日动量</span>
                 <span class="metric-chip-val" style="color:{{ '#22C55E' if stock.momentum_20d > 0 else '#EF4444' if stock.momentum_20d < 0 else 'var(--text-secondary)' }}">{{ '%+.1f'|format(stock.momentum_20d) }}%</span>
             </div>
             {% endif %}
             {% if stock.ma_alignment %}
-            <div class="metric-chip" style="min-width:80px">
+            <div class="metric-chip" class="min-w-lg">
                 <span class="metric-chip-label">均线排列</span>
                 <span class="metric-chip-val" style="color:{{ '#22C55E' if stock.ma_alignment == 'bullish' else '#EF4444' if stock.ma_alignment == 'bearish' else 'var(--text-secondary)' }}">{{ {'bullish': '多头', 'bearish': '空头', 'neutral': '交叉'}[stock.ma_alignment] }}</span>
             </div>
@@ -822,7 +822,7 @@ TPL_STOCK = """<!DOCTYPE html>
             </div>
             {% endif %}
             {% if stock.mcap_yi is not none %}
-            <div class="metric-chip" style="min-width:80px">
+            <div class="metric-chip" class="min-w-lg">
                 <span class="metric-chip-label">总市值</span>
                 <span class="metric-chip-val">{{ "%.0f"|format(stock.mcap_yi) }}亿</span>
             </div>
@@ -832,7 +832,7 @@ TPL_STOCK = """<!DOCTYPE html>
 </div>
 
 {# ── L2: LLM Analysis Dimensions ── #}
-<div class="detail-section" style="margin-bottom:16px">
+<div class="detail-section" class="mb-md">
     <div class="detail-section-title">🤖 LLM 分析维度</div>
     <table class="llm-table">
         {% for dim_name, dim in [('技术面', stock.technical), ('基本面', stock.fundamental), ('资金面', stock.capital), ('公告', stock.announcement)] %}
@@ -849,13 +849,13 @@ TPL_STOCK = """<!DOCTYPE html>
 
 {# ── L3: Dragon Tiger Evidence ── #}
 {% if stock.dragon_tiger %}
-<div class="detail-section" style="margin-bottom:16px">
+<div class="detail-section" class="mb-md">
     <div class="detail-section-title">🐉 龙虎榜</div>
     {% for dt in stock.dragon_tiger %}
     <div class="dt-block">
         <div class="dt-title">{{ dt.reason }}</div>
         <div class="dt-row">
-            <span style="color:var(--text-muted)">净额</span>
+            <span class="text-muted">净额</span>
             <span style="color:{{ '#22C55E' if dt.net_buy > 0 else '#EF4444' }}; font-family:var(--font-mono); font-weight:600">
                 {{ '%+.0f'|format(dt.net_buy) if dt.net_buy | abs >= 10000 else '%+.2f万'|format(dt.net_buy / 10000) }}
             </span>
@@ -867,7 +867,7 @@ TPL_STOCK = """<!DOCTYPE html>
 
 {# ── L3: Announcement Evidence ── #}
 {% if stock.announcement.key_events %}
-<div class="detail-section" style="margin-bottom:16px">
+<div class="detail-section" class="mb-md">
     <div class="detail-section-title">📢 公告关键事件</div>
     {% for evt in stock.announcement.key_events[:5] %}
     <div class="ann-block">
@@ -885,7 +885,7 @@ TPL_STOCK = """<!DOCTYPE html>
 
 {# ── Risk ── #}
 {% if stock.risk_points %}
-<div class="risk-block" style="margin-bottom:16px">⚠ 风险提示：{{ stock.risk_points | join('、') }}</div>
+<div class="risk-block" class="mb-md">⚠ 风险提示：{{ stock.risk_points | join('、') }}</div>
 {% endif %}
 
 <div class="disclaimer">{{ disclaimer }}</div>
@@ -940,14 +940,14 @@ TPL_HISTORY = """<!DOCTYPE html>
 {% for code, data in history.items() %}
 <div style="margin-bottom:32px">
     <div class="section-title">
-        <a href="{% if use_app_pages %}app/stock.html?code={{ code }}{% else %}stock/{{ code }}.html{% endif %}" style="text-decoration:none;color:inherit">
+        <a href="{% if use_app_pages %}app/stock.html?code={{ code }}{% else %}stock/{{ code }}.html{% endif %}" class="stock-code-link">
             {{ code }} {{ data.name }}
         </a>
         <span class="count">({{ data.records|length }} 条)</span>
     </div>
 
     {# Stats Cards #}
-    <div class="stats-grid" style="margin-bottom:16px">
+    <div class="stats-grid" class="mb-md">
         <div class="stat-card">
             <div class="stat-value" style="color:{{ '#22C55E' if data.stats.avg_score > 0 else '#EF4444' if data.stats.avg_score < 0 else 'var(--signal-hold)' }}">
                 {{ '%+.2f'|format(data.stats.avg_score) }}
@@ -955,15 +955,15 @@ TPL_HISTORY = """<!DOCTYPE html>
             <div class="stat-label">平均评分</div>
         </div>
         <div class="stat-card">
-            <div class="stat-value" style="color:var(--signal-bull)">{{ data.stats.bullish_count }}</div>
+            <div class="stat-value" class="text-bull">{{ data.stats.bullish_count }}</div>
             <div class="stat-label">看多</div>
         </div>
         <div class="stat-card">
-            <div class="stat-value" style="color:var(--signal-bear)">{{ data.stats.bearish_count }}</div>
+            <div class="stat-value" class="text-bear">{{ data.stats.bearish_count }}</div>
             <div class="stat-label">看空</div>
         </div>
         <div class="stat-card">
-            <div class="stat-value" style="color:var(--signal-hold)">{{ data.stats.hold_count }}</div>
+            <div class="stat-value" class="text-hold">{{ data.stats.hold_count }}</div>
             <div class="stat-label">观望</div>
         </div>
     </div>
@@ -986,18 +986,18 @@ TPL_HISTORY = """<!DOCTYPE html>
             {% for r in data.records|reverse %}
             <tr>
                 <td>{{ r.trade_date }}</td>
-                <td style="color:var(--text-muted)">{{ '盘前' if r.report_type == 'pre' else '盘后' }}</td>
+                <td class="text-muted">{{ '盘前' if r.report_type == 'pre' else '盘后' }}</td>
                 <td style="color:{{ '#22C55E' if r.hard_score > 0 else '#EF4444' if r.hard_score < 0 else 'var(--text-muted)' }}">{{ '%+.3f'|format(r.hard_score) }}</td>
                 <td style="color:{{ '#22C55E' if r.soft_score > 0 else '#EF4444' if r.soft_score < 0 else 'var(--text-muted)' }}">{{ '%+.3f'|format(r.soft_score) }}</td>
                 <td>{{ '%+.3f'|format(r.gate_score) }}</td>
                 <td style="font-weight:700;color:{{ '#22C55E' if r.final_score > 0.2 else '#EF4444' if r.final_score < -0.2 else 'var(--text-muted)' }}">{{ '%+.3f'|format(r.final_score) }}</td>
                 <td>
                     {% if r.final_signal in ['strong_buy', 'buy', 'bullish'] %}
-                    <span style="color:var(--signal-bull)">🟢 看多</span>
+                    <span class="text-bull">🟢 看多</span>
                     {% elif r.final_signal in ['sell', 'strong_sell'] %}
-                    <span style="color:var(--signal-bear)">🔴 看空</span>
+                    <span class="text-bear">🔴 看空</span>
                     {% else %}
-                    <span style="color:var(--signal-hold)">⚪ 观望</span>
+                    <span class="text-hold">⚪ 观望</span>
                     {% endif %}
                 </td>
                 <td>{{ (r.confidence * 100)|round(0) }}%</td>
@@ -1052,11 +1052,11 @@ TPL_DASHBOARD = """<!DOCTYPE html>
 
 {# ── Market Temperature ── #}
 {% if market and market.close %}
-<div class="signal-dashboard" style="margin-bottom:24px">
+<div class="signal-dashboard" class="mb-lg">
     <div class="signal-dashboard-head">
         <div>
             <span class="signal-dashboard-label">市场温度</span>
-            <span class="signal-dashboard-value" style="margin-left:8px">{{ market.index_name }} {{ "%.2f"|format(market.close) }}</span>
+            <span class="signal-dashboard-value">{{ market.index_name }} {{ "%.2f"|format(market.close) }}</span>
             {% if market.change_pct >= 0 %}
             <span class="signal-dashboard-change change-up">+{{ "%.2f"|format(market.change_pct) }}%</span>
             {% else %}
@@ -1081,7 +1081,7 @@ TPL_DASHBOARD = """<!DOCTYPE html>
 {% endif %}
 
 {# ── Comparison Matrix ── #}
-<div class="detail-section" style="margin-bottom:24px">
+<div class="detail-section" class="mb-lg">
     <div class="detail-section-title">自选股对比矩阵</div>
     <div class="table-scroll">
     <table class="data-table">
@@ -1105,7 +1105,7 @@ TPL_DASHBOARD = """<!DOCTYPE html>
             {% set badge_cls = 'bullish' if s in ['strong_buy','buy','bullish'] else 'bearish' if s in ['sell','strong_sell'] else 'hold' %}
             <tr>
                 <td class="stock-cell">
-                    <a href="{% if use_app_pages %}app/stock.html?code={{ stock.code }}{% else %}stock/{{ stock.code }}.html{% endif %}" style="text-decoration:none;color:inherit">
+                    <a href="{% if use_app_pages %}app/stock.html?code={{ stock.code }}{% else %}stock/{{ stock.code }}.html{% endif %}" class="stock-code-link">
                         {{ stock.code }}<br>
                         <span style="font-size:11px;color:var(--text-muted);font-weight:400">{{ stock.name }}</span>
                     </a>
@@ -1121,8 +1121,8 @@ TPL_DASHBOARD = """<!DOCTYPE html>
                 <td>{{ '%.2f'|format(stock.volume_ratio) if stock.volume_ratio is not none else '-' }}</td>
                 <td>{{ '%.1f'|format(stock.pe_ttm) if stock.pe_ttm is not none else '-' }}</td>
                 <td>{{ (stock.confidence * 100)|round(0) }}%</td>
-                <td>{% if stock.signal_breakdown.has_dragon_tiger %}<span style="color:var(--dim-dragon)">●</span>{% else %}<span style="color:var(--text-faint)">—</span>{% endif %}</td>
-                <td>{% if stock.signal_breakdown.has_announcement %}<span style="color:var(--dim-announce)">●</span>{% else %}<span style="color:var(--text-faint)">—</span>{% endif %}</td>
+                <td>{% if stock.signal_breakdown.has_dragon_tiger %}<span class="text-dragon">●</span>{% else %}<span class="text-faint">—</span>{% endif %}</td>
+                <td>{% if stock.signal_breakdown.has_announcement %}<span class="text-announce">●</span>{% else %}<span class="text-faint">—</span>{% endif %}</td>
             </tr>
             {% endfor %}
         </tbody>
@@ -1131,7 +1131,7 @@ TPL_DASHBOARD = """<!DOCTYPE html>
 </div>
 
 {# ── 5-Layer Signal Breakdown ── #}
-<div class="detail-section" style="margin-bottom:24px">
+<div class="detail-section" class="mb-lg">
     <div class="detail-section-title">5层信号分解</div>
     <div class="table-scroll">
     <table class="data-table">
@@ -1141,8 +1141,8 @@ TPL_DASHBOARD = """<!DOCTYPE html>
                 <th style="color:var(--dim-hard)">硬 40%</th>
                 <th style="color:var(--dim-soft)">软 25%</th>
                 <th style="color:var(--dim-gate)">门控 15%</th>
-                <th style="color:var(--dim-dragon)">龙虎 10%</th>
-                <th style="color:var(--dim-announce)">公告 10%</th>
+                <th class="text-dragon">龙虎 10%</th>
+                <th class="text-announce">公告 10%</th>
                 <th>最终评分</th>
             </tr>
         </thead>
@@ -1150,15 +1150,15 @@ TPL_DASHBOARD = """<!DOCTYPE html>
             {% for stock in stocks %}
             <tr>
                 <td class="stock-cell">
-                    <a href="{% if use_app_pages %}app/stock.html?code={{ stock.code }}{% else %}stock/{{ stock.code }}.html{% endif %}" style="text-decoration:none;color:inherit">
+                    <a href="{% if use_app_pages %}app/stock.html?code={{ stock.code }}{% else %}stock/{{ stock.code }}.html{% endif %}" class="stock-code-link">
                         {{ stock.code }} {{ stock.name }}
                     </a>
                 </td>
                 <td style="color:{{ '#22C55E' if stock.signal_breakdown.hard_score > 0 else '#EF4444' if stock.signal_breakdown.hard_score < 0 else 'var(--text-muted)' }}">{{ '%+.3f'|format(stock.signal_breakdown.hard_score) }}</td>
                 <td style="color:{{ '#22C55E' if stock.signal_breakdown.soft_score > 0 else '#EF4444' if stock.signal_breakdown.soft_score < 0 else 'var(--text-muted)' }}">{{ '%+.3f'|format(stock.signal_breakdown.soft_score) }}</td>
                 <td style="color:{{ '#22C55E' if stock.signal_breakdown.gate_score > 0.5 else '#EF4444' if stock.signal_breakdown.gate_score < 0.5 else 'var(--text-muted)' }}">{{ '%+.3f'|format(stock.signal_breakdown.gate_score) }}</td>
-                <td>{% if stock.signal_breakdown.has_dragon_tiger %}{{ '%+.3f'|format(stock.signal_breakdown.dragon_tiger_score) }}{% else %}<span style="color:var(--text-faint)">—</span>{% endif %}</td>
-                <td>{% if stock.signal_breakdown.has_announcement %}{{ '%+.3f'|format(stock.signal_breakdown.announcement_score) }}{% else %}<span style="color:var(--text-faint)">—</span>{% endif %}</td>
+                <td>{% if stock.signal_breakdown.has_dragon_tiger %}{{ '%+.3f'|format(stock.signal_breakdown.dragon_tiger_score) }}{% else %}<span class="text-faint">—</span>{% endif %}</td>
+                <td>{% if stock.signal_breakdown.has_announcement %}{{ '%+.3f'|format(stock.signal_breakdown.announcement_score) }}{% else %}<span class="text-faint">—</span>{% endif %}</td>
                 <td style="font-weight:700;color:{{ '#22C55E' if stock.signal_breakdown.final_score > 0.2 else '#EF4444' if stock.signal_breakdown.final_score < -0.2 else 'var(--text-muted)' }}">{{ '%+.3f'|format(stock.signal_breakdown.final_score) }}</td>
             </tr>
             {% endfor %}
@@ -1169,7 +1169,7 @@ TPL_DASHBOARD = """<!DOCTYPE html>
 
 {# ── Signal Distribution Bar ── #}
 {% if stocks %}
-<div class="detail-section" style="margin-bottom:24px">
+<div class="detail-section" class="mb-lg">
     <div class="detail-section-title">信号分布</div>
     {% set total = bullish_count + hold_count + bearish_count %}
     {% if total > 0 %}
