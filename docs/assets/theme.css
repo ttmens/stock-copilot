@@ -275,6 +275,20 @@ a:hover { color: var(--accent-blue); }
 .signal-badge.bearish { background: rgba(239,68,68,0.15); color: var(--signal-bear); border: 1px solid rgba(239,68,68,0.3); }
 .signal-badge.hold { background: rgba(148,163,184,0.12); color: var(--signal-hold); border: 1px solid rgba(148,163,184,0.2); }
 
+/* Consensus Dot — shows debate agreement level */
+.consensus-dot {
+    display: inline-block;
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    margin-left: 6px;
+    flex-shrink: 0;
+    vertical-align: middle;
+    box-shadow: 0 0 6px currentColor;
+}
+.consensus-dot.high { background: var(--signal-bull); color: var(--signal-bull); }
+.consensus-dot.medium { background: #F59E0B; color: #F59E0B; }
+.consensus-dot.low { background: var(--signal-bear); color: var(--signal-bear); }
+
 /* L1 Decision Card — Seeking Alpha style */
 .decision-card {
     background: var(--canvas-alt);

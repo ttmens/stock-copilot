@@ -159,6 +159,12 @@ def _save_latest_json(
 
     stocks = []
     for a in analyses:
+        # Debate / consensus data
+        consensus = None
+        debate_data = None
+        if a.debate:
+            consensus = a.debate.get("consensus_score")
+            debate_data = a.debate
         stocks.append({
             "code": a.snapshot.code,
             "name": a.snapshot.name,
@@ -183,6 +189,8 @@ def _save_latest_json(
                 r for agent in [a.technical, a.fundamental, a.capital]
                 for r in agent.risk_points
             ],
+            "consensus_score": consensus,
+            "debate": debate_data,
         })
 
     latest = {

@@ -98,6 +98,8 @@ def _analysis_to_stock_dict(a: StockAnalysis) -> dict:
         ],
         "signal_breakdown": sb,
         "dragon_tiger": dt_entries,
+        "consensus_score": a.debate.get("consensus_score") if a.debate else None,
+        "debate": a.debate,
     }
     return _enrich_stock_dict(stock)
 
@@ -387,6 +389,11 @@ TPL_HOME = """<!DOCTYPE html>
         {% set s = stock.overall_sentiment %}
         {% set badge_cls = 'bullish' if s in ['strong_buy','buy','bullish'] else 'bearish' if s in ['sell','strong_sell'] else 'hold' %}
         <span class="signal-badge {{ badge_cls }}">{{ stock.overall_focus }}</span>
+        {% if stock.consensus_score is not none %}
+        {% set cs = stock.consensus_score %}
+        {% set cs_level = 'high' if cs >= 0.8 else 'medium' if cs >= 0.5 else 'low' %}
+        <span class="consensus-dot {{ cs_level }}" title="共识度 {{ (cs * 100)|round(0) }}%"></span>
+        {% endif %}
     </div>
 
     <div class="decision-card">
@@ -497,7 +504,16 @@ TPL_HOME = """<!DOCTYPE html>
         <tr data-code="{{ stock.code }}" data-name="{{ stock.name }}" data-signal="{{ s }}" data-score="{{ score }}" data-confidence="{{ stock.confidence }}">
             <td class="stock-code"><a href="{% if use_app_pages %}app/stock.html?code={{ stock.code }}{% else %}stock/{{ stock.code }}.html{% endif %}" class="stock-code-link">{{ stock.code }}</a></td>
             <td><span class="stock-name">{{ stock.name }}</span></td>
-            <td><span class="signal-badge {{ badge_cls }}" title="{{ stock.overall_focus }}">{{ stock.overall_focus[:20] }}{% if stock.overall_focus|length > 20 %}…{% endif %}</span></td>
+            <td>
+{% set s2 = stock.overall_sentiment %}
+{% set badge_cls2 = 'bullish' if s2 in ['strong_buy','buy','bullish'] else 'bearish' if s2 in ['sell','strong_sell'] else 'hold' %}
+<span class="signal-badge {{ badge_cls2 }}" title="{{ stock.overall_focus }}">{{ stock.overall_focus[:20]}}{% if stock.overall_focus|length > 20 %}…{% endif %}</span>
+{% if stock.consensus_score is not none %}
+{% set cs2 = stock.consensus_score %}
+{% set cs_level2 = 'high' if cs2 >= 0.8 else 'medium' if cs2 >= 0.5 else 'low' %}
+<span class="consensus-dot {{ cs_level2 }}" title="共识度 {{ (cs2 * 100)|round(0) }}%"></span>
+{% endif %}
+</td>
             <td>
                 <div class="score-mini">
                     <span class="score-mini-val {{ score_cls }}">{{ '%+.3f'|format(score) }}</span>

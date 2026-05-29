@@ -159,6 +159,8 @@ class LatestJsonStock(BaseModel):
     fundamental: dict
     capital: dict
     risk_points: list[str]
+    consensus_score: Optional[float] = Field(default=None, description="辩论共识分数 0-1")
+    debate: Optional[dict] = Field(default=None, description="辩论交互结果")
 
 
 class LatestJsonMeta(BaseModel):

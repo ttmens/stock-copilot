@@ -87,6 +87,11 @@ class ReportResponse(BaseModel):
     markdown: str
 
 
+class ScenarioSimRequest(BaseModel):
+    scenario: str
+    symbols: Optional[list[str]] = None
+
+
 @app.get("/health")
 async def health_check():
     from src.data.db_manager import SignalDB
@@ -368,6 +373,49 @@ async def system_status():
             pass
 
     return result
+
+
+@app.post("/api/scenario/simulate")
+async def simulate_scenario(req: ScenarioSimRequest):
+    from src.analysis.scenario_sim import ScenarioSimulator
+    from src.watchlist.manager import WatchlistManager
+
+    if not req.scenario.strip():
+        raise HTTPException(status_code=400, detail="scenario description is required")
+
+    wl_manager = WatchlistManager()
+
+    # Resolve symbols: use provided list or fall back to full watchlist
+    if req.symbols:
+        all_items = {item["code"]: item for item in wl_manager.list_dicts()}
+        watchlist = []
+        missing = []
+        for sym in req.symbols:
+            sym = sym.strip()
+            if sym in all_items:
+                watchlist.append(all_items[sym])
+            else:
+                missing.append(sym)
+        if not watchlist:
+            raise HTTPException(
+                status_code=400,
+                detail=f"None of the provided symbols found in watchlist: {missing}",
+            )
+        if missing:
+            logger.warning("Symbols not in watchlist, skipped: %s", missing)
+    else:
+        watchlist = wl_manager.list_dicts()
+        if not watchlist:
+            raise HTTPException(status_code=400, detail="Watchlist is empty and no symbols provided")
+
+    simulator = ScenarioSimulator()
+    result = await simulator.simulate(scenario=req.scenario, watchlist=watchlist)
+
+    return {
+        "impact_matrix": [item.to_dict() for item in result.impact_matrix],
+        "overall_assessment": result.overall_assessment,
+        "report": result.to_markdown(),
+    }
 
 
 # ── Static files (MUST be after all API routes) ──────────────
