@@ -162,11 +162,13 @@ class EvolutionEngine:
         from src.evolution.tracker import PerformanceTracker
         from src.evolution.optimizer import WeightOptimizer
         from src.evolution.stock_pool import StockPoolManager
+        from src.evolution.agent_tracker import AgentEvolutionTracker
 
         self.db = db
         self.tracker = PerformanceTracker()
         self.optimizer = WeightOptimizer()
         self.pool_manager = StockPoolManager(db=db)
+        self.agent_tracker = AgentEvolutionTracker()  # D5
         self._cycle_count = 0
 
     def run_cycle(self, db=None) -> EvolutionReport:
@@ -256,6 +258,14 @@ class EvolutionEngine:
             report.phase = "act"
             try:
                 # Weights already saved in orient phase per settings
+
+                # D5: Agent-level evolution (track and adjust)
+                try:
+                    agent_suggestions = self.agent_tracker.get_suggestions()
+                    logger.info("🤖 Agent evolution: %d suggestions", len(agent_suggestions))
+                    report.recommendations.extend(agent_suggestions)
+                except Exception as e:
+                    logger.warning("Agent evolution tracking failed: %s", e)
 
                 # Generate and save evolution report
                 report.summary = self._generate_summary(report)

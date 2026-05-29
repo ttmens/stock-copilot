@@ -1,16 +1,23 @@
 # Stock Copilot 当前系统状态（SSOT）
 
-> **版本 v1.5.0 (Phase D)** | 更新 2026-05-27  
+> **版本 v2.0.0 (Phase D: MiroFish 增强)** | 更新 2026-05-29  
 > 代码仓库: `ttmens/stock-copilot` | 线上: https://ttmens.github.io/stock-copilot/
 
-## Phase D 要点（设计债清零）
+## Phase D 要点（MiroFish 群体智能增强）
 
-- **FundamentalAgent**: pipeline 真实 LLM 调用（Announcement 仅作 unavailable 降级）
-- **门控接线**: `_detect_gate_flags` → `fuse_signals(is_suspended, limit_up_down)`
-- **站点不重算 fusion**: `generate_site` 使用 pipeline 输出的 `signal_breakdown` / `key_basis`
-- **UI**: 价格色（红涨绿跌）与信号色分离；首页卡片 L2（summary + key_basis）；静动混合（config.js + intraday）
-- **数据**: `announcement_days` 过滤公告；`news` 写入 latest.json
-- **权重**: `fusion_weights.json` 五层 sum=1.0
+- **D1 多 Agent 辩论交互**: 3 Agent Round1 → 互相看到结论 → Round2 修正/确认 → 共识度融入 confidence
+  - `src/agents/debate.py` — DebateOrchestrator（共识度算法、分歧检测、情感偏移追踪）
+  - 共识度 1.0 → confidence +0.15；0.4 → confidence -0.03
+- **D2 股票关系图谱**: SQLite 轻量图谱（同行业/同概念/供应链关系 + 时效窗口）
+  - `src/data/stock_graph.py` — StockRelationGraph（关联查询、概念分组、自动推断）
+- **D3 ReACT 深度分析**: Agent 主动查询历史信号、资金流趋势（不再被动接收数据）
+  - `src/agents/tools.py` — AnalysisTools + build_react_context
+  - TechnicalAgent 已注入 ReACT 上下文
+- **D4 场景推演模拟**: "如果龙头跌停/板块轮动 → 持仓影响矩阵"
+  - `src/analysis/scenario_sim.py` — ScenarioSimulator（LLM 逐股影响分析）
+- **D5 Agent 动态进化**: 追踪各 Agent 维度准确率，动态调整 prompt 侧重点
+  - `src/evolution/agent_tracker.py` — AgentEvolutionTracker（维度统计、prompt 调整建议）
+  - 已集成到 EvolutionEngine OODA 循环
 
 ## Phase C 要点
 
@@ -38,15 +45,17 @@
 ## 2. 系统架构总览
 
 ```
-用户层: 静态 HTML (GitHub Pages) / CLI / FastAPI (/health, /analyze, /reports/*)
+用户层: 静态 HTML (GitHub Pages) / CLI / FastAPI (/health, /analyze, /reports/*, /api/scenario/*)
         ↓
-编排层: run_analysis() → 采集 → 硬信号 → 4 Agent → 5层融合 → 报告 → 持久化 → 通知 → 站点
+编排层: run_analysis() → 采集 → 硬信号 → 4 Agent → 辩论Round2 → 5层融合+共识度 → 报告 → 持久化 → 通知 → 站点
         ↓
 决策层:
   ├─ 硬信号引擎: HardSignals (动量/均线/量能/估值/资金流 → 综合评分)
-  ├─ 软信号引擎: 4 LLM Agent (技术面/基本面/资金/公告 → 情感评分)
+  ├─ 软信号引擎: 4 LLM Agent + ReACT工具 (技术面/基本面/资金/公告 → 情感评分)
+  ├─ 辩论引擎: DebateOrchestrator (Round1→互相查看→Round2修正→共识度)
   ├─ 门控引擎: 规则确认 (量能确认/涨跌停过滤/Agent一致性)
-  └─ 融合引擎: FusedSignal (5层加权: 硬40% + 软25% + 门控15% + 龙虎10% + 公告10%)
+  ├─ 图谱引擎: StockRelationGraph (同行业/概念关联查询)
+  └─ 融合引擎: FusedSignal (5层加权 + 辩论共识度bonus)
         ↓
 数据层:
   ├─ 采集链: AkShare → Sina → Tencent (K线) / Eastmoney → Tencent (估值) / Eastmoney → AkShare (资金)

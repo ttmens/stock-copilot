@@ -9,7 +9,7 @@ from src.llm.client import LLMClient
 
 logger = logging.getLogger(__name__)
 
-SYSTEM_PROMPT = """你是 A 股投研分析助手，仅基于用户提供的数据进行分析。
+_BASE_SYSTEM_PROMPT = """你是 A 股投研分析助手，仅基于用户提供的数据进行分析。
 
 规则：
 1. 只使用用户提供的 JSON 数据，不得编造任何数字、公告、资金数据
@@ -77,5 +77,24 @@ class TechnicalAgent(BaseAgent):
             ma20=snapshot.ma.ma20,
         )
 
-        result_json = await self.call_llm(SYSTEM_PROMPT, user_prompt)
+        # D5: Inject dynamic prompt adjustments based on agent evolution
+        try:
+            from src.evolution.agent_tracker import AgentEvolutionTracker
+            tracker = AgentEvolutionTracker()
+            suffix = tracker.build_agent_prompt_suffix("technical")
+            system_prompt = _BASE_SYSTEM_PROMPT + suffix
+        except Exception:
+            system_prompt = _BASE_SYSTEM_PROMPT
+
+        # D3: Inject ReACT context (history + capital flow)
+        try:
+            from src.agents.tools import AnalysisTools, build_react_context
+            tools = AnalysisTools()
+            react_context = build_react_context(snapshot.code, tools)
+            if react_context:
+                user_prompt += "\n\n## 辅助数据（主动查询）\n" + react_context
+        except Exception:
+            pass
+
+        result_json = await self.call_llm(system_prompt, user_prompt)
         return self._make_result(result_json)

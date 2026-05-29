@@ -133,6 +133,8 @@ def fuse_signals(
     limit_up_down: bool = False,
     dragon_tiger_entries: Optional[list[dict]] = None,
     announcement_result: Optional[AgentResult] = None,
+    consensus_score: float = 0.0,  # D1: MiroFish debate consensus
+    debate_result: Optional[dict] = None,  # D1: full debate metadata
 ) -> FusedSignal:
     """Fuse all signal layers into a final signal.
 
@@ -245,13 +247,16 @@ def fuse_signals(
     result.signal_label = SIGNAL_LABELS.get(result.final_signal, "⚪ 观望")
 
     # Confidence: based on agreement between layers and data completeness
-    result.confidence = _compute_confidence(
+    base_confidence = _compute_confidence(
         hard_score=result.hard_score,
         soft_score=result.soft_score,
         gate_score=result.gate_score,
         has_hard=has_hard,
         has_soft=has_soft,
     )
+    # D1: Apply debate consensus bonus
+    consensus_bonus = _consensus_confidence_bonus(consensus_score)
+    result.confidence = max(0.0, min(1.0, base_confidence + consensus_bonus))
 
     return result
 
@@ -347,6 +352,7 @@ def _compute_confidence(
     gate_score: float,
     has_hard: bool,
     has_soft: bool,
+    consensus_score: float = 0.0,  # D1: MiroFish-inspired debate consensus
 ) -> float:
     """Compute confidence in the fused signal [0.0, 1.0].
 
@@ -378,3 +384,15 @@ def _compute_confidence(
         data_bonus += 0.15
 
     return max(0.0, min(1.0, agreement * 0.4 + strength * 0.4 + data_bonus))
+
+
+def _consensus_confidence_bonus(consensus_score: float) -> float:
+    """D1: MiroFish-inspired debate consensus boosts confidence.
+
+    When agents reach high consensus after debate, confidence increases.
+    When they disagree, confidence decreases (disagreement = risk signal).
+    """
+    if consensus_score <= 0:
+        return 0.0
+    # Scale: consensus 1.0 → +0.15 bonus, 0.4 → -0.05 penalty
+    return (consensus_score - 0.5) * 0.3

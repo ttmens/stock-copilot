@@ -234,6 +234,10 @@ async def _analyze_and_fuse(
     concurrency = max(1, settings.pipeline.llm_concurrency)
     sem = asyncio.Semaphore(concurrency)
 
+    # D1: Initialize debate orchestrator
+    from src.agents.debate import DebateOrchestrator
+    debate_orch = DebateOrchestrator()
+
     async def process_one(snap: StockSnapshot):
         async with sem:
             hard = compute_hard_signals(
@@ -257,6 +261,31 @@ async def _analyze_and_fuse(
                 "fundamental": f_result,
                 "capital": c_result,
             }
+
+            # D1: Run debate round 2 (agents see each other's conclusions)
+            debate_result = None
+            consensus_score = 0.0
+            try:
+                debate_orchestrator_agents = {
+                    "technical": tech,
+                    "capital": cap,
+                    "fundamental": fund,
+                }
+                debate_result, agents = await debate_orch.run_debate_round(
+                    code=snap.code,
+                    name=snap.name,
+                    round1_results=agents,
+                    agents=debate_orchestrator_agents,
+                )
+                consensus_score = debate_result.consensus_score
+                logger.info(
+                    "[debate] %s %s: consensus=%.2f, shifts=%s",
+                    snap.code, snap.name, consensus_score,
+                    [k for k, v in debate_result.to_dict()["shifts"].items() if v],
+                )
+            except Exception as e:
+                logger.warning("[debate] Failed for %s: %s — falling back to round1", snap.code, e)
+                # Fallback: use round 1 results unchanged
             is_suspended, limit_up_down = _detect_gate_flags(snap)
             fused = fuse_signals(
                 code=snap.code,
@@ -268,6 +297,8 @@ async def _analyze_and_fuse(
                 limit_up_down=limit_up_down,
                 dragon_tiger_entries=[e.model_dump() for e in snap.dragon_tiger] if snap.dragon_tiger else None,
                 announcement_result=a_result,
+                consensus_score=consensus_score,
+                debate_result=debate_result.to_dict() if debate_result else None,
             )
             key_basis = _build_key_basis(t_result, c_result, a_result, f_result, hard, fused)
             overall_summary = _build_overall_summary(fused, t_result, f_result)
@@ -301,7 +332,28 @@ async def _analyze_and_fuse(
                 confidence=round(fused.confidence, 2),
                 signal_breakdown=signal_breakdown,
                 hard_metrics=hard_metrics,
+                # D1: Debate results
+                debate=debate_result.to_dict() if debate_result else None,
             )
+
+            # D2: Enrich with stock relationship graph context
+            try:
+                from src.data.stock_graph import StockRelationGraph
+                graph = StockRelationGraph()
+                context = graph.get_context_summary(snap.code)
+                if context["total_relations"] > 0:
+                    analysis.related_stocks = [
+                        {
+                            "code": r["target_code"] if r["source_code"] == snap.code else r["source_code"],
+                            "type": r["relation_type"],
+                            "strength": r["strength"],
+                            "industry": r.get("industry", ""),
+                            "concept": r.get("concept", ""),
+                        }
+                        for r in context["by_type"].get("same_industry", [])[:5]
+                    ]
+            except Exception:
+                pass
             return snap.code, analysis, fused, hard
 
     results = await asyncio.gather(*[process_one(s) for s in snapshots], return_exceptions=True)

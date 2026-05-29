@@ -125,6 +125,11 @@ class StockAnalysis(BaseModel):
     signal_breakdown: dict = Field(default_factory=dict)
     hard_metrics: dict = Field(default_factory=dict)
 
+    # D1: Debate results (MiroFish-inspired multi-agent interaction)
+    debate: Optional[dict] = Field(default=None, description="辩论交互结果：consensus_score, disagreements, shifts")
+    # D2: Related stocks from graph
+    related_stocks: list[dict] = Field(default_factory=list, description="关联股票：同行业/同概念的信号联动")
+
 
 class MarketOverview(BaseModel):
     index_code: str = "000001"
