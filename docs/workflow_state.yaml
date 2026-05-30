@@ -5,7 +5,7 @@ target_phase: phase_f
 gates:
   g1_research: approved
   g2_design: approved
-  g3_ui_acceptance: pending
+  g3_ui_acceptance: approved
 acceptance:
   functional: pass
   ux: pass
@@ -14,7 +14,7 @@ artifacts:
   ssot_status: docs/design/08-CURRENT-STATUS.md
   decisions: docs/DECISIONS.md
   design_tokens: docs/DESIGN.md
-  phase_plan: docs/design/15-PHASE-D-PLAN.md
+  phase_plan: docs/design/16-PHASE-F-PLAN.md
   self_check: scripts/self_check.py
 checkpoints:
   - phase: phase_d_complete
@@ -29,7 +29,17 @@ checkpoints:
       - scripts/self_check.py
       - src/api/routes.py (health + system status + auth)
       - config/fusion_weights.json (v3)
+  - phase: phase_f_ooda_loop
+    completed_at: "2026-05-30"
+    artifacts:
+      - src/evolution/postmortem.py
+      - src/evolution/thesis.py
+      - src/analysis/breadth.py
+      - src/data/signal_fusion.py (contradiction detection)
+      - tests/test_postmortem.py
+      - tests/test_breadth.py
+      - docs/design/16-PHASE-F-PLAN.md
 blockers: []
 last_docs_hygiene:
   status: pass
-  checked_at: "2026-05-27"
+  checked_at: "2026-05-30"
