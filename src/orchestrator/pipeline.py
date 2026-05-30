@@ -311,6 +311,7 @@ async def _analyze_and_fuse(
                 "final_score": round(fused.final_score, 3),
                 "has_dragon_tiger": fused.data_available.get("dragon_tiger", False),
                 "has_announcement": fused.data_available.get("announcement", False),
+                "contradiction_flags": fused.contradiction_flags or [],
             }
             hard_metrics = {
                 "hard_score": round(hard.composite_score, 3),

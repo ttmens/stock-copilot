@@ -293,7 +293,7 @@ TPL_HOME = """<!DOCTYPE html>
 
 <div class="shell">
 
-{# ── Signal Dashboard (Market Temperature) ── #}
+{# ── Signal Dashboard (Market Temperature + Breadth) ── #}
 {% if market and market.close %}
 <div class="signal-dashboard">
     <div class="signal-dashboard-head">
@@ -306,6 +306,15 @@ TPL_HOME = """<!DOCTYPE html>
             <span class="signal-dashboard-change change-down">{{ "%.2f"|format(market.change_pct) }}%</span>
             {% endif %}
         </div>
+        {# ── Phase F: Market Breadth Score ── #}
+        {% if breadth %}
+        <div class="breadth-widget">
+            <span class="breadth-label">市场广度</span>
+            <span class="breadth-score" style="color:{{ breadth.color }}">{{ breadth.score }}</span>
+            <span class="breadth-zone" style="color:{{ breadth.color }}">{{ breadth.zone_label }}</span>
+            <span class="breadth-exposure">建议仓位 {{ breadth.exposure }}</span>
+        </div>
+        {% endif %}
     </div>
     {# Signal distribution bar #}
     {% set total = bullish_count + hold_count + bearish_count %}
@@ -397,6 +406,10 @@ TPL_HOME = """<!DOCTYPE html>
         {% set cs_label = '高共识' if cs >= 0.8 else '中共识' if cs >= 0.5 else '低共识' %}
         {% set cs_color = '#22C55E' if cs >= 0.8 else '#F59E0B' if cs >= 0.5 else '#EF4444' %}
         <span class="consensus-badge" style="color:{{ cs_color }}" title="Agent 辩论共识度 {{ (cs * 100)|round(0) }}%">🤖 {{ cs_label }} {{ (cs * 100)|round(0) }}%</span>
+        {% endif %}
+        {# ── Phase F: Contradiction Flags ── #}
+        {% if stock.signal_breakdown.contradiction_flags and stock.signal_breakdown.contradiction_flags|length > 0 %}
+        <span class="contradiction-badge" title="{% for flag in stock.signal_breakdown.contradiction_flags %}⚠ {{ flag.type }}: {{ flag.description }}{% if not loop.last %}; {% endif %}{% endfor %}">⚠️ 冲突×{{ stock.signal_breakdown.contradiction_flags|length }}</span>
         {% endif %}
     </div>
 
@@ -1372,10 +1385,33 @@ def generate_site(report: Report, target_dir: str | None = None) -> str:
 
     stocks.sort(key=lambda s: abs(s["signal_breakdown"]["final_score"]), reverse=True)
 
+    # ── Phase F: Market Breadth Score ──────────────────────────────────
+    from src.analysis.breadth import MarketBreadthScorer
+    breadth_scorer = MarketBreadthScorer()
+    breadth_raw = breadth_scorer.compute(report.analyses)
+
+    # 为模板添加 zone_label 和 color
+    zone_labels = {
+        "strong": "强势", "healthy": "健康", "neutral": "中性",
+        "weakening": "走弱", "critical": "极弱",
+    }
+    zone_colors = {
+        "strong": "#22C55E", "healthy": "#84CC16", "neutral": "#F59E0B",
+        "weakening": "#F97316", "critical": "#EF4444",
+    }
+    breadth_data = {
+        **breadth_raw,
+        "zone_label": zone_labels.get(breadth_raw["zone"], breadth_raw["zone"]),
+        "color": zone_colors.get(breadth_raw["zone"], "#94A3B8"),
+    }
+
+    # ── Phase F: Postmortem / Signal Review Stats ──────────────────────
+    postmortem_stats = _load_postmortem_stats(settings)
+
     archive = _load_archive_entries(settings)
     history = _load_history(settings)
 
-    latest = {"meta": meta, "market": market, "stocks": stocks, "failed_symbols": report.failed_symbols, "archive": archive}
+    latest = {"meta": meta, "market": market, "stocks": stocks, "failed_symbols": report.failed_symbols, "archive": archive, "breadth": breadth_data}
     json_path = data_dir / "latest.json"
     new_count = len(stocks)
     existing_count = 0
@@ -1407,6 +1443,7 @@ def generate_site(report: Report, target_dir: str | None = None) -> str:
         bullish_count=bullish_count, hold_count=hold_count, bearish_count=bearish_count,
         use_app_pages=use_app_pages, bottom_nav=Template(BOTTOM_NAV).render(page="home"),
         nav=Template(NAV_HTML).render(page="home"),
+        breadth=breadth_data,
     )
     (site_dir / "index.html").write_text(html, encoding="utf-8")
 
@@ -1520,6 +1557,91 @@ def _load_history(settings) -> dict:
         })
     conn.close()
     return history
+
+
+def _load_postmortem_stats(settings) -> dict:
+    """Load signal postmortem summary stats from DB for last 30 days."""
+    import sqlite3
+    db_path = Path("data") / "signals.db"
+    if not db_path.exists():
+        return {}
+    try:
+        conn = sqlite3.connect(str(db_path))
+        conn.row_factory = sqlite3.Row
+        cur = conn.cursor()
+
+        # Check if postmortem table exists
+        cur.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='signal_postmortems'")
+        if not cur.fetchone():
+            conn.close()
+            return {}
+
+        # Get postmortem summary
+        cur.execute("""
+            SELECT
+                COUNT(*) as total,
+                SUM(CASE WHEN outcome_category = 'true_positive' THEN 1 ELSE 0 END) as tp,
+                SUM(CASE WHEN outcome_category = 'false_positive' THEN 1 ELSE 0 END) as fp,
+                SUM(CASE WHEN outcome_category = 'missed_opportunity' THEN 1 ELSE 0 END) as missed,
+                SUM(CASE WHEN outcome_category = 'regime_mismatch' THEN 1 ELSE 0 END) as regime
+            FROM signal_postmortems
+            WHERE outcome_category IS NOT NULL
+        """)
+        row = cur.fetchone()
+        if not row or row["total"] == 0:
+            conn.close()
+            return {}
+
+        total = row["total"]
+        result = {
+            "total": total,
+            "tp": row["tp"] or 0,
+            "fp": row["fp"] or 0,
+            "missed": row["missed"] or 0,
+            "regime": row["regime"] or 0,
+            "win_rate": round((row["tp"] or 0) / total, 3),
+        }
+
+        # Average returns
+        cur.execute("""
+            SELECT AVG(actual_return_5d) as avg_5d, AVG(actual_return_20d) as avg_20d
+            FROM signal_postmortems WHERE outcome_category IS NOT NULL
+        """)
+        ret_row = cur.fetchone()
+        result["avg_return_5d"] = round(ret_row["avg_5d"], 2) if ret_row["avg_5d"] is not None else None
+        result["avg_return_20d"] = round(ret_row["avg_20d"], 2) if ret_row["avg_20d"] is not None else None
+
+        # Contradiction impact
+        cur.execute("""
+            SELECT
+                SUM(CASE WHEN outcome_category = 'true_positive' THEN 1 ELSE 0 END) * 1.0 / COUNT(*) as win_rate,
+                COUNT(*) as cnt
+            FROM signal_postmortems
+            WHERE outcome_category IS NOT NULL
+              AND contradiction_flags IS NOT NULL AND contradiction_flags != '[]'
+              AND contradiction_flags != 'null'
+        """)
+        contra_row = cur.fetchone()
+        result["contra_win_rate"] = round(contra_row["win_rate"], 3) if contra_row and contra_row["cnt"] > 0 else None
+        result["contra_count"] = contra_row["cnt"] if contra_row else 0
+
+        cur.execute("""
+            SELECT
+                SUM(CASE WHEN outcome_category = 'true_positive' THEN 1 ELSE 0 END) * 1.0 / COUNT(*) as win_rate,
+                COUNT(*) as cnt
+            FROM signal_postmortems
+            WHERE outcome_category IS NOT NULL
+              AND (contradiction_flags IS NULL OR contradiction_flags = '[]' OR contradiction_flags = 'null')
+        """)
+        no_contra_row = cur.fetchone()
+        result["no_contra_win_rate"] = round(no_contra_row["win_rate"], 3) if no_contra_row and no_contra_row["cnt"] > 0 else None
+        result["no_contra_count"] = no_contra_row["cnt"] if no_contra_row else 0
+
+        conn.close()
+        return result
+    except Exception as e:
+        logger.warning("Failed to load postmortem stats: %s", e)
+        return {}
 
 
 def _copy_app_assets(site_dir: Path) -> None:
