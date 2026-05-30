@@ -312,7 +312,7 @@ TPL_HOME = """<!DOCTYPE html>
             <span class="breadth-label">市场广度</span>
             <span class="breadth-score" style="color:{{ breadth.color }}">{{ breadth.score }}</span>
             <span class="breadth-zone" style="color:{{ breadth.color }}">{{ breadth.zone_label }}</span>
-            <span class="breadth-exposure">建议仓位 {{ breadth.exposure }}</span>
+            <span class="breadth-exposure">建议仓位 {{ breadth.recommended_exposure }}</span>
         </div>
         {% endif %}
     </div>

@@ -29,9 +29,9 @@
       "momentum_5d": 4.48,
       "ma_alignment": "bullish",
       "volume_ratio": 1.82,
-      "pe_ttm": 18.8,
-      "pb": 2.98,
-      "mcap_yi": 6790.0,
+      "pe_ttm": null,
+      "pb": null,
+      "mcap_yi": null,
       "technical": {
         "status": "ok",
         "summary": "股价从26.56低点连续反弹，近三日放量上攻，5月29日长阳突破均线，收于27.75，站上MA5/10/20，均线开始趋向多头排列，成交量创近期新高，量价配合良好，短期趋势转强。",
@@ -53,44 +53,8 @@
         "sentiment": "neutral",
         "key_events": []
       },
-      "news": [
-        {
-          "title": "长江电力600900.SH)：2026年一季报净利润为67.61亿元、同比较去年同期上涨30.50%",
-          "url": "http://finance.eastmoney.com/a/202604303726076779.html",
-          "date": "2026-04-30 09:58:32",
-          "source": "界面新闻"
-        },
-        {
-          "title": "长江电力600900.SH)：2025年年报净利润为345.03亿元、同比较去年同期上涨6.17%",
-          "url": "http://finance.eastmoney.com/a/202604303726147821.html",
-          "date": "2026-04-30 10:44:35",
-          "source": "界面新闻"
-        },
-        {
-          "title": "今日37只个股突破半年线",
-          "url": "http://finance.eastmoney.com/a/202605263749429551.html",
-          "date": "2026-05-26 12:48:00",
-          "source": "证券时报网"
-        },
-        {
-          "title": "公用事业行业资金流入榜：华能蒙电、长江电力等净流入资金居前",
-          "url": "http://finance.eastmoney.com/a/202605293754527124.html",
-          "date": "2026-05-29 17:16:00",
-          "source": "证券时报网"
-        },
-        {
-          "title": "主力动向：5月29日特大单净流出676.60亿元",
-          "url": "http://finance.eastmoney.com/a/202605293754526111.html",
-          "date": "2026-05-29 17:16:00",
-          "source": "证券时报网"
-        }
-      ],
-      "risk_points": [
-        "短期涨幅较大，存在获利回吐风险",
-        "成交量若不能维持，反弹可能受阻",
-        "单日数据不足以判断资金趋势，存在误导风险",
-        "北向数据缺失，资金面分析不完整"
-      ],
+      "news": [],
+      "risk_points": [],
       "signal_breakdown": {
         "hard_score": 0.594,
         "soft_score": 0.6,
@@ -146,9 +110,9 @@
       "momentum_5d": 9.29,
       "ma_alignment": "bullish",
       "volume_ratio": 1.35,
-      "pe_ttm": 35.8,
-      "pb": 8.27,
-      "mcap_yi": 14566.0,
+      "pe_ttm": null,
+      "pb": null,
+      "mcap_yi": null,
       "technical": {
         "status": "ok",
         "summary": "股价站上所有均线，均线多头排列（MA5>MA10>MA20），短期趋势强劲。近期成交量显著放大，资金介入明显，尤其是5月13日、27日、28日放量上涨，显示多头动能充足。但5月29日高开低走收阴线，且成交量维持高位，可能面临获利回吐压力。当前价格距离MA5较近，短期支撑位看71.75附近，压力位关注79.63前高。整体趋势向上，但需警惕回调风险。",
@@ -170,44 +134,8 @@
         "sentiment": "neutral",
         "key_events": []
       },
-      "news": [
-        {
-          "title": "603052  强势连续2涨停！601138 超50亿主力资金净流入！消费电子，集体异动",
-          "url": "http://finance.eastmoney.com/a/202605133735702992.html",
-          "date": "2026-05-13 12:43:00",
-          "source": "证券时报网"
-        },
-        {
-          "title": "工业富联601138.SH)：2026年一季报净利润为105.95亿元",
-          "url": "http://finance.eastmoney.com/a/202604293723678712.html",
-          "date": "2026-04-29 09:01:04",
-          "source": "界面新闻"
-        },
-        {
-          "title": "9只个股大宗交易超5000万元",
-          "url": "http://finance.eastmoney.com/a/202605273751600210.html",
-          "date": "2026-05-27 21:36:00",
-          "source": "证券时报网"
-        },
-        {
-          "title": "55家公司获海外机构调研",
-          "url": "http://finance.eastmoney.com/a/202605293754560845.html",
-          "date": "2026-05-29 17:50:00",
-          "source": "证券时报网"
-        },
-        {
-          "title": "电子行业5月29日资金流向日报",
-          "url": "http://finance.eastmoney.com/a/202605293754528532.html",
-          "date": "2026-05-29 17:16:00",
-          "source": "证券时报网"
-        }
-      ],
-      "risk_points": [
-        "5月29日高开低走放量阴线，短期回调压力",
-        "价格远离MA20，乖离率较大",
-        "主力资金大幅流出可能预示短期抛压",
-        "北向资金缺失导致资金面分析不完整"
-      ],
+      "news": [],
+      "risk_points": [],
       "signal_breakdown": {
         "hard_score": 0.569,
         "soft_score": 0.6,
@@ -263,9 +191,9 @@
       "momentum_5d": 5.96,
       "ma_alignment": "bullish",
       "volume_ratio": 2.15,
-      "pe_ttm": 5.0,
-      "pb": 0.47,
-      "mcap_yi": 3915.0,
+      "pe_ttm": null,
+      "pb": null,
+      "mcap_yi": null,
       "technical": {
         "status": "ok",
         "summary": "兴业银行日线均线多头排列（MA5>MA10>MA20），股价于5月29日放量突破18元并收于18.50，创近期新高，成交量显著放大，显示资金积极介入。短期趋势由震荡转升，MACD或形成金叉。后续关注能否站稳18元关口。",
@@ -287,44 +215,8 @@
         "sentiment": "neutral",
         "key_events": []
       },
-      "news": [
-        {
-          "title": "兴业银行601166.SH)：郝超副行长任职资格获核准，自5月8日起就任",
-          "url": "http://finance.eastmoney.com/a/202605133735373542.html",
-          "date": "2026-05-13 08:58:55",
-          "source": "界面新闻"
-        },
-        {
-          "title": "兴业银行601166.SH)：2026年一季报净利润为238.32亿元、同比较去年同期上涨0.15%",
-          "url": "http://finance.eastmoney.com/a/202604303725971273.html",
-          "date": "2026-04-30 09:22:50",
-          "source": "界面新闻"
-        },
-        {
-          "title": "银行行业今日净流入资金3.08亿元，中国银行等6股净流入资金超5000万元",
-          "url": "http://finance.eastmoney.com/a/202605213745275436.html",
-          "date": "2026-05-21 17:00:00",
-          "source": "证券时报网"
-        },
-        {
-          "title": "银行股大分化：建行股价创新高，股份行普跌，城商行“独霸”四强",
-          "url": "http://finance.eastmoney.com/a/202605253748399874.html",
-          "date": "2026-05-25 20:32:00",
-          "source": "界面新闻"
-        },
-        {
-          "title": "高股息精选概念涨1.11%，主力资金净流入这些股",
-          "url": "http://finance.eastmoney.com/a/202605293754558696.html",
-          "date": "2026-05-29 17:53:00",
-          "source": "证券时报网"
-        }
-      ],
-      "risk_points": [
-        "短期快速拉升后存在回调压力",
-        "18元附近或有回踩确认需求",
-        "仅一日数据，资金方向可能存在反复",
-        "北向资金缺席，无法全面评估外资动向"
-      ],
+      "news": [],
+      "risk_points": [],
       "signal_breakdown": {
         "hard_score": 0.629,
         "soft_score": 0.35,
@@ -380,9 +272,9 @@
       "momentum_5d": 4.31,
       "ma_alignment": "bullish",
       "volume_ratio": 1.72,
-      "pe_ttm": 19.7,
-      "pb": 2.03,
-      "mcap_yi": 10177.0,
+      "pe_ttm": null,
+      "pb": null,
+      "mcap_yi": null,
       "technical": {
         "status": "ok",
         "summary": "中国神华近期股价从44.35低点反弹，连续三日上涨，最新收盘46.92站上所有均线（MA5=45.75, MA10=45.691, MA20=45.8715），MA5已上穿MA10形成金叉，且成交量明显放大（5月29日5844万手），显示多头资金积极介入。短期均线有向上发散迹象，但中期均线仍处于走平状态，尚未形成完全多头排列。前期高点46.97（5月20日）为近期压力位，突破后有望进一步上行。整体技术面转强，但需确认反弹持续性。",
@@ -404,44 +296,8 @@
         "sentiment": "neutral",
         "key_events": []
       },
-      "news": [
-        {
-          "title": "中国神华601088.SH)：2026年一季报净利润为106.67亿元、同比较去年同期下降10.73%",
-          "url": "http://finance.eastmoney.com/a/202604253718946593.html",
-          "date": "2026-04-25 10:23:17",
-          "source": "界面新闻"
-        },
-        {
-          "title": "中国神华：独立董事袁国强、陈汉文辞职",
-          "url": "http://finance.eastmoney.com/a/202605283752882070.html",
-          "date": "2026-05-28 17:43:00",
-          "source": "财中社"
-        },
-        {
-          "title": "煤炭行业5月29日资金流向日报",
-          "url": "http://finance.eastmoney.com/a/202605293754559866.html",
-          "date": "2026-05-29 17:50:00",
-          "source": "证券时报网"
-        },
-        {
-          "title": "煤炭概念涨1.19%，主力资金净流入这些股",
-          "url": "http://finance.eastmoney.com/a/202605293754556891.html",
-          "date": "2026-05-29 17:53:00",
-          "source": "证券时报网"
-        },
-        {
-          "title": "煤炭行业资金流入榜：中国神华、辽宁能源等净流入资金居前",
-          "url": "http://finance.eastmoney.com/a/202605273751351452.html",
-          "date": "2026-05-27 16:46:00",
-          "source": "证券时报网"
-        }
-      ],
-      "risk_points": [
-        "前期高点46.97附近存在抛压",
-        "中期均线尚未完全多头排列，反弹可能遇阻",
-        "北向数据缺失，可能影响外资动向判断",
-        "单日主力净流入金额较小，方向性不明确"
-      ],
+      "news": [],
+      "risk_points": [],
       "signal_breakdown": {
         "hard_score": 0.502,
         "soft_score": 0.35,
@@ -497,9 +353,9 @@
       "momentum_5d": 4.58,
       "ma_alignment": "bullish",
       "volume_ratio": 0.91,
-      "pe_ttm": 6.2,
-      "pb": 0.41,
-      "mcap_yi": 3121.0,
+      "pe_ttm": null,
+      "pb": null,
+      "mcap_yi": null,
       "technical": {
         "status": "ok",
         "summary": "浦发银行近期股价从阶段低点8.75反弹至9.37，MA5（9.272）、MA10（9.115）、MA20（9.119）呈现多头排列，显示短期趋势向上。成交量在反弹过程中有所放大，尤其5月26日、27日明显放量，量价配合良好。目前股价站稳短期均线，有望进一步挑战前高。",
@@ -521,45 +377,8 @@
         "sentiment": "neutral",
         "key_events": []
       },
-      "news": [
-        {
-          "title": "新宝股份：首次回购公司股份600000股",
-          "url": "http://finance.eastmoney.com/a/202605203743778311.html",
-          "date": "2026-05-20 20:31:00",
-          "source": "证券日报"
-        },
-        {
-          "title": "浦发银行600000.SH)：2026年一季报净利润为178.61亿元、同比较去年同期上涨1.49%",
-          "url": "http://finance.eastmoney.com/a/202604303726053285.html",
-          "date": "2026-04-30 09:43:29",
-          "source": "界面新闻"
-        },
-        {
-          "title": "信托概念涨1.17%，主力资金净流入这些股",
-          "url": "http://finance.eastmoney.com/a/202605293754555687.html",
-          "date": "2026-05-29 17:53:00",
-          "source": "证券时报网"
-        },
-        {
-          "title": "油价巨震风控升级 多家银行将原油基金调至R5最高风险等级",
-          "url": "http://finance.eastmoney.com/a/202605273751437725.html",
-          "date": "2026-05-27 19:04:36",
-          "source": "界面新闻"
-        },
-        {
-          "title": "银行行业今日净流入资金3.08亿元，中国银行等6股净流入资金超5000万元",
-          "url": "http://finance.eastmoney.com/a/202605213745275436.html",
-          "date": "2026-05-21 17:00:00",
-          "source": "证券时报网"
-        }
-      ],
-      "risk_points": [
-        "短期涨幅较大，存在获利回吐压力。",
-        "若成交量萎缩，可能转为震荡。",
-        "需关注9.40-9.50区域压力能否有效突破。",
-        "北向资金数据缺失，市场情绪不完整",
-        "单日主力资金流向可能受短期因素扰动"
-      ],
+      "news": [],
+      "risk_points": [],
       "signal_breakdown": {
         "hard_score": 0.411,
         "soft_score": 0.6,
@@ -615,9 +434,9 @@
       "momentum_5d": -7.65,
       "ma_alignment": "bearish",
       "volume_ratio": 1.01,
-      "pe_ttm": -15.2,
-      "pb": 2.09,
-      "mcap_yi": 1053.0,
+      "pe_ttm": null,
+      "pb": null,
+      "mcap_yi": null,
       "technical": {
         "status": "ok",
         "summary": "该股近期持续下跌，短期均线（MA5、MA10）已下穿长期均线（MA20），呈典型空头排列。股价从16.55元跌至13.89元，跌幅明显，且5月29日成交量放大至1.61亿股，但价格创近期新低，显示抛压仍重。当前多方力量不足，未出现止跌信号，下方支撑需关注前低或整数关口。",
@@ -639,44 +458,8 @@
         "sentiment": "neutral",
         "key_events": []
       },
-      "news": [
-        {
-          "title": "电力设备行业5月29日资金流向日报",
-          "url": "http://finance.eastmoney.com/a/202605293754527860.html",
-          "date": "2026-05-29 17:16:00",
-          "source": "证券时报网"
-        },
-        {
-          "title": "隆基绿能：公司2026年第一季度BC组件销量8.34GW",
-          "url": "http://finance.eastmoney.com/a/202605213745349863.html",
-          "date": "2026-05-21 18:13:19",
-          "source": "每日经济新闻"
-        },
-        {
-          "title": "隆基绿能：公司目前暂无回购股份并注销的计划",
-          "url": "http://finance.eastmoney.com/a/202605213745344750.html",
-          "date": "2026-05-21 18:03:45",
-          "source": "每日经济新闻"
-        },
-        {
-          "title": "隆基绿能：公司成功开发且正在规模化建设的技术是纳米合金矩阵式接触技术",
-          "url": "http://finance.eastmoney.com/a/202605213745349927.html",
-          "date": "2026-05-21 18:14:01",
-          "source": "每日经济新闻"
-        },
-        {
-          "title": "解密主力资金出逃股 连续5日净流出784股",
-          "url": "http://finance.eastmoney.com/a/202605293754528439.html",
-          "date": "2026-05-29 17:16:00",
-          "source": "证券时报网"
-        }
-      ],
-      "risk_points": [
-        "均线空头排列，短期反弹可能受阻于均线压力",
-        "放量下跌表明资金出逃，存在继续下探风险",
-        "主力资金流出可能反映短期市场情绪转弱",
-        "数据样本仅一日，趋势未明，需警惕一日游行情"
-      ],
+      "news": [],
+      "risk_points": [],
       "signal_breakdown": {
         "hard_score": -0.398,
         "soft_score": -1.0,
@@ -728,9 +511,9 @@
       "momentum_5d": 3.25,
       "ma_alignment": "bullish",
       "volume_ratio": 0.68,
-      "pe_ttm": 15.8,
-      "pb": 1.51,
-      "mcap_yi": 21474.0,
+      "pe_ttm": null,
+      "pb": null,
+      "mcap_yi": null,
       "technical": {
         "status": "ok",
         "summary": "股价近期震荡上行，站上短期均线，但均线尚未形成多头排列（MA5略低于MA10）。成交量在冲高后萎缩，上涨动能不足。短期关键支撑在95.8附近，压力位100-103。整体方向不明朗，需关注后续量能配合及均线排列变化。",
@@ -752,45 +535,8 @@
         "sentiment": "neutral",
         "key_events": []
       },
-      "news": [
-        {
-          "title": "分红季|每股现金红利人民币2.2012元！红利低波（H30269.CSI）成分股中国移动，发布2025年末期利润分派A股实施公告！",
-          "url": "http://finance.eastmoney.com/a/202605293754390393.html",
-          "date": "2026-05-29 14:58:46",
-          "source": "每日经济新闻"
-        },
-        {
-          "title": "超级品牌概念涨1.64%，主力资金净流入27股",
-          "url": "http://finance.eastmoney.com/a/202605293754550520.html",
-          "date": "2026-05-29 17:50:00",
-          "source": "证券时报网"
-        },
-        {
-          "title": "超级品牌概念下跌1.26%，6股主力资金净流出超亿元",
-          "url": "http://finance.eastmoney.com/a/202605283752868053.html",
-          "date": "2026-05-28 17:25:00",
-          "source": "证券时报网"
-        },
-        {
-          "title": "通信行业资金流入榜：中兴通讯等16股净流入资金超亿元",
-          "url": "http://finance.eastmoney.com/a/202605283752865517.html",
-          "date": "2026-05-28 17:25:00",
-          "source": "证券时报网"
-        },
-        {
-          "title": "超级品牌概念涨0.17%，主力资金净流入26股",
-          "url": "http://finance.eastmoney.com/a/202605273751352014.html",
-          "date": "2026-05-27 16:46:00",
-          "source": "证券时报网"
-        }
-      ],
-      "risk_points": [
-        "均线死叉风险（MA5下穿MA10）",
-        "量能不足导致反弹夭折",
-        "前期高点103附近阻力较大",
-        "北向资金数据缺失，无法全面评估资金面",
-        "仅有一日数据，无法判断趋势持续性"
-      ],
+      "news": [],
+      "risk_points": [],
       "signal_breakdown": {
         "hard_score": 0.326,
         "soft_score": 0.25,
@@ -846,9 +592,9 @@
       "momentum_5d": 3.79,
       "ma_alignment": "neutral",
       "volume_ratio": 1.5,
-      "pe_ttm": 22.6,
-      "pb": 1.55,
-      "mcap_yi": 1859.0,
+      "pe_ttm": null,
+      "pb": null,
+      "mcap_yi": null,
       "technical": {
         "status": "ok",
         "summary": "近期股价从5月21日低点8.74反弹至9.04，站上MA5和MA10，但MA20（8.985）构成上方压力。均线系统仍呈空头排列（MA5<MA10<MA20），表明中期趋势偏弱。5月29日成交量显著放大至2.01亿股，为近期最大量，显示资金介入意愿增强。短期需关注能否有效突破MA20并站稳，若放量突破则有望扭转趋势；若受阻回落，则可能延续震荡。",
@@ -870,45 +616,8 @@
         "sentiment": "neutral",
         "key_events": []
       },
-      "news": [
-        {
-          "title": "中国核电601985.SH)：2026年一季报净利润为20.64亿元、同比较去年同期下降34.19%",
-          "url": "http://finance.eastmoney.com/a/202604303726074735.html",
-          "date": "2026-04-30 09:57:35",
-          "source": "界面新闻"
-        },
-        {
-          "title": "中国核电601985.SH)：2025年年报净利润为93.04亿元、同比较去年同期上涨6.00%",
-          "url": "http://finance.eastmoney.com/a/202604303726149082.html",
-          "date": "2026-04-30 10:44:31",
-          "source": "界面新闻"
-        },
-        {
-          "title": "今日39只个股突破年线",
-          "url": "http://finance.eastmoney.com/a/202605293754563433.html",
-          "date": "2026-05-29 17:54:00",
-          "source": "证券时报网"
-        },
-        {
-          "title": "【盘中播报】43只股长线走稳 站上年线",
-          "url": "http://finance.eastmoney.com/a/202605293754314630.html",
-          "date": "2026-05-29 14:11:00",
-          "source": "证券时报网"
-        },
-        {
-          "title": "公用事业行业资金流入榜：华能蒙电、长江电力等净流入资金居前",
-          "url": "http://finance.eastmoney.com/a/202605293754527124.html",
-          "date": "2026-05-29 17:16:00",
-          "source": "证券时报网"
-        }
-      ],
-      "risk_points": [
-        "均线空头排列尚未扭转，反弹可能遇阻回落",
-        "若缩量回调，则可能再度考验8.66附近支撑",
-        "市场整体情绪若转弱，反弹力度或有限",
-        "北向资金数据缺失，信息不完整",
-        "单日主力净流入不足以判断资金趋势，可能存在短期波动"
-      ],
+      "news": [],
+      "risk_points": [],
       "signal_breakdown": {
         "hard_score": 0.229,
         "soft_score": 0.25,
@@ -964,9 +673,9 @@
       "momentum_5d": 3.29,
       "ma_alignment": "neutral",
       "volume_ratio": 1.34,
-      "pe_ttm": 18.4,
-      "pb": 1.17,
-      "mcap_yi": 2456.0,
+      "pe_ttm": null,
+      "pb": null,
+      "mcap_yi": null,
       "technical": {
         "status": "ok",
         "summary": "京沪高铁近期股价从4.85附近反弹，5月29日放量收于5.02，站上所有短期均线（MA5=4.904, MA10=4.909, MA20=4.917），短期均线开始向上发散，呈初步多头排列。成交量显著放大（2.4亿），显示资金入场意愿增强。5月12日高点5.25为近期压力位，若持续放量有望挑战。但均线粘合尚未完全打开，需警惕冲高回落风险。",
@@ -988,45 +697,8 @@
         "sentiment": "neutral",
         "key_events": []
       },
-      "news": [
-        {
-          "title": "京沪高铁601816.SH)：2026年一季报净利润为31.43亿元、同比较去年同期上涨6.03%",
-          "url": "http://finance.eastmoney.com/a/202604303725759890.html",
-          "date": "2026-04-30 09:00:23",
-          "source": "界面新闻"
-        },
-        {
-          "title": "强势股追踪 主力资金连续5日净流入78股",
-          "url": "http://finance.eastmoney.com/a/202605273751386888.html",
-          "date": "2026-05-27 17:18:00",
-          "source": "证券时报网"
-        },
-        {
-          "title": "今日起京沪高铁实行票价调整方案 全部车次车票均显示折扣",
-          "url": "http://finance.eastmoney.com/a/202605263749824555.html",
-          "date": "2026-05-26 18:28:39",
-          "source": "中国经营报"
-        },
-        {
-          "title": "交通运输行业资金流入榜：中远海控等5股净流入资金超3000万元",
-          "url": "http://finance.eastmoney.com/a/202605203743594713.html",
-          "date": "2026-05-20 17:28:00",
-          "source": "证券时报网"
-        },
-        {
-          "title": "京沪高铁：对京沪高速线和合蚌高速线部分动车组列车的公布票价上浮20%",
-          "url": "http://finance.eastmoney.com/a/202605113733199596.html",
-          "date": "2026-05-11 17:57:27",
-          "source": "财联社"
-        }
-      ],
-      "risk_points": [
-        "前期高点5.25附近存在套牢盘压力",
-        "均线尚未完全发散，短期回调风险仍存",
-        "若后续量能萎缩，反弹可能夭折",
-        "仅一日资金数据，趋势判断可靠性不足",
-        "北向资金缺失，外资动向不明"
-      ],
+      "news": [],
+      "risk_points": [],
       "signal_breakdown": {
         "hard_score": 0.237,
         "soft_score": 0.35,
@@ -1082,9 +754,9 @@
       "momentum_5d": 2.59,
       "ma_alignment": "bullish",
       "volume_ratio": 1.36,
-      "pe_ttm": 31.8,
-      "pb": 3.78,
-      "mcap_yi": 8769.0,
+      "pe_ttm": null,
+      "pb": null,
+      "mcap_yi": null,
       "technical": {
         "status": "ok",
         "summary": "短期价格站上MA5和MA10，但受MA20（97.69）压制，反弹量能不足。5月29日跳空高开后回落收长上影，显示98附近抛压较重。整体处于震荡筑底阶段，需观察能否放量突破MA20及98关口，若失败则有再次探底风险。",
@@ -1106,44 +778,8 @@
         "sentiment": "neutral",
         "key_events": []
       },
-      "news": [
-        {
-          "title": "超级品牌概念涨1.64%，主力资金净流入27股",
-          "url": "http://finance.eastmoney.com/a/202605293754550520.html",
-          "date": "2026-05-29 17:50:00",
-          "source": "证券时报网"
-        },
-        {
-          "title": "比亚迪发布自研高算力芯片“璇玑A3”，为中国首款4nm智驾芯片，并宣布为城市领航兜底服务",
-          "url": "http://finance.eastmoney.com/a/202605283753064749.html",
-          "date": "2026-05-28 21:48:54",
-          "source": "红星资本局"
-        },
-        {
-          "title": "超级品牌概念下跌1.26%，6股主力资金净流出超亿元",
-          "url": "http://finance.eastmoney.com/a/202605283752868053.html",
-          "date": "2026-05-28 17:25:00",
-          "source": "证券时报网"
-        },
-        {
-          "title": "4nm自研智驾芯片：比亚迪开卷城市领航",
-          "url": "http://finance.eastmoney.com/a/202605293754441197.html",
-          "date": "2026-05-29 16:09:00",
-          "source": "财中社"
-        },
-        {
-          "title": "超级品牌概念涨0.17%，主力资金净流入26股",
-          "url": "http://finance.eastmoney.com/a/202605273751352014.html",
-          "date": "2026-05-27 16:46:00",
-          "source": "证券时报网"
-        }
-      ],
-      "risk_points": [
-        "反弹量能不足，存在冲高回落风险",
-        "若无法突破MA20，可能再次下探前低93.36",
-        "北向数据缺失，资金面判断不完整",
-        "主力净流入金额较小，可能缺乏支撑力度"
-      ],
+      "news": [],
+      "risk_points": [],
       "signal_breakdown": {
         "hard_score": 0.246,
         "soft_score": 0.25,
@@ -1199,9 +835,9 @@
       "momentum_5d": 2.77,
       "ma_alignment": "neutral",
       "volume_ratio": 1.55,
-      "pe_ttm": 20.0,
-      "pb": 6.19,
-      "mcap_yi": 16576.0,
+      "pe_ttm": null,
+      "pb": null,
+      "mcap_yi": null,
       "technical": {
         "status": "ok",
         "summary": "贵州茅台近20日股价从1401元持续下跌至1326元，整体呈现空头格局。均线系统MA5(1292.85) < MA10(1302.77) < MA20(1333.39)，呈典型空头排列。近期在1250附近获得支撑后出现放量反弹，5月29日收大阳线，但尚未有效突破短期均线压制。目前趋势仍偏空，反弹持续性存疑，需观察能否站稳MA10及MA20。量能方面，反弹日成交量显著放大，但后续若缩量则可能再度回落。",
@@ -1223,43 +859,8 @@
         "sentiment": "neutral",
         "key_events": []
       },
-      "news": [
-        {
-          "title": "贵州茅台600519.SH)：2026年一季报净利润为272.43亿元、同比较去年同期上涨1.47%",
-          "url": "http://finance.eastmoney.com/a/202604253718938246.html",
-          "date": "2026-04-25 10:15:22",
-          "source": "界面新闻"
-        },
-        {
-          "title": "贵州茅台：股份回购完成，耗资30亿",
-          "url": "http://finance.eastmoney.com/a/202605273752783635.html",
-          "date": "2026-05-27 21:24:30",
-          "source": "国际金融报"
-        },
-        {
-          "title": "贵州茅台回购219万股 金额30亿元",
-          "url": "http://finance.eastmoney.com/a/202605273751439066.html",
-          "date": "2026-05-27 18:53:00",
-          "source": "财中社"
-        },
-        {
-          "title": "贵州茅台：股份回购完成 耗资30亿元回购218.86万股",
-          "url": "http://finance.eastmoney.com/a/202605273751435142.html",
-          "date": "2026-05-27 18:52:00",
-          "source": "证券时报网"
-        },
-        {
-          "title": "贵州茅台：完成30亿元股份回购",
-          "url": "http://finance.eastmoney.com/a/202605273751430588.html",
-          "date": "2026-05-27 18:45:34",
-          "source": "财联社"
-        }
-      ],
-      "risk_points": [
-        "趋势尚未扭转，反弹可能只是超跌修复",
-        "若后续缩量或受阻于均线，可能二次探底",
-        "数据不完整，无法全面评估资金动向"
-      ],
+      "news": [],
+      "risk_points": [],
       "signal_breakdown": {
         "hard_score": 0.157,
         "soft_score": 0.25,
@@ -1315,9 +916,9 @@
       "momentum_5d": 0.51,
       "ma_alignment": "neutral",
       "volume_ratio": 1.79,
-      "pe_ttm": 17.8,
-      "pb": 2.57,
-      "mcap_yi": 834.0,
+      "pe_ttm": null,
+      "pb": null,
+      "mcap_yi": null,
       "technical": {
         "status": "ok",
         "summary": "青岛啤酒近期持续下跌，均线呈空头排列，MA5<MA10<MA20，价格在MA5上方但低于MA10和MA20。5月29日放量大涨，收于61.14，成交量为近期最大，显示短期反弹动能较强。但整体趋势仍偏空，需关注能否突破MA10（60.96）及MA20（61.78）压力。若反弹承压，可能再度考验59元支撑。量能是否持续是观察重点。",
@@ -1339,44 +940,8 @@
         "sentiment": "neutral",
         "key_events": []
       },
-      "news": [
-        {
-          "title": "青岛啤酒600600.SH)：独立董事张然因个人工作安排辞职",
-          "url": "http://finance.eastmoney.com/a/202605203743708142.html",
-          "date": "2026-05-20 19:38:30",
-          "source": "界面新闻"
-        },
-        {
-          "title": "青岛啤酒600600.SH)：2026年一季报净利润为18.00亿元、同比较去年同期上涨5.23%",
-          "url": "http://finance.eastmoney.com/a/202604283721609152.html",
-          "date": "2026-04-28 09:34:46",
-          "source": "界面新闻"
-        },
-        {
-          "title": "啤酒概念涨0.77%，主力资金净流入17股",
-          "url": "http://finance.eastmoney.com/a/202605293754556110.html",
-          "date": "2026-05-29 17:53:00",
-          "source": "证券时报网"
-        },
-        {
-          "title": "超级品牌概念涨1.64%，主力资金净流入27股",
-          "url": "http://finance.eastmoney.com/a/202605293754550520.html",
-          "date": "2026-05-29 17:50:00",
-          "source": "证券时报网"
-        },
-        {
-          "title": "食品饮料行业5月29日资金流向日报",
-          "url": "http://finance.eastmoney.com/a/202605293754551583.html",
-          "date": "2026-05-29 17:50:00",
-          "source": "证券时报网"
-        }
-      ],
-      "risk_points": [
-        "均线空头排列，反弹可能受阻",
-        "成交量能否维持",
-        "若跌破59，则可能继续下探",
-        "北向资金数据缺失，资金面信息不完整"
-      ],
+      "news": [],
+      "risk_points": [],
       "signal_breakdown": {
         "hard_score": 0.127,
         "soft_score": 0.25,
@@ -1432,9 +997,9 @@
       "momentum_5d": 2.67,
       "ma_alignment": "neutral",
       "volume_ratio": 1.62,
-      "pe_ttm": 6.4,
-      "pb": 0.85,
-      "mcap_yi": 9586.0,
+      "pe_ttm": null,
+      "pb": null,
+      "mcap_yi": null,
       "technical": {
         "status": "ok",
         "summary": "招商银行近期价格从4月底的38.5附近持续下跌至5月25日的36.94低点，随后反弹至38.01。均线系统目前仍呈空头排列（MA5=37.214，MA10=37.225，MA20=37.606），但最新收盘价已站上MA20，短期有企稳迹象。5月29日成交量显著放大（15.3亿），显示资金介入意愿增强。然而，均线尚未形成多头排列，上方压力位关注MA60（未提供）及前期平台38.5附近。整体处于下跌趋势中的反弹阶段，方向有待确认。",
@@ -1456,44 +1021,8 @@
         "sentiment": "neutral",
         "key_events": []
       },
-      "news": [
-        {
-          "title": "招商银行600036.SH)：执行董事、行长王良因年龄原因辞任",
-          "url": "http://finance.eastmoney.com/a/202604303726586969.html",
-          "date": "2026-04-30 18:12:08",
-          "source": "界面新闻"
-        },
-        {
-          "title": "招商证券：董事长变更",
-          "url": "http://finance.eastmoney.com/a/202605273751293316.html",
-          "date": "2026-05-27 15:58:00",
-          "source": "上海证券报·中国证券网"
-        },
-        {
-          "title": "油价巨震风控升级 多家银行将原油基金调至R5最高风险等级",
-          "url": "http://finance.eastmoney.com/a/202605273751437725.html",
-          "date": "2026-05-27 19:04:36",
-          "source": "界面新闻"
-        },
-        {
-          "title": "解密主力资金出逃股 连续5日净流出813股",
-          "url": "http://finance.eastmoney.com/a/202605273751387729.html",
-          "date": "2026-05-27 17:18:00",
-          "source": "证券时报网"
-        },
-        {
-          "title": "解密主力资金出逃股 连续5日净流出768股",
-          "url": "http://finance.eastmoney.com/a/202605263749739722.html",
-          "date": "2026-05-26 16:55:00",
-          "source": "证券时报网"
-        }
-      ],
-      "risk_points": [
-        "均线空头排列尚未扭转，反弹可能受阻于MA20或前高38.5",
-        "若后续缩量回调，可能再次探底考验前期低点36.9附近支撑",
-        "北向资金数据缺失，信息不完整",
-        "单日主力流入可能为短期波动，缺乏趋势确认"
-      ],
+      "news": [],
+      "risk_points": [],
       "signal_breakdown": {
         "hard_score": 0.223,
         "soft_score": 0.0,
@@ -1545,9 +1074,9 @@
       "momentum_5d": -2.47,
       "ma_alignment": "bearish",
       "volume_ratio": 0.54,
-      "pe_ttm": 15.7,
-      "pb": 0.8,
-      "mcap_yi": 1360.0,
+      "pe_ttm": null,
+      "pb": null,
+      "mcap_yi": null,
       "technical": {
         "status": "ok",
         "summary": "从最近20个交易日数据看，股价自5月19日高点5.11持续回落至4.35，跌幅约15%。均线系统呈现空头排列（MA5=4.398 < MA10=4.561 < MA20=4.5805），价格持续运行于均线下方。5月18-19日放量冲高后，随后的交易日量能萎缩且价格下行，表明多头力量衰竭。当前价格接近4.31附近的前期低点，若跌破可能进一步打开下跌空间。整体趋势偏弱，短期反弹需突破MA5压力。",
@@ -1569,43 +1098,8 @@
         "sentiment": "neutral",
         "key_events": []
       },
-      "news": [
-        {
-          "title": "中国联通600050.SH)：2026年一季报净利润为21.37亿元、同比较去年同期下降17.99%",
-          "url": "http://finance.eastmoney.com/a/202604223713516783.html",
-          "date": "2026-04-22 09:17:23",
-          "source": "界面新闻"
-        },
-        {
-          "title": "122.83亿元主力资金今日撤离通信板块",
-          "url": "http://finance.eastmoney.com/a/202605263749741296.html",
-          "date": "2026-05-26 16:55:00",
-          "source": "证券时报网"
-        },
-        {
-          "title": "通信行业今日涨3.77%，主力资金净流入38.64亿元",
-          "url": "http://finance.eastmoney.com/a/202605253748276645.html",
-          "date": "2026-05-25 17:38:00",
-          "source": "证券时报网"
-        },
-        {
-          "title": "通信行业5月22日资金流向日报",
-          "url": "http://finance.eastmoney.com/a/202605223746781410.html",
-          "date": "2026-05-22 16:51:00",
-          "source": "证券时报网"
-        },
-        {
-          "title": "91股特大单净流入资金超2亿元",
-          "url": "http://finance.eastmoney.com/a/202605223746780342.html",
-          "date": "2026-05-22 16:51:00",
-          "source": "证券时报网"
-        }
-      ],
-      "risk_points": [
-        "若跌破4.31支撑，可能加速下跌",
-        "反弹至MA5或MA10附近可能遇到阻力",
-        "整体趋势偏空，不宜盲目抄底"
-      ],
+      "news": [],
+      "risk_points": [],
       "signal_breakdown": {
         "hard_score": -0.448,
         "soft_score": -0.35,
@@ -1661,9 +1155,9 @@
       "momentum_5d": -5.41,
       "ma_alignment": "bearish",
       "volume_ratio": 0.84,
-      "pe_ttm": 37.5,
-      "pb": 5.29,
-      "mcap_yi": 1219.0,
+      "pe_ttm": null,
+      "pb": null,
+      "mcap_yi": null,
       "technical": {
         "status": "ok",
         "summary": "股价自5月12日高点50.97持续下跌，跌破所有均线，均线呈空头排列（MA5<MA10<MA20），空头主导。成交量在下跌过程中放大，资金出逃明显。最新价42.98低于MA5（43.27）和MA10（44.74），反弹乏力，需警惕进一步下探。关键支撑关注前低41.98附近，压力位关注MA5和MA10。",
@@ -1685,45 +1179,8 @@
         "sentiment": "neutral",
         "key_events": []
       },
-      "news": [
-        {
-          "title": "解密主力资金出逃股 连续5日净流出736股",
-          "url": "http://finance.eastmoney.com/a/202605203743590466.html",
-          "date": "2026-05-20 17:28:00",
-          "source": "证券时报网"
-        },
-        {
-          "title": "解密主力资金出逃股 连续5日净流出668股",
-          "url": "http://finance.eastmoney.com/a/202605193742032245.html",
-          "date": "2026-05-19 16:53:00",
-          "source": "证券时报网"
-        },
-        {
-          "title": "解密主力资金出逃股 连续5日净流出800股",
-          "url": "http://finance.eastmoney.com/a/202605183740537634.html",
-          "date": "2026-05-18 16:55:00",
-          "source": "证券时报网"
-        },
-        {
-          "title": "中航沈飞：第一季度净利润同比下降62% 主要系受产品结构调整及交付进度影响",
-          "url": "http://finance.eastmoney.com/a/202604283722425755.html",
-          "date": "2026-04-28 17:40:57",
-          "source": "每日经济新闻"
-        },
-        {
-          "title": "中航沈飞：第一季度净利润同比下降61.69%",
-          "url": "http://finance.eastmoney.com/a/202604283722408184.html",
-          "date": "2026-04-28 17:37:58",
-          "source": "财联社"
-        }
-      ],
-      "risk_points": [
-        "下跌趋势延续，可能跌破前低",
-        "反弹受均线压制，难以形成有效突破",
-        "成交量萎缩，无反弹动力",
-        "北向资金数据缺失，不能排除外资流出风险",
-        "单日主力资金数据参考价值有限，需结合多日数据"
-      ],
+      "news": [],
+      "risk_points": [],
       "signal_breakdown": {
         "hard_score": -0.673,
         "soft_score": 0.05,
@@ -1779,9 +1236,9 @@
       "momentum_5d": -5.38,
       "ma_alignment": "bearish",
       "volume_ratio": 1.25,
-      "pe_ttm": 19.6,
-      "pb": 1.82,
-      "mcap_yi": 1650.0,
+      "pe_ttm": null,
+      "pb": null,
+      "mcap_yi": null,
       "technical": {
         "status": "ok",
         "summary": "股价近期持续下跌，均线呈空头排列（MA5<MA10<MA20），最新收盘价17.94低于所有均线，空头趋势明确。量能方面，下跌过程中多次放量，表明抛压沉重。近期低点18.15跌破后，下方支撑不明，短期反弹力度微弱，整体走势偏弱。",
@@ -1803,44 +1260,8 @@
         "sentiment": "neutral",
         "key_events": []
       },
-      "news": [
-        {
-          "title": "三一重工600031.SH)：2026年一季报净利润为24.81亿元",
-          "url": "http://finance.eastmoney.com/a/202604303726086871.html",
-          "date": "2026-04-30 10:03:17",
-          "source": "界面新闻"
-        },
-        {
-          "title": "三一重工：公司暂未专门针对发电机组领域进行大规模市场化布局",
-          "url": "http://finance.eastmoney.com/a/202605253748301980.html",
-          "date": "2026-05-25 18:03:18",
-          "source": "每日经济新闻"
-        },
-        {
-          "title": "134.61亿元资金今日流出机械设备股",
-          "url": "http://finance.eastmoney.com/a/202605293754551875.html",
-          "date": "2026-05-29 17:50:00",
-          "source": "证券时报网"
-        },
-        {
-          "title": "机械设备行业资金流出榜：华工科技、绿的谐波等净流出资金居前",
-          "url": "http://finance.eastmoney.com/a/202605273751353551.html",
-          "date": "2026-05-27 16:46:00",
-          "source": "证券时报网"
-        },
-        {
-          "title": "17只个股大宗交易超5000万元",
-          "url": "http://finance.eastmoney.com/a/202605193742339674.html",
-          "date": "2026-05-19 22:00:00",
-          "source": "证券时报网"
-        }
-      ],
-      "risk_points": [
-        "均线空头压制，反弹空间有限",
-        "若跌破近期低点17.65，可能加速下跌",
-        "仅一日数据，无法确认资金趋势",
-        "主力流入幅度较小，不足以驱动股价大幅波动"
-      ],
+      "news": [],
+      "risk_points": [],
       "signal_breakdown": {
         "hard_score": -0.371,
         "soft_score": -0.35,
@@ -1896,9 +1317,9 @@
       "momentum_5d": -1.98,
       "ma_alignment": "neutral",
       "volume_ratio": 1.19,
-      "pe_ttm": 22.5,
-      "pb": 2.62,
-      "mcap_yi": 2198.0,
+      "pe_ttm": null,
+      "pb": null,
+      "mcap_yi": null,
       "technical": {
         "status": "ok",
         "summary": "牧原股份近期持续下跌，均线呈空头排列（MA20 > MA10 > MA5 > 收盘价），价格沿5日均线下行，趋势明确偏空。最新交易日（5月29日）股价收涨至38.07，成交量显著放大，显示短期有反弹需求，但上方MA10（38.86）及MA20（41.25）构成强压力。低点36.75可能形成短期支撑，若反弹无法突破均线压制，则后市仍大概率继续探底。整体量价关系偏弱，需警惕进一步下跌风险。",
@@ -1920,44 +1341,8 @@
         "sentiment": "neutral",
         "key_events": []
       },
-      "news": [
-        {
-          "title": "牧原股份002714.SZ)2026年一季报净利润为-12.15亿元，由盈转亏",
-          "url": "http://finance.eastmoney.com/a/202604223714006394.html",
-          "date": "2026-04-22 16:04:44",
-          "source": "界面新闻"
-        },
-        {
-          "title": "解密主力资金出逃股 连续5日净流出607股",
-          "url": "http://finance.eastmoney.com/a/202605253748279064.html",
-          "date": "2026-05-25 17:38:00",
-          "source": "证券时报网"
-        },
-        {
-          "title": "牧原股份：公司目前期货业务整体规模较小",
-          "url": "http://finance.eastmoney.com/a/202605183740241816.html",
-          "date": "2026-05-18 13:04:10",
-          "source": "每日经济新闻"
-        },
-        {
-          "title": "养殖场污水疑似排入河道，牧原股份子公司被立案调查，污水渗漏已控制",
-          "url": "http://finance.eastmoney.com/a/202605143737313888.html",
-          "date": "2026-05-14 14:34:24",
-          "source": "深圳商报·读创"
-        },
-        {
-          "title": "解密主力资金出逃股 连续5日净流出567股",
-          "url": "http://finance.eastmoney.com/a/202605223746789773.html",
-          "date": "2026-05-22 16:51:00",
-          "source": "证券时报网"
-        }
-      ],
-      "risk_points": [
-        "均线空头排列持续施压，反弹高度受限",
-        "若后续成交量萎缩，反弹可能夭折",
-        "单日数据不足以判断趋势",
-        "北向资金态度不明，存在不确定性"
-      ],
+      "news": [],
+      "risk_points": [],
       "signal_breakdown": {
         "hard_score": -0.185,
         "soft_score": 0.6,
@@ -2013,9 +1398,9 @@
       "momentum_5d": 1.11,
       "ma_alignment": "neutral",
       "volume_ratio": 1.34,
-      "pe_ttm": 7.5,
-      "pb": 1.44,
-      "mcap_yi": 2194.0,
+      "pe_ttm": null,
+      "pb": null,
+      "mcap_yi": null,
       "technical": {
         "status": "ok",
         "summary": "股价近期从40.47元持续下跌至37.88元，均线呈空头排列（MA5<MA10<MA20）。但5月29日放量上涨2.91%，收盘39.17元站上MA5和MA10，短期止跌反弹迹象明显。不过当前价格仍低于MA20（39.57元），且整体下行趋势未改。后续关注能否放量突破20日均线，以及成交量持续性。",
@@ -2037,44 +1422,8 @@
         "sentiment": "neutral",
         "key_events": []
       },
-      "news": [
-        {
-          "title": "格力电器000651.SZ)2025年净利润为290.03亿元、较去年同期下降9.89%",
-          "url": "http://finance.eastmoney.com/a/202604303726260626.html",
-          "date": "2026-04-30 13:04:13",
-          "source": "界面新闻"
-        },
-        {
-          "title": "格力电器000651.SZ)：2026年一季报净利润为60.82亿元",
-          "url": "http://finance.eastmoney.com/a/202604293723678584.html",
-          "date": "2026-04-29 09:00:24",
-          "source": "界面新闻"
-        },
-        {
-          "title": "超级品牌概念涨1.64%，主力资金净流入27股",
-          "url": "http://finance.eastmoney.com/a/202605293754550520.html",
-          "date": "2026-05-29 17:50:00",
-          "source": "证券时报网"
-        },
-        {
-          "title": "格力电器总裁张伟：今年及时优化业务，Q1业绩创历史新高",
-          "url": "http://finance.eastmoney.com/a/202605283752894855.html",
-          "date": "2026-05-28 18:01:43",
-          "source": "第一财经"
-        },
-        {
-          "title": "格力回应去年业绩不理想：加速自主品牌出海，发力智能装备、碳化硅芯片等新赛道",
-          "url": "http://finance.eastmoney.com/a/202605293753773713.html",
-          "date": "2026-05-29 09:21:02",
-          "source": "深圳商报·读创"
-        }
-      ],
-      "risk_points": [
-        "均线空头排列，反弹可能遭遇抛压",
-        "整体趋势仍向下，反弹后或二次探底",
-        "数据不完整，仅凭主力净流入不足以判断趋势",
-        "主力流入金额较小，持续性存疑"
-      ],
+      "news": [],
+      "risk_points": [],
       "signal_breakdown": {
         "hard_score": 0.189,
         "soft_score": 0.0,
@@ -2126,9 +1475,9 @@
       "momentum_5d": 5.17,
       "ma_alignment": "neutral",
       "volume_ratio": 3.84,
-      "pe_ttm": 31.0,
-      "pb": 2.14,
-      "mcap_yi": 1238.0,
+      "pe_ttm": null,
+      "pb": null,
+      "mcap_yi": null,
       "technical": {
         "status": "ok",
         "summary": "股价近期持续下跌，均线呈空头排列（MA20 > MA10 > MA5），但5月29日放量长阳反弹，收盘59.58站上MA5和MA10，成交量达1.28亿股创阶段天量，显示短期资金介入。上方20日均线（约59.88）构成关键压力，若后续量能持续有望突破，否则可能回踩。整体趋势仍偏空，但反弹力度较强，多空博弈需观察。",
@@ -2150,45 +1499,8 @@
         "sentiment": "neutral",
         "key_events": []
       },
-      "news": [
-        {
-          "title": "601888涨停！大消费，逆市爆发",
-          "url": "http://finance.eastmoney.com/a/202605293754138028.html",
-          "date": "2026-05-29 12:22:00",
-          "source": "证券时报"
-        },
-        {
-          "title": "大消费板块，强势崛起！白酒零售大涨，601888涨停",
-          "url": "http://finance.eastmoney.com/a/202605293754137894.html",
-          "date": "2026-05-29 12:19:00",
-          "source": "中国基金报"
-        },
-        {
-          "title": "中国中免601888.SH)：2026年一季报净利润为23.48亿元、同比较去年同期上涨21.18%",
-          "url": "http://finance.eastmoney.com/a/202604303726034715.html",
-          "date": "2026-04-30 09:41:14",
-          "source": "界面新闻"
-        },
-        {
-          "title": "免税店概念涨2.40%，主力资金净流入12股",
-          "url": "http://finance.eastmoney.com/a/202605293754550766.html",
-          "date": "2026-05-29 17:50:00",
-          "source": "证券时报网"
-        },
-        {
-          "title": "股民刚庆祝涨停，千亿消费巨头就炸板，机构看高至101元",
-          "url": "http://finance.eastmoney.com/a/202605293754561348.html",
-          "date": "2026-05-29 17:55:00",
-          "source": "21世纪经济报道"
-        }
-      ],
-      "risk_points": [
-        "均线仍为空头排列，趋势未逆转",
-        "单日巨量反弹后可能面临获利回吐",
-        "前期低点54.56附近支撑有效性待验证",
-        "单日资金数据波动较大，不宜作为趋势依据",
-        "北向资金缺失可能影响全貌判断"
-      ],
+      "news": [],
+      "risk_points": [],
       "signal_breakdown": {
         "hard_score": 0.103,
         "soft_score": 0.0,
@@ -2240,9 +1552,9 @@
       "momentum_5d": 3.12,
       "ma_alignment": "neutral",
       "volume_ratio": 1.44,
-      "pe_ttm": 24.8,
-      "pb": 6.0,
-      "mcap_yi": 19616.0,
+      "pe_ttm": null,
+      "pb": null,
+      "mcap_yi": null,
       "technical": {
         "status": "ok",
         "summary": "宁德时代近期呈空头排列，MA5和MA10均在MA20下方，但股价从低点402.88反弹至424，且最后两日成交量显著放大，显示反弹动能。上方MA20（426.21）及前高430附近构成压力，若放量突破则可能转强，否则仍有下行风险。下方支撑位在400整数关口附近。整体多空博弈加剧，方向待确认。",
@@ -2264,44 +1576,8 @@
         "sentiment": "neutral",
         "key_events": []
       },
-      "news": [
-        {
-          "title": "9只个股大宗交易超5000万元",
-          "url": "http://finance.eastmoney.com/a/202605273751600210.html",
-          "date": "2026-05-27 21:36:00",
-          "source": "证券时报网"
-        },
-        {
-          "title": "北京科锐澄清：与特斯拉上海签下合作协议，总装机容量仅为“初略预估量”",
-          "url": "http://finance.eastmoney.com/a/202605293753980822.html",
-          "date": "2026-05-29 10:22:21",
-          "source": "每日经济新闻"
-        },
-        {
-          "title": "赛力斯“蓝电”品牌增资66.7亿元 宁德时代等入股",
-          "url": "http://finance.eastmoney.com/a/202605253748398718.html",
-          "date": "2026-05-25 20:29:00",
-          "source": "证券时报网"
-        },
-        {
-          "title": "2026年一季报净利润为207.38亿元、宁德时代300750.SZ)较去年同期上涨48.52%",
-          "url": "http://finance.eastmoney.com/a/202604163707108545.html",
-          "date": "2026-04-16 10:17:47",
-          "source": "界面新闻"
-        },
-        {
-          "title": "电力设备行业5月29日资金流向日报",
-          "url": "http://finance.eastmoney.com/a/202605293754527860.html",
-          "date": "2026-05-29 17:16:00",
-          "source": "证券时报网"
-        }
-      ],
-      "risk_points": [
-        "空头排列趋势未扭转，反弹可能遇阻",
-        "若无法突破压力位，可能再次测试前低400支撑",
-        "单日数据不足以确认趋势，需观察持续性",
-        "北向资金态度不明，若外资流出可能抵消主力影响"
-      ],
+      "news": [],
+      "risk_points": [],
       "signal_breakdown": {
         "hard_score": 0.16,
         "soft_score": 0.0,
@@ -2353,9 +1629,9 @@
       "momentum_5d": 0.7,
       "ma_alignment": "neutral",
       "volume_ratio": 2.21,
-      "pe_ttm": 11.5,
-      "pb": 1.32,
-      "mcap_yi": 3861.0,
+      "pe_ttm": null,
+      "pb": null,
+      "mcap_yi": null,
       "technical": {
         "status": "ok",
         "summary": "近期股价自27.32持续回落，均线呈空头排列（MA5<MA10<MA20），最新收盘26.05虽站上MA5但低于MA10及MA20，整体趋势偏弱。5月29日放量反弹收阳，但量能放大仅一天，需观察后续能否持续。上方压力关注MA10（26.02）及MA20（26.55）；下方支撑看前低25.35。若反弹受阻则可能继续探底。",
@@ -2377,45 +1653,8 @@
         "sentiment": "neutral",
         "key_events": []
       },
-      "news": [
-        {
-          "title": "中信证券600030.SH)：2026年一季报净利润为102.16亿元、同比较去年同期上涨54.60%",
-          "url": "http://finance.eastmoney.com/a/202604253718946814.html",
-          "date": "2026-04-25 10:23:13",
-          "source": "界面新闻"
-        },
-        {
-          "title": "中信证券拟发行H股募资160亿元 关联方中信金控全额认购",
-          "url": "http://finance.eastmoney.com/a/202605283753019624.html",
-          "date": "2026-05-28 21:07:00",
-          "source": "财中社"
-        },
-        {
-          "title": "券商龙头，大消息！160亿元巨资加持",
-          "url": "http://finance.eastmoney.com/a/202605283752989887.html",
-          "date": "2026-05-28 20:48:00",
-          "source": "证券时报"
-        },
-        {
-          "title": "涛涛车业再度提交港交所主板上市申请",
-          "url": "http://finance.eastmoney.com/a/202605273750921641.html",
-          "date": "2026-05-27 10:45:38",
-          "source": "央广财经"
-        },
-        {
-          "title": "11股今日获机构买入评级",
-          "url": "http://finance.eastmoney.com/a/202605293754527240.html",
-          "date": "2026-05-29 17:17:00",
-          "source": "证券时报网"
-        }
-      ],
-      "risk_points": [
-        "均线空头排列，反弹空间受限",
-        "若缩量回调，则反弹可能结束",
-        "市场整体情绪偏弱，需防范继续下行风险",
-        "单一主力资金指标无法全面反映市场情绪",
-        "数据周期仅为1日，持续性有待观察"
-      ],
+      "news": [],
+      "risk_points": [],
       "signal_breakdown": {
         "hard_score": 0.145,
         "soft_score": -0.1,
@@ -2471,9 +1710,9 @@
       "momentum_5d": 0.71,
       "ma_alignment": "neutral",
       "volume_ratio": 1.31,
-      "pe_ttm": 13.9,
-      "pb": 2.65,
-      "mcap_yi": 6154.0,
+      "pe_ttm": null,
+      "pb": null,
+      "mcap_yi": null,
       "technical": {
         "status": "ok",
         "summary": "美的集团近期股价围绕MA5/MA10/MA20（79.84/80.63/80.74）窄幅震荡，均线粘合，未形成明确多头或空头排列。5月15日冲高至83.3后回落，昨收80.85，放量反弹但未突破均线压制。成交量整体平稳，缺乏持续方向性信号。短线关注80.8附近压力，若有效突破则有望走强；若再次回落至80下方则可能测试前低78.5附近支撑。",
@@ -2495,45 +1734,8 @@
         "sentiment": "neutral",
         "key_events": []
       },
-      "news": [
-        {
-          "title": "美的集团000333.SZ)：2026年一季报净利润为126.75亿元",
-          "url": "http://finance.eastmoney.com/a/202604303726099026.html",
-          "date": "2026-04-30 10:09:40",
-          "source": "界面新闻"
-        },
-        {
-          "title": "美的集团：获家电行业首张国家级碳足迹标识认证证书",
-          "url": "http://finance.eastmoney.com/a/202605283752918142.html",
-          "date": "2026-05-28 18:47:00",
-          "source": "证券时报网"
-        },
-        {
-          "title": "美的集团：拟在库卡实施多元化员工持股计划",
-          "url": "http://finance.eastmoney.com/a/202605273751443984.html",
-          "date": "2026-05-27 19:06:33",
-          "source": "财联社"
-        },
-        {
-          "title": "强势股追踪 主力资金连续5日净流入94股",
-          "url": "http://finance.eastmoney.com/a/202605283752870734.html",
-          "date": "2026-05-28 17:25:00",
-          "source": "证券时报网"
-        },
-        {
-          "title": "超级品牌概念涨1.64%，主力资金净流入27股",
-          "url": "http://finance.eastmoney.com/a/202605293754550520.html",
-          "date": "2026-05-29 17:50:00",
-          "source": "证券时报网"
-        }
-      ],
-      "risk_points": [
-        "均线粘合后若选择向下，可能加速下跌",
-        "短期高点83.3构成强阻力，多头动能不足",
-        "成交量未能持续放大，反弹持续性存疑",
-        "数据不完整，单一主力数据参考价值有限",
-        "北向资金动向不明，可能隐含风险"
-      ],
+      "news": [],
+      "risk_points": [],
       "signal_breakdown": {
         "hard_score": 0.148,
         "soft_score": 0.0,
@@ -2585,9 +1787,9 @@
       "momentum_5d": -1.74,
       "ma_alignment": "bearish",
       "volume_ratio": 1.01,
-      "pe_ttm": 23.1,
-      "pb": 3.17,
-      "mcap_yi": 3028.0,
+      "pe_ttm": null,
+      "pb": null,
+      "mcap_yi": null,
       "technical": {
         "status": "ok",
         "summary": "股价处于所有均线下方，MA5、MA10、MA20呈空头排列，趋势偏弱。近期从21.6高点回落，今日低开低走收于19.16，成交量放大，抛压明显。下方关注19元整数关口支撑，若跌破可能进一步下探。均线发散加大，短期反弹压力较大。",
@@ -2609,45 +1811,8 @@
         "sentiment": "neutral",
         "key_events": []
       },
-      "news": [
-        {
-          "title": "东方财富：东方财富桌面端已在统信、麒麟、鸿蒙、龙芯官方应用商店上架",
-          "url": "http://finance.eastmoney.com/a/202605223746876066.html",
-          "date": "2026-05-22 18:19:27",
-          "source": "每日经济新闻"
-        },
-        {
-          "title": "杠杆资金连续五日加仓创业板股",
-          "url": "http://finance.eastmoney.com/a/202605293753703627.html",
-          "date": "2026-05-29 09:23:00",
-          "source": "证券时报网"
-        },
-        {
-          "title": "主力动向：5月28日特大单净流入164.25亿元",
-          "url": "http://finance.eastmoney.com/a/202605283752867050.html",
-          "date": "2026-05-28 17:26:00",
-          "source": "证券时报网"
-        },
-        {
-          "title": "非银金融行业5月28日资金流向日报",
-          "url": "http://finance.eastmoney.com/a/202605283752873514.html",
-          "date": "2026-05-28 17:25:00",
-          "source": "证券时报网"
-        },
-        {
-          "title": "非银金融行业5月26日资金流向日报",
-          "url": "http://finance.eastmoney.com/a/202605263749703149.html",
-          "date": "2026-05-26 16:35:00",
-          "source": "证券时报网"
-        }
-      ],
-      "risk_points": [
-        "股价持续跌破19元，可能加速下跌",
-        "均线系统压制反弹空间，反弹需放量突破均线",
-        "近期高点21.6构成强压力，多头信心不足",
-        "主力资金单日大幅流出，短期抛压较重",
-        "北向数据缺失可能导致判断不完整"
-      ],
+      "news": [],
+      "risk_points": [],
       "signal_breakdown": {
         "hard_score": -0.3,
         "soft_score": -0.35,
@@ -2703,9 +1868,9 @@
       "momentum_5d": -2.22,
       "ma_alignment": "bearish",
       "volume_ratio": 1.08,
-      "pe_ttm": 16.5,
-      "pb": 0.7,
-      "mcap_yi": 5865.0,
+      "pe_ttm": null,
+      "pb": null,
+      "mcap_yi": null,
       "technical": {
         "status": "ok",
         "summary": "最近20个交易日，股票600028中国石化价格持续下跌，从5.40元区域跌至4.85元。均线系统呈空头排列，MA5(4.856)<MA10(4.964)<MA20(5.109)，表明短期、中期趋势均向下。成交量在下跌过程中有所放大，显示抛压较重。MACD指标可能处于死叉状态或负值区域。技术面偏弱，空头占优。",
@@ -2727,44 +1892,8 @@
         "sentiment": "neutral",
         "key_events": []
       },
-      "news": [
-        {
-          "title": "中国石化600028.SH)：副总裁郭洪金因年龄原因辞职",
-          "url": "http://finance.eastmoney.com/a/202605123734645140.html",
-          "date": "2026-05-12 18:38:10",
-          "source": "界面新闻"
-        },
-        {
-          "title": "中国石化600028.SH)：2026年一季报净利润为170.06亿元、同比较去年同期上涨28.21%",
-          "url": "http://finance.eastmoney.com/a/202604293723650050.html",
-          "date": "2026-04-29 08:58:47",
-          "source": "界面新闻"
-        },
-        {
-          "title": "中国石化等成立新能源公司",
-          "url": "http://finance.eastmoney.com/a/202605293754552754.html",
-          "date": "2026-05-29 17:45:00",
-          "source": "南方财经网"
-        },
-        {
-          "title": "中国石化：今年的回购授权已获得股东会批准，公司积极研究回购计划",
-          "url": "http://finance.eastmoney.com/a/202605253748278129.html",
-          "date": "2026-05-25 17:48:33",
-          "source": "每日经济新闻"
-        },
-        {
-          "title": "中国石化：一季度国际原油价格上涨，公司库存有所收益",
-          "url": "http://finance.eastmoney.com/a/202605253748278261.html",
-          "date": "2026-05-25 17:49:13",
-          "source": "每日经济新闻"
-        }
-      ],
-      "risk_points": [
-        "若跌破4.80元支撑，可能加速下跌",
-        "均线发散向下，反弹可能面临均线压制",
-        "市场整体弱势，需关注外部风险因素",
-        "北向资金数据缺失，信息不完整，无法确认外资动向"
-      ],
+      "news": [],
+      "risk_points": [],
       "signal_breakdown": {
         "hard_score": -0.284,
         "soft_score": -0.35,
@@ -2820,9 +1949,9 @@
       "momentum_5d": 2.39,
       "ma_alignment": "neutral",
       "volume_ratio": 1.24,
-      "pe_ttm": 13.7,
-      "pb": 0.55,
-      "mcap_yi": 1068.0,
+      "pe_ttm": null,
+      "pb": null,
+      "mcap_yi": null,
       "technical": {
         "status": "ok",
         "summary": "股价近期经历连续下跌后，在19.33附近获得支撑并出现反弹，最新收盘20.15元。均线系统呈空头排列，MA5、MA10、MA20依次向下，短期反弹受到均线压制。成交量在反弹日有所放大，但整体量能未明显持续。当前处于超跌反弹阶段，方向尚不明确。关注上方20.20-20.50压力区能否突破，若受阻可能重回弱势；下方19.33-19.50为短期支撑。",
@@ -2844,44 +1973,8 @@
         "sentiment": "neutral",
         "key_events": []
       },
-      "news": [
-        {
-          "title": "海螺水泥600585.SH)：聘任李国友为总经理助理，持有公司9000股",
-          "url": "http://finance.eastmoney.com/a/202605133735374483.html",
-          "date": "2026-05-13 08:58:20",
-          "source": "界面新闻"
-        },
-        {
-          "title": "海螺水泥600585.SH)：2026年一季报净利润为14.68亿元、同比较去年同期下降18.98%",
-          "url": "http://finance.eastmoney.com/a/202604303726046179.html",
-          "date": "2026-04-30 09:44:36",
-          "source": "界面新闻"
-        },
-        {
-          "title": "海螺水泥：注销2224万股回购股份",
-          "url": "http://finance.eastmoney.com/a/202605293754008851.html",
-          "date": "2026-05-29 10:23:00",
-          "source": "南方财经网"
-        },
-        {
-          "title": "海螺水泥：拟6亿元至10亿元回购A股股份",
-          "url": "http://finance.eastmoney.com/a/202605263749850477.html",
-          "date": "2026-05-26 19:14:00",
-          "source": "证券时报网"
-        },
-        {
-          "title": "海螺水泥：拟以6亿元至10亿元回购公司A股",
-          "url": "http://finance.eastmoney.com/a/202605263749838698.html",
-          "date": "2026-05-26 19:07:02",
-          "source": "财联社"
-        }
-      ],
-      "risk_points": [
-        "均线空头排列，反弹高度受限，若遇阻回落可能再次探底",
-        "整体市场情绪偏弱，缺乏增量资金，反弹持续性存疑",
-        "北向资金态度不明，可能转向流出",
-        "主力流入金额有限，对股价支撑作用较弱"
-      ],
+      "news": [],
+      "risk_points": [],
       "signal_breakdown": {
         "hard_score": 0.123,
         "soft_score": 0.0,
@@ -2933,9 +2026,9 @@
       "momentum_5d": 0.56,
       "ma_alignment": "neutral",
       "volume_ratio": 1.39,
-      "pe_ttm": 6.9,
-      "pb": 0.66,
-      "mcap_yi": 25733.0,
+      "pe_ttm": null,
+      "pb": null,
+      "mcap_yi": null,
       "technical": {
         "status": "ok",
         "summary": "近20日股价整体震荡下行，从7.47元回落至7.22元。均线呈空头排列（MA5<MA10<MA20），但收盘价7.22元站上MA5（7.146元），且5月29日放量反弹（成交量389万手，创近期新高），低点6.99元形成短期支撑。短期多空博弈加剧：空头趋势未改，但超跌反弹动能增强。需观察后续能否突破MA10（7.164元）及MA20（7.2745元）压力。",
@@ -2957,44 +2050,8 @@
         "sentiment": "neutral",
         "key_events": []
       },
-      "news": [
-        {
-          "title": "工商银行601398.SH)：2026年一季报净利润为869.41亿元、同比较去年同期上涨3.31%",
-          "url": "http://finance.eastmoney.com/a/202604303726007763.html",
-          "date": "2026-04-30 09:32:42",
-          "source": "界面新闻"
-        },
-        {
-          "title": "工商银行完成发行600亿元二级资本债券，票面利率1.9%",
-          "url": "http://finance.eastmoney.com/a/202605253748295841.html",
-          "date": "2026-05-25 17:58:00",
-          "source": "财中社"
-        },
-        {
-          "title": "招商证券：董事长变更",
-          "url": "http://finance.eastmoney.com/a/202605273751293316.html",
-          "date": "2026-05-27 15:58:00",
-          "source": "上海证券报·中国证券网"
-        },
-        {
-          "title": "油价巨震风控升级 多家银行将原油基金调至R5最高风险等级",
-          "url": "http://finance.eastmoney.com/a/202605273751437725.html",
-          "date": "2026-05-27 19:04:36",
-          "source": "界面新闻"
-        },
-        {
-          "title": "工行、交行合计发债1000亿元 国有大行资本补充再提速",
-          "url": "http://finance.eastmoney.com/a/202605283751719959.html",
-          "date": "2026-05-28 04:35:57",
-          "source": "经济参考报"
-        }
-      ],
-      "risk_points": [
-        "均线空头排列未扭转，中期趋势偏弱",
-        "若跌破6.99元低点，可能开启新一轮下跌",
-        "北向资金数据缺失，信息不完整，可能影响判断",
-        "仅有一日资金数据，无法确认趋势，需警惕短期波动风险"
-      ],
+      "news": [],
+      "risk_points": [],
       "signal_breakdown": {
         "hard_score": 0.112,
         "soft_score": 0.0,
@@ -3046,9 +2103,9 @@
       "momentum_5d": -3.22,
       "ma_alignment": "bullish",
       "volume_ratio": 0.74,
-      "pe_ttm": 8.6,
-      "pb": 0.92,
-      "mcap_yi": 2165.0,
+      "pe_ttm": null,
+      "pb": null,
+      "mcap_yi": null,
       "technical": {
         "status": "ok",
         "summary": "中远海控目前均线系统呈多头排列（MA5>MA10>MA20），但最新收盘价14.14已跌破MA5（14.372）和MA10（14.365），短期回调压力明显。成交量在前期放量上涨后逐步萎缩，显示上涨动能减弱。价格在14.0-14.1附近获得支撑，但若继续缩量调整，可能考验MA20（14.254）支撑。多空信号交织，方向尚不明确，需关注量能变化及均线支撑有效性。",
@@ -3070,45 +2127,8 @@
         "sentiment": "neutral",
         "key_events": []
       },
-      "news": [
-        {
-          "title": "中远海控601919.SH)：2026年一季报净利润为58.77亿元、同比较去年同期下降49.75%",
-          "url": "http://finance.eastmoney.com/a/202604303726074292.html",
-          "date": "2026-04-30 09:55:50",
-          "source": "界面新闻"
-        },
-        {
-          "title": "解密主力资金出逃股 连续5日净流出784股",
-          "url": "http://finance.eastmoney.com/a/202605293754528439.html",
-          "date": "2026-05-29 17:16:00",
-          "source": "证券时报网"
-        },
-        {
-          "title": "中远海控回购208万股 金额3129万港元",
-          "url": "http://finance.eastmoney.com/a/202605203743632451.html",
-          "date": "2026-05-20 18:22:00",
-          "source": "财中社"
-        },
-        {
-          "title": "中远海控：今年以来，公司升级了洋浦至海防直航航线、拓展了东南亚至美西北/加拿大等服务路径",
-          "url": "http://finance.eastmoney.com/a/202605213745344864.html",
-          "date": "2026-05-21 18:07:51",
-          "source": "每日经济新闻"
-        },
-        {
-          "title": "中远海控回购249万股 金额3641万港元",
-          "url": "http://finance.eastmoney.com/a/202605193742120013.html",
-          "date": "2026-05-19 18:16:00",
-          "source": "财中社"
-        }
-      ],
-      "risk_points": [
-        "股价持续在短期均线下方运行，可能转为空头排列",
-        "量能萎缩表明市场参与度降低，反弹力度或有限",
-        "若跌破MA20，趋势可能转弱",
-        "主力资金持续流出可能压制股价",
-        "北向资金数据缺失，资金面信息不完整"
-      ],
+      "news": [],
+      "risk_points": [],
       "signal_breakdown": {
         "hard_score": 0.074,
         "soft_score": 0.0,
@@ -3160,9 +2180,9 @@
       "momentum_5d": 0.28,
       "ma_alignment": "neutral",
       "volume_ratio": 2.03,
-      "pe_ttm": 16.9,
-      "pb": 2.27,
-      "mcap_yi": 891.0,
+      "pe_ttm": null,
+      "pb": null,
+      "mcap_yi": null,
       "technical": {
         "status": "ok",
         "summary": "该股近期处于下跌趋势，均线呈空头排列（MA5<MA10<MA20），股价自54.63元持续下探至最低48.02元后略有反弹，但收盘价49.94元仍低于所有均线。成交量在下跌过程中放大，显示抛压较重，最后一日反弹量能虽有增加，但未有效突破均线压制。整体趋势偏空，短期反弹力度有待观察。",
@@ -3184,45 +2204,8 @@
         "sentiment": "neutral",
         "key_events": []
       },
-      "news": [
-        {
-          "title": "云南白药000538.SZ)：2026年一季报净利润为20.37亿元、同比较去年同期上涨5.31%",
-          "url": "http://finance.eastmoney.com/a/202604303726089842.html",
-          "date": "2026-04-30 10:05:10",
-          "source": "界面新闻"
-        },
-        {
-          "title": "超级品牌概念涨1.64%，主力资金净流入27股",
-          "url": "http://finance.eastmoney.com/a/202605293754550520.html",
-          "date": "2026-05-29 17:50:00",
-          "source": "证券时报网"
-        },
-        {
-          "title": "超级品牌概念下跌1.26%，6股主力资金净流出超亿元",
-          "url": "http://finance.eastmoney.com/a/202605283752868053.html",
-          "date": "2026-05-28 17:25:00",
-          "source": "证券时报网"
-        },
-        {
-          "title": "超级品牌概念涨0.17%，主力资金净流入26股",
-          "url": "http://finance.eastmoney.com/a/202605273751352014.html",
-          "date": "2026-05-27 16:46:00",
-          "source": "证券时报网"
-        },
-        {
-          "title": "高股息精选概念涨1.11%，主力资金净流入这些股",
-          "url": "http://finance.eastmoney.com/a/202605293754558696.html",
-          "date": "2026-05-29 17:53:00",
-          "source": "证券时报网"
-        }
-      ],
-      "risk_points": [
-        "下跌趋势未改，可能继续探底",
-        "均线压制明显，反弹空间有限",
-        "若后续量能萎缩，反弹可能夭折",
-        "单一交易日主力流向易受噪音干扰",
-        "北向资金缺席时，资金面信号可信度降低"
-      ],
+      "news": [],
+      "risk_points": [],
       "signal_breakdown": {
         "hard_score": 0.058,
         "soft_score": -0.1,
@@ -3278,9 +2261,9 @@
       "momentum_5d": 1.16,
       "ma_alignment": "neutral",
       "volume_ratio": 1.23,
-      "pe_ttm": 133.3,
-      "pb": 5.04,
-      "mcap_yi": 1151.0,
+      "pe_ttm": null,
+      "pb": null,
+      "mcap_yi": null,
       "technical": {
         "status": "ok",
         "summary": "最近20个交易日股价冲高至50.25后回落，最新收盘47.9跌破MA5/MA10/MA20，均线呈MA5>MA20>MA10的非标准排列。量能方面，5月27日放量冲高后连续两日放量下跌，显示抛压增大。短期趋势转弱，关注46.8附近支撑（前期低点），若持续放量下跌则可能进一步下探。",
@@ -3302,44 +2285,8 @@
         "sentiment": "neutral",
         "key_events": []
       },
-      "news": [
-        {
-          "title": "科大讯飞002230.SZ)：2025年年报净利润为8.39亿元",
-          "url": "http://finance.eastmoney.com/a/202604293723961326.html",
-          "date": "2026-04-29 09:57:06",
-          "source": "界面新闻"
-        },
-        {
-          "title": "科大讯飞002230.SZ)：2026年一季报净利润为-1.70亿元",
-          "url": "http://finance.eastmoney.com/a/202604293723868089.html",
-          "date": "2026-04-29 09:27:38",
-          "source": "界面新闻"
-        },
-        {
-          "title": "科大讯飞AI眼镜发布 主打全场景翻译和超级AI助理",
-          "url": "http://finance.eastmoney.com/a/202605283752542982.html",
-          "date": "2026-05-28 12:46:46",
-          "source": "人民财讯"
-        },
-        {
-          "title": "科大讯飞AI眼镜发布 主打全场景翻译和超级AI助理",
-          "url": "http://finance.eastmoney.com/a/202605283752545956.html",
-          "date": "2026-05-28 12:45:00",
-          "source": "证券时报网"
-        },
-        {
-          "title": "讯飞AI眼镜正式发布 科大讯飞“软硬一体”战略再进一步",
-          "url": "http://finance.eastmoney.com/a/202605283752904176.html",
-          "date": "2026-05-28 18:12:00",
-          "source": "证券时报网"
-        }
-      ],
-      "risk_points": [
-        "连续放量下跌，短期空头力量较强",
-        "均线可能形成死叉，进一步压制股价",
-        "主力资金流出可能拖累股价",
-        "北向数据缺失，资金面判断不完整"
-      ],
+      "news": [],
+      "risk_points": [],
       "signal_breakdown": {
         "hard_score": -0.197,
         "soft_score": -0.35,
@@ -3395,9 +2342,9 @@
       "momentum_5d": -0.34,
       "ma_alignment": "bearish",
       "volume_ratio": 1.05,
-      "pe_ttm": 7.3,
-      "pb": 0.95,
-      "mcap_yi": 9688.0,
+      "pe_ttm": null,
+      "pb": null,
+      "mcap_yi": null,
       "technical": {
         "status": "ok",
         "summary": "该股近期呈下跌趋势，价格从59.43元持续下滑至53.5元，均线系统呈现空头排列（MA5<MA10<MA20）。最近几日弱势震荡，成交量无明显放大，反弹乏力。上方压力位参考MA10（约53.87元）和MA20（约56.34元），下方支撑位参考前低52.15元。整体空头格局未改，需关注后续能否放量突破均线压制。",
@@ -3419,44 +2366,8 @@
         "sentiment": "neutral",
         "key_events": []
       },
-      "news": [
-        {
-          "title": "中国平安601318.SH)：执行董事蔡方方辞任",
-          "url": "http://finance.eastmoney.com/a/202605153738283778.html",
-          "date": "2026-05-15 09:08:58",
-          "source": "界面新闻"
-        },
-        {
-          "title": "中国平安2026年度核心人员持股计划完成购股 合计斥资6.37亿元购入1124万股",
-          "url": "http://finance.eastmoney.com/a/202605263749838791.html",
-          "date": "2026-05-26 18:55:00",
-          "source": "财中社"
-        },
-        {
-          "title": "中国平安2026年长期服务计划完成购股：40.32亿元买入7385万股H股，涉7.1万名员工",
-          "url": "http://finance.eastmoney.com/a/202605213745355473.html",
-          "date": "2026-05-21 18:24:00",
-          "source": "财中社"
-        },
-        {
-          "title": "60股获融资客逆市净买入超亿元",
-          "url": "http://finance.eastmoney.com/a/202605283752241190.html",
-          "date": "2026-05-28 09:33:00",
-          "source": "证券时报网"
-        },
-        {
-          "title": "解密主力资金出逃股 连续5日净流出722股",
-          "url": "http://finance.eastmoney.com/a/202605283752871893.html",
-          "date": "2026-05-28 17:25:00",
-          "source": "证券时报网"
-        }
-      ],
-      "risk_points": [
-        "均线空头排列持续压制反弹空间",
-        "若跌破近期低点52.15元可能加速下跌",
-        "北向资金缺失导致分析维度不全，可能遗漏外资动向",
-        "单日主力净流入规模较小，持续性存疑"
-      ],
+      "news": [],
+      "risk_points": [],
       "signal_breakdown": {
         "hard_score": -0.182,
         "soft_score": -0.35,
@@ -3512,9 +2423,9 @@
       "momentum_5d": -6.87,
       "ma_alignment": "bearish",
       "volume_ratio": 1.59,
-      "pe_ttm": -714.7,
-      "pb": 1.35,
-      "mcap_yi": 300.0,
+      "pe_ttm": null,
+      "pb": null,
+      "mcap_yi": null,
       "technical": {
         "status": "ok",
         "summary": "当前股价73.57元，远低于MA5(75.98)、MA10(78.66)和MA20(82.59)，均线呈空头排列，价格持续走低。近期从85元区间快速下跌，跌幅超过14%，且下跌过程成交量放大，显示抛压沉重。虽然5月29日出现低位放量反弹，但仍未能站上5日均线，反弹力度有限。整体趋势向下，空头主导市场。",
@@ -3536,45 +2447,8 @@
         "sentiment": "neutral",
         "key_events": []
       },
-      "news": [
-        {
-          "title": "长春高新000661.SZ)：子公司金赛药业1类新药GenSci144片获批临床，用于苯丙酮尿症",
-          "url": "http://finance.eastmoney.com/a/202605263749694924.html",
-          "date": "2026-05-26 16:33:11",
-          "source": "界面新闻"
-        },
-        {
-          "title": "长春高新000661.SZ)：子公司GenSci144片慢性肾脏病适应症临床试验申请获受理",
-          "url": "http://finance.eastmoney.com/a/202605253748256366.html",
-          "date": "2026-05-25 17:25:56",
-          "source": "界面新闻"
-        },
-        {
-          "title": "长春高新：甲磺酸亮丙瑞林注射液（6M）上市申请获受理",
-          "url": "http://finance.eastmoney.com/a/202605293754549616.html",
-          "date": "2026-05-29 17:45:00",
-          "source": "证券时报网"
-        },
-        {
-          "title": "长春高新：甲磺酸亮丙瑞林注射液（6M）上市申请获得受理",
-          "url": "http://finance.eastmoney.com/a/202605293754504676.html",
-          "date": "2026-05-29 17:03:22",
-          "source": "财联社"
-        },
-        {
-          "title": "长春高新：甲磺酸亮丙瑞林注射液境外上市申请获受理",
-          "url": "http://finance.eastmoney.com/a/202605293754533872.html",
-          "date": "2026-05-29 17:20:00",
-          "source": "财中社"
-        }
-      ],
-      "risk_points": [
-        "均线空头排列，短期难以扭转下跌趋势",
-        "下跌过程放量，抛压未释放完毕",
-        "若跌破72元前期低点，可能加速下行",
-        "北向资金长期无数据，可能影响资金面判断",
-        "主力资金流入金额偏低，不构成明确看多信号"
-      ],
+      "news": [],
+      "risk_points": [],
       "signal_breakdown": {
         "hard_score": -0.25,
         "soft_score": -0.35,
@@ -3630,9 +2504,9 @@
       "momentum_5d": 0.85,
       "ma_alignment": "neutral",
       "volume_ratio": 1.62,
-      "pe_ttm": 5.3,
-      "pb": 0.27,
-      "mcap_yi": 1554.0,
+      "pe_ttm": null,
+      "pb": null,
+      "mcap_yi": null,
       "technical": {
         "status": "ok",
         "summary": "民生银行近期呈下跌趋势，均线空头排列（MA5<MA10<MA20）。股价从3.74持续滑落至3.55，20个交易日内跌幅约5.1%。5月29日虽放量反弹收阳，但仍在MA5（3.512）下方，未能有效突破短期均线压制。下跌过程中量能放大，显示抛压较重，短期反弹或为超跌后的技术性修复。当前价格低于所有主要均线，趋势偏空，需关注后续能否站稳MA5并向上测试MA10。",
@@ -3654,43 +2528,8 @@
         "sentiment": "neutral",
         "key_events": []
       },
-      "news": [
-        {
-          "title": "19只个股大宗交易超5000万元",
-          "url": "http://finance.eastmoney.com/a/202605253748525356.html",
-          "date": "2026-05-25 22:27:00",
-          "source": "证券时报网"
-        },
-        {
-          "title": "零售业务承压，这些银行何以逆势增长？",
-          "url": "http://finance.eastmoney.com/a/202605293754177052.html",
-          "date": "2026-05-29 13:08:31",
-          "source": "界面新闻"
-        },
-        {
-          "title": "银行行业今日净流入资金3.08亿元，中国银行等6股净流入资金超5000万元",
-          "url": "http://finance.eastmoney.com/a/202605213745275436.html",
-          "date": "2026-05-21 17:00:00",
-          "source": "证券时报网"
-        },
-        {
-          "title": "民生银行完成发行300亿元无固定期限资本债券",
-          "url": "http://finance.eastmoney.com/a/202605143737542952.html",
-          "date": "2026-05-14 17:36:00",
-          "source": "财中社"
-        },
-        {
-          "title": "上市银行效率比拼：人均创收江苏银行最高，人均创利成都银行最强",
-          "url": "http://finance.eastmoney.com/a/202605263749905113.html",
-          "date": "2026-05-26 20:52:29",
-          "source": "界面新闻"
-        }
-      ],
-      "risk_points": [
-        "均线空头排列，趋势延续下行风险",
-        "反弹若量能不足，可能再度下探",
-        "宏观经济或银行板块利空可能加剧跌势"
-      ],
+      "news": [],
+      "risk_points": [],
       "signal_breakdown": {
         "hard_score": 0.148,
         "soft_score": -0.35,
@@ -3746,9 +2585,9 @@
       "momentum_5d": 2.34,
       "ma_alignment": "neutral",
       "volume_ratio": 1.48,
-      "pe_ttm": 4.9,
-      "pb": 0.46,
-      "mcap_yi": 2121.0,
+      "pe_ttm": null,
+      "pb": null,
+      "mcap_yi": null,
       "technical": {
         "status": "ok",
         "summary": "平安银行近期呈现下跌趋势，股价从11.52元持续回落至10.93元，累计跌幅约5%。均线系统呈空头排列，MA5（10.764）和MA10（10.769）双双下穿MA20（11.022），短期均线在长期均线下方形成压制。最后交易日（5月29日）虽有放量反弹（成交量约1.4亿），但收盘价仍受制于MA20，且反弹高度有限。整体量能萎缩后略有放大，显示多空分歧增加，但空头格局未改。预计短期仍需消化上方均线压力，需关注能否有效突破MA20并站稳。",
@@ -3770,44 +2609,8 @@
         "sentiment": "neutral",
         "key_events": []
       },
-      "news": [
-        {
-          "title": "平安银行000001.SZ)：2026年一季报净利润为145.23亿元",
-          "url": "http://finance.eastmoney.com/a/202604253718934165.html",
-          "date": "2026-04-25 10:12:35",
-          "source": "界面新闻"
-        },
-        {
-          "title": "解密主力资金出逃股 连续5日净流出722股",
-          "url": "http://finance.eastmoney.com/a/202605283752871893.html",
-          "date": "2026-05-28 17:25:00",
-          "source": "证券时报网"
-        },
-        {
-          "title": "ETF市场日报 | 创新药板块批量涨超4%，卫星ETF重挫逾7%",
-          "url": "http://finance.eastmoney.com/a/202605293754439015.html",
-          "date": "2026-05-29 15:36:26",
-          "source": "界面新闻"
-        },
-        {
-          "title": "解密主力资金出逃股 连续5日净流出813股",
-          "url": "http://finance.eastmoney.com/a/202605273751387729.html",
-          "date": "2026-05-27 17:18:00",
-          "source": "证券时报网"
-        },
-        {
-          "title": "解密主力资金出逃股 连续5日净流出768股",
-          "url": "http://finance.eastmoney.com/a/202605263749739722.html",
-          "date": "2026-05-26 16:55:00",
-          "source": "证券时报网"
-        }
-      ],
-      "risk_points": [
-        "均线空头排列未改变，反弹可能受阻于MA20附近",
-        "若量能无法持续，股价可能再度回探前低10.62元甚至更低",
-        "单日数据不足以判断趋势",
-        "北向资金态度未知，可能构成不确定性"
-      ],
+      "news": [],
+      "risk_points": [],
       "signal_breakdown": {
         "hard_score": 0.199,
         "soft_score": -0.35,
@@ -3863,9 +2666,9 @@
       "momentum_5d": 2.75,
       "ma_alignment": "neutral",
       "volume_ratio": 1.01,
-      "pe_ttm": 14.1,
-      "pb": 2.86,
-      "mcap_yi": 1703.0,
+      "pe_ttm": null,
+      "pb": null,
+      "mcap_yi": null,
       "technical": {
         "status": "ok",
         "summary": "伊利股份近期走势偏弱，均线呈现空头排列（MA5=26.48 < MA10=26.70 < MA20=27.14），股价虽从26.0低点反弹至26.92，但仍受制于MA10及MA20。前期下跌过程中量能放大，反弹时成交量温和，量价配合不充分。上方压力位在MA10和MA20附近，若无法有效突破，可能延续下行趋势。下方支撑关注前低26.0及整数关口26元。整体技术面偏空，需警惕反弹结束后的再度回落。",
@@ -3887,44 +2690,8 @@
         "sentiment": "neutral",
         "key_events": []
       },
-      "news": [
-        {
-          "title": "600887，大手笔分红！董事长发声",
-          "url": "http://finance.eastmoney.com/a/202605013727208911.html",
-          "date": "2026-05-01 12:54:00",
-          "source": "上海证券报"
-        },
-        {
-          "title": "伊利股份600887.SH)：2026年一季报净利润为53.95亿元",
-          "url": "http://finance.eastmoney.com/a/202604303726092243.html",
-          "date": "2026-04-30 10:06:42",
-          "source": "界面新闻"
-        },
-        {
-          "title": "伊利股份600887.SH)：2025年年报净利润为115.65亿元",
-          "url": "http://finance.eastmoney.com/a/202604303726145821.html",
-          "date": "2026-04-30 10:43:25",
-          "source": "界面新闻"
-        },
-        {
-          "title": "乳业概念涨1.28%，主力资金净流入17股",
-          "url": "http://finance.eastmoney.com/a/202605293754559239.html",
-          "date": "2026-05-29 17:53:00",
-          "source": "证券时报网"
-        },
-        {
-          "title": "超级品牌概念涨1.64%，主力资金净流入27股",
-          "url": "http://finance.eastmoney.com/a/202605293754550520.html",
-          "date": "2026-05-29 17:50:00",
-          "source": "证券时报网"
-        }
-      ],
-      "risk_points": [
-        "均线空头排列，反弹空间受限，容易受阻回落",
-        "前期放量下跌表明抛压较重，市场情绪仍偏谨慎",
-        "仅一日主力流入数据，趋势不明确",
-        "北向资金缺失，外部资金态度未知"
-      ],
+      "news": [],
+      "risk_points": [],
       "signal_breakdown": {
         "hard_score": 0.193,
         "soft_score": -0.35,
@@ -3979,9 +2746,9 @@
       "momentum_5d": 2.03,
       "ma_alignment": "neutral",
       "volume_ratio": 1.48,
-      "pe_ttm": 5.0,
-      "pb": 1.51,
-      "mcap_yi": 1862.0,
+      "pe_ttm": null,
+      "pb": null,
+      "mcap_yi": null,
       "technical": {
         "status": "ok",
         "summary": "近期股价处于下跌趋势，短期均线在长期均线下方形成空头排列，MA5和MA10均低于MA20，表明空头主导。价格从64.1跌至59.7，跌幅约7%，且多次创出新低。尽管近两日有所反弹，但量能配合一般，上方60.78附近存在压力。短期内可能继续震荡筑底，若跌破57.52支撑则可能进一步下行。",
@@ -4003,44 +2770,8 @@
         "sentiment": "neutral",
         "key_events": []
       },
-      "news": [
-        {
-          "title": "新华保险601336.SH)：2026年一季报净利润为65.01亿元、同比较去年同期上涨10.52%",
-          "url": "http://finance.eastmoney.com/a/202604303726099256.html",
-          "date": "2026-04-30 10:09:16",
-          "source": "界面新闻"
-        },
-        {
-          "title": "非银金融行业5月28日资金流向日报",
-          "url": "http://finance.eastmoney.com/a/202605283752873514.html",
-          "date": "2026-05-28 17:25:00",
-          "source": "证券时报网"
-        },
-        {
-          "title": "非银金融行业5月26日资金流向日报",
-          "url": "http://finance.eastmoney.com/a/202605263749703149.html",
-          "date": "2026-05-26 16:35:00",
-          "source": "证券时报网"
-        },
-        {
-          "title": "A股五大上市险企全部撤销监事会",
-          "url": "http://finance.eastmoney.com/a/202605193741396740.html",
-          "date": "2026-05-19 09:23:51",
-          "source": "中国经营报"
-        },
-        {
-          "title": "非银金融行业今日净流出资金30.71亿元",
-          "url": "http://finance.eastmoney.com/a/202605223746788498.html",
-          "date": "2026-05-22 16:51:00",
-          "source": "证券时报网"
-        }
-      ],
-      "risk_points": [
-        "短期均线压制，反弹空间有限",
-        "若跌破57.52支撑，可能加速下跌",
-        "单日主力净流入金额较小，不足以支撑趋势性判断",
-        "北向资金数据缺失，可能隐含外资动向不确定性"
-      ],
+      "news": [],
+      "risk_points": [],
       "signal_breakdown": {
         "hard_score": 0.193,
         "soft_score": -0.35,
@@ -4096,9 +2827,9 @@
       "momentum_5d": -2.04,
       "ma_alignment": "bearish",
       "volume_ratio": 1.03,
-      "pe_ttm": 5.7,
-      "pb": 0.97,
-      "mcap_yi": 3096.0,
+      "pe_ttm": null,
+      "pb": null,
+      "mcap_yi": null,
       "technical": {
         "status": "ok",
         "summary": "中国太保近期持续下跌，最新收盘价32.18元，远低于MA5（32.67）、MA10（33.02）和MA20（34.82），均线呈空头排列，趋势向下。量能方面，5月28日和29日放量下跌，显示抛压较重。从高点37.62回落已超14%，短期无企稳迹象。关键支撑位在31.6附近（近期低点），若跌破可能进一步下探。反弹面临MA5和MA10双重压制，市场情绪偏空。",
@@ -4120,45 +2851,8 @@
         "sentiment": "neutral",
         "key_events": []
       },
-      "news": [
-        {
-          "title": "中国太保601601.SH)：2026年一季报净利润为100.41亿元、同比较去年同期上涨4.30%",
-          "url": "http://finance.eastmoney.com/a/202604293723698824.html",
-          "date": "2026-04-29 09:14:04",
-          "source": "界面新闻"
-        },
-        {
-          "title": "非银金融行业5月28日资金流向日报",
-          "url": "http://finance.eastmoney.com/a/202605283752873514.html",
-          "date": "2026-05-28 17:25:00",
-          "source": "证券时报网"
-        },
-        {
-          "title": "非银金融行业5月26日资金流向日报",
-          "url": "http://finance.eastmoney.com/a/202605263749703149.html",
-          "date": "2026-05-26 16:35:00",
-          "source": "证券时报网"
-        },
-        {
-          "title": "A股五大上市险企全部撤销监事会",
-          "url": "http://finance.eastmoney.com/a/202605193741396740.html",
-          "date": "2026-05-19 09:23:51",
-          "source": "中国经营报"
-        },
-        {
-          "title": "国寿平安互为股东 险资真金白银 “买同业”",
-          "url": "http://finance.eastmoney.com/a/202605243747499736.html",
-          "date": "2026-05-24 21:08:32",
-          "source": "中国经营报"
-        }
-      ],
-      "risk_points": [
-        "下跌趋势延续，价格持续创新低的风险",
-        "跌破关键支撑位（31.6）可能引发恐慌性抛售",
-        "反弹无力，均线压制明显，弱反弹后可能继续下行",
-        "北向资金数据缺失，分析不完整",
-        "主力净流入规模较小，趋势不明"
-      ],
+      "news": [],
+      "risk_points": [],
       "signal_breakdown": {
         "hard_score": -0.286,
         "soft_score": -0.1,
@@ -4214,9 +2908,9 @@
       "momentum_5d": -0.86,
       "ma_alignment": "neutral",
       "volume_ratio": 1.89,
-      "pe_ttm": -378.9,
-      "pb": 0.36,
-      "mcap_yi": 691.0,
+      "pe_ttm": null,
+      "pb": null,
+      "mcap_yi": null,
       "technical": {
         "status": "ok",
         "summary": "保利发展近期股价从6.4元回落，最新收盘5.77元，均线呈空头排列（MA5<MA10<MA20），MA5=5.754，MA10=5.876，MA20=6.1285。短期趋势偏弱，5月29日放量阳线（成交量2.67亿）可能止跌，但仍需突破MA10（5.88）和MA20（6.13）压力才能转强。下方支撑关注前低5.58元，若跌破可能进一步探底。量能方面，前期下跌缩量，近期放量反弹，多空分歧加大，但整体空头格局未改。",
@@ -4238,45 +2932,8 @@
         "sentiment": "neutral",
         "key_events": []
       },
-      "news": [
-        {
-          "title": "保利发展600048.SH)：董事童云翔因退休辞职，不再担任公司任何职务",
-          "url": "http://finance.eastmoney.com/a/202605143737575081.html",
-          "date": "2026-05-14 18:37:35",
-          "source": "界面新闻"
-        },
-        {
-          "title": "保利发展600048.SH)：6.95亿元竞得东莞厚街镇住宅地块，权益比例100%",
-          "url": "http://finance.eastmoney.com/a/202605113733235863.html",
-          "date": "2026-05-11 18:53:13",
-          "source": "界面新闻"
-        },
-        {
-          "title": "保利发展600048.SH)：2026年一季报净利润为9.16亿元、同比较去年同期下降57.06%",
-          "url": "http://finance.eastmoney.com/a/202604283721379764.html",
-          "date": "2026-04-28 08:58:08",
-          "source": "界面新闻"
-        },
-        {
-          "title": "8股今日获机构买入评级",
-          "url": "http://finance.eastmoney.com/a/202605253748274995.html",
-          "date": "2026-05-25 17:39:00",
-          "source": "证券时报网"
-        },
-        {
-          "title": "保利发展定向发行可转债申请获证监会同意注册批复",
-          "url": "http://finance.eastmoney.com/a/202605193741368155.html",
-          "date": "2026-05-19 09:07:00",
-          "source": "证券时报网"
-        }
-      ],
-      "risk_points": [
-        "均线空头排列，趋势向下，反弹可能受阻于均线压力",
-        "前期低点5.58若被跌破，将加速下跌",
-        "大盘或板块情绪弱势可能拖累个股表现",
-        "北向资金数据缺失，外资动向未知",
-        "主力净流入金额较小，持续性存疑"
-      ],
+      "news": [],
+      "risk_points": [],
       "signal_breakdown": {
         "hard_score": 0.092,
         "soft_score": -0.35,
@@ -4332,9 +2989,9 @@
       "momentum_5d": 0.04,
       "ma_alignment": "neutral",
       "volume_ratio": 1.91,
-      "pe_ttm": 14.2,
-      "pb": 3.48,
-      "mcap_yi": 1565.0,
+      "pe_ttm": null,
+      "pb": null,
+      "mcap_yi": null,
       "technical": {
         "status": "ok",
         "summary": "山西汾酒近期呈下跌趋势，均线系统空头排列（MA5<MA10<MA20），股价在MA10下方运行。5月27日和29日成交量显著放大，但反弹力度有限，未能有效突破均线压力，显示多头力量不足。当前支撑位在124-125元区间，若跌破可能加速下行。量能放大但价格未同步突破，存在下跌中继风险。",
@@ -4356,45 +3013,8 @@
         "sentiment": "neutral",
         "key_events": []
       },
-      "news": [
-        {
-          "title": "山西汾酒600809.SH)：2026年一季报净利润为53.83亿元、同比较去年同期下降19.03%",
-          "url": "http://finance.eastmoney.com/a/202604303725977594.html",
-          "date": "2026-04-30 09:22:40",
-          "source": "界面新闻"
-        },
-        {
-          "title": "超80亿元！600809拟大手笔现金分红",
-          "url": "http://finance.eastmoney.com/a/202604233715126831.html",
-          "date": "2026-04-23 08:41:00",
-          "source": "中国基金报"
-        },
-        {
-          "title": "山西汾酒600809.SH)：2025年年报净利润为122.46亿元、同比较去年同期上涨0.03%",
-          "url": "http://finance.eastmoney.com/a/202604233715635614.html",
-          "date": "2026-04-23 10:07:48",
-          "source": "界面新闻"
-        },
-        {
-          "title": "白酒概念涨1.48%，主力资金净流入这些股",
-          "url": "http://finance.eastmoney.com/a/202605293754551017.html",
-          "date": "2026-05-29 17:50:00",
-          "source": "证券时报网"
-        },
-        {
-          "title": "食品饮料行业5月29日资金流向日报",
-          "url": "http://finance.eastmoney.com/a/202605293754551583.html",
-          "date": "2026-05-29 17:50:00",
-          "source": "证券时报网"
-        }
-      ],
-      "risk_points": [
-        "下跌趋势明确，均线构成持续压制",
-        "放量反弹若未能突破，可能转为继续下跌",
-        "若跌破124元支撑，下方空间打开",
-        "北向资金态度不明，外资动向对白酒板块影响较大",
-        "单日资金流入持续性存疑，需结合多日数据判断"
-      ],
+      "news": [],
+      "risk_points": [],
       "signal_breakdown": {
         "hard_score": 0.086,
         "soft_score": -0.35,
@@ -4450,9 +3070,9 @@
       "momentum_5d": 1.05,
       "ma_alignment": "neutral",
       "volume_ratio": 1.29,
-      "pe_ttm": 5.3,
-      "pb": 0.4,
-      "mcap_yi": 1996.0,
+      "pe_ttm": null,
+      "pb": null,
+      "mcap_yi": null,
       "technical": {
         "status": "ok",
         "summary": "近期股价从4.90元回落至4.72元，呈下降趋势，均线呈空头排列（MA5<MA10<MA20），反弹至4.83元但量能不足。成交量在下跌中逐步萎缩，最后一日放量反弹，但短期均线压制明显，趋势偏空。",
@@ -4474,44 +3094,8 @@
         "sentiment": "neutral",
         "key_events": []
       },
-      "news": [
-        {
-          "title": "中国建筑601668.SH)：中标莱州至青岛高速公路青岛段特许经营项目，估算总投资159.10亿元",
-          "url": "http://finance.eastmoney.com/a/202605293754532890.html",
-          "date": "2026-05-29 17:21:16",
-          "source": "界面新闻"
-        },
-        {
-          "title": "中国建筑601668.SH)：2026年一季报净利润为138.81亿元、同比较去年同期下降7.53%",
-          "url": "http://finance.eastmoney.com/a/202604293723692163.html",
-          "date": "2026-04-29 09:05:58",
-          "source": "界面新闻"
-        },
-        {
-          "title": "中国建筑：近期获得113.6亿元高速公路项目 且与子企业联合体中标159亿元高速公路特许经营项目",
-          "url": "http://finance.eastmoney.com/a/202605293754487411.html",
-          "date": "2026-05-29 16:44:45",
-          "source": "财联社"
-        },
-        {
-          "title": "中国建筑：中标约159.1亿元高速公路特许经营项目 获113.6亿元重大项目",
-          "url": "http://finance.eastmoney.com/a/202605293754513951.html",
-          "date": "2026-05-29 17:09:00",
-          "source": "证券时报网"
-        },
-        {
-          "title": "分红哪家强? 50只股股息率超5%",
-          "url": "http://finance.eastmoney.com/a/202605293753766388.html",
-          "date": "2026-05-29 09:24:00",
-          "source": "证券时报网"
-        }
-      ],
-      "risk_points": [
-        "均线空头排列形成压制",
-        "成交量未持续放大，反弹可能夭折",
-        "单日资金数据参考价值有限，需观察持续性",
-        "北向资金缺席可能影响市场情绪"
-      ],
+      "news": [],
+      "risk_points": [],
       "signal_breakdown": {
         "hard_score": 0.149,
         "soft_score": -0.35,
@@ -4567,9 +3151,9 @@
       "momentum_5d": -0.55,
       "ma_alignment": "neutral",
       "volume_ratio": 1.42,
-      "pe_ttm": 41.0,
-      "pb": 5.34,
-      "mcap_yi": 3331.0,
+      "pe_ttm": null,
+      "pb": null,
+      "mcap_yi": null,
       "technical": {
         "status": "ok",
         "summary": "恒瑞医药近期呈现下跌趋势，均线系统空头排列（MA5<MA10<MA20），价格在MA10和MA20下方运行。尽管5月29日放量反弹至50.19，但仍受制于均线压制，且前期高点54.99形成重要阻力。量能虽有放大，但未能扭转颓势，短期反弹需观察能否突破MA10（50.408）及MA20（52.343）。若量能不济，可能继续探底。",
@@ -4591,45 +3175,8 @@
         "sentiment": "neutral",
         "key_events": []
       },
-      "news": [
-        {
-          "title": "恒瑞医药600276.SH)：SHR-1819注射液获儿童特应性皮炎临床试验批准",
-          "url": "http://finance.eastmoney.com/a/202605283752886775.html",
-          "date": "2026-05-28 17:50:52",
-          "source": "界面新闻"
-        },
-        {
-          "title": "恒瑞医药600276.SH)：子公司注射用SHR-5421获临床试验批准，用于多发性骨髓瘤",
-          "url": "http://finance.eastmoney.com/a/202605263749771682.html",
-          "date": "2026-05-26 17:21:45",
-          "source": "界面新闻"
-        },
-        {
-          "title": "恒瑞医药600276.SH)：子公司HRS-1635片获临床试验批准，用于B细胞恶性肿瘤",
-          "url": "http://finance.eastmoney.com/a/202605263749772196.html",
-          "date": "2026-05-26 17:21:40",
-          "source": "界面新闻"
-        },
-        {
-          "title": "恒瑞医药600276.SH)：子公司获肠外营养注射液药品注册批准",
-          "url": "http://finance.eastmoney.com/a/202605193742100587.html",
-          "date": "2026-05-19 17:58:30",
-          "source": "界面新闻"
-        },
-        {
-          "title": "恒瑞医药600276.SH)：HRS-3005片获临床试验批准，拟用于B细胞恶性肿瘤治疗",
-          "url": "http://finance.eastmoney.com/a/202605083731528791.html",
-          "date": "2026-05-08 16:51:47",
-          "source": "界面新闻"
-        }
-      ],
-      "risk_points": [
-        "均线空头排列形成技术压制，反弹空间受限",
-        "若量能萎缩，反弹可能夭折并再度下探",
-        "近期波动加剧，存在跌破47.62创阶段新低的风险",
-        "仅一日数据，无法确认资金流入持续性",
-        "若后续北向资金大幅流出，可能对冲主力流入效果"
-      ],
+      "news": [],
+      "risk_points": [],
       "signal_breakdown": {
         "hard_score": -0.23,
         "soft_score": -0.1,
@@ -4685,9 +3232,9 @@
       "momentum_5d": 2.33,
       "ma_alignment": "neutral",
       "volume_ratio": 1.25,
-      "pe_ttm": 12.3,
-      "pb": 0.83,
-      "mcap_yi": 2711.0,
+      "pe_ttm": null,
+      "pb": null,
+      "mcap_yi": null,
       "technical": {
         "status": "ok",
         "summary": "近20个交易日股价从16.12持续下跌至15.38，跌幅约4.6%，均线呈空头排列（MA5=15.206 < MA10=15.252 < MA20=15.646），短期趋势偏弱。5月29日反弹至15.38但未站上MA5，量能未明显放大，上攻动能不足。整体处于下降通道，短线虽有反弹但受均线压制，方向偏空。",
@@ -4709,44 +3256,8 @@
         "sentiment": "neutral",
         "key_events": []
       },
-      "news": [
-        {
-          "title": "国泰海通601211.SH)：2026年一季报净利润为63.88亿元、同比较去年同期下降47.82%",
-          "url": "http://finance.eastmoney.com/a/202604253718903517.html",
-          "date": "2026-04-25 09:46:24",
-          "source": "界面新闻"
-        },
-        {
-          "title": "国泰海通：子公司海通开元投资管理的合肥市海通徽银股权投资合伙企业目前持有长鑫科技0.47%股份",
-          "url": "http://finance.eastmoney.com/a/202605203743628949.html",
-          "date": "2026-05-20 18:14:01",
-          "source": "每日经济新闻"
-        },
-        {
-          "title": "国泰海通：子公司海通开元投资管理的海通徽银基金持有长鑫科技0.47%股份",
-          "url": "http://finance.eastmoney.com/a/202605203743806510.html",
-          "date": "2026-05-20 21:29:00",
-          "source": "南方财经网"
-        },
-        {
-          "title": "非银金融行业5月28日资金流向日报",
-          "url": "http://finance.eastmoney.com/a/202605283752873514.html",
-          "date": "2026-05-28 17:25:00",
-          "source": "证券时报网"
-        },
-        {
-          "title": "非银金融行业5月26日资金流向日报",
-          "url": "http://finance.eastmoney.com/a/202605263749703149.html",
-          "date": "2026-05-26 16:35:00",
-          "source": "证券时报网"
-        }
-      ],
-      "risk_points": [
-        "均线空头排列持续压制，反弹空间有限",
-        "若跌破15.0关口可能加速下跌",
-        "数据不完整，判断依据不足",
-        "单日资金波动可能受短期因素影响"
-      ],
+      "news": [],
+      "risk_points": [],
       "signal_breakdown": {
         "hard_score": 0.129,
         "soft_score": -0.35,
@@ -4802,9 +3313,9 @@
       "momentum_5d": -2.17,
       "ma_alignment": "bearish",
       "volume_ratio": 1.06,
-      "pe_ttm": 7.5,
-      "pb": 0.8,
-      "mcap_yi": 22119.0,
+      "pe_ttm": null,
+      "pb": null,
+      "mcap_yi": null,
       "technical": {
         "status": "ok",
         "summary": "根据最近20个交易日数据，农业银行股价从6.97元持续下跌至6.32元，累计跌幅约9.4%。均线系统呈现典型空头排列，MA5（6.34）<MA10（6.435）<MA20（6.626），价格运行于所有均线之下，下跌趋势明确。成交量在5月14日、5月20日和5月27日下跌时有所放大，显示抛压较重；5月29日虽小幅反弹但缩量，反弹力度不足。短期支撑位于6.14元（5月29日低点），上方阻力关注6.42元（5月26日收盘价）和6.46元（5月20日收盘价）。整体技术面偏弱，未见明确止跌信号。",
@@ -4826,45 +3337,8 @@
         "sentiment": "neutral",
         "key_events": []
       },
-      "news": [
-        {
-          "title": "农业银行601288.SH)：非执行董事刘晓鹏因工作调整辞任",
-          "url": "http://finance.eastmoney.com/a/202605133735381511.html",
-          "date": "2026-05-13 08:59:27",
-          "source": "界面新闻"
-        },
-        {
-          "title": "农业银行601288.SH)：2026年一季报净利润为751.85亿元、同比较去年同期上涨4.52%",
-          "url": "http://finance.eastmoney.com/a/202604303725997677.html",
-          "date": "2026-04-30 09:29:34",
-          "source": "界面新闻"
-        },
-        {
-          "title": "银行股大分化：建行股价创新高，股份行普跌，城商行“独霸”四强",
-          "url": "http://finance.eastmoney.com/a/202605253748399874.html",
-          "date": "2026-05-25 20:32:00",
-          "source": "界面新闻"
-        },
-        {
-          "title": "农业银行完成发行300亿元总损失吸收能力非资本债券",
-          "url": "http://finance.eastmoney.com/a/202605193742112878.html",
-          "date": "2026-05-19 18:11:00",
-          "source": "财中社"
-        },
-        {
-          "title": "长鑫科技IPO过会，“巨无霸” 如何牵动市场与产业链",
-          "url": "http://finance.eastmoney.com/a/202605273751527236.html",
-          "date": "2026-05-27 20:45:25",
-          "source": "第一财经"
-        }
-      ],
-      "risk_points": [
-        "均线空头排列持续压制，反弹空间受限",
-        "下跌过程中量能未明显萎缩，空头动能仍存",
-        "银行板块整体表现或受宏观经济预期影响，需警惕系统性风险",
-        "单日资金流入难以确认趋势",
-        "北向资金态度不明，增加不确定性"
-      ],
+      "news": [],
+      "risk_points": [],
       "signal_breakdown": {
         "hard_score": -0.275,
         "soft_score": 0.0,
@@ -4916,9 +3390,9 @@
       "momentum_5d": -2.29,
       "ma_alignment": "bearish",
       "volume_ratio": 1.22,
-      "pe_ttm": 15.1,
-      "pb": 3.81,
-      "mcap_yi": 3032.0,
+      "pe_ttm": null,
+      "pb": null,
+      "mcap_yi": null,
       "technical": {
         "status": "ok",
         "summary": "药明康德近期股价持续走弱，最新收盘101.6元，低于MA5(102.338)、MA10(102.684)和MA20(105.438)，均线呈现空头排列。自4月底以来高点逐步下移，趋势向下。成交量在下跌过程中有所放大，但反弹时缩量，表明市场抛压较重，多头缺乏信心。短期支撑位关注100元整数关口和前期低点99.44元，若跌破则可能进一步下探。上方压力位在MA5和MA10附近（102-103元），反弹难以突破。整体技术面偏空，短期内调整压力较大。",
@@ -4940,44 +3414,8 @@
         "sentiment": "neutral",
         "key_events": []
       },
-      "news": [
-        {
-          "title": "利好突袭！603259 强势拉涨停",
-          "url": "http://finance.eastmoney.com/a/202604283721970578.html",
-          "date": "2026-04-28 12:44:00",
-          "source": "中国基金报"
-        },
-        {
-          "title": "机构风向标 | 药明康德6032592026年一季度已披露持股减少机构超220家",
-          "url": "http://finance.eastmoney.com/a/202605013727067419.html",
-          "date": "2026-05-01 09:41:09",
-          "source": "界面新闻"
-        },
-        {
-          "title": "603259，在手订单近600亿元",
-          "url": "http://finance.eastmoney.com/a/202604283721449061.html",
-          "date": "2026-04-28 09:09:00",
-          "source": "上海证券报"
-        },
-        {
-          "title": "603259，3000亿元龙头涨停！CRO概念股集体拉升",
-          "url": "http://finance.eastmoney.com/a/202604283721856349.html",
-          "date": "2026-04-28 10:44:00",
-          "source": "证券时报网"
-        },
-        {
-          "title": "药明康德603259.SH)：2026年一季报净利润为46.52亿元",
-          "url": "http://finance.eastmoney.com/a/202604283721577525.html",
-          "date": "2026-04-28 09:30:43",
-          "source": "界面新闻"
-        }
-      ],
-      "risk_points": [
-        "若跌破100元整数关口，可能加速下跌",
-        "反弹量能不足，难以扭转弱势局面",
-        "单日资金数据参考价值有限，需结合多日趋势",
-        "北向资金缺席，信息不完整可能影响判断"
-      ],
+      "news": [],
+      "risk_points": [],
       "signal_breakdown": {
         "hard_score": -0.213,
         "soft_score": -0.1,
@@ -5033,9 +3471,9 @@
       "momentum_5d": -1.28,
       "ma_alignment": "neutral",
       "volume_ratio": 1.29,
-      "pe_ttm": 14.0,
-      "pb": 0.47,
-      "mcap_yi": 1416.0,
+      "pe_ttm": null,
+      "pb": null,
+      "mcap_yi": null,
       "technical": {
         "status": "ok",
         "summary": "根据最近20日数据，股价从13.69持续下跌至12.32，累计跌幅约10%。均线系统呈空头排列（MA5=12.214 < MA10=12.363 < MA20=12.913），表明短期、中期趋势均下行。成交量在下跌过程中总体放大，显示抛压较重。5月29日收出阳线且成交量显著放大，但收盘价仍低于所有均线，仅为超跌反弹性质，尚未确认趋势反转。上方MA10（12.36）和MA20（12.91）构成短期压力位，下方前低11.99附近有短暂支撑。整体技术面偏空，需观察反弹能否持续及量能配合情况。",
@@ -5057,45 +3495,8 @@
         "sentiment": "neutral",
         "key_events": []
       },
-      "news": [
-        {
-          "title": "上汽集团600104.SH)：2026年一季报净利润为30.26亿元、同比较去年同期上涨0.09%",
-          "url": "http://finance.eastmoney.com/a/202604303726083923.html",
-          "date": "2026-04-30 10:03:12",
-          "source": "界面新闻"
-        },
-        {
-          "title": "超级品牌概念涨1.64%，主力资金净流入27股",
-          "url": "http://finance.eastmoney.com/a/202605293754550520.html",
-          "date": "2026-05-29 17:50:00",
-          "source": "证券时报网"
-        },
-        {
-          "title": "上汽集团：公司持有清陶能源16.52%的股权",
-          "url": "http://finance.eastmoney.com/a/202605223746867327.html",
-          "date": "2026-05-22 18:05:32",
-          "source": "每日经济新闻"
-        },
-        {
-          "title": "超级品牌概念下跌1.26%，6股主力资金净流出超亿元",
-          "url": "http://finance.eastmoney.com/a/202605283752868053.html",
-          "date": "2026-05-28 17:25:00",
-          "source": "证券时报网"
-        },
-        {
-          "title": "上汽集团：自今年起，公司计划在不同品牌逐步推出搭载半固态电池的量产车型",
-          "url": "http://finance.eastmoney.com/a/202605223746809290.html",
-          "date": "2026-05-22 17:19:31",
-          "source": "每日经济新闻"
-        }
-      ],
-      "risk_points": [
-        "均线空头排列，趋势仍向下，反弹后可能继续下跌",
-        "股价连续创出新低，市场情绪悲观，存在进一步破位风险",
-        "若后续成交量不能维持或放大，反弹可能夭折",
-        "单日数据参考价值有限",
-        "北向资金缺席，信息不完整"
-      ],
+      "news": [],
+      "risk_points": [],
       "signal_breakdown": {
         "hard_score": -0.048,
         "soft_score": -0.35,
@@ -5151,9 +3552,9 @@
       "momentum_5d": 0.03,
       "ma_alignment": "neutral",
       "volume_ratio": 1.06,
-      "pe_ttm": 6.6,
-      "pb": 1.6,
-      "mcap_yi": 9562.0,
+      "pe_ttm": null,
+      "pb": null,
+      "mcap_yi": null,
       "technical": {
         "status": "ok",
         "summary": "中国人寿近期呈下跌趋势，股价从36.6元跌至33.83元，均线系统空头排列（MA5<MA10<MA20），且股价始终受均线压制。最近两日虽有小幅反弹，但成交量未能有效放大，反弹力度较弱。整体空头格局未改，需警惕进一步下探风险。短期关键压力位在MA10（约34.02）及MA20（35.41），下方支撑关注前低33.17。",
@@ -5175,44 +3576,8 @@
         "sentiment": "neutral",
         "key_events": []
       },
-      "news": [
-        {
-          "title": "中国人寿601628.SH)：2026年一季报净利润为195.05亿元、同比较去年同期下降32.28%",
-          "url": "http://finance.eastmoney.com/a/202604303726102063.html",
-          "date": "2026-04-30 10:14:36",
-          "source": "界面新闻"
-        },
-        {
-          "title": "非银金融行业5月28日资金流向日报",
-          "url": "http://finance.eastmoney.com/a/202605283752873514.html",
-          "date": "2026-05-28 17:25:00",
-          "source": "证券时报网"
-        },
-        {
-          "title": "非银金融行业5月26日资金流向日报",
-          "url": "http://finance.eastmoney.com/a/202605263749703149.html",
-          "date": "2026-05-26 16:35:00",
-          "source": "证券时报网"
-        },
-        {
-          "title": "A股五大上市险企全部撤销监事会",
-          "url": "http://finance.eastmoney.com/a/202605193741396740.html",
-          "date": "2026-05-19 09:23:51",
-          "source": "中国经营报"
-        },
-        {
-          "title": "国寿平安互为股东 险资真金白银 “买同业”",
-          "url": "http://finance.eastmoney.com/a/202605243747499736.html",
-          "date": "2026-05-24 21:08:32",
-          "source": "中国经营报"
-        }
-      ],
-      "risk_points": [
-        "均线空头排列压制明显，反弹可能遇阻回落",
-        "近期低点33.17若被跌破，则可能加速下跌",
-        "仅依赖单日主力资金数据，判断依据不足",
-        "北向资金缺席，资金面全貌不完整"
-      ],
+      "news": [],
+      "risk_points": [],
       "signal_breakdown": {
         "hard_score": -0.047,
         "soft_score": -0.35,
@@ -5268,9 +3633,9 @@
       "momentum_5d": -0.64,
       "ma_alignment": "neutral",
       "volume_ratio": 1.28,
-      "pe_ttm": 17.9,
-      "pb": 1.26,
-      "mcap_yi": 621.0,
+      "pe_ttm": null,
+      "pb": null,
+      "mcap_yi": null,
       "technical": {
         "status": "ok",
         "summary": "股价近期持续下行，均线呈空头排列（MA5<MA10<MA20），短期反弹受制于均线压力。5月29日虽反弹至23.25，但尚未有效站上5日线且量能未明显放大，整体趋势偏弱。关注前期低点22.64附近支撑，若跌破则可能进一步下探。",
@@ -5292,44 +3657,8 @@
         "sentiment": "neutral",
         "key_events": []
       },
-      "news": [
-        {
-          "title": "复星医药600196.SH)：控股子公司桃红四物汤颗粒药品注册申请获受理",
-          "url": "http://finance.eastmoney.com/a/202605143736712078.html",
-          "date": "2026-05-14 08:55:52",
-          "source": "界面新闻"
-        },
-        {
-          "title": "复星医药600196.SH)：2026年一季报净利润为8.71亿元",
-          "url": "http://finance.eastmoney.com/a/202604293724127794.html",
-          "date": "2026-04-29 12:07:27",
-          "source": "界面新闻"
-        },
-        {
-          "title": "复星医药600196.SH)：2026年一季报净利润为8.71亿元、同比较去年同期上涨13.87%",
-          "url": "http://finance.eastmoney.com/a/202604293724659165.html",
-          "date": "2026-04-29 17:58:10",
-          "source": "界面新闻"
-        },
-        {
-          "title": "复星医药：控股子公司帕妥珠单抗注射液上市注册申请获批",
-          "url": "http://finance.eastmoney.com/a/202605293754545854.html",
-          "date": "2026-05-29 17:41:00",
-          "source": "证券时报网"
-        },
-        {
-          "title": "复星医药：控股子公司帕妥珠单抗注射液获国家药监局批准上市",
-          "url": "http://finance.eastmoney.com/a/202605293754482845.html",
-          "date": "2026-05-29 16:40:55",
-          "source": "财联社"
-        }
-      ],
-      "risk_points": [
-        "均线空头压制，反弹空间受限",
-        "若跌破22.64支撑，可能加速下行",
-        "市场情绪偏弱，成交量不足",
-        "北向资金数据缺失，资金方向不明确"
-      ],
+      "news": [],
+      "risk_points": [],
       "signal_breakdown": {
         "hard_score": -0.041,
         "soft_score": -0.35,
@@ -5385,9 +3714,9 @@
       "momentum_5d": -3.93,
       "ma_alignment": "bearish",
       "volume_ratio": 0.83,
-      "pe_ttm": 25.8,
-      "pb": 4.16,
-      "mcap_yi": 1331.0,
+      "pe_ttm": null,
+      "pb": null,
+      "mcap_yi": null,
       "technical": {
         "status": "ok",
         "summary": "股价自4月29日35.4元持续下跌至5月29日28.87元，跌幅超18%，形成明确下降趋势。均线系统呈现空头排列（MA5=29.85 < MA10=30.15 < MA20=32.49），短期均线加速下移。近期成交量放大，尤其5月28-29日下跌放量，显示抛压较重。下方关键支撑位于5月28日低点28.51元，若跌破则可能进一步下探。整体技术面弱势。",
@@ -5409,44 +3738,8 @@
         "sentiment": "neutral",
         "key_events": []
       },
-      "news": [
-        {
-          "title": "山东黄金600547.SH)：2026年一季报净利润为14.46亿元、同比较去年同期上涨40.87%",
-          "url": "http://finance.eastmoney.com/a/202604303726101124.html",
-          "date": "2026-04-30 10:12:57",
-          "source": "界面新闻"
-        },
-        {
-          "title": "有色金属行业5月25日资金流向日报",
-          "url": "http://finance.eastmoney.com/a/202605253748277840.html",
-          "date": "2026-05-25 17:38:00",
-          "source": "证券时报网"
-        },
-        {
-          "title": "黄金概念涨1.56%，主力资金净流入这些股",
-          "url": "http://finance.eastmoney.com/a/202605263749701645.html",
-          "date": "2026-05-26 16:35:00",
-          "source": "证券时报网"
-        },
-        {
-          "title": "解密主力资金出逃股 连续5日净流出717股",
-          "url": "http://finance.eastmoney.com/a/202605213745277070.html",
-          "date": "2026-05-21 17:00:00",
-          "source": "证券时报网"
-        },
-        {
-          "title": "解密主力资金出逃股 连续5日净流出736股",
-          "url": "http://finance.eastmoney.com/a/202605203743590466.html",
-          "date": "2026-05-20 17:28:00",
-          "source": "证券时报网"
-        }
-      ],
-      "risk_points": [
-        "均线空头排列，趋势下行压力持续",
-        "放量下跌，资金出逃迹象明显，反弹可能乏力",
-        "北向资金数据缺失，信息不完整可能影响判断",
-        "主力流出虽小，但若持续可能转为负面信号"
-      ],
+      "news": [],
+      "risk_points": [],
       "signal_breakdown": {
         "hard_score": -0.52,
         "soft_score": 0.6,
@@ -5502,9 +3795,9 @@
       "momentum_5d": 0.11,
       "ma_alignment": "bearish",
       "volume_ratio": 1.0,
-      "pe_ttm": 9.4,
-      "pb": 0.92,
-      "mcap_yi": 1641.0,
+      "pe_ttm": null,
+      "pb": null,
+      "mcap_yi": null,
       "technical": {
         "status": "ok",
         "summary": "华泰证券当前收盘价18.18元，低于MA5（18.37）、MA10（18.43）和MA20（18.83），均线呈空头排列，短期趋势偏弱。近期股价在5月15日大跌后尝试反弹，但未能有效站上均线，成交量萎缩，市场做多意愿不足。5月28日创阶段低点17.92后小幅回升，但整体仍受均线压制。量能方面，近期无明显放量，反弹缺乏动能。综合来看，技术面显示空头主导，需关注17.92支撑有效性及均线压力。",
@@ -5526,44 +3819,8 @@
         "sentiment": "neutral",
         "key_events": []
       },
-      "news": [
-        {
-          "title": "华泰证券601688.SH)：2026年一季报净利润为48.00亿元、同比较去年同期上涨31.79%",
-          "url": "http://finance.eastmoney.com/a/202604303726174737.html",
-          "date": "2026-04-30 10:06:29",
-          "source": "界面新闻"
-        },
-        {
-          "title": "重磅调整！两大指数集体换新血，科创50迎来GPU双雄",
-          "url": "http://finance.eastmoney.com/a/202605293754584072.html",
-          "date": "2026-05-29 18:31:00",
-          "source": "21世纪经济报道"
-        },
-        {
-          "title": "非银金融行业5月28日资金流向日报",
-          "url": "http://finance.eastmoney.com/a/202605283752873514.html",
-          "date": "2026-05-28 17:25:00",
-          "source": "证券时报网"
-        },
-        {
-          "title": "券商“把脉”2026年A股下半场，盈利兑现推动“慢牛”延续，硬科技是核心主线",
-          "url": "http://finance.eastmoney.com/a/202605293754384073.html",
-          "date": "2026-05-29 14:44:49",
-          "source": "界面新闻"
-        },
-        {
-          "title": "非银金融行业5月26日资金流向日报",
-          "url": "http://finance.eastmoney.com/a/202605263749703149.html",
-          "date": "2026-05-26 16:35:00",
-          "source": "证券时报网"
-        }
-      ],
-      "risk_points": [
-        "若跌破17.92支撑，可能打开下行空间",
-        "均线压制明显，短期反弹空间有限",
-        "数据不完整，分析结论可靠性低",
-        "主力净流入绝对值低，动能不足"
-      ],
+      "news": [],
+      "risk_points": [],
       "signal_breakdown": {
         "hard_score": -0.164,
         "soft_score": -0.1,
@@ -5619,9 +3876,9 @@
       "momentum_5d": 4.08,
       "ma_alignment": "neutral",
       "volume_ratio": 1.95,
-      "pe_ttm": 67.3,
-      "pb": 1.39,
-      "mcap_yi": 684.0,
+      "pe_ttm": null,
+      "pb": null,
+      "mcap_yi": null,
       "technical": {
         "status": "ok",
         "summary": "洋河股份近20日股价呈下降趋势，均线系统MA5、MA10、MA20呈现空头排列（MA5<MA10<MA20），最新收盘价45.39位于MA20（46.355）下方，短期虽从低点反弹但整体弱势。5月29日放量上涨，但前两日缩量回调，反弹持续性存疑。上方MA20构成直接压力，下方近期低点43.55附近有支撑。量能若不能持续放大，反弹或受阻。",
@@ -5643,45 +3900,8 @@
         "sentiment": "neutral",
         "key_events": []
       },
-      "news": [
-        {
-          "title": "洋河股份002304.SZ)：2026年一季报净利润为24.47亿元、同比较去年同期下降32.73%",
-          "url": "http://finance.eastmoney.com/a/202604283721780524.html",
-          "date": "2026-04-28 10:18:19",
-          "source": "界面新闻"
-        },
-        {
-          "title": "洋河股份002304.SZ)：2025年年报净利润为22.06亿元、同比较去年同期下降66.94%",
-          "url": "http://finance.eastmoney.com/a/202604283721773277.html",
-          "date": "2026-04-28 10:15:17",
-          "source": "界面新闻"
-        },
-        {
-          "title": "超级品牌概念涨1.64%，主力资金净流入27股",
-          "url": "http://finance.eastmoney.com/a/202605293754550520.html",
-          "date": "2026-05-29 17:50:00",
-          "source": "证券时报网"
-        },
-        {
-          "title": "白酒概念涨1.48%，主力资金净流入这些股",
-          "url": "http://finance.eastmoney.com/a/202605293754551017.html",
-          "date": "2026-05-29 17:50:00",
-          "source": "证券时报网"
-        },
-        {
-          "title": "食品饮料行业5月29日资金流向日报",
-          "url": "http://finance.eastmoney.com/a/202605293754551583.html",
-          "date": "2026-05-29 17:50:00",
-          "source": "证券时报网"
-        }
-      ],
-      "risk_points": [
-        "均线空头排列压制，反弹空间有限",
-        "若量能跟不上，可能再度回落至前期低点",
-        "整体趋势偏空，反弹失败风险较大",
-        "北向资金数据缺失，信息不完整",
-        "单日主力流入无法代表趋势，存在反转风险"
-      ],
+      "news": [],
+      "risk_points": [],
       "signal_breakdown": {
         "hard_score": -0.078,
         "soft_score": -0.35,
@@ -5737,9 +3957,9 @@
       "momentum_5d": 1.02,
       "ma_alignment": "neutral",
       "volume_ratio": 1.55,
-      "pe_ttm": 26.1,
-      "pb": 2.57,
-      "mcap_yi": 3295.0,
+      "pe_ttm": null,
+      "pb": null,
+      "mcap_yi": null,
       "technical": {
         "status": "ok",
         "summary": "五粮液近期呈现明显下跌趋势，均线系统呈空头排列（MA5<MA10<MA20）。股价从98.34元跌至84.89元，跌幅超过13%。5月29日虽放量反弹，但收盘价仍低于MA10和MA20，反弹力度有限。成交量在5月6日放量下跌后整体萎缩，表明资金离场意愿较强。短期内需关注MA10（约84.4元）和MA20（约88.2元）的压制作用，若无法有效突破，则可能继续探底。下方支撑位关注前低80.88元。",
@@ -5761,45 +3981,8 @@
         "sentiment": "neutral",
         "key_events": []
       },
-      "news": [
-        {
-          "title": "000858 最新公告！五粮液集团斥资不低于30亿元增持",
-          "url": "http://finance.eastmoney.com/a/202605063728974577.html",
-          "date": "2026-05-06 21:28:00",
-          "source": "证券时报网"
-        },
-        {
-          "title": "五粮液000858.SZ)：2026年一季报净利润为80.63亿元、同比较去年同期上涨82.57%",
-          "url": "http://finance.eastmoney.com/a/202605013727076920.html",
-          "date": "2026-05-01 09:46:56",
-          "source": "界面新闻"
-        },
-        {
-          "title": "五粮液000858.SZ)：2025年年报净利润为89.54亿元、同比较去年同期下降71.89%",
-          "url": "http://finance.eastmoney.com/a/202605013727077793.html",
-          "date": "2026-05-01 09:46:46",
-          "source": "界面新闻"
-        },
-        {
-          "title": "午后白酒集体飙涨！贵州茅台涨超3%",
-          "url": "http://finance.eastmoney.com/a/202605273751229191.html",
-          "date": "2026-05-27 14:29:00",
-          "source": "华夏时报"
-        },
-        {
-          "title": "超级品牌概念涨1.64%，主力资金净流入27股",
-          "url": "http://finance.eastmoney.com/a/202605293754550520.html",
-          "date": "2026-05-29 17:50:00",
-          "source": "证券时报网"
-        }
-      ],
-      "risk_points": [
-        "继续下跌测试80元整数关口",
-        "反弹受阻后可能加速下跌",
-        "成交量持续萎缩显示市场人气不足",
-        "北向资金状态未知，外资态度不明",
-        "仅单日主力数据，不能排除短期波动"
-      ],
+      "news": [],
+      "risk_points": [],
       "signal_breakdown": {
         "hard_score": -0.02,
         "soft_score": -0.35,
@@ -5891,5 +4074,21 @@
       "type": "pre",
       "url": "archive/2026-05-24-pre.html"
     }
-  ]
+  ],
+  "breadth": {
+    "score": 31,
+    "zone": "weakening",
+    "components": {
+      "bull_ratio": 0.24,
+      "strong_bull_ratio": 0.02,
+      "avg_confidence": 0.6578,
+      "capital_net_positive": 0.0,
+      "ma_bullish_ratio": 0.16,
+      "low_contradiction": 1.0
+    },
+    "recommended_exposure": "40-60%",
+    "total_stocks": 50,
+    "zone_label": "走弱",
+    "color": "#F97316"
+  }
 }
