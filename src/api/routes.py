@@ -418,6 +418,313 @@ async def simulate_scenario(req: ScenarioSimRequest):
     }
 
 
+# ── Phase F: Postmortems, Theses, Breadth, Stagnation ──────────
+
+
+class CheckMatureRequest(BaseModel):
+    check_date: Optional[str] = None
+
+
+@app.get("/api/postmortems")
+async def list_postmortems(ticker: Optional[str] = None, days: int = 30):
+    """List signal postmortems with optional ticker and date range filter."""
+    from src.data.db_manager import SignalDB
+    return {"postmortems": SignalDB().get_postmortems(ticker=ticker, days=days)}
+
+
+@app.get("/api/postmortems/summary")
+async def postmortem_summary(days: int = 30):
+    """Postmortem statistical summary."""
+    from src.data.db_manager import SignalDB
+    from src.evolution.postmortem import PostmortemAnalyzer
+    db = SignalDB()
+    analyzer = PostmortemAnalyzer(db)
+    return analyzer.get_summary(days=days)
+
+
+@app.post("/api/postmortems/check-mature")
+async def check_mature(req: Optional[CheckMatureRequest] = None):
+    """Check matured signals and update outcomes."""
+    from src.data.db_manager import SignalDB
+    from src.evolution.postmortem import PostmortemAnalyzer
+    check_date = req.check_date if req else None
+    result = PostmortemAnalyzer(SignalDB()).check_mature_signals(as_of=check_date)
+    return result
+
+
+@app.get("/api/theses")
+async def list_theses(status: Optional[str] = None, ticker: Optional[str] = None):
+    """List thesis records with optional status and ticker filter."""
+    from src.data.db_manager import SignalDB
+    return {"theses": SignalDB().get_theses(status=status, ticker=ticker)}
+
+
+@app.get("/api/theses/statistics")
+async def thesis_statistics(days: int = 90):
+    """Thesis performance statistics over a given period."""
+    from src.data.db_manager import SignalDB
+    from datetime import timedelta
+
+    db = SignalDB()
+    all_theses = db.get_theses()
+
+    # Filter by creation date
+    cutoff = (date.today() - timedelta(days=days)).isoformat()
+    recent = [t for t in all_theses if t.get("created_at", "") >= cutoff]
+
+    by_status = {}
+    for t in recent:
+        s = t.get("status", "unknown")
+        by_status[s] = by_status.get(s, 0) + 1
+
+    # PnL stats for exited theses
+    exited = [t for t in recent if t.get("exit_date") and t.get("pnl_pct") is not None]
+    pnls = [t["pnl_pct"] for t in exited]
+    avg_pnl = round(sum(pnls) / len(pnls), 2) if pnls else None
+    max_pnl = round(max(pnls), 2) if pnls else None
+    min_pnl = round(min(pnls), 2) if pnls else None
+
+    # Win rate (positive PnL)
+    wins = sum(1 for p in pnls if p > 0)
+    win_rate = round(wins / len(pnls), 3) if pnls else None
+
+    # By thesis type
+    by_type = {}
+    for t in recent:
+        tt = t.get("thesis_type", "unknown")
+        if tt not in by_type:
+            by_type[tt] = {"count": 0, "exited": 0, "win": 0}
+        by_type[tt]["count"] += 1
+        if t.get("exit_date"):
+            by_type[tt]["exited"] += 1
+            if t.get("pnl_pct") is not None and t["pnl_pct"] > 0:
+                by_type[tt]["win"] += 1
+
+    return {
+        "period_days": days,
+        "total": len(recent),
+        "by_status": by_status,
+        "exited_count": len(exited),
+        "avg_pnl": avg_pnl,
+        "max_pnl": max_pnl,
+        "min_pnl": min_pnl,
+        "win_rate": win_rate,
+        "by_type": by_type,
+    }
+
+
+@app.get("/api/breadth")
+async def market_breadth():
+    """Market breadth metrics derived from latest.json stock data."""
+    from src.data.db_manager import SignalDB
+    from datetime import datetime
+
+    data_dir = Path(get_settings().site.data_dir)
+    json_path = data_dir / "latest.json"
+    if not json_path.exists():
+        docs_path = Path("docs/data/latest.json")
+        if docs_path.exists():
+            json_path = docs_path
+        else:
+            raise HTTPException(status_code=404, detail="latest.json not found")
+
+    data = json.loads(json_path.read_text(encoding="utf-8"))
+    stocks = data.get("stocks", [])
+    meta = data.get("meta", {})
+
+    if not stocks:
+        return {"error": "No stock data available"}
+
+    total = len(stocks)
+
+    # Sentiment distribution
+    sentiments = {"bullish": 0, "neutral": 0, "bearish": 0}
+    for s in stocks:
+        sent = s.get("overall_sentiment", "neutral")
+        if sent in sentiments:
+            sentiments[sent] += 1
+
+    # MA alignment distribution
+    ma_dist = {"bullish": 0, "bearish": 0, "flat": 0, "unknown": 0}
+    for s in stocks:
+        ma = s.get("ma_alignment", "unknown")
+        if ma in ma_dist:
+            ma_dist[ma] += 1
+        else:
+            ma_dist["unknown"] += 1
+
+    # Score distribution
+    hard_scores = [s.get("hard_score") for s in stocks if s.get("hard_score") is not None]
+    final_scores = [s.get("signal_breakdown", {}).get("final_score") for s in stocks
+                    if s.get("signal_breakdown", {}).get("final_score") is not None]
+
+    # Momentum stats
+    mom_5d = [s.get("momentum_5d") for s in stocks if s.get("momentum_5d") is not None]
+    mom_20d = [s.get("momentum_20d") for s in stocks if s.get("momentum_5d") is not None]
+
+    # Advance/decline (positive vs negative 5d momentum)
+    advances = sum(1 for m in mom_5d if m > 0)
+    declines = sum(1 for m in mom_5d if m < 0)
+    unchanged = sum(1 for m in mom_5d if m == 0)
+
+    return {
+        "trade_date": meta.get("trade_date"),
+        "generated_at": meta.get("generated_at"),
+        "symbol_count": total,
+        "sentiment": sentiments,
+        "ma_alignment": ma_dist,
+        "advance_decline": {
+            "advances": advances,
+            "declines": declines,
+            "unchanged": unchanged,
+            "advance_ratio": round(advances / total, 3) if total else 0,
+        },
+        "hard_score": {
+            "mean": round(sum(hard_scores) / len(hard_scores), 3) if hard_scores else None,
+            "median": round(sorted(hard_scores)[len(hard_scores) // 2], 3) if hard_scores else None,
+        },
+        "final_score": {
+            "mean": round(sum(final_scores) / len(final_scores), 3) if final_scores else None,
+        },
+        "momentum_5d": {
+            "mean": round(sum(mom_5d) / len(mom_5d), 2) if mom_5d else None,
+        },
+        "momentum_20d": {
+            "mean": round(sum(mom_20d) / len(mom_20d), 2) if mom_20d else None,
+        },
+    }
+
+
+@app.get("/api/stagnation")
+async def stagnation_check():
+    """Identify stagnating stocks from latest.json data."""
+    from src.data.db_manager import SignalDB
+    from datetime import datetime
+
+    data_dir = Path(get_settings().site.data_dir)
+    json_path = data_dir / "latest.json"
+    if not json_path.exists():
+        docs_path = Path("docs/data/latest.json")
+        if docs_path.exists():
+            json_path = docs_path
+        else:
+            raise HTTPException(status_code=404, detail="latest.json not found")
+
+    data = json.loads(json_path.read_text(encoding="utf-8"))
+    stocks = data.get("stocks", [])
+    meta = data.get("meta", {})
+
+    # Stagnation criteria:
+    # - 5d momentum within ±2% (near-zero)
+    # - AND volume_ratio < 1.2 (no unusual volume)
+    # - OR flat/unknown MA alignment
+    stagnating = []
+    for s in stocks:
+        mom_5d = s.get("momentum_5d")
+        vol_ratio = s.get("volume_ratio")
+        ma = s.get("ma_alignment", "unknown")
+
+        is_low_momentum = mom_5d is not None and abs(mom_5d) < 2.0
+        is_low_volume = vol_ratio is not None and vol_ratio < 1.2
+        is_flat_ma = ma in ("flat", "unknown") or ma is None
+
+        if is_low_momentum and (is_low_volume or is_flat_ma):
+            stagnating.append({
+                "code": s.get("code"),
+                "name": s.get("name"),
+                "momentum_5d": mom_5d,
+                "volume_ratio": vol_ratio,
+                "ma_alignment": ma,
+                "hard_score": s.get("hard_score"),
+                "final_score": s.get("signal_breakdown", {}).get("final_score"),
+                "sentiment": s.get("overall_sentiment"),
+            })
+
+    return {
+        "trade_date": meta.get("trade_date"),
+        "total_analyzed": len(stocks),
+        "stagnation_count": len(stagnating),
+        "stagnation_ratio": round(len(stagnating) / len(stocks), 3) if stocks else 0,
+        "stagnating": sorted(stagnating, key=lambda x: abs(x.get("momentum_5d", 0) or 0)),
+    }
+
+
+# ── Phase F: Postmortem / Thesis / Breadth APIs ──────────────
+
+@app.get("/api/postmortems")
+async def get_postmortems(ticker: Optional[str] = None, outcome: Optional[str] = None, days: int = 30):
+    """查询 postmortem 记录"""
+    from src.data.db_manager import SignalDB
+    from src.evolution.postmortem import PostmortemRecorder
+    db = SignalDB()
+    recorder = PostmortemRecorder(db)
+    records = recorder.db.get_postmortems(ticker=ticker, days=days)
+    if outcome:
+        records = [r for r in records if r.get("outcome_category") == outcome]
+    return {"total": len(records), "records": records[:100]}
+
+
+@app.get("/api/postmortems/summary")
+async def get_postmortem_summary(days: int = 30):
+    """postmortem 统计摘要"""
+    from src.data.db_manager import SignalDB
+    from src.evolution.postmortem import PostmortemRecorder
+    db = SignalDB()
+    recorder = PostmortemRecorder(db)
+    return recorder.get_summary(days=days)
+
+
+@app.post("/api/postmortems/check-mature")
+async def check_mature_signals():
+    """手动触发成熟信号检查"""
+    from src.data.db_manager import SignalDB
+    from src.evolution.postmortem import PostmortemRecorder
+    db = SignalDB()
+    recorder = PostmortemRecorder(db)
+    result = recorder.check_mature_signals()
+    return result
+
+
+@app.get("/api/theses")
+async def get_theses(status: Optional[str] = None, ticker: Optional[str] = None):
+    """查询 thesis 列表"""
+    from src.data.db_manager import SignalDB
+    db = SignalDB()
+    theses = db.get_theses(status=status, ticker=ticker)
+    return {"total": len(theses), "theses": theses[:100]}
+
+
+@app.get("/api/theses/statistics")
+async def get_thesis_statistics(days: int = 90):
+    """thesis 统计"""
+    from src.data.db_manager import SignalDB
+    from src.evolution.thesis import ThesisManager
+    db = SignalDB()
+    mgr = ThesisManager(db)
+    return mgr.get_statistics(days=days)
+
+
+@app.get("/api/breadth")
+async def get_market_breadth():
+    """市场广度评分（从 latest.json 读取）"""
+    json_path = Path("site/data/latest.json")
+    if not json_path.exists():
+        json_path = Path("data/latest.json")
+    if not json_path.exists():
+        return {"error": "no data available"}
+    data = json.loads(json_path.read_text(encoding="utf-8"))
+    return data.get("breadth", {"error": "no breadth data"})
+
+
+@app.get("/api/stagnation")
+async def get_stagnation_status():
+    """策略停滞检测状态"""
+    return {
+        "status": "monitoring",
+        "message": "策略停滞检测已就绪，需积累 10+ 交易日数据后激活",
+    }
+
+
 # ── Static files (MUST be after all API routes) ──────────────
 docs_path = Path("docs")
 if docs_path.exists():

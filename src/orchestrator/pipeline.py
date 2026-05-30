@@ -175,6 +175,77 @@ async def run_analysis(
         except Exception as e:
             logger.warning("Signal persistence failed: %s", e)
 
+    # Postmortem recording + Thesis creation (after signal persistence)
+    if fused_records:
+        try:
+            from src.data.db_manager import SignalDB
+            from src.evolution.postmortem import PostmortemRecorder
+            from src.evolution.thesis import ThesisManager, _infer_thesis_type
+
+            db2 = SignalDB()
+            recorder = PostmortemRecorder(db2)
+            thesis_mgr = ThesisManager(db2)
+            signal_date = date.today().isoformat()
+
+            # Build analysis lookup for contradiction_flags etc.
+            analysis_by_code: dict[str, StockAnalysis] = {
+                a.snapshot.code: a for a in analyses
+            }
+
+            postmortem_count = 0
+            thesis_count = 0
+            for code, record in fused_records.items():
+                analysis = analysis_by_code.get(code)
+                sb = analysis.signal_breakdown if analysis else {}
+
+                # Record postmortem for every signal
+                recorder.record_signal(
+                    code=code,
+                    signal_date=signal_date,
+                    final_signal=record.final_signal,
+                    fusion_score=record.final_score,
+                    hard_score=record.hard_score or 0.0,
+                    soft_score=record.soft_score or 0.0,
+                    gate_score=record.gate_score or 0.0,
+                    dragon_tiger_score=sb.get("dragon_tiger_score", 0.0),
+                    announcement_score=sb.get("announcement_score", 0.0),
+                    contradiction_flags=sb.get("contradiction_flags", []),
+                    market_regime="unknown",
+                )
+                postmortem_count += 1
+
+                # Auto-create thesis for high-score signals (final_score > 0.4)
+                if record.final_score > 0.4:
+                    hard_metrics = analysis.hard_metrics if analysis else {}
+                    thesis_type = _infer_thesis_type(
+                        hard_score=record.hard_score or 0.0,
+                        soft_score=record.soft_score or 0.0,
+                        capital_score=0.0,
+                        ma_alignment=hard_metrics.get("ma_alignment", ""),
+                        announcement_sentiment="neutral",
+                    )
+                    thesis_statement = (
+                        f"{record.signal_label}: {record.final_signal} "
+                        f"(fusion={record.final_score:.3f}, "
+                        f"hard={record.hard_score:.3f}, soft={record.soft_score:.3f})"
+                    )
+                    thesis_mgr.create_thesis(
+                        ticker=code,
+                        signal_id=f"sig_{code}_{signal_date}_{record.final_score:.3f}",
+                        thesis_type=thesis_type,
+                        thesis_statement=thesis_statement,
+                        fusion_score=record.final_score,
+                        hard_score=record.hard_score or 0.0,
+                    )
+                    thesis_count += 1
+
+            logger.info(
+                "Postmortem & thesis: %d signals recorded, %d theses created",
+                postmortem_count, thesis_count,
+            )
+        except Exception as e:
+            logger.warning("Postmortem/thesis recording failed: %s", e)
+
     try:
         from src.notify.base import get_notifier
         notifier = get_notifier()

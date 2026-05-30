@@ -1035,6 +1035,48 @@ TPL_HISTORY = """<!DOCTYPE html>
 </div>
 {% endif %}
 
+{# ── Phase F: Signal Postmortem / 复盘统计 ── #}
+{% if postmortem_stats and postmortem_stats.total > 0 %}
+<div class="detail-section mb-lg">
+    <div class="detail-section-title">📊 信号复盘统计 <span class="section-subtitle">最近 30 日信号验证</span></div>
+    <div class="stats-grid mb-md">
+        <div class="stat-card">
+            <div class="stat-value" style="color:{{ '#22C55E' if postmortem_stats.win_rate >= 0.5 else '#EF4444' }}">{{ (postmortem_stats.win_rate * 100)|round(1) }}%</div>
+            <div class="stat-label">胜率</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value text-bull">{{ postmortem_stats.tp }}</div>
+            <div class="stat-label">✅ 正确信号</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value text-bear">{{ postmortem_stats.fp }}</div>
+            <div class="stat-label">❌ 误报</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value text-hold">{{ postmortem_stats.missed }}</div>
+            <div class="stat-label">⏭ 遗漏机会</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value" style="color:var(--text-muted)">{{ postmortem_stats.regime }}</div>
+            <div class="stat-label">🔄 风格错配</div>
+        </div>
+    </div>
+    {# Returns #}
+    <div class="postmortem-returns">
+        {% if postmortem_stats.avg_return_5d is not none %}
+        <span class="return-chip">5日均收益 <span class="{{ 'change-up' if postmortem_stats.avg_return_5d > 0 else 'change-down' }}">{{ '%+.2f'|format(postmortem_stats.avg_return_5d) }}%</span></span>
+        {% endif %}
+        {% if postmortem_stats.avg_return_20d is not none %}
+        <span class="return-chip">20日均收益 <span class="{{ 'change-up' if postmortem_stats.avg_return_20d > 0 else 'change-down' }}">{{ '%+.2f'|format(postmortem_stats.avg_return_20d) }}%</span></span>
+        {% endif %}
+        {% if postmortem_stats.contra_win_rate is not none and postmortem_stats.no_contra_win_rate is not none %}
+        <span class="return-chip">有冲突信号胜率 <span class="{{ 'change-up' if postmortem_stats.contra_win_rate >= 0.5 else 'change-down' }}">{{ (postmortem_stats.contra_win_rate * 100)|round(1) }}%</span> ({{ postmortem_stats.contra_count }})</span>
+        <span class="return-chip">无冲突信号胜率 <span class="{{ 'change-up' if postmortem_stats.no_contra_win_rate >= 0.5 else 'change-down' }}">{{ (postmortem_stats.no_contra_win_rate * 100)|round(1) }}%</span> ({{ postmortem_stats.no_contra_count }})</span>
+        {% endif %}
+    </div>
+</div>
+{% endif %}
+
 {% for code, data in history.items() %}
 <div style="margin-bottom:32px">
     <div class="section-title">
@@ -1162,6 +1204,15 @@ TPL_DASHBOARD = """<!DOCTYPE html>
             {% endif %}
         </div>
     </div>
+    {# ── Phase F: Market Breadth Score ── #}
+    {% if breadth %}
+    <div class="breadth-widget">
+        <span class="breadth-label">市场广度</span>
+        <span class="breadth-score" style="color:{{ breadth.color }}">{{ breadth.score }}</span>
+        <span class="breadth-zone" style="color:{{ breadth.color }}">{{ breadth.zone_label }}</span>
+        <span class="breadth-exposure">建议仓位 {{ breadth.recommended_exposure }}</span>
+    </div>
+    {% endif %}
     {% set total = bullish_count + hold_count + bearish_count %}
     {% if total > 0 %}
     <div class="signal-bar">
@@ -1466,6 +1517,7 @@ def generate_site(report: Report, target_dir: str | None = None) -> str:
     hhtml = Template(TPL_HISTORY).render(
         **common, history=history,
         meta=meta, type_label=type_label,
+        postmortem_stats=postmortem_stats,
         use_app_pages=use_app_pages,
         bottom_nav=Template(BOTTOM_NAV).render(page="history"),
         nav=Template(NAV_HTML).render(page="history"),
@@ -1477,6 +1529,8 @@ def generate_site(report: Report, target_dir: str | None = None) -> str:
         **common, meta=meta, type_label=type_label, market=market,
         stocks=stocks,
         bullish_count=bullish_count, hold_count=hold_count, bearish_count=bearish_count,
+        breadth=breadth_data,
+        postmortem_stats=postmortem_stats,
         use_app_pages=use_app_pages,
         bottom_nav=Template(BOTTOM_NAV).render(page="dashboard"),
         nav=Template(NAV_HTML).render(page="dashboard"),

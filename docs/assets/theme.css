@@ -764,3 +764,17 @@ a:hover { color: var(--accent-blue); }
     background: rgba(245,158,11,0.12); border: 1px solid rgba(245,158,11,0.25);
     cursor: help;
 }
+
+/* ── Phase F: Postmortem Returns (history page) ── */
+.postmortem-returns {
+    display: flex; flex-wrap: wrap; gap: 8px;
+    padding: 12px 0 0; border-top: 1px solid var(--border-soft);
+}
+.return-chip {
+    font-size: 12px; color: var(--text-muted);
+    padding: 4px 10px; background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border-soft); border-radius: var(--r-full);
+}
+.return-chip .change-up { color: #22C55E; font-weight: 600; }
+.return-chip .change-down { color: #EF4444; font-weight: 600; }
+
