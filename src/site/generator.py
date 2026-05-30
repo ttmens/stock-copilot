@@ -100,6 +100,7 @@ def _analysis_to_stock_dict(a: StockAnalysis) -> dict:
         "dragon_tiger": dt_entries,
         "consensus_score": a.debate.get("consensus_score") if a.debate else None,
         "debate": a.debate,
+        "related_stocks": a.related_stocks if a.related_stocks else [],
     }
     return _enrich_stock_dict(stock)
 
@@ -186,6 +187,8 @@ def report_from_latest_json(path: Path) -> Report:
                 "ma_alignment": s.get("ma_alignment"),
                 "volume_ratio": s.get("volume_ratio"),
             },
+            debate=s.get("debate"),
+            related_stocks=s.get("related_stocks", []),
         ))
 
     market = None
@@ -391,8 +394,9 @@ TPL_HOME = """<!DOCTYPE html>
         <span class="signal-badge {{ badge_cls }}">{{ stock.overall_focus }}</span>
         {% if stock.consensus_score is not none %}
         {% set cs = stock.consensus_score %}
-        {% set cs_level = 'high' if cs >= 0.8 else 'medium' if cs >= 0.5 else 'low' %}
-        <span class="consensus-dot {{ cs_level }}" title="共识度 {{ (cs * 100)|round(0) }}%"></span>
+        {% set cs_label = '高共识' if cs >= 0.8 else '中共识' if cs >= 0.5 else '低共识' %}
+        {% set cs_color = '#22C55E' if cs >= 0.8 else '#F59E0B' if cs >= 0.5 else '#EF4444' %}
+        <span class="consensus-badge" style="color:{{ cs_color }}" title="Agent 辩论共识度 {{ (cs * 100)|round(0) }}%">🤖 {{ cs_label }} {{ (cs * 100)|round(0) }}%</span>
         {% endif %}
     </div>
 
@@ -510,8 +514,9 @@ TPL_HOME = """<!DOCTYPE html>
 <span class="signal-badge {{ badge_cls2 }}" title="{{ stock.overall_focus }}">{{ stock.overall_focus[:20]}}{% if stock.overall_focus|length > 20 %}…{% endif %}</span>
 {% if stock.consensus_score is not none %}
 {% set cs2 = stock.consensus_score %}
-{% set cs_level2 = 'high' if cs2 >= 0.8 else 'medium' if cs2 >= 0.5 else 'low' %}
-<span class="consensus-dot {{ cs_level2 }}" title="共识度 {{ (cs2 * 100)|round(0) }}%"></span>
+{% set cs_label2 = '高共识' if cs2 >= 0.8 else '中共识' if cs2 >= 0.5 else '低共识' %}
+{% set cs_color2 = '#22C55E' if cs2 >= 0.8 else '#F59E0B' if cs2 >= 0.5 else '#EF4444' %}
+<span class="consensus-badge-table" style="color:{{ cs_color2 }}" title="共识度 {{ (cs2 * 100)|round(0) }}%">🤖{{ cs_label2 }}{{ (cs2 * 100)|round(0) }}%</span>
 {% endif %}
 </td>
             <td>
@@ -863,6 +868,70 @@ TPL_STOCK = """<!DOCTYPE html>
     </table>
 </div>
 
+{# ── Phase D: Agent Debate Panel ── #}
+{% if stock.debate %}
+<div class="detail-section" class="mb-md">
+    <div class="detail-section-title">🤖 Agent 辩论面板</div>
+    {% set deb = stock.debate %}
+    {% set cs = deb.get('consensus_score', 0) %}
+    {% set cs_pct = (cs * 100)|round(0) %}
+    {% set cs_color = '#22C55E' if cs >= 0.8 else '#F59E0B' if cs >= 0.5 else '#EF4444' %}
+    {% set cs_label = '高共识' if cs >= 0.8 else '中共识' if cs >= 0.5 else '低共识/分歧' %}
+    <div class="debate-header">
+        <span class="debate-consensus" style="color:{{ cs_color }}">共识度 {{ cs_pct }}% — {{ cs_label }}</span>
+        {% if deb.has_disagreement %}
+        <span class="debate-warning">⚠️ 存在分歧</span>
+        {% endif %}
+    </div>
+    <div class="debate-grid">
+        {% for agent_name in ['technical', 'capital', 'fundamental'] %}
+        {% set agent_labels = {'technical': '技术面', 'capital': '资金面', 'fundamental': '基本面'} %}
+        {% set r1 = deb.get('round1', {}).get(agent_name, '') %}
+        {% set r2 = deb.get('round2', {}).get(agent_name, '') %}
+        {% set shifted = deb.get('shifts', {}).get(agent_name + '_shifted', false) %}
+        {% set r1_icon = '🟢' if r1 == 'bullish' else '🔴' if r1 == 'bearish' else '⚪' %}
+        {% set r2_icon = '🟢' if r2 == 'bullish' else '🔴' if r2 == 'bearish' else '⚪' %}
+        <div class="debate-agent-card">
+            <div class="debate-agent-title">{{ agent_labels.get(agent_name, agent_name) }}{% if shifted %} <span class="debate-shift-tag">已修正</span>{% endif %}</div>
+            <div class="debate-round">
+                <span class="debate-round-label">R1</span>
+                <span class="debate-sentiment">{{ r1_icon }} {{ r1 }}</span>
+            </div>
+            <div class="debate-arrow">↓</div>
+            <div class="debate-round">
+                <span class="debate-round-label">R2</span>
+                <span class="debate-sentiment">{{ r2_icon }} {{ r2 }}</span>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% if deb.has_disagreement and deb.get('disagreement_points') %}
+    <div class="debate-disagreements">
+        <div class="debate-disagree-title">🔀 分歧点：</div>
+        {% for dp in deb.disagreement_points[:3] %}
+        <div class="debate-disagree-item">• {{ dp }}</div>
+        {% endfor %}
+    </div>
+    {% endif %}
+</div>
+{% endif %}
+
+{# ── Phase D: Related Stocks ── #}
+{% if stock.related_stocks and stock.related_stocks|length > 0 %}
+<div class="detail-section" class="mb-md">
+    <div class="detail-section-title">🔗 关联股票</div>
+    <div class="related-grid">
+        {% for rel in stock.related_stocks[:6] %}
+        <a href="{% if use_app_pages %}app/stock.html?code={{ rel.code }}{% else %}stock/{{ rel.code }}.html{% endif %}" class="related-card">
+            <div class="related-card-code">{{ rel.code }}</div>
+            <div class="related-card-type">{{ rel.type }}</div>
+            {% if rel.industry %}<div class="related-card-meta">{{ rel.industry }}</div>{% endif %}
+        </a>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+
 {# ── L3: Dragon Tiger Evidence ── #}
 {% if stock.dragon_tiger %}
 <div class="detail-section" class="mb-md">
@@ -1092,6 +1161,36 @@ TPL_DASHBOARD = """<!DOCTYPE html>
         <span class="signal-legend-item"><span class="signal-legend-dot bull"></span> 看多 {{ bullish_count }}</span>
         <span class="signal-legend-item"><span class="signal-legend-dot hold"></span> 观望 {{ hold_count }}</span>
         <span class="signal-legend-item"><span class="signal-legend-dot bear"></span> 看空 {{ bearish_count }}</span>
+    </div>
+</div>
+{% endif %}
+
+{# ── Phase D: Consensus Heatmap ── #}
+{% set stocks_with_consensus = stocks | selectattr('consensus_score', 'defined') | rejectattr('consensus_score', 'none') | list %}
+{% if stocks_with_consensus %}
+<div class="detail-section" class="mb-lg">
+    <div class="detail-section-title">🤖 共识度热力图 <span class="section-subtitle">Agent 辩论后的一致性评估</span></div>
+    <div class="heatmap-grid">
+        {% for stock in stocks %}
+        {% if stock.consensus_score is not none %}
+        {% set cs = stock.consensus_score %}
+        {% set cs_pct = (cs * 100)|round(0) %}
+        {% set bg = '#0D2818' if cs >= 0.8 else '#1C1203' if cs >= 0.5 else '#2D0A0A' %}
+        {% set border = '#22C55E' if cs >= 0.8 else '#F59E0B' if cs >= 0.5 else '#EF4444' %}
+        {% set text_c = '#22C55E' if cs >= 0.8 else '#F59E0B' if cs >= 0.5 else '#EF4444' %}
+        <a href="{% if use_app_pages %}app/stock.html?code={{ stock.code }}{% else %}stock/{{ stock.code }}.html{% endif %}" class="heatmap-cell" style="background:{{ bg }}; border-color:{{ border }}">
+            <div class="heatmap-code">{{ stock.code }}</div>
+            <div class="heatmap-name">{{ stock.name }}</div>
+            <div class="heatmap-value" style="color:{{ text_c }}">{{ cs_pct }}%</div>
+            <div class="heatmap-bar-track"><div class="heatmap-bar-fill" style="width:{{ cs_pct }}%; background:{{ border }}"></div></div>
+        </a>
+        {% endif %}
+        {% endfor %}
+    </div>
+    <div class="heatmap-legend">
+        <span>🟢 高共识 ≥80%</span>
+        <span>🟡 中共识 50-80%</span>
+        <span>🔴 低共识 <50%（分歧大，需谨慎）</span>
     </div>
 </div>
 {% endif %}

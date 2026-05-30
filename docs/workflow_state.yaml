@@ -1,11 +1,11 @@
 project: stock-copilot
 mode: phase_increment
-current_phase: phase_e
-target_phase: phase_e
+current_phase: phase_f
+target_phase: phase_f
 gates:
   g1_research: approved
   g2_design: approved
-  g3_ui_acceptance: approved
+  g3_ui_acceptance: pending
 acceptance:
   functional: pass
   ux: pass

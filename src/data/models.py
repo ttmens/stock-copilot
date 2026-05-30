@@ -183,3 +183,73 @@ class LatestJson(BaseModel):
     stocks: list[LatestJsonStock]
     failed_symbols: list[str] = Field(default_factory=list)
     archive: list[LatestJsonArchiveItem] = Field(default_factory=list)
+
+
+# ─── Signal Postmortem models ────────────────────────────────────────
+
+class SignalOutcome(str, Enum):
+    TRUE_POSITIVE = "true_positive"
+    FALSE_POSITIVE = "false_positive"
+    MISSED_OPPORTUNITY = "missed_opportunity"
+    REGIME_MISMATCH = "regime_mismatch"
+
+
+class SignalPostmortem(BaseModel):
+    signal_id: str
+    ticker: str
+    signal_date: date
+    predicted_direction: str = Field(..., description="up/down/sideways")
+    fusion_score: float = 0.0
+    hard_score: float = 0.0
+    soft_score: float = 0.0
+    gate_score: float = 0.0
+    dragon_tiger_score: float = 0.0
+    announcement_score: float = 0.0
+    consensus_bonus: float = 0.0
+    contradiction_flags: list[str] = Field(default_factory=list)
+    market_regime: str = Field(default="", description="bull/bear/oscillation")
+    actual_return_5d: Optional[float] = None
+    actual_return_20d: Optional[float] = None
+    outcome_category: Optional[SignalOutcome] = None
+    outcome_notes: str = ""
+    recorded_at: datetime = Field(default_factory=datetime.now)
+
+
+# ─── Thesis Record models ────────────────────────────────────────────
+
+class ThesisType(str, Enum):
+    MOMENTUM_BREAKOUT = "momentum_breakout"
+    VALUATION_REPAIR = "valuation_repair"
+    CAPITAL_DRIVEN = "capital_driven"
+    EVENT_CATALYST = "event_catalyst"
+    SECTOR_ROTATION = "sector_rotation"
+
+
+class ThesisStatus(str, Enum):
+    IDEA = "idea"
+    ENTRY_READY = "entry_ready"
+    ACTIVE = "active"
+    CLOSED = "closed"
+    INVALIDATED = "invalidated"
+
+
+class ThesisRecord(BaseModel):
+    thesis_id: str
+    ticker: str
+    created_at: datetime = Field(default_factory=datetime.now)
+    thesis_type: ThesisType
+    thesis_statement: str = Field(..., description="投资逻辑陈述")
+    status: ThesisStatus = ThesisStatus.IDEA
+    expected_holding_days: Optional[int] = None
+    stop_price: Optional[float] = None
+    target_price: Optional[float] = None
+    entry_price: Optional[float] = None
+    entry_date: Optional[date] = None
+    exit_price: Optional[float] = None
+    exit_date: Optional[date] = None
+    exit_reason: str = ""
+    pnl_pct: Optional[float] = None
+    mae: Optional[float] = Field(default=None, description="最大不利偏离 Maximum Adverse Excursion")
+    mfe: Optional[float] = Field(default=None, description="最大有利偏离 Maximum Favorable Excursion")
+    source_signal_id: Optional[str] = None
+    status_history: list[dict] = Field(default_factory=list, description="状态变更记录: {status, changed_at, reason}")

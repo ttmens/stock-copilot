@@ -1,7 +1,26 @@
 # Stock Copilot 当前系统状态（SSOT）
 
-> **版本 v2.0.0 (Phase D: MiroFish 增强)** | 更新 2026-05-29  
+> **版本 v2.1.0 (Phase F: OODA 反馈闭环增强)** | 更新 2026-05-30  
 > 代码仓库: `ttmens/stock-copilot` | 线上: https://ttmens.github.io/stock-copilot/
+
+## Phase F 要点（OODA 反馈闭环增强）
+
+- **F1 Signal Postmortem**: 逐信号结果追踪 + outcome 分类（TP/FP/missed/regime_mismatch）
+  - `src/evolution/postmortem.py` — PostmortemRecorder（record_signal, check_mature_signals, generate_feedback）
+  - 延迟比对：信号日期 +7 日历日后自动通过 signals 表 momentum 计算实际收益
+- **F2 Thesis/Journal**: 投资论点全生命周期管理（IDEA → ENTRY_READY → ACTIVE → CLOSED）
+  - `src/evolution/thesis.py` — ThesisManager（create_thesis, transition, close_thesis, get_statistics）
+  - 高分信号（fusion_score > 0.4）自动创建 thesis，按信号特征推断 thesis_type
+- **F3 Contradiction 检测**: 多层信号冲突检测与 confidence 惩罚
+  - `src/data/signal_fusion.py` — detect_contradictions()（hard_vs_soft, capital_vs_technical, dragon_tiger_vs_announcement, gate_fusion_anomaly）
+  - 每个 contradiction flag → confidence -0.05
+- **F4 Market Breadth Score**: 基于自选股池的市场广度 0-100 评分
+  - `src/analysis/breadth.py` — MarketBreadthScorer（6 分量：bull_ratio, strong_bull_ratio, avg_confidence, capital_net_positive, ma_bullish_ratio, low_contradiction）
+  - Zone 映射：strong(80-100) → healthy(60-79) → neutral(40-59) → weakening(20-39) → critical(0-19)
+- **F5 数据库扩展**: signal_postmortems 表 + theses 表 + 索引
+  - `src/data/db_manager.py` — SignalPostmortem/ThesisRecord dataclass + save/get 方法
+- **F6 数据模型扩展**: SignalOutcome/ThesisType/ThesisStatus enums + SignalPostmortem/ThesisRecord models
+  - `src/data/models.py` — 新增 6 个 Pydantic 模型
 
 ## Phase D 要点（MiroFish 群体智能增强）
 

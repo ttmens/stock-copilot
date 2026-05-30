@@ -87,3 +87,15 @@
 - **背景**: `fusion_weights.json` 曾出现 sum≠1.0
 - **选择**: 配置修正 + `_normalize_layer_weights()` 运行时归一化
 - **影响**: 最终评分不再因权重和漂移
+
+## 2026-05-30 — Phase F OODA 反馈闭环增强
+
+- **背景**: 借鉴 tradermonty/claude-trading-skills 的 Signal Postmortem 和 Trader Memory Core
+- **选择**: 新增逐信号 postmortem 记录 + thesis 全生命周期管理 + contradiction 检测 + 市场广度评分
+- **影响**: 
+  - `src/evolution/postmortem.py` — PostmortemRecorder
+  - `src/evolution/thesis.py` — ThesisManager
+  - `src/data/signal_fusion.py` — detect_contradictions() 集成
+  - `src/analysis/breadth.py` — MarketBreadthScorer
+  - `src/data/db_manager.py` — signal_postmortems + theses 表
+  - `src/data/models.py` — SignalOutcome/ThesisType/ThesisStatus enums + SignalPostmortem/ThesisRecord models

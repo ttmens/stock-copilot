@@ -118,9 +118,112 @@ class FusedSignal:
     confidence: float = 0.0  # 0-1, how confident we are
     data_available: dict[str, bool] = None  # type: ignore
 
+    # Contradiction detection
+    contradiction_flags: list[dict] = None  # type: ignore
+
     def __post_init__(self):
         if self.data_available is None:
             self.data_available = {"hard": False, "soft": False, "gate": False, "dragon_tiger": False, "announcement": False}
+        if self.contradiction_flags is None:
+            self.contradiction_flags = []
+
+
+# ── Contradiction detection ──────────────────────────────────────
+
+def detect_contradictions(
+    hard_score: float = 0.0,
+    soft_score: float = 0.0,
+    gate_score: float = 0.0,
+    dragon_tiger_score: float = 0.0,
+    announcement_score: float = 0.0,
+    agents: Optional[dict[str, AgentResult]] = None,
+    has_hard: bool = False,
+    has_soft: bool = False,
+    has_dragon_tiger: bool = False,
+    has_announcement: bool = False,
+    fusion_score: float = 0.0,
+) -> list[dict]:
+    """Detect contradictions between signal layers.
+
+    Returns a list of contradiction dicts, each with:
+    {"type": "...", "severity": "high|medium|low", "description": "...", "scores": {...}}
+    """
+    flags: list[dict] = []
+
+    # 1. hard vs soft: opposite directions with significant magnitude
+    if has_hard and has_soft and abs(hard_score) > 0.3 and abs(soft_score) > 0.3:
+        if hard_score * soft_score < 0:
+            flags.append({
+                "type": "hard_vs_soft",
+                "severity": "high",
+                "description": (
+                    f"Hard signal ({hard_score:+.3f}) opposes soft signal ({soft_score:+.3f}) "
+                    f"— deterministic factors vs LLM sentiment disagree"
+                ),
+                "scores": {
+                    "hard_score": hard_score,
+                    "soft_score": soft_score,
+                },
+            })
+
+    # 2. capital vs technical: capital outflow but technical bullish
+    if agents and "capital" in agents and "technical" in agents:
+        capital_result = agents.get("capital")
+        technical_result = agents.get("technical")
+        if capital_result and technical_result and \
+                capital_result.status == AgentStatus.OK and \
+                technical_result.status == AgentStatus.OK:
+            capital_sentiment = capital_result.sentiment
+            # Map capital sentiment to score
+            capital_map = {"bullish": 1.0, "bearish": -1.0, "neutral": 0.0}
+            capital_mapped = capital_map.get(capital_sentiment, 0.0)
+            if capital_mapped < -0.5 and technical_result.sentiment == "bullish":
+                flags.append({
+                    "type": "capital_vs_technical",
+                    "severity": "medium",
+                    "description": (
+                        f"Capital flow is bearish ({capital_sentiment}) while "
+                        f"technical analysis is bullish —资金流出但技术面看多"
+                    ),
+                    "scores": {
+                        "capital_sentiment": capital_sentiment,
+                        "technical_sentiment": technical_result.sentiment,
+                    },
+                })
+
+    # 3. dragon_tiger vs announcement: 龙虎榜大幅买入但公告 bearish
+    if has_dragon_tiger and has_announcement:
+        if dragon_tiger_score > 0.5 and announcement_score < -0.3:
+            flags.append({
+                "type": "dragon_tiger_vs_announcement",
+                "severity": "medium",
+                "description": (
+                    f"Dragon&Tiger shows strong buying ({dragon_tiger_score:+.3f}) "
+                    f"but announcement is bearish ({announcement_score:+.3f}) "
+                    f"— 龙虎榜大幅买入但公告利空"
+                ),
+                "scores": {
+                    "dragon_tiger_score": dragon_tiger_score,
+                    "announcement_score": announcement_score,
+                },
+            })
+
+    # 4. Gate anomaly: low gate but high fusion
+    if gate_score < 0.3 and fusion_score > 0.5:
+        flags.append({
+            "type": "gate_fusion_anomaly",
+            "severity": "low",
+            "description": (
+                f"Gate score is low ({gate_score:.3f}) but fusion score is high "
+                f"({fusion_score:+.3f}) — gate rules warn against strong signal"
+            ),
+            "scores": {
+                "gate_score": gate_score,
+                "fusion_score": fusion_score,
+            },
+        })
+
+    return flags
 
 
 def fuse_signals(
@@ -135,6 +238,7 @@ def fuse_signals(
     announcement_result: Optional[AgentResult] = None,
     consensus_score: float = 0.0,  # D1: MiroFish debate consensus
     debate_result: Optional[dict] = None,  # D1: full debate metadata
+    detect_contradiction: bool = True,
 ) -> FusedSignal:
     """Fuse all signal layers into a final signal.
 
@@ -246,6 +350,22 @@ def fuse_signals(
     result.final_signal = _classify(result.final_score)
     result.signal_label = SIGNAL_LABELS.get(result.final_signal, "⚪ 观望")
 
+    # ── Contradiction detection ────────────────────────────────
+    if detect_contradiction:
+        result.contradiction_flags = detect_contradictions(
+            hard_score=result.hard_score,
+            soft_score=result.soft_score,
+            gate_score=result.gate_score,
+            dragon_tiger_score=result.dragon_tiger_score,
+            announcement_score=result.announcement_score,
+            agents=agents,
+            has_hard=has_hard,
+            has_soft=has_soft,
+            has_dragon_tiger=has_dragon_tiger,
+            has_announcement=has_announcement,
+            fusion_score=result.final_score,
+        )
+
     # Confidence: based on agreement between layers and data completeness
     base_confidence = _compute_confidence(
         hard_score=result.hard_score,
@@ -256,7 +376,9 @@ def fuse_signals(
     )
     # D1: Apply debate consensus bonus
     consensus_bonus = _consensus_confidence_bonus(consensus_score)
-    result.confidence = max(0.0, min(1.0, base_confidence + consensus_bonus))
+    # Apply contradiction penalty: -0.05 per flag
+    contradiction_penalty = 0.05 * len(result.contradiction_flags)
+    result.confidence = max(0.0, min(1.0, base_confidence + consensus_bonus - contradiction_penalty))
 
     return result
 

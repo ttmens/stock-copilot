@@ -155,6 +155,57 @@ CREATE TABLE IF NOT EXISTS evolution_suggestions (
     status      TEXT DEFAULT 'pending',
     created_at  TEXT DEFAULT (datetime('now'))
 );
+
+-- Signal Postmortem (Phase F)
+CREATE TABLE IF NOT EXISTS signal_postmortems (
+    signal_id TEXT PRIMARY KEY,
+    ticker TEXT NOT NULL,
+    signal_date TEXT NOT NULL,
+    predicted_direction TEXT NOT NULL,
+    fusion_score REAL NOT NULL,
+    hard_score REAL,
+    soft_score REAL,
+    gate_score REAL,
+    dragon_tiger_score REAL,
+    announcement_score REAL,
+    consensus_bonus REAL DEFAULT 0,
+    contradiction_flags TEXT DEFAULT '[]',
+    market_regime TEXT DEFAULT 'unknown',
+    actual_return_5d REAL,
+    actual_return_20d REAL,
+    outcome_category TEXT,
+    outcome_notes TEXT DEFAULT '',
+    recorded_at TEXT
+);
+
+CREATE INDEX IF NOT EXISTS idx_postmortems_ticker ON signal_postmortems(ticker);
+CREATE INDEX IF NOT EXISTS idx_postmortems_outcome ON signal_postmortems(outcome_category);
+
+-- Thesis tracking (Phase F)
+CREATE TABLE IF NOT EXISTS theses (
+    thesis_id TEXT PRIMARY KEY,
+    ticker TEXT NOT NULL,
+    created_at TEXT NOT NULL,
+    thesis_type TEXT NOT NULL,
+    thesis_statement TEXT,
+    status TEXT DEFAULT 'idea',
+    expected_holding_days INTEGER DEFAULT 10,
+    stop_price REAL,
+    target_price REAL,
+    entry_price REAL,
+    entry_date TEXT,
+    exit_price REAL,
+    exit_date TEXT,
+    exit_reason TEXT DEFAULT '',
+    pnl_pct REAL,
+    mae REAL,
+    mfe REAL,
+    source_signal_id TEXT,
+    status_history TEXT DEFAULT '[]'
+);
+
+CREATE INDEX IF NOT EXISTS idx_theses_status ON theses(status);
+CREATE INDEX IF NOT EXISTS idx_theses_ticker ON theses(ticker);
 """
 
 
@@ -196,6 +247,53 @@ class SignalRecord:
     # Metadata
     fetch_errors: list[str] = field(default_factory=list)
     data_sources: dict = field(default_factory=dict)
+
+
+@dataclass
+class SignalPostmortem:
+    """Represents a signal postmortem record (Phase F)."""
+    signal_id: str
+    ticker: str
+    signal_date: str
+    predicted_direction: str
+    fusion_score: float
+    hard_score: Optional[float] = None
+    soft_score: Optional[float] = None
+    gate_score: Optional[float] = None
+    dragon_tiger_score: Optional[float] = None
+    announcement_score: Optional[float] = None
+    consensus_bonus: float = 0.0
+    contradiction_flags: list[str] = field(default_factory=list)
+    market_regime: str = "unknown"
+    actual_return_5d: Optional[float] = None
+    actual_return_20d: Optional[float] = None
+    outcome_category: Optional[str] = None
+    outcome_notes: str = ""
+    recorded_at: Optional[str] = None
+
+
+@dataclass
+class ThesisRecord:
+    """Represents a thesis tracking record (Phase F)."""
+    thesis_id: str
+    ticker: str
+    created_at: str
+    thesis_type: str
+    thesis_statement: Optional[str] = None
+    status: str = "idea"
+    expected_holding_days: int = 10
+    stop_price: Optional[float] = None
+    target_price: Optional[float] = None
+    entry_price: Optional[float] = None
+    entry_date: Optional[str] = None
+    exit_price: Optional[float] = None
+    exit_date: Optional[str] = None
+    exit_reason: str = ""
+    pnl_pct: Optional[float] = None
+    mae: Optional[float] = None
+    mfe: Optional[float] = None
+    source_signal_id: Optional[str] = None
+    status_history: list[dict] = field(default_factory=list)
 
 
 class SignalDB:
@@ -655,3 +753,181 @@ class SignalDB:
 
     def __repr__(self):
         return f"SignalDB({self.db_path})"
+
+    # ── Signal Postmortems (Phase F) ────────────────────────────
+
+    def save_postmortem(self, postmortem: SignalPostmortem) -> bool:
+        """Save or update a signal postmortem record."""
+        recorded_at = postmortem.recorded_at or datetime.now().isoformat()
+        with self._connect() as conn:
+            conn.execute(
+                """INSERT INTO signal_postmortems (
+                    signal_id, ticker, signal_date, predicted_direction,
+                    fusion_score, hard_score, soft_score, gate_score,
+                    dragon_tiger_score, announcement_score, consensus_bonus,
+                    contradiction_flags, market_regime,
+                    actual_return_5d, actual_return_20d,
+                    outcome_category, outcome_notes, recorded_at
+                ) VALUES (
+                    ?, ?, ?, ?,
+                    ?, ?, ?, ?,
+                    ?, ?, ?,
+                    ?, ?,
+                    ?, ?,
+                    ?, ?, ?
+                )
+                ON CONFLICT(signal_id) DO UPDATE SET
+                    ticker = excluded.ticker,
+                    signal_date = excluded.signal_date,
+                    predicted_direction = excluded.predicted_direction,
+                    fusion_score = excluded.fusion_score,
+                    hard_score = excluded.hard_score,
+                    soft_score = excluded.soft_score,
+                    gate_score = excluded.gate_score,
+                    dragon_tiger_score = excluded.dragon_tiger_score,
+                    announcement_score = excluded.announcement_score,
+                    consensus_bonus = excluded.consensus_bonus,
+                    contradiction_flags = excluded.contradiction_flags,
+                    market_regime = excluded.market_regime,
+                    actual_return_5d = excluded.actual_return_5d,
+                    actual_return_20d = excluded.actual_return_20d,
+                    outcome_category = excluded.outcome_category,
+                    outcome_notes = excluded.outcome_notes,
+                    recorded_at = excluded.recorded_at""",
+                (
+                    postmortem.signal_id,
+                    postmortem.ticker,
+                    postmortem.signal_date,
+                    postmortem.predicted_direction,
+                    postmortem.fusion_score,
+                    postmortem.hard_score,
+                    postmortem.soft_score,
+                    postmortem.gate_score,
+                    postmortem.dragon_tiger_score,
+                    postmortem.announcement_score,
+                    postmortem.consensus_bonus,
+                    json.dumps(postmortem.contradiction_flags),
+                    postmortem.market_regime,
+                    postmortem.actual_return_5d,
+                    postmortem.actual_return_20d,
+                    postmortem.outcome_category,
+                    postmortem.outcome_notes,
+                    recorded_at,
+                ),
+            )
+            return True
+
+    def get_postmortems(
+        self, ticker: Optional[str] = None, days: int = 30
+    ) -> list[dict]:
+        """Get postmortem records, optionally filtered by ticker and date range."""
+        from datetime import timedelta
+
+        cutoff = (date.today() - timedelta(days=days)).isoformat()
+        with self._connect() as conn:
+            if ticker:
+                rows = conn.execute(
+                    """SELECT * FROM signal_postmortems
+                       WHERE ticker = ? AND signal_date >= ?
+                       ORDER BY signal_date DESC""",
+                    (ticker, cutoff),
+                ).fetchall()
+            else:
+                rows = conn.execute(
+                    """SELECT * FROM signal_postmortems
+                       WHERE signal_date >= ?
+                       ORDER BY signal_date DESC""",
+                    (cutoff,),
+                ).fetchall()
+        results = []
+        for r in rows:
+            d = dict(r)
+            d["contradiction_flags"] = json.loads(d.get("contradiction_flags", "[]"))
+            results.append(d)
+        return results
+
+    # ── Theses (Phase F) ────────────────────────────────────────
+
+    def save_thesis(self, thesis: ThesisRecord) -> bool:
+        """Save or update a thesis record."""
+        with self._connect() as conn:
+            conn.execute(
+                """INSERT INTO theses (
+                    thesis_id, ticker, created_at, thesis_type,
+                    thesis_statement, status, expected_holding_days,
+                    stop_price, target_price, entry_price, entry_date,
+                    exit_price, exit_date, exit_reason,
+                    pnl_pct, mae, mfe,
+                    source_signal_id, status_history
+                ) VALUES (
+                    ?, ?, ?, ?,
+                    ?, ?, ?,
+                    ?, ?, ?, ?,
+                    ?, ?, ?,
+                    ?, ?, ?,
+                    ?, ?
+                )
+                ON CONFLICT(thesis_id) DO UPDATE SET
+                    ticker = excluded.ticker,
+                    created_at = excluded.created_at,
+                    thesis_type = excluded.thesis_type,
+                    thesis_statement = excluded.thesis_statement,
+                    status = excluded.status,
+                    expected_holding_days = excluded.expected_holding_days,
+                    stop_price = excluded.stop_price,
+                    target_price = excluded.target_price,
+                    entry_price = excluded.entry_price,
+                    entry_date = excluded.entry_date,
+                    exit_price = excluded.exit_price,
+                    exit_date = excluded.exit_date,
+                    exit_reason = excluded.exit_reason,
+                    pnl_pct = excluded.pnl_pct,
+                    mae = excluded.mae,
+                    mfe = excluded.mfe,
+                    source_signal_id = excluded.source_signal_id,
+                    status_history = excluded.status_history""",
+                (
+                    thesis.thesis_id,
+                    thesis.ticker,
+                    thesis.created_at,
+                    thesis.thesis_type,
+                    thesis.thesis_statement,
+                    thesis.status,
+                    thesis.expected_holding_days,
+                    thesis.stop_price,
+                    thesis.target_price,
+                    thesis.entry_price,
+                    thesis.entry_date,
+                    thesis.exit_price,
+                    thesis.exit_date,
+                    thesis.exit_reason,
+                    thesis.pnl_pct,
+                    thesis.mae,
+                    thesis.mfe,
+                    thesis.source_signal_id,
+                    json.dumps(thesis.status_history),
+                ),
+            )
+            return True
+
+    def get_theses(
+        self, status: Optional[str] = None, ticker: Optional[str] = None
+    ) -> list[dict]:
+        """Get thesis records, optionally filtered by status and/or ticker."""
+        with self._connect() as conn:
+            query = "SELECT * FROM theses WHERE 1=1"
+            params: list = []
+            if status:
+                query += " AND status = ?"
+                params.append(status)
+            if ticker:
+                query += " AND ticker = ?"
+                params.append(ticker)
+            query += " ORDER BY created_at DESC"
+            rows = conn.execute(query, params).fetchall()
+        results = []
+        for r in rows:
+            d = dict(r)
+            d["status_history"] = json.loads(d.get("status_history", "[]"))
+            results.append(d)
+        return results
