@@ -58,7 +58,7 @@ settings = get_settings()
 try:
     archive = _load_archive_entries(settings)
     history = _load_history(settings)
-except:
+except (OSError, json.JSONDecodeError, KeyError):
     archive = data.get("archive", [])
     history = []
 

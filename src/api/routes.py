@@ -4,6 +4,7 @@ import asyncio
 import json
 import logging
 import os
+from contextlib import contextmanager
 from datetime import date
 from pathlib import Path
 from typing import Optional
@@ -26,21 +27,28 @@ app = FastAPI(
     version="3.0.0-alpha",
 )
 
-# ── Optional API auth middleware ──────────────────────────────
+# ── Optional API auth middleware (fixed) ──────────────────────
 auth_token = None
 _auth_env = settings.api.auth_token_env
 if _auth_env:
-    import os as _os
-    auth_token = _os.environ.get(_auth_env)
+    auth_token = os.environ.get(_auth_env)
 
 if auth_token:
-    from fastapi import Depends, Security
-    from fastapi.security import APIKeyHeader
-    api_key_header = APIKeyHeader(name="X-API-Key", auto_error=False)
-    async def verify_api_key(api_key: str = Security(api_key_header)):
-        if api_key != auth_token:
-            raise HTTPException(status_code=401, detail="Invalid API key")
-    app.dependency_overrides.setdefault(lambda: None, verify_api_key)
+    from starlette.middleware.base import BaseHTTPMiddleware, RequestResponseEndpoint
+    from starlette.requests import Request
+    from starlette.responses import JSONResponse
+
+    class AuthMiddleware(BaseHTTPMiddleware):
+        async def dispatch(self, request: Request, call_next: RequestResponseEndpoint):
+            path = request.url.path
+            if path.startswith(("/site/", "/assets/", "/health")):
+                return await call_next(request)
+            token = request.headers.get("X-API-Key")
+            if token != auth_token:
+                return JSONResponse(status_code=401, content={"detail": "Invalid API key"})
+            return await call_next(request)
+
+    app.add_middleware(AuthMiddleware)
 
 # CORS
 app.add_middleware(
@@ -92,6 +100,60 @@ class ScenarioSimRequest(BaseModel):
     symbols: Optional[list[str]] = None
 
 
+# ── Shared helpers ─────────────────────────────────────────────
+
+def _read_latest_json() -> dict:
+    """Safely read latest.json with fallback and error handling."""
+    data_dir = Path(get_settings().site.data_dir)
+    json_path = data_dir / "latest.json"
+    if not json_path.exists():
+        docs_path = Path("docs/data/latest.json")
+        if docs_path.exists():
+            json_path = docs_path
+        else:
+            raise HTTPException(status_code=404, detail="latest.json not found")
+    try:
+        return json.loads(json_path.read_text(encoding="utf-8"))
+    except (json.JSONDecodeError, UnicodeDecodeError) as e:
+        logger.error("Failed to parse latest.json: %s", e)
+        raise HTTPException(status_code=500, detail=f"latest.json parse error: {e}")
+
+
+def _safe_parse_date(date_str: Optional[str]):
+    """Safely parse ISO date string, raise 400 on failure."""
+    if not date_str:
+        return None
+    try:
+        return date.fromisoformat(date_str)
+    except (ValueError, TypeError):
+        raise HTTPException(status_code=400, detail=f"Invalid date format: {date_str} (expected YYYY-MM-DD)")
+
+
+def _get_db_stats() -> dict:
+    """Safely query DB stats with proper connection cleanup."""
+    import sqlite3
+    db_path = Path("data/signals.db")
+    if not db_path.exists():
+        return {}
+    conn = None
+    try:
+        conn = sqlite3.connect(str(db_path))
+        cur = conn.cursor()
+        stats = {}
+        cur.execute("SELECT COUNT(*) FROM signals")
+        stats["signal_count"] = cur.fetchone()[0]
+        cur.execute("SELECT COUNT(DISTINCT code) FROM signals")
+        stats["unique_stocks"] = cur.fetchone()[0]
+        cur.execute("SELECT MAX(trade_date) FROM signals")
+        stats["last_signal_date"] = cur.fetchone()[0]
+        return stats
+    except Exception:
+        return {}
+    finally:
+        if conn:
+            conn.close()
+
+
 @app.get("/health")
 async def health_check():
     from src.data.db_manager import SignalDB
@@ -120,24 +182,7 @@ async def health_check():
         else:
             data_fresh = "expired"
 
-    # DB stats
-    try:
-        import sqlite3
-        db_path = Path("data/signals.db")
-        db_stats = {}
-        if db_path.exists():
-            conn = sqlite3.connect(str(db_path))
-            cur = conn.cursor()
-            cur.execute("SELECT COUNT(*) FROM signals")
-            db_stats["signal_count"] = cur.fetchone()[0]
-            cur.execute("SELECT COUNT(DISTINCT code) FROM signals")
-            db_stats["unique_stocks"] = cur.fetchone()[0]
-            cur.execute("SELECT MAX(trade_date) FROM signals")
-            last_date = cur.fetchone()[0]
-            db_stats["last_signal_date"] = last_date
-            conn.close()
-    except Exception:
-        db_stats = {}
+    db_stats = _get_db_stats()
 
     return {
         "status": "ok",
@@ -252,7 +297,7 @@ async def import_default_watchlist():
 @app.get("/api/quotes/intraday")
 async def intraday_quotes(trade_date: str | None = None):
     from src.data.db_manager import SignalDB
-    td = date.fromisoformat(trade_date) if trade_date else date.today()
+    td = _safe_parse_date(trade_date) or date.today()
     return {"quotes": SignalDB().get_intraday_quotes(td)}
 
 
@@ -336,21 +381,8 @@ async def system_status():
 
     # DB stats
     try:
-        db_path = Path("data/signals.db")
-        if db_path.exists():
-            conn = sqlite3.connect(str(db_path))
-            cur = conn.cursor()
-            cur.execute("SELECT COUNT(*) FROM signals")
-            result["signal_count"] = cur.fetchone()[0]
-            cur.execute("SELECT COUNT(DISTINCT code) FROM signals")
-            result["unique_stocks"] = cur.fetchone()[0]
-            cur.execute("SELECT MAX(trade_date) FROM signals")
-            result["last_signal_date"] = cur.fetchone()[0]
-            cur.execute("SELECT COUNT(*) FROM jobs WHERE status = 'completed'")
-            result["completed_jobs"] = cur.fetchone()[0]
-            cur.execute("SELECT COUNT(*) FROM jobs WHERE status = 'failed'")
-            result["failed_jobs"] = cur.fetchone()[0]
-            conn.close()
+        db_stats = _get_db_stats()
+        result.update(db_stats)
     except Exception as e:
         result["db_error"] = str(e)
 
@@ -513,19 +545,7 @@ async def thesis_statistics(days: int = 90):
 @app.get("/api/breadth")
 async def market_breadth():
     """Market breadth metrics derived from latest.json stock data."""
-    from src.data.db_manager import SignalDB
-    from datetime import datetime
-
-    data_dir = Path(get_settings().site.data_dir)
-    json_path = data_dir / "latest.json"
-    if not json_path.exists():
-        docs_path = Path("docs/data/latest.json")
-        if docs_path.exists():
-            json_path = docs_path
-        else:
-            raise HTTPException(status_code=404, detail="latest.json not found")
-
-    data = json.loads(json_path.read_text(encoding="utf-8"))
+    data = _read_latest_json()
     stocks = data.get("stocks", [])
     meta = data.get("meta", {})
 
@@ -595,19 +615,7 @@ async def market_breadth():
 @app.get("/api/stagnation")
 async def stagnation_check():
     """Identify stagnating stocks from latest.json data."""
-    from src.data.db_manager import SignalDB
-    from datetime import datetime
-
-    data_dir = Path(get_settings().site.data_dir)
-    json_path = data_dir / "latest.json"
-    if not json_path.exists():
-        docs_path = Path("docs/data/latest.json")
-        if docs_path.exists():
-            json_path = docs_path
-        else:
-            raise HTTPException(status_code=404, detail="latest.json not found")
-
-    data = json.loads(json_path.read_text(encoding="utf-8"))
+    data = _read_latest_json()
     stocks = data.get("stocks", [])
     meta = data.get("meta", {})
 
@@ -680,7 +688,7 @@ async def market_session():
 async def digest_today(trade_date: str | None = None):
     from src.intelligence.ingester import KnowledgeIngester
     from datetime import date as d
-    td = d.fromisoformat(trade_date) if trade_date else d.today()
+    td = _safe_parse_date(trade_date) or d.today()
     return KnowledgeIngester().export_json(td)
 
 
@@ -688,7 +696,7 @@ async def digest_today(trade_date: str | None = None):
 async def overnight_snapshot(trade_date: str | None = None):
     from src.intelligence.overnight import build_overnight_snapshot
     from datetime import date as d
-    td = d.fromisoformat(trade_date) if trade_date else d.today()
+    td = _safe_parse_date(trade_date) or d.today()
     return build_overnight_snapshot(td)
 
 
@@ -696,7 +704,7 @@ async def overnight_snapshot(trade_date: str | None = None):
 async def recommendations_today(trade_date: str | None = None):
     from src.recommendation.engine import RecommendationEngine
     from datetime import date as d
-    td = d.fromisoformat(trade_date) if trade_date else d.today()
+    td = _safe_parse_date(trade_date) or d.today()
     return RecommendationEngine().export_json(td)
 
 
@@ -704,7 +712,7 @@ async def recommendations_today(trade_date: str | None = None):
 async def auction_latest(trade_date: str | None = None):
     from src.monitoring.auction import AuctionMonitor
     from datetime import date as d
-    td = d.fromisoformat(trade_date) if trade_date else d.today()
+    td = _safe_parse_date(trade_date) or d.today()
     return AuctionMonitor().get_latest(td)
 
 
@@ -761,7 +769,7 @@ async def delete_position(position_id: int):
 async def review_today(trade_date: str | None = None):
     from src.review.recommendation_review import RecommendationReview
     from datetime import date as d
-    td = d.fromisoformat(trade_date) if trade_date else d.today()
+    td = _safe_parse_date(trade_date) or d.today()
     return RecommendationReview().export_json(td)
 
 
@@ -770,6 +778,23 @@ async def deep_analysis(code: str):
     from src.agents.deep_research import DeepResearchAgent
     agent = DeepResearchAgent()
     return await agent.analyze(code.strip())
+
+
+@app.get("/api/config")
+async def runtime_config():
+    """Frontend runtime config: API base, version, features."""
+    return {
+        "version": "3.0.0-alpha",
+        "product": "智策 NexStrat",
+        "api_base": f"http://{settings.pipeline.api_host}:{settings.pipeline.api_port}",
+        "production_api_base": settings.phase_g.production_api_base or "",
+        "features": {
+            "phase_g_enabled": settings.phase_g.enabled,
+            "evolution_enabled": settings.evolution.enabled,
+            "notify_type": settings.notify.type,
+            "llm_mode": settings.llm.mode,
+        },
+    }
 
 
 # ── Static files (MUST be after all API routes) ──────────────
