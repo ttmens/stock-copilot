@@ -557,7 +557,7 @@ async def market_breadth():
 
     # Momentum stats
     mom_5d = [s.get("momentum_5d") for s in stocks if s.get("momentum_5d") is not None]
-    mom_20d = [s.get("momentum_20d") for s in stocks if s.get("momentum_5d") is not None]
+    mom_20d = [s.get("momentum_20d") for s in stocks if s.get("momentum_20d") is not None]
 
     # Advance/decline (positive vs negative 5d momentum)
     advances = sum(1 for m in mom_5d if m > 0)
