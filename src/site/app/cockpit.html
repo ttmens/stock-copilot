@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>智策 NexStrat — 今日战术</title>
+<link rel="stylesheet" href="../assets/theme.css">
+</head>
+<body id="cockpit-root">
+
+<header class="site-header">
+  <div class="brand">
+    <div class="brand-icon"><svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" class="brand-svg">
+    <rect width="32" height="32" rx="8" fill="url(#logo-grad)"/>
+    <path d="M8 22 L14 14 L18 18 L24 10" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M20 10 L24 10 L24 14" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <defs><linearGradient id="logo-grad" x1="0" y1="0" x2="32" y2="32">
+        <stop offset="0%" stop-color="#7b3ff2"/><stop offset="100%" stop-color="#00f5ff"/>
+    </linearGradient></defs>
+</svg></div>
+    <div class="brand-text">
+      <span class="brand-name">智策 NexStrat</span>
+      <span class="brand-tagline desktop-only">AI 战术助手</span>
+    </div>
+  </div>
+  <nav class="site-nav">
+    <a href="#today" data-nav-tab="today" class="active">今日<span class="alert-badge header-badge" hidden>0</span></a>
+    <a href="#watchlist" data-nav-tab="watchlist">自选</a>
+    <a href="#me" data-nav-tab="me">我的</a>
+  </nav>
+  <span class="header-meta header-badge-wrap" id="header-meta"><span class="alert-badge mobile-header-badge" hidden>0</span></span>
+</header>
+
+<div class="live-banner" id="live-banner" hidden>实时看板需连接服务器 — 当前为只读快照模式</div>
+
+<div class="shell cockpit-shell">
+
+<!-- Tab: 今日 -->
+<div class="tab-pane" data-tab="today" id="tab-today">
+
+  <section class="journey-hero" id="journey-hero">
+    <div class="journey-hero__main">
+      <span class="journey-hero__phase" id="hero-phase">加载中…</span>
+      <p class="journey-hero__hint" id="hero-hint">按交易日程，一站完成情报 → 推荐 → 竞价 → 盯盘 → 复盘</p>
+      <span class="journey-hero__countdown" id="hero-countdown"></span>
+    </div>
+    <button type="button" class="journey-hero__cta" id="session-cta">查看当前阶段</button>
+  </section>
+
+  <nav class="journey-timeline" id="journey-timeline" aria-label="交易日程">
+    <button type="button" class="journey-timeline__step" data-panel="panel-digest"><span class="journey-timeline__dot"></span><span class="journey-timeline__label">盘前</span></button>
+    <span class="journey-timeline__connector" aria-hidden="true"></span>
+    <button type="button" class="journey-timeline__step" data-panel="panel-pool"><span class="journey-timeline__dot"></span><span class="journey-timeline__label">推荐</span></button>
+    <span class="journey-timeline__connector" aria-hidden="true"></span>
+    <button type="button" class="journey-timeline__step" data-panel="panel-auction"><span class="journey-timeline__dot"></span><span class="journey-timeline__label">竞价</span></button>
+    <span class="journey-timeline__connector" aria-hidden="true"></span>
+    <button type="button" class="journey-timeline__step" data-panel="panel-live"><span class="journey-timeline__dot"></span><span class="journey-timeline__label">盯盘</span></button>
+    <span class="journey-timeline__connector" aria-hidden="true"></span>
+    <button type="button" class="journey-timeline__step" data-panel="panel-review"><span class="journey-timeline__dot"></span><span class="journey-timeline__label">复盘</span></button>
+  </nav>
+
+  <div class="cockpit-panels">
+
+    <section class="cockpit-panel" id="panel-digest" data-panel-id="digest">
+      <button type="button" class="cockpit-panel__head" aria-expanded="true">
+        <span class="cockpit-panel__title">盘前情报</span>
+        <span class="cockpit-panel__meta"><span id="digest-meta">—</span><span class="cockpit-panel__peek" id="peek-digest" hidden></span></span>
+      </button>
+      <div class="cockpit-panel__body">
+        <div class="cockpit-pre-row">
+          <div class="cockpit-pre-col">
+            <div id="digest-hot" class="event-card-grid"></div>
+            <div class="detail-section"><div class="detail-section-title">宏观摘要</div><p id="digest-macro">—</p></div>
+            <div class="detail-section"><div class="detail-section-title">外盘 / 期货</div><div id="digest-overnight" class="metrics-row"></div></div>
+            <div class="detail-section"><div class="detail-section-title">风险提示</div><ul id="digest-risks"></ul></div>
+          </div>
+          <div class="cockpit-pre-col cockpit-pre-col--pool">
+            <div class="cockpit-panel cockpit-panel--nested" id="panel-pool" data-panel-id="pool">
+              <button type="button" class="cockpit-panel__head" aria-expanded="true">
+                <span class="cockpit-panel__title">战术推荐池 3×3</span>
+                <span class="cockpit-panel__meta"><span id="pool-meta">无 ST · 市值&lt;3000亿</span><span class="cockpit-panel__peek" id="peek-pool" hidden></span></span>
+              </button>
+              <div class="cockpit-panel__body">
+                <div id="pool-root" class="pool-sectors"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cockpit-panel cockpit-panel--collapsed" id="panel-auction" data-panel-id="auction">
+      <button type="button" class="cockpit-panel__head" aria-expanded="false">
+        <span class="cockpit-panel__title">集合竞价</span>
+        <span class="cockpit-panel__meta"><span id="auction-status">—</span><span class="cockpit-panel__peek" id="peek-auction" hidden></span></span>
+      </button>
+      <div class="cockpit-panel__body" hidden>
+        <div id="auction-cards" class="cockpit-mobile-cards"></div>
+        <table class="data-table cockpit-desktop-table" id="auction-table">
+          <thead><tr><th>代码</th><th>量比</th><th>偏离度</th><th>撤单率</th></tr></thead>
+          <tbody></tbody>
+        </table>
+        <p id="auction-empty" class="empty-hint" hidden>非竞价时段 — 显示最近快照</p>
+      </div>
+    </section>
+
+    <section class="cockpit-panel cockpit-panel--collapsed" id="panel-live" data-panel-id="live">
+      <button type="button" class="cockpit-panel__head" aria-expanded="false">
+        <span class="cockpit-panel__title">实时盯盘</span>
+        <span class="cockpit-panel__meta">预警 <span id="alert-unread">0</span><span class="cockpit-panel__peek" id="peek-live" hidden></span></span>
+      </button>
+      <div class="cockpit-panel__body" hidden>
+        <div class="live-cockpit">
+          <div class="live-cockpit-left">
+            <div class="alert-feed" id="alert-feed"></div>
+            <p class="text-muted cockpit-hint">关键预警已同步企微，此处为归档查阅</p>
+          </div>
+          <div class="live-cockpit-right">
+            <div id="live-pool" class="pool-sectors"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cockpit-panel cockpit-panel--collapsed" id="panel-review" data-panel-id="review">
+      <button type="button" class="cockpit-panel__head" aria-expanded="false">
+        <span class="cockpit-panel__title">盘后复盘</span>
+        <span class="cockpit-panel__meta"><span id="review-summary-line">—</span><span class="cockpit-panel__peek" id="peek-review" hidden></span></span>
+      </button>
+      <div class="cockpit-panel__body" hidden>
+        <div id="review-summary" class="signal-dashboard"></div>
+        <div class="detail-section"><div class="detail-section-title">命中</div><ul id="review-hits" class="review-list"></ul></div>
+        <div class="detail-section"><div class="detail-section-title">遗漏 (涨5%+)</div><ul id="review-missed" class="review-list"></ul></div>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<!-- Tab: 自选 -->
+<div class="tab-pane tab-pane--hidden" data-tab="watchlist" id="tab-watchlist">
+  <div id="breadth-summary" class="signal-dashboard"></div>
+  <div class="section-title">今日重点 <span class="count" id="stock-count"></span></div>
+  <div class="filter-bar filter-bar--collapsible">
+    <input type="search" id="filter-search" placeholder="搜索代码/名称" aria-label="搜索">
+    <button type="button" class="filter-toggle-btn" id="filter-toggle" aria-expanded="false">筛选</button>
+    <div class="filter-bar__drawer" id="filter-drawer" hidden>
+      <select id="filter-signal" aria-label="信号"><option value="">全部信号</option><option value="bullish">偏多</option><option value="bearish">偏空</option><option value="hold">观望</option></select>
+      <select id="filter-sort" aria-label="排序"><option value="score">按评分</option><option value="confidence">按置信度</option><option value="code">按代码</option></select>
+      <a href="watchlist.html" class="filter-link">管理自选</a>
+    </div>
+    <div class="view-toggle">
+      <button class="view-toggle-btn active" id="btn-view-cards" title="卡片视图" type="button">卡片</button>
+      <button class="view-toggle-btn" id="btn-view-table" title="表格视图" type="button">表格</button>
+    </div>
+  </div>
+  <div class="stock-grid" id="stock-grid"></div>
+  <div class="table-view" id="table-view">
+    <div class="table-scroll"><table class="stock-table" id="stock-table">
+      <thead><tr><th data-sort="code">代码</th><th>名称</th><th>信号</th><th data-sort="score" class="sorted">评分</th><th data-sort="confidence">置信度</th></tr></thead>
+      <tbody></tbody>
+    </table></div>
+  </div>
+  <div class="compare-panel desktop-only" id="compare-panel">
+    <div class="compare-panel-title">对比面板 <span id="compare-count">(0)</span><span class="compare-panel-close" id="compare-close">×</span></div>
+    <div id="compare-list"></div>
+  </div>
+</div>
+
+<!-- Tab: 我的 -->
+<div class="tab-pane tab-pane--hidden" data-tab="me" id="tab-me">
+  <div class="section-title">持仓管理</div>
+  <form id="pos-form" class="filter-bar pos-form-desktop">
+    <input id="pos-code" placeholder="代码" required maxlength="6">
+    <input id="pos-name" placeholder="名称">
+    <input id="pos-shares" type="number" placeholder="股数" required step="100">
+    <input id="pos-price" type="number" placeholder="成本价" required step="0.01">
+    <button type="submit">开仓</button>
+  </form>
+  <button type="button" class="cockpit-fab" id="pos-fab" aria-label="开仓">+</button>
+  <div id="pos-form-mobile" class="pos-form-mobile filter-bar-wrap" hidden>
+    <form id="pos-form-m" class="filter-bar">
+      <input id="pos-code-m" placeholder="代码" required maxlength="6">
+      <input id="pos-shares-m" type="number" placeholder="股数" required step="100">
+      <input id="pos-price-m" type="number" placeholder="成本价" required step="0.01">
+      <button type="submit">确认开仓</button>
+    </form>
+  </div>
+  <div id="pos-list" class="pos-list"></div>
+  <div class="me-links">
+    <a href="../history.html">历史信号</a>
+    <a href="../dashboard.html">完整看板</a>
+  </div>
+</div>
+
+<div class="disclaimer">本报告仅供个人研究参考，不构成投资建议。股市有风险，决策需谨慎。</div>
+<footer class="site-footer">智策 NexStrat · AI 辅助决策</footer>
+</div>
+
+<nav class="bottom-nav">
+  <div class="bottom-nav-inner">
+    <a href="#today" data-nav-tab="today" class="active">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      今日<span class="alert-badge bottom-badge" hidden>0</span>
+    </a>
+    <a href="#watchlist" data-nav-tab="watchlist">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+      自选
+    </a>
+    <a href="#me" data-nav-tab="me">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      我的
+    </a>
+  </div>
+</nav>
+
+<script src="config.js"></script>
+<script src="api-client.js"></script>
+<script src="ui-render.js"></script>
+<script src="layout.js"></script>
+<script src="live.js"></script>
+<script src="cockpit.js"></script>
+</body>
+</html>

@@ -19,8 +19,8 @@ data/*.sqlite
 output/reports/*.md
 output/reports/*.json
 
-# Site (generated — only docs/ is committed via publish)
-site/
+# Generated site output at repo root (docs/ is the published copy)
+/site/
 
 # IDE
 .idea/
