@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>自选股管理 — 智策 NexStrat</title>
 <link rel="stylesheet" href="../assets/theme.css">
+<script src="config.js"></script>
+<script src="app.js"></script>
 <style>
 .wl-shell { max-width: 800px; margin: 0 auto; padding: 88px 16px 100px; }
 @media (max-width: 900px) { .wl-shell { padding: 72px 12px 96px; } }
@@ -212,14 +214,10 @@
 (function () {
   "use strict";
 
-  // Auto-detect API
-  let API = "";
-  if (window.location.hostname !== "ttmens.github.io") {
-    API = window.location.origin;
-  }
-  if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
-    API = "http://127.0.0.1:8000";
-  }
+  // Use unified API config from config.js
+  const cfg = window.STOCK_COPILOT || {};
+  const apiBase = cfg.API_BASE === null ? null : (cfg.API_BASE || "").replace(/\/$/, "");
+  const API = apiBase === null ? null : apiBase;
 
   const body = document.getElementById("wl-body");
   const emptyState = document.getElementById("empty-state");
