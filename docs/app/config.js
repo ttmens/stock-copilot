@@ -5,7 +5,7 @@
   const cfg = window.STOCK_COPILOT;
 
   if (!cfg.PRODUCTION_API_BASE) {
-    cfg.PRODUCTION_API_BASE = "http://43.128.74.198:8000";
+    cfg.PRODUCTION_API_BASE = "https://43.128.74.198:8443";
   }
 
   if (!cfg.API_BASE) {
