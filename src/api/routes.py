@@ -23,7 +23,7 @@ settings = get_settings()
 app = FastAPI(
     title="智策 NexStrat API",
     description="A股AI智能投研助手 — 5层信号融合 + LLM分析",
-    version="2.0.0",
+    version="3.0.0-alpha",
 )
 
 # ── Optional API auth middleware ──────────────────────────────
@@ -141,7 +141,7 @@ async def health_check():
 
     return {
         "status": "ok",
-        "version": "2.0.0",
+        "version": "3.0.0-alpha",
         "product": "智策 NexStrat",
         "data_freshness": data_fresh,
         "watchlist_count": len(wl),
@@ -436,20 +436,17 @@ async def list_postmortems(ticker: Optional[str] = None, days: int = 30):
 async def postmortem_summary(days: int = 30):
     """Postmortem statistical summary."""
     from src.data.db_manager import SignalDB
-    from src.evolution.postmortem import PostmortemAnalyzer
-    db = SignalDB()
-    analyzer = PostmortemAnalyzer(db)
-    return analyzer.get_summary(days=days)
+    from src.evolution.postmortem import PostmortemRecorder
+    return PostmortemRecorder(SignalDB()).get_summary(days=days)
 
 
 @app.post("/api/postmortems/check-mature")
 async def check_mature(req: Optional[CheckMatureRequest] = None):
     """Check matured signals and update outcomes."""
     from src.data.db_manager import SignalDB
-    from src.evolution.postmortem import PostmortemAnalyzer
+    from src.evolution.postmortem import PostmortemRecorder
     check_date = req.check_date if req else None
-    result = PostmortemAnalyzer(SignalDB()).check_mature_signals(as_of=check_date)
-    return result
+    return PostmortemRecorder(SignalDB()).check_mature_signals(as_of=check_date)
 
 
 @app.get("/api/theses")
@@ -649,80 +646,130 @@ async def stagnation_check():
     }
 
 
-# ── Phase F: Postmortem / Thesis / Breadth APIs ──────────────
+# ── Phase G API ──────────────────────────────────────────────
 
-@app.get("/api/postmortems")
-async def get_postmortems(ticker: Optional[str] = None, outcome: Optional[str] = None, days: int = 30):
-    """查询 postmortem 记录"""
+class PositionCreate(BaseModel):
+    code: str
+    name: str = ""
+    shares: float
+    entry_price: float
+    leverage: float = 1.0
+    stop_loss: float | None = None
+    take_profit: float | None = None
+    notes: str = ""
+
+
+class PositionUpdate(BaseModel):
+    code: str | None = None
+    name: str | None = None
+    shares: float | None = None
+    entry_price: float | None = None
+    leverage: float | None = None
+    stop_loss: float | None = None
+    take_profit: float | None = None
+    notes: str | None = None
+
+
+@app.get("/api/market/session")
+async def market_session():
+    from src.monitoring.session import get_market_session
+    return get_market_session()
+
+
+@app.get("/api/digest/today")
+async def digest_today(trade_date: str | None = None):
+    from src.intelligence.ingester import KnowledgeIngester
+    from datetime import date as d
+    td = d.fromisoformat(trade_date) if trade_date else d.today()
+    return KnowledgeIngester().export_json(td)
+
+
+@app.get("/api/overnight")
+async def overnight_snapshot(trade_date: str | None = None):
+    from src.intelligence.overnight import build_overnight_snapshot
+    from datetime import date as d
+    td = d.fromisoformat(trade_date) if trade_date else d.today()
+    return build_overnight_snapshot(td)
+
+
+@app.get("/api/recommendations/today")
+async def recommendations_today(trade_date: str | None = None):
+    from src.recommendation.engine import RecommendationEngine
+    from datetime import date as d
+    td = d.fromisoformat(trade_date) if trade_date else d.today()
+    return RecommendationEngine().export_json(td)
+
+
+@app.get("/api/auction/latest")
+async def auction_latest(trade_date: str | None = None):
+    from src.monitoring.auction import AuctionMonitor
+    from datetime import date as d
+    td = d.fromisoformat(trade_date) if trade_date else d.today()
+    return AuctionMonitor().get_latest(td)
+
+
+@app.get("/api/alerts")
+async def list_alerts(trade_date: str | None = None, unread_only: bool = False,
+                      severity: str | None = None):
+    from src.monitoring.alerts import AlertDispatcher
+    return AlertDispatcher().get_feed(trade_date, unread_only, severity)
+
+
+@app.post("/api/alerts/read")
+async def mark_alerts_read(trade_date: str | None = None):
     from src.data.db_manager import SignalDB
-    from src.evolution.postmortem import PostmortemRecorder
-    db = SignalDB()
-    recorder = PostmortemRecorder(db)
-    records = recorder.db.get_postmortems(ticker=ticker, days=days)
-    if outcome:
-        records = [r for r in records if r.get("outcome_category") == outcome]
-    return {"total": len(records), "records": records[:100]}
+    from datetime import date as d
+    td = trade_date or d.today().isoformat()
+    count = SignalDB().mark_alerts_read(td)
+    return {"marked_read": count}
 
 
-@app.get("/api/postmortems/summary")
-async def get_postmortem_summary(days: int = 30):
-    """postmortem 统计摘要"""
-    from src.data.db_manager import SignalDB
-    from src.evolution.postmortem import PostmortemRecorder
-    db = SignalDB()
-    recorder = PostmortemRecorder(db)
-    return recorder.get_summary(days=days)
+@app.get("/api/positions")
+async def list_positions(open_only: bool = True):
+    from src.portfolio.tracker import PositionTracker
+    return PositionTracker().summary() if open_only else {"positions": PositionTracker().list_positions(False)}
 
 
-@app.post("/api/postmortems/check-mature")
-async def check_mature_signals():
-    """手动触发成熟信号检查"""
-    from src.data.db_manager import SignalDB
-    from src.evolution.postmortem import PostmortemRecorder
-    db = SignalDB()
-    recorder = PostmortemRecorder(db)
-    result = recorder.check_mature_signals()
-    return result
+@app.post("/api/positions")
+async def create_position(body: PositionCreate):
+    from src.portfolio.tracker import PositionTracker
+    return PositionTracker().create(
+        body.code, body.name or body.code, body.shares, body.entry_price,
+        body.leverage, body.stop_loss, body.take_profit, body.notes,
+    )
 
 
-@app.get("/api/theses")
-async def get_theses(status: Optional[str] = None, ticker: Optional[str] = None):
-    """查询 thesis 列表"""
-    from src.data.db_manager import SignalDB
-    db = SignalDB()
-    theses = db.get_theses(status=status, ticker=ticker)
-    return {"total": len(theses), "theses": theses[:100]}
+@app.patch("/api/positions/{position_id}")
+async def update_position(position_id: int, body: PositionUpdate):
+    from src.portfolio.tracker import PositionTracker
+    kwargs = {k: v for k, v in body.model_dump().items() if v is not None}
+    try:
+        return PositionTracker().update(position_id, **kwargs)
+    except ValueError as e:
+        raise HTTPException(status_code=404, detail=str(e))
 
 
-@app.get("/api/theses/statistics")
-async def get_thesis_statistics(days: int = 90):
-    """thesis 统计"""
-    from src.data.db_manager import SignalDB
-    from src.evolution.thesis import ThesisManager
-    db = SignalDB()
-    mgr = ThesisManager(db)
-    return mgr.get_statistics(days=days)
+@app.delete("/api/positions/{position_id}")
+async def delete_position(position_id: int):
+    from src.portfolio.tracker import PositionTracker
+    if not PositionTracker().delete(position_id):
+        raise HTTPException(status_code=404, detail="Position not found")
+    return {"deleted": position_id}
 
 
-@app.get("/api/breadth")
-async def get_market_breadth():
-    """市场广度评分（从 latest.json 读取）"""
-    json_path = Path("site/data/latest.json")
-    if not json_path.exists():
-        json_path = Path("data/latest.json")
-    if not json_path.exists():
-        return {"error": "no data available"}
-    data = json.loads(json_path.read_text(encoding="utf-8"))
-    return data.get("breadth", {"error": "no breadth data"})
+@app.get("/api/review/today")
+async def review_today(trade_date: str | None = None):
+    from src.review.recommendation_review import RecommendationReview
+    from datetime import date as d
+    td = d.fromisoformat(trade_date) if trade_date else d.today()
+    return RecommendationReview().export_json(td)
 
 
-@app.get("/api/stagnation")
-async def get_stagnation_status():
-    """策略停滞检测状态"""
-    return {
-        "status": "monitoring",
-        "message": "策略停滞检测已就绪，需积累 10+ 交易日数据后激活",
-    }
+@app.post("/api/stocks/{code}/deep-analysis")
+async def deep_analysis(code: str):
+    from src.agents.deep_research import DeepResearchAgent
+    agent = DeepResearchAgent()
+    return await agent.analyze(code.strip())
 
 
 # ── Static files (MUST be after all API routes) ──────────────

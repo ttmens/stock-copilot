@@ -1,0 +1,100 @@
+project: stock-copilot
+
+mode: phase_increment
+
+current_phase: phase_g
+
+target_phase: phase_g
+
+phase_g_status: alpha
+
+gates:
+
+  g1_research: approved
+
+  g2_design: approved
+
+  g3_ui_acceptance: approved
+
+acceptance:
+
+  functional: pass
+
+  ux: pass
+
+  ops: pass
+
+artifacts:
+
+  version: documentation/VERSION.md
+
+  ssot_status: documentation/reference/current-status.md
+
+  phase_g_spec: documentation/explanation/phase-g-product-spec.md
+
+  ui_phase_g: documentation/reference/ui-phase-g.md
+
+  decisions: documentation/explanation/decisions/README.md
+
+  design_tokens: documentation/design-system/tokens.md
+
+  api_spec: documentation/reference/api-spec.md
+
+  self_check: scripts/self_check.py
+
+phase_g_delivered:
+
+  - src/intelligence/
+
+  - src/recommendation/
+
+  - src/monitoring/
+
+  - src/portfolio/
+
+  - src/review/
+
+  - src/site/app/digest.html
+
+  - src/site/app/live.html
+
+  - tests/test_phase_g.py
+
+phase_f_open_items:
+
+  - strategy stagnation module
+
+  - stock correlation
+
+  - multi-timeframe hard signals
+
+checkpoints:
+
+  - phase: phase_g_alpha
+
+    status: delivered
+
+    completed_at: "2026-05-26"
+
+    artifacts:
+
+      - documentation/explanation/phase-g-product-spec.md
+
+      - documentation/reference/ui-phase-g.md
+
+      - tests/test_intelligence.py
+
+      - tests/test_recommendation.py
+
+      - tests/test_phase_g.py
+
+blockers: []
+
+last_docs_hygiene:
+
+  status: pass
+
+  checked_at: "2026-05-26"
+
+  layout: documentation/
+

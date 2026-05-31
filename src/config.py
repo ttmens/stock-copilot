@@ -89,6 +89,24 @@ class SiteConfig(BaseModel):
     data_dir: str = "site/data"
 
 
+class PhaseGScheduleConfig(BaseModel):
+    daily_intelligence: str = "06:30"
+    overnight_futures: str = "06:45"
+    recommendation_pool: str = "08:45"
+    recommendation_review: str = "17:00"
+    auction_start: str = "09:15"
+    auction_end: str = "09:25"
+    intraday_interval_min: int = 2
+
+
+class PhaseGConfig(BaseModel):
+    enabled: bool = True
+    mcap_limit_yi: float = 3000.0
+    limit_up_streak_days: int = 3
+    production_api_base: str = ""
+    schedule: PhaseGScheduleConfig = Field(default_factory=PhaseGScheduleConfig)
+
+
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8", extra="ignore")
 
@@ -101,6 +119,7 @@ class Settings(BaseSettings):
     evolution: EvolutionConfig = Field(default_factory=EvolutionConfig)
     pipeline: PipelineConfig = Field(default_factory=PipelineConfig)
     api: ApiConfig = Field(default_factory=ApiConfig)
+    phase_g: PhaseGConfig = Field(default_factory=PhaseGConfig)
 
     # Env-based secrets
     deepseek_api_key: str = ""
@@ -146,6 +165,13 @@ class Settings(BaseSettings):
             kwargs["pipeline"] = PipelineConfig(**cfg["pipeline"])
         if "api" in cfg:
             kwargs["api"] = ApiConfig(**cfg["api"])
+        if "phase_g" in cfg:
+            pg = dict(cfg["phase_g"])
+            sched = pg.pop("schedule", {})
+            kwargs["phase_g"] = PhaseGConfig(
+                **pg,
+                schedule=PhaseGScheduleConfig(**sched) if sched else PhaseGScheduleConfig(),
+            )
 
         # Override notify.wecom_webhook from env
         wecom_env = os.getenv("WECOM_WEBHOOK", "")

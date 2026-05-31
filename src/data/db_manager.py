@@ -206,6 +206,122 @@ CREATE TABLE IF NOT EXISTS theses (
 
 CREATE INDEX IF NOT EXISTS idx_theses_status ON theses(status);
 CREATE INDEX IF NOT EXISTS idx_theses_ticker ON theses(ticker);
+
+-- Phase G: market intelligence
+CREATE TABLE IF NOT EXISTS market_events (
+    id              INTEGER PRIMARY KEY AUTOINCREMENT,
+    trade_date      TEXT NOT NULL,
+    event_type      TEXT NOT NULL,
+    title           TEXT NOT NULL,
+    summary         TEXT DEFAULT '',
+    source          TEXT DEFAULT 'akshare',
+    impact_score    REAL DEFAULT 0.5,
+    sector_tags     TEXT DEFAULT '[]',
+    raw_json        TEXT DEFAULT '{}',
+    created_at      TEXT DEFAULT (datetime('now'))
+);
+CREATE INDEX IF NOT EXISTS idx_market_events_date ON market_events(trade_date);
+
+CREATE TABLE IF NOT EXISTS daily_digest (
+    trade_date      TEXT PRIMARY KEY,
+    hot_events      TEXT DEFAULT '[]',
+    sector_impact   TEXT DEFAULT '[]',
+    macro_summary   TEXT DEFAULT '',
+    risk_flags      TEXT DEFAULT '[]',
+    overnight_json  TEXT DEFAULT '{}',
+    futures_json    TEXT DEFAULT '[]',
+    llm_summary     TEXT DEFAULT '',
+    generated_at    TEXT DEFAULT (datetime('now'))
+);
+
+CREATE TABLE IF NOT EXISTS overnight_snapshots (
+    trade_date      TEXT PRIMARY KEY,
+    indices_json    TEXT DEFAULT '{}',
+    rules_json      TEXT DEFAULT '{}',
+    created_at      TEXT DEFAULT (datetime('now'))
+);
+
+CREATE TABLE IF NOT EXISTS futures_snapshots (
+    trade_date      TEXT PRIMARY KEY,
+    contracts_json  TEXT DEFAULT '[]',
+    sector_hints    TEXT DEFAULT '[]',
+    created_at      TEXT DEFAULT (datetime('now'))
+);
+
+CREATE TABLE IF NOT EXISTS recommendation_pool (
+    id              INTEGER PRIMARY KEY AUTOINCREMENT,
+    trade_date      TEXT NOT NULL,
+    sector_name     TEXT NOT NULL,
+    sector_rank     INTEGER DEFAULT 0,
+    code            TEXT NOT NULL,
+    name            TEXT DEFAULT '',
+    score           REAL DEFAULT 0,
+    source          TEXT DEFAULT 'scan',
+    focus_flag      INTEGER DEFAULT 0,
+    added_at        TEXT DEFAULT (datetime('now')),
+    UNIQUE(trade_date, code)
+);
+CREATE INDEX IF NOT EXISTS idx_rec_pool_date ON recommendation_pool(trade_date);
+
+CREATE TABLE IF NOT EXISTS auction_snapshots (
+    id              INTEGER PRIMARY KEY AUTOINCREMENT,
+    trade_date      TEXT NOT NULL,
+    code            TEXT NOT NULL,
+    volume_ratio    REAL,
+    price_deviation REAL,
+    cancel_rate     REAL,
+    last_min_volatility REAL,
+    snapshot_at     TEXT DEFAULT (datetime('now'))
+);
+CREATE INDEX IF NOT EXISTS idx_auction_date ON auction_snapshots(trade_date);
+
+CREATE TABLE IF NOT EXISTS alerts (
+    id              INTEGER PRIMARY KEY AUTOINCREMENT,
+    trade_date      TEXT NOT NULL,
+    code            TEXT NOT NULL,
+    name            TEXT DEFAULT '',
+    alert_type      TEXT NOT NULL,
+    severity        TEXT DEFAULT 'info',
+    message         TEXT NOT NULL,
+    is_read         INTEGER DEFAULT 0,
+    created_at      TEXT DEFAULT (datetime('now'))
+);
+CREATE INDEX IF NOT EXISTS idx_alerts_date ON alerts(trade_date);
+
+CREATE TABLE IF NOT EXISTS positions (
+    id              INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id         TEXT DEFAULT 'default',
+    code            TEXT NOT NULL,
+    name            TEXT DEFAULT '',
+    shares          REAL NOT NULL,
+    entry_price     REAL NOT NULL,
+    leverage        REAL DEFAULT 1.0,
+    stop_loss       REAL,
+    take_profit     REAL,
+    notes           TEXT DEFAULT '',
+    opened_at       TEXT DEFAULT (datetime('now')),
+    closed_at       TEXT DEFAULT NULL
+);
+CREATE INDEX IF NOT EXISTS idx_positions_user ON positions(user_id);
+
+CREATE TABLE IF NOT EXISTS position_rules (
+    id              INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id         TEXT DEFAULT 'default',
+    position_id     INTEGER,
+    rule_type       TEXT NOT NULL,
+    threshold       REAL,
+    enabled         INTEGER DEFAULT 1,
+    created_at      TEXT DEFAULT (datetime('now'))
+);
+
+CREATE TABLE IF NOT EXISTS recommendation_reviews (
+    trade_date      TEXT PRIMARY KEY,
+    hit_count       INTEGER DEFAULT 0,
+    miss_count      INTEGER DEFAULT 0,
+    hit_rate        REAL DEFAULT 0,
+    review_json     TEXT DEFAULT '{}',
+    generated_at    TEXT DEFAULT (datetime('now'))
+);
 """
 
 
@@ -931,3 +1047,232 @@ class SignalDB:
             d["status_history"] = json.loads(d.get("status_history", "[]"))
             results.append(d)
         return results
+
+    # ── Phase G: Intelligence & recommendation ─────────────────
+
+    def save_market_event(self, trade_date: str, event_type: str, title: str,
+                          summary: str = "", source: str = "akshare",
+                          impact_score: float = 0.5, sector_tags: list | None = None,
+                          raw_json: dict | None = None) -> int:
+        with self._connect() as conn:
+            cur = conn.execute(
+                """INSERT INTO market_events
+                   (trade_date, event_type, title, summary, source, impact_score, sector_tags, raw_json)
+                   VALUES (?, ?, ?, ?, ?, ?, ?, ?)""",
+                (trade_date, event_type, title, summary, source, impact_score,
+                 json.dumps(sector_tags or []), json.dumps(raw_json or {})),
+            )
+            return cur.lastrowid
+
+    def save_daily_digest(self, trade_date: str, data: dict) -> None:
+        with self._connect() as conn:
+            conn.execute(
+                """INSERT INTO daily_digest
+                   (trade_date, hot_events, sector_impact, macro_summary, risk_flags,
+                    overnight_json, futures_json, llm_summary, generated_at)
+                   VALUES (?, ?, ?, ?, ?, ?, ?, ?, datetime('now'))
+                   ON CONFLICT(trade_date) DO UPDATE SET
+                    hot_events=excluded.hot_events, sector_impact=excluded.sector_impact,
+                    macro_summary=excluded.macro_summary, risk_flags=excluded.risk_flags,
+                    overnight_json=excluded.overnight_json, futures_json=excluded.futures_json,
+                    llm_summary=excluded.llm_summary, generated_at=datetime('now')""",
+                (
+                    trade_date,
+                    json.dumps(data.get("hot_events", []), ensure_ascii=False),
+                    json.dumps(data.get("sector_impact", []), ensure_ascii=False),
+                    data.get("macro_summary", ""),
+                    json.dumps(data.get("risk_flags", []), ensure_ascii=False),
+                    json.dumps(data.get("overnight", {}), ensure_ascii=False),
+                    json.dumps(data.get("futures", []), ensure_ascii=False),
+                    data.get("llm_summary", ""),
+                ),
+            )
+
+    def get_daily_digest(self, trade_date: str) -> dict | None:
+        with self._connect() as conn:
+            row = conn.execute(
+                "SELECT * FROM daily_digest WHERE trade_date = ?", (trade_date,)
+            ).fetchone()
+            if not row:
+                return None
+            d = dict(row)
+            d["hot_events"] = json.loads(d.get("hot_events") or "[]")
+            d["sector_impact"] = json.loads(d.get("sector_impact") or "[]")
+            d["risk_flags"] = json.loads(d.get("risk_flags") or "[]")
+            raw_ov = d.pop("overnight_json", "{}")
+            d["overnight"] = json.loads(raw_ov) if isinstance(raw_ov, str) else (raw_ov or {})
+            raw_fut = d.pop("futures_json", "[]")
+            d["futures"] = json.loads(raw_fut) if isinstance(raw_fut, str) else (raw_fut or [])
+            return d
+
+    def clear_recommendation_pool(self, trade_date: str) -> None:
+        with self._connect() as conn:
+            conn.execute("DELETE FROM recommendation_pool WHERE trade_date = ?", (trade_date,))
+
+    def save_recommendation_stock(self, trade_date: str, sector_name: str, sector_rank: int,
+                                  code: str, name: str, score: float,
+                                  source: str = "scan", focus_flag: bool = False) -> None:
+        with self._connect() as conn:
+            conn.execute(
+                """INSERT INTO recommendation_pool
+                   (trade_date, sector_name, sector_rank, code, name, score, source, focus_flag)
+                   VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+                   ON CONFLICT(trade_date, code) DO UPDATE SET
+                    sector_name=excluded.sector_name, score=excluded.score,
+                    source=excluded.source, focus_flag=excluded.focus_flag""",
+                (trade_date, sector_name, sector_rank, code, name, score, source, int(focus_flag)),
+            )
+
+    def get_recommendation_pool(self, trade_date: str) -> list[dict]:
+        with self._connect() as conn:
+            rows = conn.execute(
+                """SELECT * FROM recommendation_pool WHERE trade_date = ?
+                   ORDER BY sector_rank, score DESC""",
+                (trade_date,),
+            ).fetchall()
+            return [dict(r) for r in rows]
+
+    def save_auction_snapshot(self, trade_date: str, code: str, metrics: dict) -> None:
+        with self._connect() as conn:
+            conn.execute(
+                """INSERT INTO auction_snapshots
+                   (trade_date, code, volume_ratio, price_deviation, cancel_rate, last_min_volatility)
+                   VALUES (?, ?, ?, ?, ?, ?)""",
+                (
+                    trade_date, code,
+                    metrics.get("volume_ratio"),
+                    metrics.get("price_deviation"),
+                    metrics.get("cancel_rate"),
+                    metrics.get("last_min_volatility"),
+                ),
+            )
+
+    def get_auction_latest(self, trade_date: str) -> list[dict]:
+        with self._connect() as conn:
+            rows = conn.execute(
+                """SELECT a.* FROM auction_snapshots a
+                   INNER JOIN (
+                     SELECT code, MAX(snapshot_at) AS max_at
+                     FROM auction_snapshots WHERE trade_date = ?
+                     GROUP BY code
+                   ) latest ON a.code = latest.code AND a.snapshot_at = latest.max_at
+                   WHERE a.trade_date = ?""",
+                (trade_date, trade_date),
+            ).fetchall()
+            return [dict(r) for r in rows]
+
+    def save_alert(self, trade_date: str, code: str, name: str, alert_type: str,
+                   message: str, severity: str = "info") -> int:
+        with self._connect() as conn:
+            cur = conn.execute(
+                """INSERT INTO alerts (trade_date, code, name, alert_type, severity, message)
+                   VALUES (?, ?, ?, ?, ?, ?)""",
+                (trade_date, code, name, alert_type, severity, message),
+            )
+            return cur.lastrowid
+
+    def get_alerts(self, trade_date: str, unread_only: bool = False,
+                   severity: str | None = None, limit: int = 50) -> list[dict]:
+        with self._connect() as conn:
+            q = "SELECT * FROM alerts WHERE trade_date = ?"
+            params: list = [trade_date]
+            if unread_only:
+                q += " AND is_read = 0"
+            if severity:
+                q += " AND severity = ?"
+                params.append(severity)
+            q += " ORDER BY created_at DESC LIMIT ?"
+            params.append(limit)
+            return [dict(r) for r in conn.execute(q, params).fetchall()]
+
+    def mark_alerts_read(self, trade_date: str) -> int:
+        with self._connect() as conn:
+            cur = conn.execute(
+                "UPDATE alerts SET is_read = 1 WHERE trade_date = ? AND is_read = 0",
+                (trade_date,),
+            )
+            return cur.rowcount
+
+    def count_unread_alerts(self, trade_date: str) -> int:
+        with self._connect() as conn:
+            row = conn.execute(
+                "SELECT COUNT(*) FROM alerts WHERE trade_date = ? AND is_read = 0",
+                (trade_date,),
+            ).fetchone()
+            return row[0] if row else 0
+
+    # ── Phase G: Positions ─────────────────────────────────────
+
+    def save_position(self, user_id: str, code: str, name: str, shares: float,
+                      entry_price: float, leverage: float = 1.0,
+                      stop_loss: float | None = None, take_profit: float | None = None,
+                      notes: str = "", position_id: int | None = None) -> int:
+        with self._connect() as conn:
+            if position_id:
+                conn.execute(
+                    """UPDATE positions SET code=?, name=?, shares=?, entry_price=?,
+                       leverage=?, stop_loss=?, take_profit=?, notes=? WHERE id=? AND user_id=?""",
+                    (code, name, shares, entry_price, leverage, stop_loss, take_profit,
+                     notes, position_id, user_id),
+                )
+                return position_id
+            cur = conn.execute(
+                """INSERT INTO positions
+                   (user_id, code, name, shares, entry_price, leverage, stop_loss, take_profit, notes)
+                   VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+                (user_id, code, name, shares, entry_price, leverage, stop_loss, take_profit, notes),
+            )
+            return cur.lastrowid
+
+    def get_positions(self, user_id: str = "default", open_only: bool = True) -> list[dict]:
+        with self._connect() as conn:
+            q = "SELECT * FROM positions WHERE user_id = ?"
+            if open_only:
+                q += " AND closed_at IS NULL"
+            q += " ORDER BY opened_at DESC"
+            return [dict(r) for r in conn.execute(q, (user_id,)).fetchall()]
+
+    def close_position(self, position_id: int, user_id: str = "default") -> bool:
+        with self._connect() as conn:
+            cur = conn.execute(
+                "UPDATE positions SET closed_at = datetime('now') WHERE id = ? AND user_id = ?",
+                (position_id, user_id),
+            )
+            return cur.rowcount > 0
+
+    def delete_position(self, position_id: int, user_id: str = "default") -> bool:
+        with self._connect() as conn:
+            cur = conn.execute(
+                "DELETE FROM positions WHERE id = ? AND user_id = ?", (position_id, user_id)
+            )
+            return cur.rowcount > 0
+
+    def save_recommendation_review(self, trade_date: str, data: dict) -> None:
+        with self._connect() as conn:
+            conn.execute(
+                """INSERT INTO recommendation_reviews
+                   (trade_date, hit_count, miss_count, hit_rate, review_json, generated_at)
+                   VALUES (?, ?, ?, ?, ?, datetime('now'))
+                   ON CONFLICT(trade_date) DO UPDATE SET
+                    hit_count=excluded.hit_count, miss_count=excluded.miss_count,
+                    hit_rate=excluded.hit_rate, review_json=excluded.review_json,
+                    generated_at=datetime('now')""",
+                (
+                    trade_date,
+                    data.get("hit_count", 0),
+                    data.get("miss_count", 0),
+                    data.get("hit_rate", 0.0),
+                    json.dumps(data, ensure_ascii=False),
+                ),
+            )
+
+    def get_recommendation_review(self, trade_date: str) -> dict | None:
+        with self._connect() as conn:
+            row = conn.execute(
+                "SELECT * FROM recommendation_reviews WHERE trade_date = ?", (trade_date,)
+            ).fetchone()
+            if not row:
+                return None
+            d = dict(row)
+            d["review"] = json.loads(d.get("review_json") or "{}")
+            return d

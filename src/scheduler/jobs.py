@@ -88,6 +88,76 @@ async def run_db_cleanup():
         logger.error("DB cleanup failed: %s", e)
 
 
+async def run_daily_intelligence():
+    if not is_trading_day():
+        return
+    settings = get_settings()
+    if not settings.phase_g.enabled:
+        return
+    logger.info("[phase_g] daily_intelligence")
+    try:
+        from src.intelligence.ingester import KnowledgeIngester
+        KnowledgeIngester().run()
+    except Exception as e:
+        logger.error("daily_intelligence failed: %s", e, exc_info=True)
+
+
+async def run_recommendation_pool():
+    if not is_trading_day():
+        return
+    settings = get_settings()
+    if not settings.phase_g.enabled:
+        return
+    logger.info("[phase_g] recommendation_pool")
+    try:
+        from src.recommendation.engine import RecommendationEngine
+        RecommendationEngine().build_pool()
+    except Exception as e:
+        logger.error("recommendation_pool failed: %s", e, exc_info=True)
+
+
+async def run_auction_monitor():
+    if not is_trading_day():
+        return
+    settings = get_settings()
+    if not settings.phase_g.enabled:
+        return
+    try:
+        from src.monitoring.auction import AuctionMonitor
+        await asyncio.to_thread(AuctionMonitor().run_once)
+    except Exception as e:
+        logger.error("auction_monitor failed: %s", e, exc_info=True)
+
+
+async def run_intraday_monitor():
+    if not is_trading_day():
+        return
+    settings = get_settings()
+    if not settings.phase_g.enabled:
+        return
+    try:
+        from src.monitoring.intraday import IntradayMonitor
+        from src.portfolio.tracker import PositionTracker
+        await asyncio.to_thread(IntradayMonitor().run_once)
+        await asyncio.to_thread(PositionTracker().check_rules)
+    except Exception as e:
+        logger.error("intraday_monitor failed: %s", e, exc_info=True)
+
+
+async def run_recommendation_review():
+    if not is_trading_day():
+        return
+    settings = get_settings()
+    if not settings.phase_g.enabled:
+        return
+    logger.info("[phase_g] recommendation_review")
+    try:
+        from src.review.recommendation_review import RecommendationReview
+        RecommendationReview().run()
+    except Exception as e:
+        logger.error("recommendation_review failed: %s", e, exc_info=True)
+
+
 async def _startup_catch_up():
     from src.data.db_manager import SignalDB
 
@@ -141,6 +211,53 @@ def _configure_scheduler(scheduler: AsyncIOScheduler) -> None:
         hour=clean_h, minute=clean_m, day_of_week=dow, timezone=tz,
         id="db_cleanup", name="DB 清理",
     )
+
+    # Phase G jobs
+    if settings.phase_g.enabled:
+        pg = settings.phase_g.schedule
+        di_h, di_m = _parse_hm(pg.daily_intelligence)
+        of_h, of_m = _parse_hm(pg.overnight_futures)
+        rp_h, rp_m = _parse_hm(pg.recommendation_pool)
+        rv_h, rv_m = _parse_hm(pg.recommendation_review)
+        auc_start_h, auc_start_m = _parse_hm(pg.auction_start)
+        auc_end_h, auc_end_m = _parse_hm(pg.auction_end)
+
+        scheduler.add_job(
+            run_daily_intelligence, "cron",
+            hour=di_h, minute=di_m, day_of_week="mon-fri", timezone=tz,
+            id="daily_intelligence", name="日更知识库",
+        )
+        scheduler.add_job(
+            run_daily_intelligence, "cron",
+            hour=of_h, minute=of_m, day_of_week="mon-fri", timezone=tz,
+            id="overnight_futures", name="外盘期货",
+        )
+        scheduler.add_job(
+            run_recommendation_pool, "cron",
+            hour=rp_h, minute=rp_m, day_of_week="mon-fri", timezone=tz,
+            id="recommendation_pool", name="推荐池",
+        )
+        scheduler.add_job(
+            run_recommendation_review, "cron",
+            hour=rv_h, minute=rv_m, day_of_week="mon-fri", timezone=tz,
+            id="recommendation_review", name="推荐复盘",
+        )
+        scheduler.add_job(
+            run_auction_monitor, "cron",
+            hour=f"{auc_start_h}-{auc_end_h}", minute="*", day_of_week="mon-fri", timezone=tz,
+            id="auction_monitor", name="竞价监测",
+        )
+        interval = pg.intraday_interval_min
+        scheduler.add_job(
+            run_intraday_monitor, "cron",
+            hour="9-11,13-14", minute=f"*/{interval}", day_of_week="mon-fri", timezone=tz,
+            id="intraday_monitor_am", name="盘中监测上午",
+        )
+        scheduler.add_job(
+            run_intraday_monitor, "cron",
+            hour="14", minute=f"*/{interval}", day_of_week="mon-fri", timezone=tz,
+            id="intraday_monitor_pm", name="盘中监测下午",
+        )
 
 
 async def _run_scheduler():

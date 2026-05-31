@@ -67,3 +67,17 @@ site:
   output_dir: "site"
   archive_dir: "site/archive"
   data_dir: "site/data"
+
+phase_g:
+  enabled: true
+  mcap_limit_yi: 3000
+  limit_up_streak_days: 3
+  production_api_base: ""
+  schedule:
+    daily_intelligence: "06:30"
+    overnight_futures: "06:45"
+    recommendation_pool: "08:45"
+    recommendation_review: "17:00"
+    auction_start: "09:15"
+    auction_end: "09:25"
+    intraday_interval_min: 2

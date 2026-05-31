@@ -226,16 +226,27 @@ BRAND_SVG = """<svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/200
 # ── Top Nav ───────────────────────────────────────────────────
 NAV_HTML = """
 <div class="site-nav">
-    <a href="index.html"{% if page == 'home' %} class="active"{% endif %}>首页</a>
-    <a href="dashboard.html"{% if page == 'dashboard' %} class="active"{% endif %}>看板</a>
-    <a href="history.html"{% if page == 'history' %} class="active"{% endif %}>历史</a>
+    <a href="app/cockpit.html#today"{% if page == 'today' %} class="active"{% endif %}>今日<span class="alert-badge" id="nav-alert-badge" hidden>0</span></a>
+    <a href="app/cockpit.html#watchlist"{% if page == 'watchlist' %} class="active"{% endif %}>自选</a>
+    <a href="app/cockpit.html#me"{% if page == 'me' %} class="active"{% endif %}>我的</a>
 </div>
 """
 NAV_HTML_SUB = """
 <div class="site-nav">
-    <a href="../index.html"{% if page == 'home' %} class="active"{% endif %}>首页</a>
-    <a href="../dashboard.html"{% if page == 'dashboard' %} class="active"{% endif %}>看板</a>
-    <a href="../history.html"{% if page == 'history' %} class="active"{% endif %}>历史</a>
+    <a href="cockpit.html#today"{% if page == 'today' %} class="active"{% endif %}>今日</a>
+    <a href="cockpit.html#watchlist"{% if page == 'watchlist' %} class="active"{% endif %}>自选</a>
+    <a href="cockpit.html#me"{% if page == 'me' %} class="active"{% endif %}>我的</a>
+</div>
+"""
+
+SESSION_RAIL = """
+<div class="session-rail" id="session-rail">
+    <span class="session-rail-phase" id="session-phase">盘前</span>
+    <span class="session-rail-countdown" id="session-countdown"></span>
+    <a href="app/cockpit.html#today" class="session-rail-cta" id="session-cta">查看今日战术</a>
+</div>
+<div class="live-banner" id="live-banner" hidden>
+    实时看板需连接服务器 — 当前为只读快照模式
 </div>
 """
 
@@ -243,21 +254,17 @@ NAV_HTML_SUB = """
 BOTTOM_NAV = """
 <nav class="bottom-nav">
     <div class="bottom-nav-inner">
-        <a href="index.html"{% if page == 'home' %} class="active"{% endif %}>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-            首页
+        <a href="app/cockpit.html#today"{% if page == 'today' %} class="active"{% endif %}>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            今日
         </a>
-        <a href="dashboard.html"{% if page == 'dashboard' %} class="active"{% endif %}>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-            看板
-        </a>
-        <a href="app/watchlist.html"{% if page == 'watchlist' %} class="active"{% endif %}>
+        <a href="app/cockpit.html#watchlist"{% if page == 'watchlist' %} class="active"{% endif %}>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
             自选
         </a>
-        <a href="history.html"{% if page == 'history' %} class="active"{% endif %}>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-            历史
+        <a href="app/cockpit.html#me"{% if page == 'me' %} class="active"{% endif %}>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            我的
         </a>
     </div>
 </nav>
@@ -274,8 +281,11 @@ TPL_HOME = """<!DOCTYPE html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta http-equiv="refresh" content="0;url=app/cockpit.html">
+    <meta name="description" content="智策 NexStrat — AI 辅助 A 股战术投研，盘前情报、推荐池、竞价、盯盘、复盘一站闭环">
     <title>智策 NexStrat — {{ meta.trade_date }} {{ type_label }}</title>
     <link rel="stylesheet" href="assets/theme.css">
+    <script>location.replace("app/cockpit.html");</script>
 </head>
 <body>
 
@@ -290,6 +300,8 @@ TPL_HOME = """<!DOCTYPE html>
     {{ nav }}
     <span class="header-meta">{{ meta.trade_date }} {{ type_label }} · {{ meta.generated_at[11:16] }}</span>
 </header>
+
+{{ session_rail }}
 
 <div class="shell">
 
@@ -728,6 +740,8 @@ TPL_HOME = """<!DOCTYPE html>
 </script>
 
 <script src="app/config.js"></script>
+<script src="app/api-client.js"></script>
+<script src="app/live.js" defer></script>
 <script src="app/app.js" defer></script>
 </body>
 </html>
@@ -1494,6 +1508,7 @@ def generate_site(report: Report, target_dir: str | None = None) -> str:
         bullish_count=bullish_count, hold_count=hold_count, bearish_count=bearish_count,
         use_app_pages=use_app_pages, bottom_nav=Template(BOTTOM_NAV).render(page="home"),
         nav=Template(NAV_HTML).render(page="home"),
+        session_rail=SESSION_RAIL,
         breadth=breadth_data,
     )
     (site_dir / "index.html").write_text(html, encoding="utf-8")
@@ -1502,8 +1517,8 @@ def generate_site(report: Report, target_dir: str | None = None) -> str:
     if not get_settings().pipeline.skip_stock_html:
         stock_dir = site_dir / "stock"
         stock_dir.mkdir(exist_ok=True)
-        sub_nav = Template(NAV_HTML_SUB).render(page="stock")
-        sub_bottom = Template(BOTTOM_NAV).render(page="stock").replace('index.html', '../index.html').replace('dashboard.html', '../dashboard.html').replace('app/watchlist.html', '../app/watchlist.html').replace('history.html', '../history.html')
+        sub_nav = Template(NAV_HTML_SUB).render(page="stock").replace("cockpit.html", "../app/cockpit.html")
+        sub_bottom = Template(BOTTOM_NAV).render(page="stock").replace("app/cockpit.html", "../app/cockpit.html")
         for stock in stocks:
             shtml = Template(TPL_STOCK).render(
                 **common, stock=stock, meta=meta, type_label=type_label,
@@ -1542,6 +1557,7 @@ def generate_site(report: Report, target_dir: str | None = None) -> str:
     archive_file.write_text(html, encoding="utf-8")
 
     _copy_app_assets(site_dir)
+    _export_phase_g_json(site_dir, report.trade_date)
 
     if not is_test:
         _sync_to_docs(settings)
@@ -1696,6 +1712,39 @@ def _load_postmortem_stats(settings) -> dict:
     except Exception as e:
         logger.warning("Failed to load postmortem stats: %s", e)
         return {}
+
+
+def _export_phase_g_json(site_dir: Path, trade_date) -> None:
+    """Export Phase G static JSON snapshots."""
+    data_dir = site_dir / "data"
+    data_dir.mkdir(parents=True, exist_ok=True)
+    td = str(trade_date)
+    try:
+        from src.intelligence.ingester import KnowledgeIngester
+        digest = KnowledgeIngester().export_json(trade_date)
+        (data_dir / "digest.json").write_text(
+            json.dumps(digest, ensure_ascii=False, indent=2), encoding="utf-8"
+        )
+    except Exception as e:
+        logger.warning("digest.json export failed: %s", e)
+    try:
+        from src.recommendation.engine import RecommendationEngine
+        rec = RecommendationEngine().export_json(trade_date)
+        (data_dir / "recommendation.json").write_text(
+            json.dumps(rec, ensure_ascii=False, indent=2), encoding="utf-8"
+        )
+    except Exception as e:
+        logger.warning("recommendation.json export failed: %s", e)
+    try:
+        from src.review.recommendation_review import RecommendationReview
+        from datetime import date as d
+        if trade_date == d.today() or str(trade_date) == d.today().isoformat():
+            review = RecommendationReview().export_json(trade_date)
+            (data_dir / "review.json").write_text(
+                json.dumps(review, ensure_ascii=False, indent=2), encoding="utf-8"
+            )
+    except Exception as e:
+        logger.debug("review.json export skipped: %s", e)
 
 
 def _copy_app_assets(site_dir: Path) -> None:

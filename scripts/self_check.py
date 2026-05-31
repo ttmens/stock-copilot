@@ -60,7 +60,7 @@ def main():
         )
         h = json.loads(r.stdout)
         check("API 可达", h.get("status") == "ok")
-        check("版本 2.0.0", h.get("version") == "2.0.0", h.get("version"))
+        check("版本 2.1.0", h.get("version") == "2.1.0", h.get("version"))
         check("自选股 > 0", h.get("watchlist_count", 0) > 0, str(h.get("watchlist_count", 0)))
         check("数据新鲜度", h.get("data_freshness") in ("fresh", "unknown"), h.get("data_freshness"))
 

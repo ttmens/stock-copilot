@@ -154,37 +154,41 @@ def check_performance(root: Path) -> CheckResult:
 
 def check_ia(root: Path) -> CheckResult:
     r = CheckResult("information_architecture", 20, 0)
-    index = read_text(root / "docs" / "index.html")
+    cockpit = read_text(root / "docs" / "app" / "cockpit.html")
     gen = read_text(root / "src" / "site" / "generator.py")
+    combined = cockpit + gen
     signals = [
-        ("signal-dashboard", "市场温度/信号分布区"),
-        ("stock-card", "自选股卡片"),
-        ("signal-badge", "信号标签"),
-        ("decision-score", "综合评分"),
+        ("cockpit.html", "单页 Cockpit 入口"),
+        ("journey-hero", "战术 Hero"),
+        ("journey-timeline", "交易日程 timeline"),
+        ("ui-render.js", "共享 render 层"),
     ]
     found = 0
     for token, label in signals:
-        if token in index or token in gen:
+        if token in combined:
             found += 1
             r.details.append(f"Found {label}")
     r.score = min(r.max_score, found * 5)
-    if "filter-bar" in index or "filter-bar" in gen:
+    if "cockpit.html#watchlist" in gen or "cockpit.html#today" in gen:
         r.score = min(r.max_score, r.score + 4)
-        r.details.append("Filter bar present")
+        r.details.append("3-item nav to cockpit")
     return r
 
 
 def check_interaction(root: Path) -> CheckResult:
     r = CheckResult("interaction", 15, 0)
-    app_js = read_text(root / "docs" / "app" / "app.js")
-    index = read_text(root / "docs" / "index.html")
+    cockpit_js = read_text(root / "docs" / "app" / "cockpit.js")
+    ui_render = read_text(root / "docs" / "app" / "ui-render.js")
+    cockpit_html = read_text(root / "docs" / "app" / "cockpit.html")
     checks = [
         ("filter-search", "搜索"),
         ("filter-signal", "信号筛选"),
         ("filter-sort", "排序"),
         ("aria-label", "无障碍标签"),
+        ("renderStockCard", "完整 stock-card render"),
+        ("decision-card", "decision-card 结构"),
     ]
-    combined = app_js + index
+    combined = cockpit_js + ui_render + cockpit_html
     for token, label in checks:
         if token in combined:
             r.score += 3
@@ -200,14 +204,14 @@ def check_interaction(root: Path) -> CheckResult:
 def check_hybrid(root: Path) -> CheckResult:
     r = CheckResult("static_dynamic", 15, 0)
     config = read_text(root / "docs" / "app" / "config.js")
-    app_js = read_text(root / "docs" / "app" / "app.js")
+    cockpit_js = read_text(root / "docs" / "app" / "cockpit.js")
     if "API_BASE" in config or "STOCK_COPILOT" in config:
         r.score += 5
         r.details.append("API config present")
-    if "fetch(" in app_js or "API_BASE" in app_js:
+    if "fetch(" in cockpit_js or "fetchJson" in cockpit_js:
         r.score += 5
-        r.details.append("Dynamic fetch in app.js")
-    if "unavailable" in app_js.lower() or "empty" in app_js.lower() or "暂无" in app_js:
+        r.details.append("Dynamic fetch in cockpit.js")
+    if "unavailable" in cockpit_js.lower() or "empty" in cockpit_js.lower() or "暂无" in cockpit_js:
         r.score += 5
         r.details.append("Empty/unavailable handling hints")
     latest = root / "docs" / "data" / "latest.json"
@@ -220,27 +224,35 @@ def check_hybrid(root: Path) -> CheckResult:
 def check_responsive(root: Path) -> CheckResult:
     r = CheckResult("responsive", 10, 0)
     css = read_text(root / "docs" / "assets" / "theme.css")
-    index = read_text(root / "docs" / "index.html")
-    if "viewport" in index:
+    cockpit = read_text(root / "docs" / "app" / "cockpit.html")
+    if "viewport" in cockpit:
         r.score += 4
-        r.details.append("viewport meta present")
-    if "@media" in css:
-        r.score += 6
-        r.details.append("CSS media queries present")
-    else:
+        r.details.append("viewport meta present (cockpit)")
+    breakpoints = [
+        ("max-width: 899px", "375px mobile"),
+        ("min-width: 900px", "desktop"),
+        ("min-width: 1024px", "1280px live-cockpit"),
+    ]
+    for bp, label in breakpoints:
+        if bp in css:
+            r.score += 2
+            r.details.append(f"Breakpoint {label}")
+    r.score = min(r.max_score, r.score)
+    if "@media" not in css:
         r.details.append("No @media in theme.css")
     return r
 
 
 def check_a11y(root: Path) -> CheckResult:
     r = CheckResult("a11y", 10, 0)
-    index = read_text(root / "docs" / "index.html")
-    app = read_text(root / "docs" / "app" / "app.js")
-    combined = index + app
-    if "aria-label" in combined:
+    cockpit = read_text(root / "docs" / "app" / "cockpit.html")
+    cockpit_js = read_text(root / "docs" / "app" / "cockpit.js")
+    combined = cockpit + cockpit_js
+    css = read_text(root / "docs" / "assets" / "theme.css")
+    if "aria-label" in combined or "aria-expanded" in combined:
         r.score += 5
-        r.details.append("aria-label usage")
-    if ":focus" in read_text(root / "docs" / "assets" / "theme.css") or "focus-visible" in combined:
+        r.details.append("aria usage in cockpit")
+    if ":focus" in css or "focus-visible" in css:
         r.score += 5
         r.details.append("Focus styles")
     return r
