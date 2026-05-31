@@ -1,4 +1,5 @@
 /** Runtime config — static + Live Cockpit dual-track (Phase G) */
+// Cache-bust: v3.0.0-alpha-20260531-fix-deep-mine
 (function () {
   if (!window.STOCK_COPILOT) window.STOCK_COPILOT = {};
 
