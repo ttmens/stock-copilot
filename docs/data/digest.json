@@ -1,0 +1,49 @@
+{
+  "trade_date": "2026-05-29",
+  "hot_events": [
+    {
+      "rank": 1,
+      "title": "数据采集暂不可用",
+      "code": "",
+      "impact_score": 0.5,
+      "sector_tags": []
+    }
+  ],
+  "macro_summary": "宏观快讯：关注美联储政策、A股北向资金流向及行业政策动向。",
+  "sector_impact": [],
+  "risk_flags": [
+    "暂无 ST 持仓风险"
+  ],
+  "overnight": {
+    "nasdaq": {
+      "name": "纳斯达克",
+      "change_pct": 0.0
+    },
+    "sp500": {
+      "name": "标普500",
+      "change_pct": 0.0
+    },
+    "dow": {
+      "name": "道琼斯",
+      "change_pct": 0.0
+    },
+    "nikkei": {
+      "name": "日经225",
+      "change_pct": 0.0
+    },
+    "strong_foreign_impact": false
+  },
+  "futures": [
+    {
+      "symbol": "原油",
+      "change_pct": 0.0,
+      "sector_hint": null
+    },
+    {
+      "symbol": "黄金",
+      "change_pct": 0.0,
+      "sector_hint": null
+    }
+  ],
+  "llm_summary": ""
+}

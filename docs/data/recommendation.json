@@ -1,0 +1,35 @@
+{
+  "trade_date": "2026-05-29",
+  "generated_at": "2026-05-31",
+  "filters_applied": [
+    "no_st",
+    "mcap_lt_3000b",
+    "no_limit_up_streak"
+  ],
+  "sectors": [
+    {
+      "name": "半导体",
+      "reason": "硬信号+热点",
+      "stocks": [
+        {
+          "code": "000001",
+          "name": "平安银行",
+          "score": 0.09374999999999999,
+          "source": "scan",
+          "focus_flag": false
+        }
+      ]
+    },
+    {
+      "name": "新能源",
+      "reason": "硬信号+热点",
+      "stocks": []
+    },
+    {
+      "name": "消费",
+      "reason": "硬信号+热点",
+      "stocks": []
+    }
+  ],
+  "auction_added": []
+}
