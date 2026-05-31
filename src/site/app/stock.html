@@ -369,8 +369,10 @@
       if (!box.hidden) { box.hidden = true; btn.textContent = "展开"; return; }
       btn.textContent = "加载中…";
       try {
-        var api = (window.STOCK_COPILOT || {}).API_BASE || "";
-        if (!api) throw new Error("需连接 API");
+        var apiBase = (window.STOCK_COPILOT || {}).API_BASE;
+        // Empty string = same-origin (relative URL). null/undefined = offline.
+        if (apiBase === null || apiBase === undefined) throw new Error("需连接 API");
+        var api = apiBase.replace(/\/$/, "");
         var res = await fetch(api + "/api/stocks/" + code + "/deep-analysis", { method: "POST" });
         var data = await res.json();
         box.innerHTML = "<p>" + (data.summary || "") + "</p><ul>" +
