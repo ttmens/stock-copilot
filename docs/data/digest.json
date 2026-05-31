@@ -1,5 +1,6 @@
 {
   "trade_date": "2026-05-29",
+  "generated_at": "2026-05-31 02:48:57",
   "hot_events": [
     {
       "rank": 1,
@@ -44,6 +45,5 @@
       "change_pct": 0.0,
       "sector_hint": null
     }
-  ],
-  "llm_summary": ""
+  ]
 }

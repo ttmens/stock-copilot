@@ -1,6 +1,6 @@
 {
   "trade_date": "2026-05-29",
-  "generated_at": "2026-05-31",
+  "generated_at": "2026-05-29",
   "filters_applied": [
     "no_st",
     "mcap_lt_3000b",
@@ -9,7 +9,7 @@
   "sectors": [
     {
       "name": "半导体",
-      "reason": "硬信号+热点",
+      "reason": "",
       "stocks": [
         {
           "code": "000001",
@@ -19,16 +19,6 @@
           "focus_flag": false
         }
       ]
-    },
-    {
-      "name": "新能源",
-      "reason": "硬信号+热点",
-      "stocks": []
-    },
-    {
-      "name": "消费",
-      "reason": "硬信号+热点",
-      "stocks": []
     }
   ],
   "auction_added": []
