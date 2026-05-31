@@ -3,15 +3,17 @@
   "use strict";
 
   const cfg = window.STOCK_COPILOT || {};
-  const API = (cfg.API_BASE || "").replace(/\/$/, "");
+  // Empty string = same-origin (relative URL). "null" = truly offline.
+  const API = cfg.API_BASE === null ? null : (cfg.API_BASE || "").replace(/\/$/, "");
 
   async function apiFetch(path, options) {
-    if (!API) {
+    if (API === null) {
       const err = new Error("API unavailable");
       err.offline = true;
       throw err;
     }
-    const res = await fetch(`${API}${path}`, options || {});
+    const url = API ? `${API}${path}` : path;
+    const res = await fetch(url, options || {});
     if (!res.ok) {
       const err = new Error(`HTTP ${res.status}`);
       err.status = res.status;
@@ -35,12 +37,10 @@
   }
 
   window.StockCopilotAPI = {
-    base: API,
+    base: API || window.location.origin,
     fetch: apiFetch,
     showLiveBanner,
     showStale,
-    isOnline: () => !!API,
+    isOnline: () => API !== null,
   };
-
-  if (!API) showLiveBanner(true);
 })();
