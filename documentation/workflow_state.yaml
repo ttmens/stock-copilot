@@ -6,7 +6,7 @@ current_phase: phase_g
 
 target_phase: phase_g
 
-phase_g_status: alpha
+phase_g_status: stable
 
 gates:
 
@@ -41,6 +41,8 @@ artifacts:
   api_spec: documentation/reference/api-spec.md
 
   self_check: scripts/self_check.py
+
+  optimization_plan: documentation/plans/2026-05-31-system-optimization.md
 
 phase_g_delivered:
 
