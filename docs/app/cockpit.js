@@ -148,25 +148,25 @@
     const empty = document.getElementById("auction-empty");
     const tbody = document.querySelector("#auction-table tbody");
     const cards = document.getElementById("auction-cards");
-    if (!api()?.isOnline()) {
-      if (empty) empty.hidden = false;
-      return;
+    if (api()?.isOnline()) {
+      try {
+        const data = await api().fetch("/api/auction/latest");
+        const snaps = data.snapshots || [];
+        if (statusEl) statusEl.textContent = data.in_auction_window ? "竞价中" : "最近快照";
+        if (empty) empty.hidden = data.in_auction_window || snaps.length > 0;
+        if (tbody && UI()) tbody.innerHTML = snaps.map((s) => UI().renderAuctionRow(s, { href: stockHref(s.code) })).join("");
+        if (cards && UI()) cards.innerHTML = snaps.map((s) => UI().renderAuctionRow(s, { mobile: true, href: stockHref(s.code) })).join("");
+        const peek = document.getElementById("peek-auction");
+        if (peek) {
+          peek.textContent = snaps.length ? `${snaps.length} 只监测中` : "";
+          peek.hidden = !snaps.length;
+        }
+        return;
+      } catch (_) {}
     }
-    try {
-      const data = await api().fetch("/api/auction/latest");
-      const snaps = data.snapshots || [];
-      if (statusEl) statusEl.textContent = data.in_auction_window ? "竞价中" : "最近快照";
-      if (empty) empty.hidden = data.in_auction_window || snaps.length > 0;
-      if (tbody && UI()) tbody.innerHTML = snaps.map((s) => UI().renderAuctionRow(s, { href: stockHref(s.code) })).join("");
-      if (cards && UI()) cards.innerHTML = snaps.map((s) => UI().renderAuctionRow(s, { mobile: true, href: stockHref(s.code) })).join("");
-      const peek = document.getElementById("peek-auction");
-      if (peek) {
-        peek.textContent = snaps.length ? `${snaps.length} 只监测中` : "";
-        peek.hidden = !snaps.length;
-      }
-    } catch (_) {
-      if (empty) empty.hidden = false;
-    }
+    // Offline fallback: show from static data if available
+    if (empty) empty.textContent = "竞价监测需要连接服务器";
+    if (statusEl) statusEl.textContent = "快照模式";
   }
 
   async function loadLive() {
