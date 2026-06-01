@@ -1,6 +1,6 @@
 {
-  "trade_date": "2026-05-29",
-  "generated_at": "2026-05-29",
+  "trade_date": "2026-06-01",
+  "generated_at": "2026-06-01",
   "filters_applied": [
     "no_st",
     "mcap_lt_3000b",
@@ -9,12 +9,80 @@
   "sectors": [
     {
       "name": "半导体",
-      "reason": "",
+      "reason": "硬信号+热点",
       "stocks": [
         {
-          "code": "000001",
-          "name": "平安银行",
-          "score": 0.09374999999999999,
+          "code": "600900",
+          "name": "长江电力",
+          "score": 0.6157018120070685,
+          "source": "scan",
+          "focus_flag": false
+        },
+        {
+          "code": "601138",
+          "name": "工业富联",
+          "score": 0.5658611467316985,
+          "source": "scan",
+          "focus_flag": false
+        },
+        {
+          "code": "601166",
+          "name": "兴业银行",
+          "score": 0.5550408334900772,
+          "source": "scan",
+          "focus_flag": false
+        }
+      ]
+    },
+    {
+      "name": "新能源",
+      "reason": "硬信号+热点",
+      "stocks": [
+        {
+          "code": "601088",
+          "name": "中国神华",
+          "score": 0.49178585067036157,
+          "source": "scan",
+          "focus_flag": false
+        },
+        {
+          "code": "600941",
+          "name": "中国移动",
+          "score": 0.4910873375929827,
+          "source": "scan",
+          "focus_flag": false
+        },
+        {
+          "code": "601985",
+          "name": "中国核电",
+          "score": 0.4488252131346197,
+          "source": "scan",
+          "focus_flag": false
+        }
+      ]
+    },
+    {
+      "name": "消费",
+      "reason": "硬信号+热点",
+      "stocks": [
+        {
+          "code": "600000",
+          "name": "浦发银行",
+          "score": 0.40885617133471036,
+          "source": "scan",
+          "focus_flag": false
+        },
+        {
+          "code": "600036",
+          "name": "招商银行",
+          "score": 0.36780560828469855,
+          "source": "scan",
+          "focus_flag": false
+        },
+        {
+          "code": "000651",
+          "name": "格力电器",
+          "score": 0.313095533204639,
           "source": "scan",
           "focus_flag": false
         }
