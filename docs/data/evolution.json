@@ -1,6 +1,6 @@
 {
   "cycle_id": "evo-0001",
-  "date": "2026-06-02",
+  "date": "2026-06-03",
   "win_rate": 0.0,
   "avg_return": 0.0,
   "sharpe_like": 0.0,
@@ -15,6 +15,6 @@
   "pool_size": 50,
   "evicted_count": 0,
   "added_count": 0,
-  "summary": "权重保持稳定，无需调整。",
+  "summary": "权重保持稳定，无需调整。 遇到 1 个问题（见详情）。",
   "status": "act"
 }
