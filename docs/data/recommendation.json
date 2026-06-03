@@ -1,6 +1,6 @@
 {
-  "trade_date": "2026-06-02",
-  "generated_at": "2026-06-02",
+  "trade_date": "2026-06-03",
+  "generated_at": "2026-06-03",
   "filters_applied": [
     "no_st",
     "mcap_lt_3000b",
@@ -12,23 +12,23 @@
       "reason": "硬信号+热点",
       "stocks": [
         {
-          "code": "601088",
-          "name": "中国神华",
-          "score": 0.5903395974644643,
+          "code": "601211",
+          "name": "国泰君安",
+          "score": 0.6249780116172456,
           "source": "scan",
           "focus_flag": false
         },
         {
-          "code": "601138",
-          "name": "工业富联",
-          "score": 0.5422968592995838,
+          "code": "601816",
+          "name": "京沪高铁",
+          "score": 0.601111401501945,
           "source": "scan",
           "focus_flag": false
         },
         {
-          "code": "601166",
-          "name": "兴业银行",
-          "score": 0.5142835179669651,
+          "code": "601985",
+          "name": "中国核电",
+          "score": 0.5996567489596774,
           "source": "scan",
           "focus_flag": false
         }
@@ -39,23 +39,23 @@
       "reason": "硬信号+热点",
       "stocks": [
         {
-          "code": "601919",
-          "name": "中远海控",
-          "score": 0.49982808768407677,
+          "code": "601088",
+          "name": "中国神华",
+          "score": 0.5821717877500001,
+          "source": "scan",
+          "focus_flag": false
+        },
+        {
+          "code": "601138",
+          "name": "工业富联",
+          "score": 0.571087757408175,
           "source": "scan",
           "focus_flag": false
         },
         {
           "code": "600900",
           "name": "长江电力",
-          "score": 0.4993266070492122,
-          "source": "scan",
-          "focus_flag": false
-        },
-        {
-          "code": "600941",
-          "name": "中国移动",
-          "score": 0.49910609678976303,
+          "score": 0.535667961071775,
           "source": "scan",
           "focus_flag": false
         }
@@ -66,23 +66,23 @@
       "reason": "硬信号+热点",
       "stocks": [
         {
-          "code": "601211",
-          "name": "国泰君安",
-          "score": 0.49812283878733105,
+          "code": "600036",
+          "name": "招商银行",
+          "score": 0.4999180539154836,
           "source": "scan",
           "focus_flag": false
         },
         {
-          "code": "601985",
-          "name": "中国核电",
-          "score": 0.4456646426796257,
+          "code": "601166",
+          "name": "兴业银行",
+          "score": 0.48549197202642835,
           "source": "scan",
           "focus_flag": false
         },
         {
-          "code": "601816",
-          "name": "京沪高铁",
-          "score": 0.4334583209630423,
+          "code": "600941",
+          "name": "中国移动",
+          "score": 0.4716475201225604,
           "source": "scan",
           "focus_flag": false
         }
