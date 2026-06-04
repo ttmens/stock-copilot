@@ -1,6 +1,6 @@
 {
-  "trade_date": "2026-06-03",
-  "generated_at": "2026-06-03",
+  "trade_date": "2026-06-04",
+  "generated_at": "2026-06-04",
   "filters_applied": [
     "no_st",
     "mcap_lt_3000b",
@@ -9,158 +9,85 @@
   "sectors": [
     {
       "name": "半导体",
-      "reason": "",
+      "reason": "硬信号+热点",
       "stocks": [
+        {
+          "code": "601138",
+          "name": "工业富联",
+          "score": 0.7311134391988827,
+          "source": "scan",
+          "focus_flag": false
+        },
         {
           "code": "601211",
           "name": "国泰君安",
-          "score": 0.6249780116172456,
+          "score": 0.694457856800329,
           "source": "scan",
           "focus_flag": false
-        }
-      ]
-    },
-    {
-      "name": "竞价加池",
-      "reason": "",
-      "stocks": [
-        {
-          "code": "601816",
-          "name": "京沪高铁",
-          "score": 0.5,
-          "source": "auction",
-          "focus_flag": true
-        },
-        {
-          "code": "601985",
-          "name": "中国核电",
-          "score": 0.5,
-          "source": "auction",
-          "focus_flag": true
-        },
-        {
-          "code": "600900",
-          "name": "长江电力",
-          "score": 0.5,
-          "source": "auction",
-          "focus_flag": true
-        },
-        {
-          "code": "600036",
-          "name": "招商银行",
-          "score": 0.5,
-          "source": "auction",
-          "focus_flag": true
-        },
-        {
-          "code": "601166",
-          "name": "兴业银行",
-          "score": 0.5,
-          "source": "auction",
-          "focus_flag": true
         },
         {
           "code": "600941",
           "name": "中国移动",
-          "score": 0.5,
-          "source": "auction",
-          "focus_flag": true
+          "score": 0.6028084329411052,
+          "source": "scan",
+          "focus_flag": false
         }
       ]
     },
     {
       "name": "新能源",
-      "reason": "",
+      "reason": "硬信号+热点",
       "stocks": [
         {
           "code": "601088",
           "name": "中国神华",
-          "score": 0.5821717877500001,
+          "score": 0.5698769064200886,
           "source": "scan",
           "focus_flag": false
         },
         {
-          "code": "601138",
-          "name": "工业富联",
-          "score": 0.571087757408175,
+          "code": "601985",
+          "name": "中国核电",
+          "score": 0.5429399105095964,
+          "source": "scan",
+          "focus_flag": false
+        },
+        {
+          "code": "601816",
+          "name": "京沪高铁",
+          "score": 0.5417408571957953,
+          "source": "scan",
+          "focus_flag": false
+        }
+      ]
+    },
+    {
+      "name": "消费",
+      "reason": "硬信号+热点",
+      "stocks": [
+        {
+          "code": "600900",
+          "name": "长江电力",
+          "score": 0.5113338736418765,
+          "source": "scan",
+          "focus_flag": false
+        },
+        {
+          "code": "601166",
+          "name": "兴业银行",
+          "score": 0.4770843989349973,
+          "source": "scan",
+          "focus_flag": false
+        },
+        {
+          "code": "601919",
+          "name": "中远海控",
+          "score": 0.47092610690779935,
           "source": "scan",
           "focus_flag": false
         }
       ]
     }
   ],
-  "auction_added": [
-    {
-      "id": 69,
-      "trade_date": "2026-06-03",
-      "sector_name": "竞价加池",
-      "sector_rank": 0,
-      "code": "601816",
-      "name": "京沪高铁",
-      "score": 0.5,
-      "source": "auction",
-      "focus_flag": 1,
-      "added_at": "2026-06-03 00:45:00"
-    },
-    {
-      "id": 70,
-      "trade_date": "2026-06-03",
-      "sector_name": "竞价加池",
-      "sector_rank": 0,
-      "code": "601985",
-      "name": "中国核电",
-      "score": 0.5,
-      "source": "auction",
-      "focus_flag": 1,
-      "added_at": "2026-06-03 00:45:00"
-    },
-    {
-      "id": 73,
-      "trade_date": "2026-06-03",
-      "sector_name": "竞价加池",
-      "sector_rank": 1,
-      "code": "600900",
-      "name": "长江电力",
-      "score": 0.5,
-      "source": "auction",
-      "focus_flag": 1,
-      "added_at": "2026-06-03 00:45:00"
-    },
-    {
-      "id": 74,
-      "trade_date": "2026-06-03",
-      "sector_name": "竞价加池",
-      "sector_rank": 2,
-      "code": "600036",
-      "name": "招商银行",
-      "score": 0.5,
-      "source": "auction",
-      "focus_flag": 1,
-      "added_at": "2026-06-03 00:45:00"
-    },
-    {
-      "id": 75,
-      "trade_date": "2026-06-03",
-      "sector_name": "竞价加池",
-      "sector_rank": 2,
-      "code": "601166",
-      "name": "兴业银行",
-      "score": 0.5,
-      "source": "auction",
-      "focus_flag": 1,
-      "added_at": "2026-06-03 00:45:00"
-    },
-    {
-      "id": 76,
-      "trade_date": "2026-06-03",
-      "sector_name": "竞价加池",
-      "sector_rank": 2,
-      "code": "600941",
-      "name": "中国移动",
-      "score": 0.5,
-      "source": "auction",
-      "focus_flag": 1,
-      "added_at": "2026-06-03 00:45:00"
-    }
-  ]
+  "auction_added": []
 }
