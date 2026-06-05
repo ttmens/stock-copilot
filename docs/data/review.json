@@ -1,46 +1,9 @@
 {
-  "trade_date": "2026-06-04",
+  "trade_date": "2026-06-05",
   "hit_count": 0,
   "miss_count": 0,
   "hit_rate": 0.0,
   "hits": [],
   "missed_top": [],
-  "pool_underperform": [
-    {
-      "code": "601138",
-      "name": "工业富联"
-    },
-    {
-      "code": "601211",
-      "name": "国泰君安"
-    },
-    {
-      "code": "600941",
-      "name": "中国移动"
-    },
-    {
-      "code": "601088",
-      "name": "中国神华"
-    },
-    {
-      "code": "601985",
-      "name": "中国核电"
-    },
-    {
-      "code": "601816",
-      "name": "京沪高铁"
-    },
-    {
-      "code": "600900",
-      "name": "长江电力"
-    },
-    {
-      "code": "601166",
-      "name": "兴业银行"
-    },
-    {
-      "code": "601919",
-      "name": "中远海控"
-    }
-  ]
+  "pool_underperform": []
 }

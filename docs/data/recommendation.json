@@ -1,6 +1,6 @@
 {
-  "trade_date": "2026-06-04",
-  "generated_at": "2026-06-04",
+  "trade_date": "2026-06-05",
+  "generated_at": "2026-06-05",
   "filters_applied": [
     "no_st",
     "mcap_lt_3000b",
@@ -12,23 +12,23 @@
       "reason": "硬信号+热点",
       "stocks": [
         {
-          "code": "601138",
-          "name": "工业富联",
-          "score": 0.7311134391988827,
-          "source": "scan",
-          "focus_flag": false
-        },
-        {
-          "code": "601211",
-          "name": "国泰君安",
-          "score": 0.694457856800329,
+          "code": "000333",
+          "name": "美的集团",
+          "score": 0.6432405415633605,
           "source": "scan",
           "focus_flag": false
         },
         {
           "code": "600941",
           "name": "中国移动",
-          "score": 0.6028084329411052,
+          "score": 0.5560431648414235,
+          "source": "scan",
+          "focus_flag": false
+        },
+        {
+          "code": "601088",
+          "name": "中国神华",
+          "score": 0.5112188193556381,
           "source": "scan",
           "focus_flag": false
         }
@@ -39,23 +39,23 @@
       "reason": "硬信号+热点",
       "stocks": [
         {
-          "code": "601088",
-          "name": "中国神华",
-          "score": 0.5698769064200886,
+          "code": "601138",
+          "name": "工业富联",
+          "score": 0.5072267964324385,
           "source": "scan",
           "focus_flag": false
         },
         {
           "code": "601985",
           "name": "中国核电",
-          "score": 0.5429399105095964,
+          "score": 0.48667605713252093,
           "source": "scan",
           "focus_flag": false
         },
         {
-          "code": "601816",
-          "name": "京沪高铁",
-          "score": 0.5417408571957953,
+          "code": "601166",
+          "name": "兴业银行",
+          "score": 0.4338459009899306,
           "source": "scan",
           "focus_flag": false
         }
@@ -68,21 +68,21 @@
         {
           "code": "600900",
           "name": "长江电力",
-          "score": 0.5113338736418765,
+          "score": 0.40517146748918687,
           "source": "scan",
           "focus_flag": false
         },
         {
-          "code": "601166",
-          "name": "兴业银行",
-          "score": 0.4770843989349973,
+          "code": "600000",
+          "name": "浦发银行",
+          "score": 0.3994608033652814,
           "source": "scan",
           "focus_flag": false
         },
         {
-          "code": "601919",
-          "name": "中远海控",
-          "score": 0.47092610690779935,
+          "code": "600036",
+          "name": "招商银行",
+          "score": 0.3665855806992626,
           "source": "scan",
           "focus_flag": false
         }
