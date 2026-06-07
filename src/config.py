@@ -76,6 +76,7 @@ class DataConfig(BaseModel):
     announcement_days: int = 7
     retry: int = 3
     retry_delay: int = 2
+    eastmoney_ut: str = "fa5fd1943c7b386f172d6893dbbd1"  # Eastmoney push2 auth token
 
 
 class ReportConfig(BaseModel):

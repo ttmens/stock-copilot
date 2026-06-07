@@ -21,6 +21,8 @@ from datetime import date, datetime
 from pathlib import Path
 from typing import Optional
 
+from src.data.schema_migration import run_migrations
+
 logger = logging.getLogger(__name__)
 
 # ── Schema definition ────────────────────────────────────────────────
@@ -424,6 +426,8 @@ class SignalDB:
             self._persistent_conn = sqlite3.connect(":memory:")
             self._persistent_conn.row_factory = sqlite3.Row
             self._persistent_conn.executescript(_SCHEMA)
+            # Run migrations on in-memory DB too (for test parity)
+            run_migrations(":memory:")
         else:
             self.db_path.parent.mkdir(parents=True, exist_ok=True)
             self._init_db()
@@ -449,10 +453,14 @@ class SignalDB:
                 conn.close()
 
     def _init_db(self):
-        """Create tables if not exists (file mode)."""
+        """Create tables if not exists (file mode), then apply migrations."""
         conn = sqlite3.connect(str(self.db_path))
         conn.executescript(_SCHEMA)
         conn.close()
+        # Apply any pending migrations
+        applied = run_migrations(self.db_path)
+        if applied:
+            logger.info("Applied %d schema migration(s)", applied)
         logger.info("SignalDB initialized: %s", self.db_path)
 
     # ── Stock metadata ───────────────────────────────────────────

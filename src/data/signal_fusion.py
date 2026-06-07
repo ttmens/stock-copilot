@@ -1,15 +1,24 @@
 """Signal fusion engine — combines hard signals, LLM soft signals, and rule-based gates.
 
-Architecture:
-- Hard signals (60%): deterministic quantitative factors
-- Soft signals (30%): LLM-generated sentiment + confidence
-- Gate signals (10%): rule-based confirmation (volume, ST filter, etc.)
+Architecture (5-layer weighted fusion):
+- Hard signals (40%): deterministic quantitative factors (momentum, MA, volume, PE)
+- Soft signals (25%): LLM-generated sentiment + confidence
+- Gate signals (15%): rule-based confirmation (volume, ST filter, etc.)
+- Dragon-tiger (10%): institutional trading signals (龙虎榜)
+- Announcement (10%): corporate event signals (公告事件)
 
-Final output: score in [-1.0, +1.0] → classified to signal label
+Weights are loaded from config/fusion_weights.json and normalized to sum=1.0.
+Final output: score in [-1.0, +1.0] → classified to signal label.
+
+Score traceability: every fuse_signals() call records per-layer input/output/weight
+to signal_score_traces table for full audit trail (see ScoreTrace model).
 """
 
+import json
 import logging
 from dataclasses import dataclass
+from functools import lru_cache
+from pathlib import Path
 from typing import Optional
 
 from src.data.hard_signals import HardSignals
@@ -19,39 +28,44 @@ logger = logging.getLogger(__name__)
 
 # ── Dynamic weight loading (evolution engine) ─────────────────────
 
+_WEIGHTS_CACHE: dict | None = None
+_WEIGHTS_MTIME: float = 0
+
+_DEFAULT_WEIGHTS = {
+    "hard": 0.40,
+    "soft": 0.25,
+    "gate": 0.15,
+    "dragon_tiger": 0.10,
+    "announcement": 0.10,
+}
+
+
 def _get_optimized_weights() -> dict:
     """Load optimized fusion weights from config file.
 
     Falls back to defaults if the config doesn't exist or is invalid.
-    Called on every fuse_signals() call — cached after first load.
+    Uses module-level cache with mtime-based invalidation.
     """
-    if not hasattr(_get_optimized_weights, "_cache"):
-        _get_optimized_weights._cache = None  # type: ignore
-        _get_optimized_weights._mtime = 0  # type: ignore
+    global _WEIGHTS_CACHE, _WEIGHTS_MTIME
 
-    import json
-    from pathlib import Path
     config_path = Path("config/fusion_weights.json")
 
     try:
         mtime = config_path.stat().st_mtime if config_path.exists() else 0
-        if mtime > _get_optimized_weights._mtime:  # type: ignore
+        if mtime > _WEIGHTS_MTIME:
             data = json.loads(config_path.read_text())
-            _get_optimized_weights._cache = {  # type: ignore
+            _WEIGHTS_CACHE = {
                 "hard": data.get("hard", 0.40),
                 "soft": data.get("soft", 0.25),
                 "gate": data.get("gate", 0.15),
                 "dragon_tiger": data.get("dragon_tiger", 0.10),
                 "announcement": data.get("announcement", 0.10),
             }
-            _get_optimized_weights._mtime = mtime  # type: ignore
+            _WEIGHTS_MTIME = mtime
     except Exception as e:
         logger.debug("Using default weights (config load failed: %s)", e)
 
-    return _get_optimized_weights._cache or {  # type: ignore
-        "hard": 0.40, "soft": 0.25, "gate": 0.15,
-        "dragon_tiger": 0.10, "announcement": 0.10,
-    }
+    return _WEIGHTS_CACHE or dict(_DEFAULT_WEIGHTS)
 
 
 def _normalize_layer_weights(

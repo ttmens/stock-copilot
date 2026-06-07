@@ -17,11 +17,11 @@ from src.data.models import AgentResult, AgentStatus
 
 logger = logging.getLogger(__name__)
 
-# ── Debate round 2 system prompts (per agent type) ──────────────
+# ── Debate round 2 system prompts (parameterized template) ──────────────
 
-DEBATE_PROMPT_TECHNICAL = """你是 A 股投研分析助手，负责技术面分析。
+_DEBATE_PROMPT_TEMPLATE = """你是 A 股投研分析助手，负责{focus}分析。
 
-你已经对 {code} {name} 完成了第一轮技术分析。现在请查看资金面和基本面分析师的观点，
+你已经对 {{code}} {{name}} 完成了第一轮{focus}分析。现在请查看其他分析师的观点，
 评估你的分析是否需要修正、补充或反驳。
 
 规则：
@@ -32,58 +32,32 @@ DEBATE_PROMPT_TECHNICAL = """你是 A 股投研分析助手，负责技术面分
 5. summary 80-150 字
 
 输出格式（严格按此 JSON 结构）：
-{{
+{{{{
   "sentiment": "bullish" | "bearish" | "neutral",
-  "summary": "80-150字技术面分析（含对其他观点的回应）",
+  "summary": "80-150字{focus}分析（含对其他观点的回应）",
   "focus_points": ["关注点1", "关注点2"],
   "risk_points": ["风险点1", "风险点2"],
   "agree_with_others": true | false,
-  "disagreement_reason": "如不同意，说明理由（同意则留空）"
-}}"""
+  "disagreement_reason": "如不同意，说明理由（同意则留空）
+}}}}"""
 
-DEBATE_PROMPT_CAPITAL = """你是 A 股投研分析助手，负责资金面分析。
 
-你已经对 {code} {name} 完成了第一轮资金面分析。现在请查看技术面和基本面分析师的观点，
-评估你的分析是否需要修正、补充或反驳。
+def _get_debate_prompt(focus: str) -> str:
+    """Get debate prompt for a specific analysis focus.
+    
+    Args:
+        focus: Analysis focus area, e.g. "技术面", "资金面", "基本面"
+    
+    Returns:
+        Formatted prompt template with focus area filled in.
+    """
+    return _DEBATE_PROMPT_TEMPLATE.format(focus=focus)
 
-规则：
-1. 只使用用户提供的数据，不得编造任何数字
-2. 如果其他分析师的观点与你一致，可以确认并补充细节
-3. 如果其他分析师的观点与你矛盾，请分析分歧原因并坚持你的专业判断
-4. 输出必须是合法 JSON，不含 markdown 代码块
-5. summary 80-150 字
 
-输出格式（严格按此 JSON 结构）：
-{{
-  "sentiment": "bullish" | "bearish" | "neutral",
-  "summary": "80-150字资金面分析（含对其他观点的回应）",
-  "focus_points": ["关注点1", "关注点2"],
-  "risk_points": ["风险点1", "风险点2"],
-  "agree_with_others": true | false,
-  "disagreement_reason": "如不同意，说明理由（同意则留空）"
-}}"""
-
-DEBATE_PROMPT_FUNDAMENTAL = """你是 A 股投研分析助手，负责基本面分析。
-
-你已经对 {code} {name} 完成了第一轮基本面分析。现在请查看技术面和资金面分析师的观点，
-评估你的分析是否需要修正、补充或反驳。
-
-规则：
-1. 只使用用户提供的数据，不得编造任何数字
-2. 如果其他分析师的观点与你一致，可以确认并补充细节
-3. 如果其他分析师的观点与你矛盾，请分析分歧原因并坚持你的专业判断
-4. 输出必须是合法 JSON，不含 markdown 代码块
-5. summary 80-150 字
-
-输出格式（严格按此 JSON 结构）：
-{{
-  "sentiment": "bullish" | "bearish" | "neutral",
-  "summary": "80-150字基本面分析（含对其他观点的回应）",
-  "focus_points": ["关注点1", "关注点2"],
-  "risk_points": ["风险点1", "风险点2"],
-  "agree_with_others": true | false,
-  "disagreement_reason": "如不同意，说明理由（同意则留空）"
-}}"""
+# Backward-compatible aliases (deprecated — use _get_debate_prompt instead)
+DEBATE_PROMPT_TECHNICAL = _get_debate_prompt("技术面")
+DEBATE_PROMPT_CAPITAL = _get_debate_prompt("资金面")
+DEBATE_PROMPT_FUNDAMENTAL = _get_debate_prompt("基本面")
 
 
 @dataclass

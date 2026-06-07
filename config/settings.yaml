@@ -58,6 +58,7 @@ data:
   announcement_days: 7
   retry: 1
   retry_delay: 1
+  eastmoney_ut: "fa5fd1943c7b386f172d6893dbbd1"  # Eastmoney push2 auth token
 
 report:
   include_market_overview: true

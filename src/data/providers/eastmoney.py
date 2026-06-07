@@ -13,6 +13,7 @@ from typing import Optional
 import httpx
 
 from src.data.models import CapitalFlow, DragonTigerItem, MarketOverview
+from src.config import get_settings
 
 logger = logging.getLogger(__name__)
 
@@ -23,8 +24,11 @@ PUSH2_FLOW_URL = "https://push2.eastmoney.com/api/qt/stock/fflow/daykline/get"
 DATACENTER_URL = "https://datacenter-web.eastmoney.com/api/data/v1/get"
 MARKET_OVERVIEW_URL = "https://push2.eastmoney.com/api/qt/stock/get"
 
-# Auth token for Eastmoney push2 (stable)
-EM_UT = "fa5fd1943c7b386f172d6893dbbd1"
+
+def _get_em_ut() -> str:
+    """Get Eastmoney push2 auth token from config."""
+    return get_settings().data.eastmoney_ut
+
 
 HEADERS = {
     "User-Agent": UA,
@@ -46,7 +50,7 @@ def get_stock_info(code: str) -> dict:
     """
     secid = _get_secid(code)
     params = {
-        "fltt": "2", "invt": "2", "ut": EM_UT,
+        "fltt": "2", "invt": "2", "ut": _get_em_ut(),
         "fields": "f57,f58,f84,f85,f116,f117,f127,f162,f167,f168,f170,f173,f189,f43",
         "secid": secid,
     }
