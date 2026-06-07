@@ -16,15 +16,69 @@ to signal_score_traces table for full audit trail (see ScoreTrace model).
 
 import json
 import logging
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from functools import lru_cache
 from pathlib import Path
-from typing import Optional
+from typing import Optional, Callable
 
 from src.data.hard_signals import HardSignals
 from src.data.models import AgentResult, AgentStatus
 
 logger = logging.getLogger(__name__)
+
+
+@dataclass
+class ScoreTrace:
+    """Audit trail for a single fusion computation.
+    
+    Records all layer inputs, weights, and final output for reproducibility.
+    """
+    code: str
+    trade_date: str
+    report_type: str = "pre"
+    
+    # Per-layer scores and weights
+    hard_score: Optional[float] = None
+    hard_weight: float = 0.0
+    soft_score: Optional[float] = None
+    soft_weight: float = 0.0
+    gate_score: Optional[float] = None
+    gate_weight: float = 0.0
+    dragon_tiger_score: Optional[float] = None
+    dragon_tiger_weight: float = 0.0
+    announcement_score: Optional[float] = None
+    announcement_weight: float = 0.0
+    
+    # Final result
+    final_score: Optional[float] = None
+    final_signal: Optional[str] = None
+    
+    # Metadata
+    weights_version: str = "default"
+    consensus_bonus: float = 0.0
+    contradiction_count: int = 0
+    
+    def to_dict(self) -> dict:
+        """Convert to dict for database insertion."""
+        return {
+            "code": self.code,
+            "trade_date": self.trade_date,
+            "report_type": self.report_type,
+            "hard_score": self.hard_score,
+            "hard_weight": self.hard_weight,
+            "soft_score": self.soft_score,
+            "soft_weight": self.soft_weight,
+            "gate_score": self.gate_score,
+            "gate_weight": self.gate_weight,
+            "dragon_tiger_score": self.dragon_tiger_score,
+            "dragon_tiger_weight": self.dragon_tiger_weight,
+            "announcement_score": self.announcement_score,
+            "announcement_weight": self.announcement_weight,
+            "final_score": self.final_score,
+            "final_signal": self.final_signal,
+            "weights_version": self.weights_version,
+            "consensus_bonus": self.consensus_bonus,
+        }
 
 # ── Dynamic weight loading (evolution engine) ─────────────────────
 
@@ -66,6 +120,20 @@ def _get_optimized_weights() -> dict:
         logger.debug("Using default weights (config load failed: %s)", e)
 
     return _WEIGHTS_CACHE or dict(_DEFAULT_WEIGHTS)
+
+
+def _get_weights_version() -> str:
+    """Get the version identifier for current weights.
+    
+    Returns 'default' if using defaults, or the config file mtime.
+    """
+    config_path = Path("config/fusion_weights.json")
+    try:
+        if config_path.exists():
+            return f"v{int(config_path.stat().st_mtime)}"
+    except Exception:
+        pass
+    return "default"
 
 
 def _normalize_layer_weights(
@@ -253,6 +321,9 @@ def fuse_signals(
     consensus_score: float = 0.0,  # D1: MiroFish debate consensus
     debate_result: Optional[dict] = None,  # D1: full debate metadata
     detect_contradiction: bool = True,
+    trade_date: Optional[str] = None,
+    report_type: str = "pre",
+    trace_callback: Optional[Callable[[ScoreTrace], None]] = None,
 ) -> FusedSignal:
     """Fuse all signal layers into a final signal.
 
@@ -264,10 +335,17 @@ def fuse_signals(
         is_st: whether stock is ST
         is_suspended: whether stock is suspended
         limit_up_down: whether stock hit 涨跌停 today
+        trade_date: trade date for trace (defaults to today)
+        report_type: 'pre' or 'post' for trace
+        trace_callback: optional callback to receive ScoreTrace for audit
 
     Returns:
         FusedSignal with score and classification
     """
+    from datetime import date as date_cls
+    if trade_date is None:
+        trade_date = date_cls.today().isoformat()
+    
     result = FusedSignal(code=code, name=name)
 
     # ── Gate: hard filters ─────────────────────────────────────
@@ -393,6 +471,33 @@ def fuse_signals(
     # Apply contradiction penalty: -0.05 per flag
     contradiction_penalty = 0.05 * len(result.contradiction_flags)
     result.confidence = max(0.0, min(1.0, base_confidence + consensus_bonus - contradiction_penalty))
+
+    # ── Score traceability ─────────────────────────────────────
+    if trace_callback is not None:
+        trace = ScoreTrace(
+            code=code,
+            trade_date=trade_date,
+            report_type=report_type,
+            hard_score=result.hard_score if has_hard else None,
+            hard_weight=w_hard,
+            soft_score=result.soft_score if has_soft else None,
+            soft_weight=w_soft,
+            gate_score=result.gate_score,
+            gate_weight=w_gate,
+            dragon_tiger_score=result.dragon_tiger_score if has_dragon_tiger else None,
+            dragon_tiger_weight=w_dragon_tiger,
+            announcement_score=result.announcement_score if has_announcement else None,
+            announcement_weight=w_announcement,
+            final_score=result.final_score,
+            final_signal=result.final_signal,
+            weights_version=_get_weights_version(),
+            consensus_bonus=consensus_bonus,
+            contradiction_count=len(result.contradiction_flags),
+        )
+        try:
+            trace_callback(trace)
+        except Exception as e:
+            logger.warning("Trace callback failed: %s", e)
 
     return result
 

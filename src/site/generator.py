@@ -1,5 +1,22 @@
 """Static site generator — multi-page site from report data.
 
+⚠️ ARCHITECTURAL NOTE (Tech Debt)
+This file (1819 lines) contains inline HTML templates that should be
+extracted to src/site/templates/ for better maintainability.
+
+Refactoring plan:
+- Extract TPL_HOME, TPL_STOCK, TPL_HISTORY, TPL_DASHBOARD to .html files
+- Use Jinja2 Environment with FileSystemLoader
+- Move CSS to separate files (theme.css already externalized)
+- Split into: templates/, renderers/, generators/
+
+Current structure (lines 217-271):
+- BRAND_SVG, NAV_HTML, SESSION_RAIL, BOTTOM_NAV — shared fragments
+- TPL_HOME (line 279) — homepage template
+- TPL_STOCK (line ~400) — stock detail template  
+- TPL_HISTORY (line ~900) — history page template
+- TPL_DASHBOARD (line ~1400) — dashboard template
+
 Pages:
 1. index.html — 首页：信号仪表盘 + 自选股概览 (L1 → L2 progressive)
 2. app/stock.html?code=XXX — 个股详情：决策卡片 + 5层维度 + 证据链

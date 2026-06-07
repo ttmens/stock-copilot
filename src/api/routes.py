@@ -1,4 +1,8 @@
-"""FastAPI API routes — static + dynamic (Phase C)."""
+"""FastAPI API routes — modular architecture with domain routers.
+
+Main app setup + core routes (health, analyze, jobs, reports, system, config).
+Domain-specific routes are in src/api/routers/.
+"""
 
 import asyncio
 import json
@@ -16,6 +20,12 @@ from pydantic import BaseModel, Field
 
 from src.config import get_settings
 from src.data.models import ReportType
+from src.api.routers.helpers import get_db_stats, safe_parse_date
+from src.api.routers.watchlist import router as watchlist_router
+from src.api.routers.portfolio import router as portfolio_router
+from src.api.routers.market import router as market_router
+from src.api.routers.evolution import router as evolution_router
+from src.api.routers.intelligence import router as intelligence_router
 
 logger = logging.getLogger(__name__)
 
@@ -63,7 +73,15 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# ── Include domain routers ────────────────────────────────────
+app.include_router(watchlist_router)
+app.include_router(portfolio_router)
+app.include_router(market_router)
+app.include_router(evolution_router)
+app.include_router(intelligence_router)
 
+
+# ── Request/Response models ──────────────────────────────────
 class AnalyzeRequest(BaseModel):
     type: ReportType
     symbols: Optional[list[str]] = None
@@ -85,11 +103,6 @@ class JobCreateRequest(BaseModel):
     publish: bool = True
 
 
-class WatchlistAdd(BaseModel):
-    code: str
-    name: str = ""
-
-
 class ReportResponse(BaseModel):
     file_path: str
     markdown: str
@@ -100,62 +113,10 @@ class ScenarioSimRequest(BaseModel):
     symbols: Optional[list[str]] = None
 
 
-# ── Shared helpers ─────────────────────────────────────────────
-
-def _read_latest_json() -> dict:
-    """Safely read latest.json with fallback and error handling."""
-    data_dir = Path(get_settings().site.data_dir)
-    json_path = data_dir / "latest.json"
-    if not json_path.exists():
-        docs_path = Path("docs/data/latest.json")
-        if docs_path.exists():
-            json_path = docs_path
-        else:
-            raise HTTPException(status_code=404, detail="latest.json not found")
-    try:
-        return json.loads(json_path.read_text(encoding="utf-8"))
-    except (json.JSONDecodeError, UnicodeDecodeError) as e:
-        logger.error("Failed to parse latest.json: %s", e)
-        raise HTTPException(status_code=500, detail=f"latest.json parse error: {e}")
-
-
-def _safe_parse_date(date_str: Optional[str]):
-    """Safely parse ISO date string, raise 400 on failure."""
-    if not date_str:
-        return None
-    try:
-        return date.fromisoformat(date_str)
-    except (ValueError, TypeError):
-        raise HTTPException(status_code=400, detail=f"Invalid date format: {date_str} (expected YYYY-MM-DD)")
-
-
-def _get_db_stats() -> dict:
-    """Safely query DB stats with proper connection cleanup."""
-    import sqlite3
-    db_path = Path("data/signals.db")
-    if not db_path.exists():
-        return {}
-    conn = None
-    try:
-        conn = sqlite3.connect(str(db_path))
-        cur = conn.cursor()
-        stats = {}
-        cur.execute("SELECT COUNT(*) FROM signals")
-        stats["signal_count"] = cur.fetchone()[0]
-        cur.execute("SELECT COUNT(DISTINCT code) FROM signals")
-        stats["unique_stocks"] = cur.fetchone()[0]
-        cur.execute("SELECT MAX(trade_date) FROM signals")
-        stats["last_signal_date"] = cur.fetchone()[0]
-        return stats
-    except Exception:
-        return {}
-    finally:
-        if conn:
-            conn.close()
-
-
+# ── Core routes ──────────────────────────────────────────────
 @app.get("/health")
 async def health_check():
+    """Health check endpoint."""
     from src.data.db_manager import SignalDB
     from src.watchlist.manager import WatchlistManager
     import socket
@@ -182,7 +143,7 @@ async def health_check():
         else:
             data_fresh = "expired"
 
-    db_stats = _get_db_stats()
+    db_stats = get_db_stats()
 
     return {
         "status": "ok",
@@ -200,6 +161,7 @@ async def health_check():
 
 @app.post("/analyze", response_model=AnalyzeResponse)
 async def trigger_analysis(req: AnalyzeRequest):
+    """Trigger full analysis pipeline."""
     from src.delivery.pipeline import DeliveryPipeline
 
     pipe = DeliveryPipeline()
@@ -220,6 +182,7 @@ async def trigger_analysis(req: AnalyzeRequest):
 
 @app.post("/api/jobs")
 async def create_job(req: JobCreateRequest):
+    """Create async analysis job."""
     from src.data.db_manager import SignalDB
     from src.delivery.pipeline import DeliveryPipeline
 
@@ -243,6 +206,7 @@ async def create_job(req: JobCreateRequest):
 
 @app.get("/api/jobs/latest")
 async def latest_job():
+    """Get latest job status."""
     from src.data.db_manager import SignalDB
     job = SignalDB().get_latest_job()
     if not job:
@@ -252,6 +216,7 @@ async def latest_job():
 
 @app.get("/api/jobs/{job_id}")
 async def get_job(job_id: str):
+    """Get job by ID."""
     from src.data.db_manager import SignalDB
     job = SignalDB().get_job(job_id)
     if not job:
@@ -259,76 +224,9 @@ async def get_job(job_id: str):
     return job
 
 
-@app.get("/api/watchlist")
-async def list_watchlist():
-    from src.watchlist.manager import WatchlistManager
-    return {"stocks": WatchlistManager().list_dicts()}
-
-
-@app.post("/api/watchlist")
-async def add_watchlist(body: WatchlistAdd):
-    from src.watchlist.manager import WatchlistManager
-    item = WatchlistManager().add(body.code.strip(), body.name.strip())
-    return item
-
-
-@app.delete("/api/watchlist/{code}")
-async def remove_watchlist(code: str):
-    from src.watchlist.manager import WatchlistManager
-    if not WatchlistManager().remove(code):
-        raise HTTPException(status_code=404, detail="Not in watchlist")
-    return {"removed": code}
-
-
-@app.patch("/api/watchlist/{code}")
-async def patch_watchlist(code: str, pinned: bool | None = None, name: str | None = None):
-    from src.watchlist.manager import WatchlistManager
-    WatchlistManager().update(code, pinned=pinned, name=name)
-    return {"code": code, "pinned": pinned, "name": name}
-
-
-@app.post("/api/watchlist/import-default")
-async def import_default_watchlist():
-    from src.watchlist.manager import WatchlistManager
-    n = WatchlistManager().import_default_template()
-    return {"imported": n}
-
-
-@app.get("/api/quotes/intraday")
-async def intraday_quotes(trade_date: str | None = None):
-    from src.data.db_manager import SignalDB
-    td = _safe_parse_date(trade_date) or date.today()
-    return {"quotes": SignalDB().get_intraday_quotes(td)}
-
-
-@app.get("/api/evolution/suggestions")
-async def evolution_suggestions(status: str = "pending"):
-    from src.data.db_manager import SignalDB
-    return {"suggestions": SignalDB().list_evolution_suggestions(status)}
-
-
-@app.post("/api/evolution/suggestions/{suggestion_id}/accept")
-async def accept_suggestion(suggestion_id: int, accept: bool = True):
-    from src.data.db_manager import SignalDB
-    from src.watchlist.manager import WatchlistManager
-
-    db = SignalDB()
-    rows = db.list_evolution_suggestions("pending")
-    row = next((r for r in rows if r["id"] == suggestion_id), None)
-    if not row:
-        raise HTTPException(status_code=404, detail="Suggestion not found")
-    db.resolve_evolution_suggestion(suggestion_id, accept)
-    if accept:
-        wl = WatchlistManager()
-        if row["action"] == "add":
-            wl.add(row["code"], row.get("name", row["code"]))
-        elif row["action"] == "evict":
-            wl.remove(row["code"])
-    return {"id": suggestion_id, "accepted": accept}
-
-
 @app.get("/api/published")
 async def last_published():
+    """Get last published report metadata."""
     from src.data.db_manager import SignalDB
     pub = SignalDB().get_last_published()
     meta_path = Path("docs/meta/published_at.json")
@@ -340,6 +238,7 @@ async def last_published():
 
 @app.get("/reports/latest", response_model=ReportResponse)
 async def get_latest_report():
+    """Get latest markdown report."""
     output_dir = Path(get_settings().report.output_dir)
     reports = sorted(output_dir.glob("*.md"), reverse=True)
     if not reports:
@@ -350,6 +249,7 @@ async def get_latest_report():
 
 @app.get("/reports/{report_date}", response_model=ReportResponse)
 async def get_report_by_date(report_date: str, type: str = "pre"):
+    """Get report by date."""
     output_dir = Path(get_settings().report.output_dir)
     report_file = output_dir / f"{report_date}-{type}.md"
     if not report_file.exists():
@@ -359,6 +259,7 @@ async def get_report_by_date(report_date: str, type: str = "pre"):
 
 @app.get("/site/latest.json")
 async def get_latest_json():
+    """Get latest.json data file."""
     data_dir = Path(get_settings().site.data_dir)
     json_path = data_dir / "latest.json"
     if not json_path.exists():
@@ -374,14 +275,13 @@ async def get_latest_json():
 async def system_status():
     """Comprehensive system status: DB, data freshness, scheduler jobs, evolution."""
     from src.data.db_manager import SignalDB
-    import sqlite3
     from datetime import datetime
 
     result = {"status": "ok", "timestamp": datetime.now().isoformat()}
 
     # DB stats
     try:
-        db_stats = _get_db_stats()
+        db_stats = get_db_stats()
         result.update(db_stats)
     except Exception as e:
         result["db_error"] = str(e)
@@ -409,6 +309,7 @@ async def system_status():
 
 @app.post("/api/scenario/simulate")
 async def simulate_scenario(req: ScenarioSimRequest):
+    """Simulate scenario impact on watchlist."""
     from src.analysis.scenario_sim import ScenarioSimulator
     from src.watchlist.manager import WatchlistManager
 
@@ -450,331 +351,9 @@ async def simulate_scenario(req: ScenarioSimRequest):
     }
 
 
-# ── Phase F: Postmortems, Theses, Breadth, Stagnation ──────────
-
-
-class CheckMatureRequest(BaseModel):
-    check_date: Optional[str] = None
-
-
-@app.get("/api/postmortems")
-async def list_postmortems(ticker: Optional[str] = None, days: int = 30):
-    """List signal postmortems with optional ticker and date range filter."""
-    from src.data.db_manager import SignalDB
-    return {"postmortems": SignalDB().get_postmortems(ticker=ticker, days=days)}
-
-
-@app.get("/api/postmortems/summary")
-async def postmortem_summary(days: int = 30):
-    """Postmortem statistical summary."""
-    from src.data.db_manager import SignalDB
-    from src.evolution.postmortem import PostmortemRecorder
-    return PostmortemRecorder(SignalDB()).get_summary(days=days)
-
-
-@app.post("/api/postmortems/check-mature")
-async def check_mature(req: Optional[CheckMatureRequest] = None):
-    """Check matured signals and update outcomes."""
-    from src.data.db_manager import SignalDB
-    from src.evolution.postmortem import PostmortemRecorder
-    check_date = req.check_date if req else None
-    return PostmortemRecorder(SignalDB()).check_mature_signals(as_of=check_date)
-
-
-@app.get("/api/theses")
-async def list_theses(status: Optional[str] = None, ticker: Optional[str] = None):
-    """List thesis records with optional status and ticker filter."""
-    from src.data.db_manager import SignalDB
-    return {"theses": SignalDB().get_theses(status=status, ticker=ticker)}
-
-
-@app.get("/api/theses/statistics")
-async def thesis_statistics(days: int = 90):
-    """Thesis performance statistics over a given period."""
-    from src.data.db_manager import SignalDB
-    from datetime import timedelta
-
-    db = SignalDB()
-    all_theses = db.get_theses()
-
-    # Filter by creation date
-    cutoff = (date.today() - timedelta(days=days)).isoformat()
-    recent = [t for t in all_theses if t.get("created_at", "") >= cutoff]
-
-    by_status = {}
-    for t in recent:
-        s = t.get("status", "unknown")
-        by_status[s] = by_status.get(s, 0) + 1
-
-    # PnL stats for exited theses
-    exited = [t for t in recent if t.get("exit_date") and t.get("pnl_pct") is not None]
-    pnls = [t["pnl_pct"] for t in exited]
-    avg_pnl = round(sum(pnls) / len(pnls), 2) if pnls else None
-    max_pnl = round(max(pnls), 2) if pnls else None
-    min_pnl = round(min(pnls), 2) if pnls else None
-
-    # Win rate (positive PnL)
-    wins = sum(1 for p in pnls if p > 0)
-    win_rate = round(wins / len(pnls), 3) if pnls else None
-
-    # By thesis type
-    by_type = {}
-    for t in recent:
-        tt = t.get("thesis_type", "unknown")
-        if tt not in by_type:
-            by_type[tt] = {"count": 0, "exited": 0, "win": 0}
-        by_type[tt]["count"] += 1
-        if t.get("exit_date"):
-            by_type[tt]["exited"] += 1
-            if t.get("pnl_pct") is not None and t["pnl_pct"] > 0:
-                by_type[tt]["win"] += 1
-
-    return {
-        "period_days": days,
-        "total": len(recent),
-        "by_status": by_status,
-        "exited_count": len(exited),
-        "avg_pnl": avg_pnl,
-        "max_pnl": max_pnl,
-        "min_pnl": min_pnl,
-        "win_rate": win_rate,
-        "by_type": by_type,
-    }
-
-
-@app.get("/api/breadth")
-async def market_breadth():
-    """Market breadth metrics derived from latest.json stock data."""
-    data = _read_latest_json()
-    stocks = data.get("stocks", [])
-    meta = data.get("meta", {})
-
-    if not stocks:
-        return {"error": "No stock data available"}
-
-    total = len(stocks)
-
-    # Sentiment distribution
-    sentiments = {"bullish": 0, "neutral": 0, "bearish": 0}
-    for s in stocks:
-        sent = s.get("overall_sentiment", "neutral")
-        if sent in sentiments:
-            sentiments[sent] += 1
-
-    # MA alignment distribution
-    ma_dist = {"bullish": 0, "bearish": 0, "flat": 0, "unknown": 0}
-    for s in stocks:
-        ma = s.get("ma_alignment", "unknown")
-        if ma in ma_dist:
-            ma_dist[ma] += 1
-        else:
-            ma_dist["unknown"] += 1
-
-    # Score distribution
-    hard_scores = [s.get("hard_score") for s in stocks if s.get("hard_score") is not None]
-    final_scores = [s.get("signal_breakdown", {}).get("final_score") for s in stocks
-                    if s.get("signal_breakdown", {}).get("final_score") is not None]
-
-    # Momentum stats
-    mom_5d = [s.get("momentum_5d") for s in stocks if s.get("momentum_5d") is not None]
-    mom_20d = [s.get("momentum_20d") for s in stocks if s.get("momentum_20d") is not None]
-
-    # Advance/decline (positive vs negative 5d momentum)
-    advances = sum(1 for m in mom_5d if m > 0)
-    declines = sum(1 for m in mom_5d if m < 0)
-    unchanged = sum(1 for m in mom_5d if m == 0)
-
-    return {
-        "trade_date": meta.get("trade_date"),
-        "generated_at": meta.get("generated_at"),
-        "symbol_count": total,
-        "sentiment": sentiments,
-        "ma_alignment": ma_dist,
-        "advance_decline": {
-            "advances": advances,
-            "declines": declines,
-            "unchanged": unchanged,
-            "advance_ratio": round(advances / total, 3) if total else 0,
-        },
-        "hard_score": {
-            "mean": round(sum(hard_scores) / len(hard_scores), 3) if hard_scores else None,
-            "median": round(sorted(hard_scores)[len(hard_scores) // 2], 3) if hard_scores else None,
-        },
-        "final_score": {
-            "mean": round(sum(final_scores) / len(final_scores), 3) if final_scores else None,
-        },
-        "momentum_5d": {
-            "mean": round(sum(mom_5d) / len(mom_5d), 2) if mom_5d else None,
-        },
-        "momentum_20d": {
-            "mean": round(sum(mom_20d) / len(mom_20d), 2) if mom_20d else None,
-        },
-    }
-
-
-@app.get("/api/stagnation")
-async def stagnation_check():
-    """Identify stagnating stocks from latest.json data."""
-    data = _read_latest_json()
-    stocks = data.get("stocks", [])
-    meta = data.get("meta", {})
-
-    # Stagnation criteria:
-    # - 5d momentum within ±2% (near-zero)
-    # - AND volume_ratio < 1.2 (no unusual volume)
-    # - OR flat/unknown MA alignment
-    stagnating = []
-    for s in stocks:
-        mom_5d = s.get("momentum_5d")
-        vol_ratio = s.get("volume_ratio")
-        ma = s.get("ma_alignment", "unknown")
-
-        is_low_momentum = mom_5d is not None and abs(mom_5d) < 2.0
-        is_low_volume = vol_ratio is not None and vol_ratio < 1.2
-        is_flat_ma = ma in ("flat", "unknown") or ma is None
-
-        if is_low_momentum and (is_low_volume or is_flat_ma):
-            stagnating.append({
-                "code": s.get("code"),
-                "name": s.get("name"),
-                "momentum_5d": mom_5d,
-                "volume_ratio": vol_ratio,
-                "ma_alignment": ma,
-                "hard_score": s.get("hard_score"),
-                "final_score": s.get("signal_breakdown", {}).get("final_score"),
-                "sentiment": s.get("overall_sentiment"),
-            })
-
-    return {
-        "trade_date": meta.get("trade_date"),
-        "total_analyzed": len(stocks),
-        "stagnation_count": len(stagnating),
-        "stagnation_ratio": round(len(stagnating) / len(stocks), 3) if stocks else 0,
-        "stagnating": sorted(stagnating, key=lambda x: abs(x.get("momentum_5d", 0) or 0)),
-    }
-
-
-# ── Phase G API ──────────────────────────────────────────────
-
-class PositionCreate(BaseModel):
-    code: str
-    name: str = ""
-    shares: float
-    entry_price: float
-    leverage: float = 1.0
-    stop_loss: float | None = None
-    take_profit: float | None = None
-    notes: str = ""
-
-
-class PositionUpdate(BaseModel):
-    code: str | None = None
-    name: str | None = None
-    shares: float | None = None
-    entry_price: float | None = None
-    leverage: float | None = None
-    stop_loss: float | None = None
-    take_profit: float | None = None
-    notes: str | None = None
-
-
-@app.get("/api/market/session")
-async def market_session():
-    from src.monitoring.session import get_market_session
-    return get_market_session()
-
-
-@app.get("/api/digest/today")
-async def digest_today(trade_date: str | None = None):
-    from src.intelligence.ingester import KnowledgeIngester
-    from datetime import date as d
-    td = _safe_parse_date(trade_date) or d.today()
-    return KnowledgeIngester().export_json(td)
-
-
-@app.get("/api/overnight")
-async def overnight_snapshot(trade_date: str | None = None):
-    from src.intelligence.overnight import build_overnight_snapshot
-    from datetime import date as d
-    td = _safe_parse_date(trade_date) or d.today()
-    return build_overnight_snapshot(td)
-
-
-@app.get("/api/recommendations/today")
-async def recommendations_today(trade_date: str | None = None):
-    from src.recommendation.engine import RecommendationEngine
-    from datetime import date as d
-    td = _safe_parse_date(trade_date) or d.today()
-    return RecommendationEngine().export_json(td)
-
-
-@app.get("/api/auction/latest")
-async def auction_latest(trade_date: str | None = None):
-    from src.monitoring.auction import AuctionMonitor
-    from datetime import date as d
-    td = _safe_parse_date(trade_date) or d.today()
-    return AuctionMonitor().get_latest(td)
-
-
-@app.get("/api/alerts")
-async def list_alerts(trade_date: str | None = None, unread_only: bool = False,
-                      severity: str | None = None):
-    from src.monitoring.alerts import AlertDispatcher
-    return AlertDispatcher().get_feed(trade_date, unread_only, severity)
-
-
-@app.post("/api/alerts/read")
-async def mark_alerts_read(trade_date: str | None = None):
-    from src.data.db_manager import SignalDB
-    from datetime import date as d
-    td = trade_date or d.today().isoformat()
-    count = SignalDB().mark_alerts_read(td)
-    return {"marked_read": count}
-
-
-@app.get("/api/positions")
-async def list_positions(open_only: bool = True):
-    from src.portfolio.tracker import PositionTracker
-    return PositionTracker().summary() if open_only else {"positions": PositionTracker().list_positions(False)}
-
-
-@app.post("/api/positions")
-async def create_position(body: PositionCreate):
-    from src.portfolio.tracker import PositionTracker
-    return PositionTracker().create(
-        body.code, body.name or body.code, body.shares, body.entry_price,
-        body.leverage, body.stop_loss, body.take_profit, body.notes,
-    )
-
-
-@app.patch("/api/positions/{position_id}")
-async def update_position(position_id: int, body: PositionUpdate):
-    from src.portfolio.tracker import PositionTracker
-    kwargs = {k: v for k, v in body.model_dump().items() if v is not None}
-    try:
-        return PositionTracker().update(position_id, **kwargs)
-    except ValueError as e:
-        raise HTTPException(status_code=404, detail=str(e))
-
-
-@app.delete("/api/positions/{position_id}")
-async def delete_position(position_id: int):
-    from src.portfolio.tracker import PositionTracker
-    if not PositionTracker().delete(position_id):
-        raise HTTPException(status_code=404, detail="Position not found")
-    return {"deleted": position_id}
-
-
-@app.get("/api/review/today")
-async def review_today(trade_date: str | None = None):
-    from src.review.recommendation_review import RecommendationReview
-    from datetime import date as d
-    td = _safe_parse_date(trade_date) or d.today()
-    return RecommendationReview().export_json(td)
-
-
 @app.post("/api/stocks/{code}/deep-analysis")
 async def deep_analysis(code: str):
+    """Deep research analysis for a single stock."""
     from src.agents.deep_research import DeepResearchAgent
     agent = DeepResearchAgent()
     return await agent.analyze(code.strip())

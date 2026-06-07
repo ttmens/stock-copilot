@@ -358,6 +358,16 @@ async def _analyze_and_fuse(
                 logger.warning("[debate] Failed for %s: %s — falling back to round1", snap.code, e)
                 # Fallback: use round 1 results unchanged
             is_suspended, limit_up_down = _detect_gate_flags(snap)
+            
+            # Create trace callback for audit trail
+            def _save_trace(trace):
+                try:
+                    from src.data.db_manager import SignalDB
+                    db = SignalDB()
+                    db.save_score_trace(trace)
+                except Exception as e:
+                    logger.warning("Failed to save score trace: %s", e)
+            
             fused = fuse_signals(
                 code=snap.code,
                 name=snap.name,
@@ -370,6 +380,7 @@ async def _analyze_and_fuse(
                 announcement_result=a_result,
                 consensus_score=consensus_score,
                 debate_result=debate_result.to_dict() if debate_result else None,
+                trace_callback=_save_trace,
             )
             key_basis = _build_key_basis(t_result, c_result, a_result, f_result, hard, fused)
             overall_summary = _build_overall_summary(fused, t_result, f_result)

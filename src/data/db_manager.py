@@ -1,5 +1,21 @@
 """Signal database — SQLite manager for persistent signal history.
 
+⚠️ ARCHITECTURAL NOTE (Tech Debt)
+This file (1278 lines) is a monolithic database manager. For better
+maintainability, consider splitting into Repository pattern:
+
+Refactoring plan:
+- SignalRepository — signals, signal_score_traces tables
+- JobRepository — jobs table
+- PostmortemRepository — signal_postmortems table
+- ThesisRepository — theses table
+- EvolutionRepository — evolution_suggestions table
+- AlertRepository — alerts table
+- PositionRepository — positions table
+- RecommendationRepository — recommendation_reviews table
+
+Schema migration: Now handled by src/data/schema_migration.py (v3)
+
 Stores:
 - Hard signals (computed deterministically from market data)
 - Soft signals (LLM-generated sentiment/events)
@@ -1284,3 +1300,94 @@ class SignalDB:
             d = dict(row)
             d["review"] = json.loads(d.get("review_json") or "{}")
             return d
+
+    # ── Score Traceability ─────────────────────────────────────
+
+    def save_score_trace(self, trace) -> int:
+        """Save a ScoreTrace to signal_score_traces table.
+        
+        Args:
+            trace: ScoreTrace dataclass instance or dict with trace fields
+        
+        Returns:
+            The row ID of the inserted trace.
+        """
+        if hasattr(trace, "to_dict"):
+            data = trace.to_dict()
+        else:
+            data = trace
+        
+        with self._connect() as conn:
+            cur = conn.execute(
+                """INSERT INTO signal_score_traces
+                   (code, trade_date, report_type,
+                    hard_score, hard_weight, soft_score, soft_weight,
+                    gate_score, gate_weight, dragon_tiger_score, dragon_tiger_weight,
+                    announcement_score, announcement_weight,
+                    final_score, final_signal, weights_version, consensus_bonus)
+                   VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+                (
+                    data.get("code"),
+                    data.get("trade_date"),
+                    data.get("report_type", "pre"),
+                    data.get("hard_score"),
+                    data.get("hard_weight", 0.0),
+                    data.get("soft_score"),
+                    data.get("soft_weight", 0.0),
+                    data.get("gate_score"),
+                    data.get("gate_weight", 0.0),
+                    data.get("dragon_tiger_score"),
+                    data.get("dragon_tiger_weight", 0.0),
+                    data.get("announcement_score"),
+                    data.get("announcement_weight", 0.0),
+                    data.get("final_score"),
+                    data.get("final_signal"),
+                    data.get("weights_version", "default"),
+                    data.get("consensus_bonus", 0.0),
+                ),
+            )
+            return cur.lastrowid
+
+    def get_score_traces(
+        self,
+        code: str | None = None,
+        trade_date: str | None = None,
+        limit: int = 100,
+    ) -> list[dict]:
+        """Query score traces with optional filters.
+        
+        Args:
+            code: Filter by stock code
+            trade_date: Filter by trade date
+            limit: Max rows to return (default 100)
+        
+        Returns:
+            List of trace dicts.
+        """
+        conditions = []
+        params = []
+        
+        if code:
+            conditions.append("code = ?")
+            params.append(code)
+        if trade_date:
+            conditions.append("trade_date = ?")
+            params.append(trade_date)
+        
+        where = " AND ".join(conditions) if conditions else "1=1"
+        params.append(limit)
+        
+        with self._connect() as conn:
+            rows = conn.execute(
+                f"SELECT * FROM signal_score_traces WHERE {where} ORDER BY created_at DESC LIMIT ?",
+                params,
+            ).fetchall()
+            return [dict(r) for r in rows]
+
+    def get_trace_by_id(self, trace_id: int) -> dict | None:
+        """Get a single trace by ID."""
+        with self._connect() as conn:
+            row = conn.execute(
+                "SELECT * FROM signal_score_traces WHERE id = ?", (trace_id,)
+            ).fetchone()
+            return dict(row) if row else None

@@ -6,6 +6,7 @@ Note: push2his (K-line) may be blocked from some servers;
 """
 
 import logging
+import time
 import uuid
 from datetime import datetime
 from typing import Optional
@@ -14,6 +15,7 @@ import httpx
 
 from src.data.models import CapitalFlow, DragonTigerItem, MarketOverview
 from src.config import get_settings
+from src.data.health_monitor import monitor
 
 logger = logging.getLogger(__name__)
 
@@ -48,6 +50,7 @@ def get_stock_info(code: str) -> dict:
             f116=mcap, f117=float_mcap, f127=industry, f189=list_date,
             f162=PE_TTM, f167=PB, f168=PS, f173=ROE, f43=price
     """
+    start_time = time.time()
     secid = _get_secid(code)
     params = {
         "fltt": "2", "invt": "2", "ut": _get_em_ut(),
@@ -58,8 +61,11 @@ def get_stock_info(code: str) -> dict:
         with httpx.Client(timeout=8) as client:
             r = client.get(PUSH2_URL, params=params, headers=HEADERS)
             d = r.json().get("data", {})
+            latency_ms = int((time.time() - start_time) * 1000)
             if not d or not d.get("f57"):
+                monitor.record_failure("eastmoney", "get_stock_info", "Empty response", latency_ms)
                 return {}
+            monitor.record_success("eastmoney", "get_stock_info", latency_ms)
             return {
                 "code": d.get("f57", ""),
                 "name": d.get("f58", ""),
@@ -75,13 +81,21 @@ def get_stock_info(code: str) -> dict:
                 "ps_ttm": d.get("f168"),
                 "roe": d.get("f173"),
             }
+    except httpx.TimeoutException as e:
+        latency_ms = int((time.time() - start_time) * 1000)
+        monitor.record_timeout("eastmoney", "get_stock_info", latency_ms)
+        logger.debug("Eastmoney stock_info timeout for %s: %s", code, e)
+        return {}
     except Exception as e:
+        latency_ms = int((time.time() - start_time) * 1000)
+        monitor.record_failure("eastmoney", "get_stock_info", str(e), latency_ms)
         logger.debug("Eastmoney stock_info failed for %s: %s", code, e)
         return {}
 
 
 def get_capital_flow(code: str, days: int = 5) -> Optional[CapitalFlow]:
     """Get daily capital flow from Eastmoney push2."""
+    start_time = time.time()
     secid = _get_secid(code)
     params = {
         "secid": secid,
@@ -94,23 +108,34 @@ def get_capital_flow(code: str, days: int = 5) -> Optional[CapitalFlow]:
         with httpx.Client(timeout=8) as client:
             r = client.get(PUSH2_FLOW_URL, params=params, headers=HEADERS)
             data = r.json().get("data", {})
+            latency_ms = int((time.time() - start_time) * 1000)
             klines = data.get("klines", [])
             if not klines:
+                monitor.record_failure("eastmoney", "get_capital_flow", "No klines", latency_ms)
                 return None
             last = klines[-1].split(",")
             main_inflow = float(last[1]) if len(last) > 1 and last[1] != "-" else None
+            monitor.record_success("eastmoney", "get_capital_flow", latency_ms)
             return CapitalFlow(
                 north_net_inflow=None,
                 main_net_inflow=main_inflow,
                 period=f"{days}d",
             )
+    except httpx.TimeoutException as e:
+        latency_ms = int((time.time() - start_time) * 1000)
+        monitor.record_timeout("eastmoney", "get_capital_flow", latency_ms)
+        logger.debug("Eastmoney capital flow timeout for %s: %s", code, e)
+        return None
     except Exception as e:
+        latency_ms = int((time.time() - start_time) * 1000)
+        monitor.record_failure("eastmoney", "get_capital_flow", str(e), latency_ms)
         logger.debug("Eastmoney capital flow failed for %s: %s", code, e)
         return None
 
 
 def get_market_overview() -> Optional[MarketOverview]:
     """Get Shanghai Composite Index."""
+    start_time = time.time()
     params = {
         "fltt": "2", "invt": "2",
         "fields": "f43,f44,f45,f46,f47,f57,f58,f60,f170",
@@ -120,17 +145,27 @@ def get_market_overview() -> Optional[MarketOverview]:
         with httpx.Client(timeout=8) as client:
             r = client.get(MARKET_OVERVIEW_URL, params=params, headers=HEADERS)
             d = r.json().get("data", {})
+            latency_ms = int((time.time() - start_time) * 1000)
             if not d:
+                monitor.record_failure("eastmoney", "get_market_overview", "Empty response", latency_ms)
                 return None
             close = (d.get("f43") or 0) / 100
             change = (d.get("f170") or 0) / 100
+            monitor.record_success("eastmoney", "get_market_overview", latency_ms)
             return MarketOverview(
                 index_code="000001",
                 index_name="上证指数",
                 close=round(close, 2),
                 change_pct=round(change, 2),
             )
+    except httpx.TimeoutException as e:
+        latency_ms = int((time.time() - start_time) * 1000)
+        monitor.record_timeout("eastmoney", "get_market_overview", latency_ms)
+        logger.debug("Eastmoney market overview timeout: %s", e)
+        return None
     except Exception as e:
+        latency_ms = int((time.time() - start_time) * 1000)
+        monitor.record_failure("eastmoney", "get_market_overview", str(e), latency_ms)
         logger.debug("Eastmoney market overview failed: %s", e)
         return None
 
