@@ -36,3 +36,7 @@ Thumbs.db
 *.log
 verify_full.py
 *.pyc
+
+# Backups
+data/*.bak
+output.bak/
