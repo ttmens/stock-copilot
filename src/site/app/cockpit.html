@@ -35,8 +35,22 @@
 
 <div class="shell cockpit-shell">
 
+<!-- Loading Skeleton (shown before data loads) -->
+<div class="cockpit-skeleton" id="cockpit-skeleton">
+  <div class="journey-hero skeleton" style="height:100px;margin-bottom:12px;"></div>
+  <div style="display:flex;gap:12px;margin-bottom:16px;">
+    <div class="skeleton" style="height:40px;flex:1;"></div>
+    <div class="skeleton" style="height:40px;flex:1;"></div>
+    <div class="skeleton" style="height:40px;flex:1;"></div>
+  </div>
+  <div class="skeleton skeleton-card" style="height:200px;margin-bottom:12px;"></div>
+  <div class="skeleton skeleton-card" style="height:150px;margin-bottom:12px;"></div>
+  <div class="skeleton skeleton-card" style="height:120px;"></div>
+</div>
+
+
 <!-- Tab: 今日 -->
-<div class="tab-pane" data-tab="today" id="tab-today">
+<div class="tab-pane" data-tab="today" id="tab-today" style="display:none;">
 
   <section class="journey-hero" id="journey-hero">
     <div class="journey-hero__main">

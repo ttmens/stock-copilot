@@ -411,7 +411,7 @@ TPL_HOME = """<!DOCTYPE html>
 </div>
 {% endif %}
 
-<div class="stock-grid" id="stock-grid">
+<div class="stock-grid stagger-in" id="stock-grid">
 {% for stock in stocks %}
 {% set score = stock.signal_breakdown.final_score %}
 {% set score_cls = 'signal-score-bull' if score > 0.2 else 'signal-score-bear' if score < -0.2 else 'signal-score-hold' %}
