@@ -568,7 +568,19 @@
     initWatchlistFilters();
     initViewToggle();
     updateHero("pre_market", {});
+
+    // Show skeleton during initial load
+    const skeleton = document.getElementById("cockpit-skeleton");
+    const tabToday = document.getElementById("tab-today");
+
     await Promise.all([loadDigest(), loadPool(), loadAuction(), loadLive(), loadReview()]);
+
+    // Hide skeleton, reveal content with fade
+    if (skeleton) skeleton.style.display = "none";
+    if (tabToday) {
+      tabToday.style.display = "";
+      tabToday.classList.add("stagger-in");
+    }
     try {
       const meta = await fetch("../data/latest.json").then((r) => (r.ok ? r.json() : null));
       if (meta?.meta) updateHeaderMeta(meta.meta);
