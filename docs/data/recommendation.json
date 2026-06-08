@@ -12,14 +12,167 @@
       "reason": "",
       "stocks": [
         {
-          "code": "000001",
-          "name": "平安银行",
-          "score": 0.09374999999999999,
+          "code": "600036",
+          "name": "招商银行",
+          "score": 0.5022872824129403,
+          "source": "scan",
+          "focus_flag": false
+        }
+      ]
+    },
+    {
+      "name": "竞价加池",
+      "reason": "",
+      "stocks": [
+        {
+          "code": "601919",
+          "name": "中远海控",
+          "score": 0.5,
+          "source": "auction",
+          "focus_flag": true
+        },
+        {
+          "code": "601088",
+          "name": "中国神华",
+          "score": 0.5,
+          "source": "auction",
+          "focus_flag": true
+        },
+        {
+          "code": "601398",
+          "name": "工商银行",
+          "score": 0.5,
+          "source": "auction",
+          "focus_flag": true
+        },
+        {
+          "code": "601211",
+          "name": "国泰君安",
+          "score": 0.5,
+          "source": "auction",
+          "focus_flag": true
+        },
+        {
+          "code": "601166",
+          "name": "兴业银行",
+          "score": 0.5,
+          "source": "auction",
+          "focus_flag": true
+        },
+        {
+          "code": "600900",
+          "name": "长江电力",
+          "score": 0.5,
+          "source": "auction",
+          "focus_flag": true
+        },
+        {
+          "code": "600000",
+          "name": "浦发银行",
+          "score": 0.5,
+          "source": "auction",
+          "focus_flag": true
+        }
+      ]
+    },
+    {
+      "name": "消费",
+      "reason": "",
+      "stocks": [
+        {
+          "code": "000333",
+          "name": "美的集团",
+          "score": 0.27007253653007396,
           "source": "scan",
           "focus_flag": false
         }
       ]
     }
   ],
-  "auction_added": []
+  "auction_added": [
+    {
+      "id": 138,
+      "trade_date": "2026-06-08",
+      "sector_name": "竞价加池",
+      "sector_rank": 0,
+      "code": "601919",
+      "name": "中远海控",
+      "score": 0.5,
+      "source": "auction",
+      "focus_flag": 1,
+      "added_at": "2026-06-08 00:45:00"
+    },
+    {
+      "id": 140,
+      "trade_date": "2026-06-08",
+      "sector_name": "竞价加池",
+      "sector_rank": 0,
+      "code": "601088",
+      "name": "中国神华",
+      "score": 0.5,
+      "source": "auction",
+      "focus_flag": 1,
+      "added_at": "2026-06-08 00:45:00"
+    },
+    {
+      "id": 141,
+      "trade_date": "2026-06-08",
+      "sector_name": "竞价加池",
+      "sector_rank": 1,
+      "code": "601398",
+      "name": "工商银行",
+      "score": 0.5,
+      "source": "auction",
+      "focus_flag": 1,
+      "added_at": "2026-06-08 00:45:00"
+    },
+    {
+      "id": 142,
+      "trade_date": "2026-06-08",
+      "sector_name": "竞价加池",
+      "sector_rank": 1,
+      "code": "601211",
+      "name": "国泰君安",
+      "score": 0.5,
+      "source": "auction",
+      "focus_flag": 1,
+      "added_at": "2026-06-08 00:45:00"
+    },
+    {
+      "id": 143,
+      "trade_date": "2026-06-08",
+      "sector_name": "竞价加池",
+      "sector_rank": 1,
+      "code": "601166",
+      "name": "兴业银行",
+      "score": 0.5,
+      "source": "auction",
+      "focus_flag": 1,
+      "added_at": "2026-06-08 00:45:00"
+    },
+    {
+      "id": 144,
+      "trade_date": "2026-06-08",
+      "sector_name": "竞价加池",
+      "sector_rank": 2,
+      "code": "600900",
+      "name": "长江电力",
+      "score": 0.5,
+      "source": "auction",
+      "focus_flag": 1,
+      "added_at": "2026-06-08 00:45:00"
+    },
+    {
+      "id": 146,
+      "trade_date": "2026-06-08",
+      "sector_name": "竞价加池",
+      "sector_rank": 2,
+      "code": "600000",
+      "name": "浦发银行",
+      "score": 0.5,
+      "source": "auction",
+      "focus_flag": 1,
+      "added_at": "2026-06-08 00:45:00"
+    }
+  ]
 }

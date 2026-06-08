@@ -1,0 +1,3966 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>智策 NexStrat — 2026-05-26 盘后</title>
+    <link rel="stylesheet" href="assets/theme.css">
+</head>
+<body>
+
+<header class="site-header">
+    <div class="brand">
+    <div class="brand-icon">
+        <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:32px;height:32px">
+            <rect width="32" height="32" rx="8" fill="url(#logo-grad)"/>
+            <path d="M8 22 L14 14 L18 18 L24 10" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M20 10 L24 10 L24 14" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <defs>
+                <linearGradient id="logo-grad" x1="0" y1="0" x2="32" y2="32">
+                    <stop offset="0%" stop-color="#7b3ff2"/>
+                    <stop offset="100%" stop-color="#00f5ff"/>
+                </linearGradient>
+            </defs>
+        </svg>
+    </div>
+        <div class="brand-text">
+            <span class="brand-name">智策 NexStrat</span>
+            <span class="brand-tagline">面向投资者的AI智能投研</span>
+        </div>
+    </div>
+    
+<div class="site-nav">
+    <a href="index.html" class="active">首页</a>
+    <a href="dashboard.html">看板</a>
+    <a href="history.html">历史</a>
+</div>
+
+    <span class="header-meta">2026-05-26 盘后 · 23:22</span>
+</header>
+
+<div class="shell">
+
+    
+    <div class="market-temp">
+        <div class="market-temp-head">
+            <span class="market-temp-label">市场温度</span>
+            <div>
+                <span class="market-temp-index">上证指数 4145.37</span>
+                
+                <span class="market-temp-change down">&nbsp;-0.17%</span>
+                
+            </div>
+        </div>
+        <div class="signal-distribution">
+            <span class="sig-stat"><span class="sig-dot green"></span> 看多 2</span>
+            <span class="sig-stat"><span class="sig-dot gray"></span> 观望 16</span>
+            <span class="sig-stat"><span class="sig-dot red"></span> 看空 32</span>
+        </div>
+    </div>
+    
+
+    <div class="section-title">
+        今日重点 <span class="count" id="stock-count">(50 只自选)</span>
+    </div>
+
+    <div class="filter-bar" id="filter-bar">
+        <input type="search" id="filter-search" placeholder="搜索代码/名称" aria-label="搜索">
+        <select id="filter-signal" aria-label="信号筛选">
+            <option value="">全部信号</option>
+            <option value="bullish">看多</option>
+            <option value="hold">观望</option>
+            <option value="bearish">看空</option>
+        </select>
+        <select id="filter-sort" aria-label="排序">
+            <option value="score">按评分</option>
+            <option value="confidence">按置信度</option>
+            <option value="code">按代码</option>
+        </select>
+        <a href="app/watchlist.html" class="filter-link">管理自选</a>
+    </div>
+
+    
+
+    <div class="stock-grid" id="stock-grid">
+        
+        <a href="app/stock.html?code=601919" class="stock-card-link" data-code="601919" data-name="中远海控" data-signal="buy" data-score="0.582" data-confidence="0.97" style="text-decoration:none;color:inherit">
+        <div class="narr-card">
+            <div class="narr-header">
+                <div class="narr-stock">
+                    <span class="narr-stock-code">601919</span>
+                    <span class="narr-stock-name">中远海控</span>
+                </div>
+                
+                <span class="signal-pill buy">
+                    🟢 看多
+                </span>
+            </div>
+
+            <div class="score-panel">
+                <div class="score-row">
+                    <span class="score-label">综合评分</span>
+                    <span class="score-value" style="color:#22C55E">
+                        +0.582
+                    </span>
+                </div>
+                <div class="score-bar-track">
+                    <div class="score-bar-fill" style="width: 79.1%; background: #22C55E;"></div>
+                </div>
+                <div class="confidence-row">
+                    <span>置信度</span>
+                    <div class="conf-dots">
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot "></span>
+                        
+                    </div>
+                    <span class="conf-value">97.0%</span>
+                </div>
+            </div>
+
+            <div class="metrics-row">
+                
+                <div class="metric-chip" style="border-color:rgba(34,197,94,0.3)">
+                    <span class="metric-chip-label">5日</span>
+                    <span class="metric-chip-val" style="color:#22C55E">+3.9%</span>
+                </div>
+                
+                
+                <div class="metric-chip" style="border-color:rgba(34,197,94,0.3)">
+                    <span class="metric-chip-label">均线</span>
+                    <span class="metric-chip-val" style="color:#22C55E">多头</span>
+                </div>
+                
+                
+                <div class="metric-chip" style="border-color:rgba(239,68,68,0.3)">
+                    <span class="metric-chip-label">量比</span>
+                    <span class="metric-chip-val">0.76</span>
+                </div>
+                
+                
+                <div class="metric-chip">
+                    <span class="metric-chip-label">PE</span>
+                    <span class="metric-chip-val">8.9</span>
+                </div>
+                
+            </div>
+
+            
+            <div class="risk-block">
+                <strong>⚠ 风险：</strong>若量能萎缩，可能面临技术性回调、上方14.9附近压力较大，需警惕假突破风险、北向资金数据缺失，信息不完整、若主力持续流出可能加剧调整风险
+            </div>
+            
+        </div>
+        </a>
+        
+        <a href="app/stock.html?code=600276" class="stock-card-link" data-code="600276" data-name="恒瑞医药" data-signal="sell" data-score="-0.566" data-confidence="0.96" style="text-decoration:none;color:inherit">
+        <div class="narr-card">
+            <div class="narr-header">
+                <div class="narr-stock">
+                    <span class="narr-stock-code">600276</span>
+                    <span class="narr-stock-name">恒瑞医药</span>
+                </div>
+                
+                <span class="signal-pill sell">
+                    🔴 看空
+                </span>
+            </div>
+
+            <div class="score-panel">
+                <div class="score-row">
+                    <span class="score-label">综合评分</span>
+                    <span class="score-value" style="color:#EF4444">
+                        -0.566
+                    </span>
+                </div>
+                <div class="score-bar-track">
+                    <div class="score-bar-fill" style="width: 21.7%; background: #EF4444;"></div>
+                </div>
+                <div class="confidence-row">
+                    <span>置信度</span>
+                    <div class="conf-dots">
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot "></span>
+                        
+                    </div>
+                    <span class="conf-value">96.0%</span>
+                </div>
+            </div>
+
+            <div class="metrics-row">
+                
+                <div class="metric-chip" style="border-color:rgba(239,68,68,0.3)">
+                    <span class="metric-chip-label">5日</span>
+                    <span class="metric-chip-val" style="color:#EF4444">-4.6%</span>
+                </div>
+                
+                
+                <div class="metric-chip" style="border-color:rgba(239,68,68,0.3)">
+                    <span class="metric-chip-label">均线</span>
+                    <span class="metric-chip-val" style="color:#EF4444">空头</span>
+                </div>
+                
+                
+                <div class="metric-chip" style="">
+                    <span class="metric-chip-label">量比</span>
+                    <span class="metric-chip-val">0.82</span>
+                </div>
+                
+                
+                <div class="metric-chip">
+                    <span class="metric-chip-label">PE</span>
+                    <span class="metric-chip-val">40.2</span>
+                </div>
+                
+            </div>
+
+            
+            <div class="risk-block">
+                <strong>⚠ 风险：</strong>股价持续创新低，空头趋势延续、均线空头排列压制，反弹空间受限、若跌破48.8元可能加速下跌，需警惕止损盘涌出、数据不完整，分析可靠性降低、主力流出若持续可能对股价形成压力
+            </div>
+            
+        </div>
+        </a>
+        
+        <a href="app/stock.html?code=600760" class="stock-card-link" data-code="600760" data-name="中航沈飞" data-signal="sell" data-score="-0.558" data-confidence="0.96" style="text-decoration:none;color:inherit">
+        <div class="narr-card">
+            <div class="narr-header">
+                <div class="narr-stock">
+                    <span class="narr-stock-code">600760</span>
+                    <span class="narr-stock-name">中航沈飞</span>
+                </div>
+                
+                <span class="signal-pill sell">
+                    🔴 看空
+                </span>
+            </div>
+
+            <div class="score-panel">
+                <div class="score-row">
+                    <span class="score-label">综合评分</span>
+                    <span class="score-value" style="color:#EF4444">
+                        -0.558
+                    </span>
+                </div>
+                <div class="score-bar-track">
+                    <div class="score-bar-fill" style="width: 22.1%; background: #EF4444;"></div>
+                </div>
+                <div class="confidence-row">
+                    <span>置信度</span>
+                    <div class="conf-dots">
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot "></span>
+                        
+                    </div>
+                    <span class="conf-value">96.0%</span>
+                </div>
+            </div>
+
+            <div class="metrics-row">
+                
+                <div class="metric-chip" style="border-color:rgba(239,68,68,0.3)">
+                    <span class="metric-chip-label">5日</span>
+                    <span class="metric-chip-val" style="color:#EF4444">-7.3%</span>
+                </div>
+                
+                
+                <div class="metric-chip" style="border-color:rgba(239,68,68,0.3)">
+                    <span class="metric-chip-label">均线</span>
+                    <span class="metric-chip-val" style="color:#EF4444">空头</span>
+                </div>
+                
+                
+                <div class="metric-chip" style="">
+                    <span class="metric-chip-label">量比</span>
+                    <span class="metric-chip-val">0.84</span>
+                </div>
+                
+                
+                <div class="metric-chip">
+                    <span class="metric-chip-label">PE</span>
+                    <span class="metric-chip-val">38.0</span>
+                </div>
+                
+            </div>
+
+            
+            <div class="risk-block">
+                <strong>⚠ 风险：</strong>下行趋势未出现止跌信号、均线形成压制，反弹可能受阻、量能持续放大可能引发恐慌性杀跌、数据缺失导致分析不完整、主力资金流出若持续可能压制股价
+            </div>
+            
+        </div>
+        </a>
+        
+        <a href="app/stock.html?code=002304" class="stock-card-link" data-code="002304" data-name="洋河股份" data-signal="sell" data-score="-0.542" data-confidence="0.95" style="text-decoration:none;color:inherit">
+        <div class="narr-card">
+            <div class="narr-header">
+                <div class="narr-stock">
+                    <span class="narr-stock-code">002304</span>
+                    <span class="narr-stock-name">洋河股份</span>
+                </div>
+                
+                <span class="signal-pill sell">
+                    🔴 看空
+                </span>
+            </div>
+
+            <div class="score-panel">
+                <div class="score-row">
+                    <span class="score-label">综合评分</span>
+                    <span class="score-value" style="color:#EF4444">
+                        -0.542
+                    </span>
+                </div>
+                <div class="score-bar-track">
+                    <div class="score-bar-fill" style="width: 22.9%; background: #EF4444;"></div>
+                </div>
+                <div class="confidence-row">
+                    <span>置信度</span>
+                    <div class="conf-dots">
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot "></span>
+                        
+                    </div>
+                    <span class="conf-value">95.0%</span>
+                </div>
+            </div>
+
+            <div class="metrics-row">
+                
+                <div class="metric-chip" style="border-color:rgba(239,68,68,0.3)">
+                    <span class="metric-chip-label">5日</span>
+                    <span class="metric-chip-val" style="color:#EF4444">-2.1%</span>
+                </div>
+                
+                
+                <div class="metric-chip" style="border-color:rgba(239,68,68,0.3)">
+                    <span class="metric-chip-label">均线</span>
+                    <span class="metric-chip-val" style="color:#EF4444">空头</span>
+                </div>
+                
+                
+                <div class="metric-chip" style="">
+                    <span class="metric-chip-label">量比</span>
+                    <span class="metric-chip-val">0.84</span>
+                </div>
+                
+                
+                <div class="metric-chip">
+                    <span class="metric-chip-label">PE</span>
+                    <span class="metric-chip-val">65.5</span>
+                </div>
+                
+            </div>
+
+            
+            <div class="risk-block">
+                <strong>⚠ 风险：</strong>下跌通道未改，存在继续破位风险、反弹缩量，多头抵抗力度弱、MA10（45.21元）构成短期强阻力、北向资金数据缺失，无法判断外资持股变动风险、主力净流出可能预示短期调整压力
+            </div>
+            
+        </div>
+        </a>
+        
+        <a href="app/stock.html?code=601985" class="stock-card-link" data-code="601985" data-name="中国核电" data-signal="sell" data-score="-0.526" data-confidence="0.94" style="text-decoration:none;color:inherit">
+        <div class="narr-card">
+            <div class="narr-header">
+                <div class="narr-stock">
+                    <span class="narr-stock-code">601985</span>
+                    <span class="narr-stock-name">中国核电</span>
+                </div>
+                
+                <span class="signal-pill sell">
+                    🔴 看空
+                </span>
+            </div>
+
+            <div class="score-panel">
+                <div class="score-row">
+                    <span class="score-label">综合评分</span>
+                    <span class="score-value" style="color:#EF4444">
+                        -0.526
+                    </span>
+                </div>
+                <div class="score-bar-track">
+                    <div class="score-bar-fill" style="width: 23.7%; background: #EF4444;"></div>
+                </div>
+                <div class="confidence-row">
+                    <span>置信度</span>
+                    <div class="conf-dots">
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot "></span>
+                        
+                    </div>
+                    <span class="conf-value">94.0%</span>
+                </div>
+            </div>
+
+            <div class="metrics-row">
+                
+                <div class="metric-chip" style="border-color:rgba(239,68,68,0.3)">
+                    <span class="metric-chip-label">5日</span>
+                    <span class="metric-chip-val" style="color:#EF4444">-5.1%</span>
+                </div>
+                
+                
+                <div class="metric-chip" style="border-color:rgba(239,68,68,0.3)">
+                    <span class="metric-chip-label">均线</span>
+                    <span class="metric-chip-val" style="color:#EF4444">空头</span>
+                </div>
+                
+                
+                <div class="metric-chip" style="border-color:rgba(239,68,68,0.3)">
+                    <span class="metric-chip-label">量比</span>
+                    <span class="metric-chip-val">0.57</span>
+                </div>
+                
+                
+                <div class="metric-chip">
+                    <span class="metric-chip-label">PE</span>
+                    <span class="metric-chip-val">21.9</span>
+                </div>
+                
+            </div>
+
+            
+            <div class="risk-block">
+                <strong>⚠ 风险：</strong>均线空头发散，技术面偏空，存在继续下跌风险、若跌破8.66元近期低点，可能打开下行空间、数据缺失导致分析依据不足
+            </div>
+            
+        </div>
+        </a>
+        
+        <a href="app/stock.html?code=600196" class="stock-card-link" data-code="600196" data-name="复星医药" data-signal="sell" data-score="-0.48" data-confidence="0.92" style="text-decoration:none;color:inherit">
+        <div class="narr-card">
+            <div class="narr-header">
+                <div class="narr-stock">
+                    <span class="narr-stock-code">600196</span>
+                    <span class="narr-stock-name">复星医药</span>
+                </div>
+                
+                <span class="signal-pill sell">
+                    🔴 看空
+                </span>
+            </div>
+
+            <div class="score-panel">
+                <div class="score-row">
+                    <span class="score-label">综合评分</span>
+                    <span class="score-value" style="color:#EF4444">
+                        -0.480
+                    </span>
+                </div>
+                <div class="score-bar-track">
+                    <div class="score-bar-fill" style="width: 26.0%; background: #EF4444;"></div>
+                </div>
+                <div class="confidence-row">
+                    <span>置信度</span>
+                    <div class="conf-dots">
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot "></span>
+                        
+                    </div>
+                    <span class="conf-value">92.0%</span>
+                </div>
+            </div>
+
+            <div class="metrics-row">
+                
+                <div class="metric-chip" style="border-color:rgba(239,68,68,0.3)">
+                    <span class="metric-chip-label">5日</span>
+                    <span class="metric-chip-val" style="color:#EF4444">-4.2%</span>
+                </div>
+                
+                
+                <div class="metric-chip" style="border-color:rgba(239,68,68,0.3)">
+                    <span class="metric-chip-label">均线</span>
+                    <span class="metric-chip-val" style="color:#EF4444">空头</span>
+                </div>
+                
+                
+                <div class="metric-chip" style="border-color:rgba(239,68,68,0.3)">
+                    <span class="metric-chip-label">量比</span>
+                    <span class="metric-chip-val">0.57</span>
+                </div>
+                
+                
+                <div class="metric-chip">
+                    <span class="metric-chip-label">PE</span>
+                    <span class="metric-chip-val">17.8</span>
+                </div>
+                
+            </div>
+
+            
+            <div class="risk-block">
+                <strong>⚠ 风险：</strong>若跌破23.00整数关口，可能加速下跌、均线空头排列下，反弹空间受限，需防范持续阴跌、北向资金动向不明，可能隐藏潜在风险、仅一日主力流出数据，无法排除短期波动干扰
+            </div>
+            
+        </div>
+        </a>
+        
+        <a href="app/stock.html?code=002714" class="stock-card-link" data-code="002714" data-name="牧原股份" data-signal="sell" data-score="-0.474" data-confidence="0.92" style="text-decoration:none;color:inherit">
+        <div class="narr-card">
+            <div class="narr-header">
+                <div class="narr-stock">
+                    <span class="narr-stock-code">002714</span>
+                    <span class="narr-stock-name">牧原股份</span>
+                </div>
+                
+                <span class="signal-pill sell">
+                    🔴 看空
+                </span>
+            </div>
+
+            <div class="score-panel">
+                <div class="score-row">
+                    <span class="score-label">综合评分</span>
+                    <span class="score-value" style="color:#EF4444">
+                        -0.474
+                    </span>
+                </div>
+                <div class="score-bar-track">
+                    <div class="score-bar-fill" style="width: 26.3%; background: #EF4444;"></div>
+                </div>
+                <div class="confidence-row">
+                    <span>置信度</span>
+                    <div class="conf-dots">
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot "></span>
+                        
+                    </div>
+                    <span class="conf-value">92.0%</span>
+                </div>
+            </div>
+
+            <div class="metrics-row">
+                
+                <div class="metric-chip" style="border-color:rgba(239,68,68,0.3)">
+                    <span class="metric-chip-label">5日</span>
+                    <span class="metric-chip-val" style="color:#EF4444">-4.0%</span>
+                </div>
+                
+                
+                <div class="metric-chip" style="border-color:rgba(239,68,68,0.3)">
+                    <span class="metric-chip-label">均线</span>
+                    <span class="metric-chip-val" style="color:#EF4444">空头</span>
+                </div>
+                
+                
+                <div class="metric-chip" style="border-color:rgba(239,68,68,0.3)">
+                    <span class="metric-chip-label">量比</span>
+                    <span class="metric-chip-val">0.77</span>
+                </div>
+                
+                
+                <div class="metric-chip">
+                    <span class="metric-chip-label">PE</span>
+                    <span class="metric-chip-val">22.9</span>
+                </div>
+                
+            </div>
+
+            
+            <div class="risk-block">
+                <strong>⚠ 风险：</strong>均线空头排列，趋势向下，反弹可能受阻、前期放量下跌后若缩量反弹，可能只是下跌中继、大盘系统性风险或行业利空可能加剧下跌、北向资金数据缺失导致分析不全面、单日数据不足以判断趋势
+            </div>
+            
+        </div>
+        </a>
+        
+        <a href="app/stock.html?code=000858" class="stock-card-link" data-code="000858" data-name="000858" data-signal="sell" data-score="-0.462" data-confidence="0.92" style="text-decoration:none;color:inherit">
+        <div class="narr-card">
+            <div class="narr-header">
+                <div class="narr-stock">
+                    <span class="narr-stock-code">000858</span>
+                    <span class="narr-stock-name">000858</span>
+                </div>
+                
+                <span class="signal-pill sell">
+                    🔴 看空
+                </span>
+            </div>
+
+            <div class="score-panel">
+                <div class="score-row">
+                    <span class="score-label">综合评分</span>
+                    <span class="score-value" style="color:#EF4444">
+                        -0.462
+                    </span>
+                </div>
+                <div class="score-bar-track">
+                    <div class="score-bar-fill" style="width: 26.9%; background: #EF4444;"></div>
+                </div>
+                <div class="confidence-row">
+                    <span>置信度</span>
+                    <div class="conf-dots">
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot "></span>
+                        
+                    </div>
+                    <span class="conf-value">92.0%</span>
+                </div>
+            </div>
+
+            <div class="metrics-row">
+                
+                <div class="metric-chip" style="border-color:rgba(239,68,68,0.3)">
+                    <span class="metric-chip-label">5日</span>
+                    <span class="metric-chip-val" style="color:#EF4444">-2.8%</span>
+                </div>
+                
+                
+                <div class="metric-chip" style="border-color:rgba(239,68,68,0.3)">
+                    <span class="metric-chip-label">均线</span>
+                    <span class="metric-chip-val" style="color:#EF4444">空头</span>
+                </div>
+                
+                
+                <div class="metric-chip" style="">
+                    <span class="metric-chip-label">量比</span>
+                    <span class="metric-chip-val">0.80</span>
+                </div>
+                
+                
+                <div class="metric-chip">
+                    <span class="metric-chip-label">PE</span>
+                    <span class="metric-chip-val">25.7</span>
+                </div>
+                
+            </div>
+
+            
+            <div class="risk-block">
+                <strong>⚠ 风险：</strong>均线空头排列压制反弹、下跌放量，存在继续探底风险、单日主力净流出较大，但缺乏持续性验证
+            </div>
+            
+        </div>
+        </a>
+        
+        <a href="app/stock.html?code=601012" class="stock-card-link" data-code="601012" data-name="隆基绿能" data-signal="sell" data-score="-0.448" data-confidence="0.91" style="text-decoration:none;color:inherit">
+        <div class="narr-card">
+            <div class="narr-header">
+                <div class="narr-stock">
+                    <span class="narr-stock-code">601012</span>
+                    <span class="narr-stock-name">隆基绿能</span>
+                </div>
+                
+                <span class="signal-pill sell">
+                    🔴 看空
+                </span>
+            </div>
+
+            <div class="score-panel">
+                <div class="score-row">
+                    <span class="score-label">综合评分</span>
+                    <span class="score-value" style="color:#EF4444">
+                        -0.448
+                    </span>
+                </div>
+                <div class="score-bar-track">
+                    <div class="score-bar-fill" style="width: 27.6%; background: #EF4444;"></div>
+                </div>
+                <div class="confidence-row">
+                    <span>置信度</span>
+                    <div class="conf-dots">
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot "></span>
+                        
+                    </div>
+                    <span class="conf-value">91.0%</span>
+                </div>
+            </div>
+
+            <div class="metrics-row">
+                
+                <div class="metric-chip" style="border-color:rgba(239,68,68,0.3)">
+                    <span class="metric-chip-label">5日</span>
+                    <span class="metric-chip-val" style="color:#EF4444">-4.2%</span>
+                </div>
+                
+                
+                <div class="metric-chip" style="border-color:rgba(239,68,68,0.3)">
+                    <span class="metric-chip-label">均线</span>
+                    <span class="metric-chip-val" style="color:#EF4444">空头</span>
+                </div>
+                
+                
+                <div class="metric-chip" style="">
+                    <span class="metric-chip-label">量比</span>
+                    <span class="metric-chip-val">0.96</span>
+                </div>
+                
+                
+                <div class="metric-chip">
+                    <span class="metric-chip-label">PE</span>
+                    <span class="metric-chip-val">-16.0</span>
+                </div>
+                
+            </div>
+
+            
+            <div class="risk-block">
+                <strong>⚠ 风险：</strong>若继续有效跌破14.39元，可能加速下跌、反弹至MA10或MA20附近可能遭遇抛压、主力资金持续流出可能压制股价、北向资金动向不明，若外资同步流出将加大回调压力
+            </div>
+            
+        </div>
+        </a>
+        
+        <a href="app/stock.html?code=600585" class="stock-card-link" data-code="600585" data-name="海螺水泥" data-signal="sell" data-score="-0.444" data-confidence="0.91" style="text-decoration:none;color:inherit">
+        <div class="narr-card">
+            <div class="narr-header">
+                <div class="narr-stock">
+                    <span class="narr-stock-code">600585</span>
+                    <span class="narr-stock-name">海螺水泥</span>
+                </div>
+                
+                <span class="signal-pill sell">
+                    🔴 看空
+                </span>
+            </div>
+
+            <div class="score-panel">
+                <div class="score-row">
+                    <span class="score-label">综合评分</span>
+                    <span class="score-value" style="color:#EF4444">
+                        -0.444
+                    </span>
+                </div>
+                <div class="score-bar-track">
+                    <div class="score-bar-fill" style="width: 27.8%; background: #EF4444;"></div>
+                </div>
+                <div class="confidence-row">
+                    <span>置信度</span>
+                    <div class="conf-dots">
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot "></span>
+                        
+                    </div>
+                    <span class="conf-value">91.0%</span>
+                </div>
+            </div>
+
+            <div class="metrics-row">
+                
+                <div class="metric-chip" style="border-color:rgba(239,68,68,0.3)">
+                    <span class="metric-chip-label">5日</span>
+                    <span class="metric-chip-val" style="color:#EF4444">-2.5%</span>
+                </div>
+                
+                
+                <div class="metric-chip" style="border-color:rgba(239,68,68,0.3)">
+                    <span class="metric-chip-label">均线</span>
+                    <span class="metric-chip-val" style="color:#EF4444">空头</span>
+                </div>
+                
+                
+                <div class="metric-chip" style="border-color:rgba(239,68,68,0.3)">
+                    <span class="metric-chip-label">量比</span>
+                    <span class="metric-chip-val">0.53</span>
+                </div>
+                
+                
+                <div class="metric-chip">
+                    <span class="metric-chip-label">PE</span>
+                    <span class="metric-chip-val">13.3</span>
+                </div>
+                
+            </div>
+
+            
+            <div class="risk-block">
+                <strong>⚠ 风险：</strong>若跌破19.26前低，可能加速下跌、反弹时量能不足，难以突破均线压制、宏观经济或行业利空可能加剧下行、北向资金数据缺失，信息不完整、单日主力资金流入波动大，参考意义有限
+            </div>
+            
+        </div>
+        </a>
+        
+        <a href="app/stock.html?code=601288" class="stock-card-link" data-code="601288" data-name="农业银行" data-signal="sell" data-score="-0.444" data-confidence="0.91" style="text-decoration:none;color:inherit">
+        <div class="narr-card">
+            <div class="narr-header">
+                <div class="narr-stock">
+                    <span class="narr-stock-code">601288</span>
+                    <span class="narr-stock-name">农业银行</span>
+                </div>
+                
+                <span class="signal-pill sell">
+                    🔴 看空
+                </span>
+            </div>
+
+            <div class="score-panel">
+                <div class="score-row">
+                    <span class="score-label">综合评分</span>
+                    <span class="score-value" style="color:#EF4444">
+                        -0.444
+                    </span>
+                </div>
+                <div class="score-bar-track">
+                    <div class="score-bar-fill" style="width: 27.8%; background: #EF4444;"></div>
+                </div>
+                <div class="confidence-row">
+                    <span>置信度</span>
+                    <div class="conf-dots">
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot "></span>
+                        
+                    </div>
+                    <span class="conf-value">91.0%</span>
+                </div>
+            </div>
+
+            <div class="metrics-row">
+                
+                <div class="metric-chip" style="border-color:rgba(239,68,68,0.3)">
+                    <span class="metric-chip-label">5日</span>
+                    <span class="metric-chip-val" style="color:#EF4444">-3.0%</span>
+                </div>
+                
+                
+                <div class="metric-chip" style="border-color:rgba(239,68,68,0.3)">
+                    <span class="metric-chip-label">均线</span>
+                    <span class="metric-chip-val" style="color:#EF4444">空头</span>
+                </div>
+                
+                
+                <div class="metric-chip" style="border-color:rgba(239,68,68,0.3)">
+                    <span class="metric-chip-label">量比</span>
+                    <span class="metric-chip-val">0.79</span>
+                </div>
+                
+                
+                <div class="metric-chip">
+                    <span class="metric-chip-label">PE</span>
+                    <span class="metric-chip-val">7.6</span>
+                </div>
+                
+            </div>
+
+            
+            <div class="risk-block">
+                <strong>⚠ 风险：</strong>6.4关口若跌破，可能打开下跌空间、若放量下跌，则下跌趋势可能加速、主力资金流出压力较大、缺乏北向资金验证
+            </div>
+            
+        </div>
+        </a>
+        
+        <a href="app/stock.html?code=000661" class="stock-card-link" data-code="000661" data-name="长春高新" data-signal="sell" data-score="-0.424" data-confidence="0.9" style="text-decoration:none;color:inherit">
+        <div class="narr-card">
+            <div class="narr-header">
+                <div class="narr-stock">
+                    <span class="narr-stock-code">000661</span>
+                    <span class="narr-stock-name">长春高新</span>
+                </div>
+                
+                <span class="signal-pill sell">
+                    🔴 看空
+                </span>
+            </div>
+
+            <div class="score-panel">
+                <div class="score-row">
+                    <span class="score-label">综合评分</span>
+                    <span class="score-value" style="color:#EF4444">
+                        -0.424
+                    </span>
+                </div>
+                <div class="score-bar-track">
+                    <div class="score-bar-fill" style="width: 28.8%; background: #EF4444;"></div>
+                </div>
+                <div class="confidence-row">
+                    <span>置信度</span>
+                    <div class="conf-dots">
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot "></span>
+                        
+                    </div>
+                    <span class="conf-value">90.0%</span>
+                </div>
+            </div>
+
+            <div class="metrics-row">
+                
+                <div class="metric-chip" style="border-color:rgba(239,68,68,0.3)">
+                    <span class="metric-chip-label">5日</span>
+                    <span class="metric-chip-val" style="color:#EF4444">-6.7%</span>
+                </div>
+                
+                
+                <div class="metric-chip" style="border-color:rgba(239,68,68,0.3)">
+                    <span class="metric-chip-label">均线</span>
+                    <span class="metric-chip-val" style="color:#EF4444">空头</span>
+                </div>
+                
+                
+                <div class="metric-chip" style="">
+                    <span class="metric-chip-label">量比</span>
+                    <span class="metric-chip-val">0.93</span>
+                </div>
+                
+                
+                <div class="metric-chip">
+                    <span class="metric-chip-label">PE</span>
+                    <span class="metric-chip-val">-755.4</span>
+                </div>
+                
+            </div>
+
+            
+            <div class="risk-block">
+                <strong>⚠ 风险：</strong>若跌破77.75支撑，可能进一步下探、均线系统压制，反弹难以持续、市场情绪偏空，短期无反转信号、仅1日主力净流出，但无法确认持续性
+            </div>
+            
+        </div>
+        </a>
+        
+        <a href="app/stock.html?code=300750" class="stock-card-link" data-code="300750" data-name="300750" data-signal="sell" data-score="-0.423" data-confidence="0.9" style="text-decoration:none;color:inherit">
+        <div class="narr-card">
+            <div class="narr-header">
+                <div class="narr-stock">
+                    <span class="narr-stock-code">300750</span>
+                    <span class="narr-stock-name">300750</span>
+                </div>
+                
+                <span class="signal-pill sell">
+                    🔴 看空
+                </span>
+            </div>
+
+            <div class="score-panel">
+                <div class="score-row">
+                    <span class="score-label">综合评分</span>
+                    <span class="score-value" style="color:#EF4444">
+                        -0.423
+                    </span>
+                </div>
+                <div class="score-bar-track">
+                    <div class="score-bar-fill" style="width: 28.8%; background: #EF4444;"></div>
+                </div>
+                <div class="confidence-row">
+                    <span>置信度</span>
+                    <div class="conf-dots">
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot "></span>
+                        
+                    </div>
+                    <span class="conf-value">90.0%</span>
+                </div>
+            </div>
+
+            <div class="metrics-row">
+                
+                <div class="metric-chip" style="border-color:rgba(239,68,68,0.3)">
+                    <span class="metric-chip-label">5日</span>
+                    <span class="metric-chip-val" style="color:#EF4444">-3.7%</span>
+                </div>
+                
+                
+                <div class="metric-chip" style="border-color:rgba(239,68,68,0.3)">
+                    <span class="metric-chip-label">均线</span>
+                    <span class="metric-chip-val" style="color:#EF4444">空头</span>
+                </div>
+                
+                
+                <div class="metric-chip" style="">
+                    <span class="metric-chip-label">量比</span>
+                    <span class="metric-chip-val">1.03</span>
+                </div>
+                
+                
+                <div class="metric-chip">
+                    <span class="metric-chip-label">PE</span>
+                    <span class="metric-chip-val">23.6</span>
+                </div>
+                
+            </div>
+
+            
+            <div class="risk-block">
+                <strong>⚠ 风险：</strong>若跌破400元，可能加速下跌至前低或更低、均线空头排列下，反弹至MA10或MA20附近易受阻、量能持续放大但价格不涨，表明资金出逃意愿强、北向资金数据缺失，无法综合判断资金方向、短期内主力流出可能对股价形成压力
+            </div>
+            
+        </div>
+        </a>
+        
+        <a href="app/stock.html?code=600028" class="stock-card-link" data-code="600028" data-name="中国石化" data-signal="sell" data-score="-0.413" data-confidence="0.9" style="text-decoration:none;color:inherit">
+        <div class="narr-card">
+            <div class="narr-header">
+                <div class="narr-stock">
+                    <span class="narr-stock-code">600028</span>
+                    <span class="narr-stock-name">中国石化</span>
+                </div>
+                
+                <span class="signal-pill sell">
+                    🔴 看空
+                </span>
+            </div>
+
+            <div class="score-panel">
+                <div class="score-row">
+                    <span class="score-label">综合评分</span>
+                    <span class="score-value" style="color:#EF4444">
+                        -0.413
+                    </span>
+                </div>
+                <div class="score-bar-track">
+                    <div class="score-bar-fill" style="width: 29.3%; background: #EF4444;"></div>
+                </div>
+                <div class="confidence-row">
+                    <span>置信度</span>
+                    <div class="conf-dots">
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot "></span>
+                        
+                    </div>
+                    <span class="conf-value">90.0%</span>
+                </div>
+            </div>
+
+            <div class="metrics-row">
+                
+                <div class="metric-chip" style="border-color:rgba(239,68,68,0.3)">
+                    <span class="metric-chip-label">5日</span>
+                    <span class="metric-chip-val" style="color:#EF4444">-5.1%</span>
+                </div>
+                
+                
+                <div class="metric-chip" style="border-color:rgba(239,68,68,0.3)">
+                    <span class="metric-chip-label">均线</span>
+                    <span class="metric-chip-val" style="color:#EF4444">空头</span>
+                </div>
+                
+                
+                <div class="metric-chip" style="">
+                    <span class="metric-chip-label">量比</span>
+                    <span class="metric-chip-val">1.09</span>
+                </div>
+                
+                
+                <div class="metric-chip">
+                    <span class="metric-chip-label">PE</span>
+                    <span class="metric-chip-val">16.6</span>
+                </div>
+                
+            </div>
+
+            
+            <div class="risk-block">
+                <strong>⚠ 风险：</strong>股价下方缺乏有效支撑，存在进一步下跌风险、若成交量继续放大而价格无法止跌，可能加速下行、北向资金态度不明，存在不确定性、主力资金流出可能延续，需关注持续性
+            </div>
+            
+        </div>
+        </a>
+        
+        <a href="app/stock.html?code=600050" class="stock-card-link" data-code="600050" data-name="中国联通" data-signal="sell" data-score="-0.407" data-confidence="0.9" style="text-decoration:none;color:inherit">
+        <div class="narr-card">
+            <div class="narr-header">
+                <div class="narr-stock">
+                    <span class="narr-stock-code">600050</span>
+                    <span class="narr-stock-name">中国联通</span>
+                </div>
+                
+                <span class="signal-pill sell">
+                    🔴 看空
+                </span>
+            </div>
+
+            <div class="score-panel">
+                <div class="score-row">
+                    <span class="score-label">综合评分</span>
+                    <span class="score-value" style="color:#EF4444">
+                        -0.407
+                    </span>
+                </div>
+                <div class="score-bar-track">
+                    <div class="score-bar-fill" style="width: 29.6%; background: #EF4444;"></div>
+                </div>
+                <div class="confidence-row">
+                    <span>置信度</span>
+                    <div class="conf-dots">
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot "></span>
+                        
+                    </div>
+                    <span class="conf-value">90.0%</span>
+                </div>
+            </div>
+
+            <div class="metrics-row">
+                
+                <div class="metric-chip" style="border-color:rgba(239,68,68,0.3)">
+                    <span class="metric-chip-label">5日</span>
+                    <span class="metric-chip-val" style="color:#EF4444">-10.1%</span>
+                </div>
+                
+                
+                <div class="metric-chip" style="">
+                    <span class="metric-chip-label">均线</span>
+                    <span class="metric-chip-val" style="color:var(--body-ink)">交叉</span>
+                </div>
+                
+                
+                <div class="metric-chip" style="border-color:rgba(239,68,68,0.3)">
+                    <span class="metric-chip-label">量比</span>
+                    <span class="metric-chip-val">0.59</span>
+                </div>
+                
+                
+                <div class="metric-chip">
+                    <span class="metric-chip-label">PE</span>
+                    <span class="metric-chip-val">16.1</span>
+                </div>
+                
+            </div>
+
+            
+            <div class="risk-block">
+                <strong>⚠ 风险：</strong>失守4.42支撑可能加速下跌、均线持续压制反弹空间、缩量阴跌表明市场参与度低、主力资金流出趋势可能延续，对股价形成压力、北向资金态度不明，增加判断不确定性
+            </div>
+            
+        </div>
+        </a>
+        
+        <a href="app/stock.html?code=600016" class="stock-card-link" data-code="600016" data-name="民生银行" data-signal="sell" data-score="-0.398" data-confidence="0.89" style="text-decoration:none;color:inherit">
+        <div class="narr-card">
+            <div class="narr-header">
+                <div class="narr-stock">
+                    <span class="narr-stock-code">600016</span>
+                    <span class="narr-stock-name">民生银行</span>
+                </div>
+                
+                <span class="signal-pill sell">
+                    🔴 看空
+                </span>
+            </div>
+
+            <div class="score-panel">
+                <div class="score-row">
+                    <span class="score-label">综合评分</span>
+                    <span class="score-value" style="color:#EF4444">
+                        -0.398
+                    </span>
+                </div>
+                <div class="score-bar-track">
+                    <div class="score-bar-fill" style="width: 30.1%; background: #EF4444;"></div>
+                </div>
+                <div class="confidence-row">
+                    <span>置信度</span>
+                    <div class="conf-dots">
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot "></span>
+                        
+                    </div>
+                    <span class="conf-value">89.0%</span>
+                </div>
+            </div>
+
+            <div class="metrics-row">
+                
+                <div class="metric-chip" style="border-color:rgba(239,68,68,0.3)">
+                    <span class="metric-chip-label">5日</span>
+                    <span class="metric-chip-val" style="color:#EF4444">-1.7%</span>
+                </div>
+                
+                
+                <div class="metric-chip" style="border-color:rgba(239,68,68,0.3)">
+                    <span class="metric-chip-label">均线</span>
+                    <span class="metric-chip-val" style="color:#EF4444">空头</span>
+                </div>
+                
+                
+                <div class="metric-chip" style="border-color:rgba(239,68,68,0.3)">
+                    <span class="metric-chip-label">量比</span>
+                    <span class="metric-chip-val">0.75</span>
+                </div>
+                
+                
+                <div class="metric-chip">
+                    <span class="metric-chip-label">PE</span>
+                    <span class="metric-chip-val">5.2</span>
+                </div>
+                
+            </div>
+
+            
+            <div class="risk-block">
+                <strong>⚠ 风险：</strong>股价持续下探，可能跌破前低3.50、均线压制明显，反弹空间受限
+            </div>
+            
+        </div>
+        </a>
+        
+        <a href="app/stock.html?code=600048" class="stock-card-link" data-code="600048" data-name="保利发展" data-signal="sell" data-score="-0.398" data-confidence="0.89" style="text-decoration:none;color:inherit">
+        <div class="narr-card">
+            <div class="narr-header">
+                <div class="narr-stock">
+                    <span class="narr-stock-code">600048</span>
+                    <span class="narr-stock-name">保利发展</span>
+                </div>
+                
+                <span class="signal-pill sell">
+                    🔴 看空
+                </span>
+            </div>
+
+            <div class="score-panel">
+                <div class="score-row">
+                    <span class="score-label">综合评分</span>
+                    <span class="score-value" style="color:#EF4444">
+                        -0.398
+                    </span>
+                </div>
+                <div class="score-bar-track">
+                    <div class="score-bar-fill" style="width: 30.1%; background: #EF4444;"></div>
+                </div>
+                <div class="confidence-row">
+                    <span>置信度</span>
+                    <div class="conf-dots">
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot "></span>
+                        
+                    </div>
+                    <span class="conf-value">89.0%</span>
+                </div>
+            </div>
+
+            <div class="metrics-row">
+                
+                <div class="metric-chip" style="border-color:rgba(239,68,68,0.3)">
+                    <span class="metric-chip-label">5日</span>
+                    <span class="metric-chip-val" style="color:#EF4444">-5.2%</span>
+                </div>
+                
+                
+                <div class="metric-chip" style="border-color:rgba(239,68,68,0.3)">
+                    <span class="metric-chip-label">均线</span>
+                    <span class="metric-chip-val" style="color:#EF4444">空头</span>
+                </div>
+                
+                
+                <div class="metric-chip" style="border-color:rgba(239,68,68,0.3)">
+                    <span class="metric-chip-label">量比</span>
+                    <span class="metric-chip-val">0.75</span>
+                </div>
+                
+                
+                <div class="metric-chip">
+                    <span class="metric-chip-label">PE</span>
+                    <span class="metric-chip-val">-384.2</span>
+                </div>
+                
+            </div>
+
+            
+            <div class="risk-block">
+                <strong>⚠ 风险：</strong>均线空头排列压制，反弹空间受限、缩量下跌表明资金参与度低，趋势可能延续、数据不完整，无法全面评估资金面、单日主力流出可能预示短期压力，但需更多数据确认
+            </div>
+            
+        </div>
+        </a>
+        
+        <a href="app/stock.html?code=000538" class="stock-card-link" data-code="000538" data-name="云南白药" data-signal="sell" data-score="-0.394" data-confidence="0.89" style="text-decoration:none;color:inherit">
+        <div class="narr-card">
+            <div class="narr-header">
+                <div class="narr-stock">
+                    <span class="narr-stock-code">000538</span>
+                    <span class="narr-stock-name">云南白药</span>
+                </div>
+                
+                <span class="signal-pill sell">
+                    🔴 看空
+                </span>
+            </div>
+
+            <div class="score-panel">
+                <div class="score-row">
+                    <span class="score-label">综合评分</span>
+                    <span class="score-value" style="color:#EF4444">
+                        -0.394
+                    </span>
+                </div>
+                <div class="score-bar-track">
+                    <div class="score-bar-fill" style="width: 30.3%; background: #EF4444;"></div>
+                </div>
+                <div class="confidence-row">
+                    <span>置信度</span>
+                    <div class="conf-dots">
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot "></span>
+                        
+                    </div>
+                    <span class="conf-value">89.0%</span>
+                </div>
+            </div>
+
+            <div class="metrics-row">
+                
+                <div class="metric-chip" style="border-color:rgba(239,68,68,0.3)">
+                    <span class="metric-chip-label">5日</span>
+                    <span class="metric-chip-val" style="color:#EF4444">-4.0%</span>
+                </div>
+                
+                
+                <div class="metric-chip" style="border-color:rgba(239,68,68,0.3)">
+                    <span class="metric-chip-label">均线</span>
+                    <span class="metric-chip-val" style="color:#EF4444">空头</span>
+                </div>
+                
+                
+                <div class="metric-chip" style="">
+                    <span class="metric-chip-label">量比</span>
+                    <span class="metric-chip-val">1.10</span>
+                </div>
+                
+                
+                <div class="metric-chip">
+                    <span class="metric-chip-label">PE</span>
+                    <span class="metric-chip-val">16.6</span>
+                </div>
+                
+            </div>
+
+            
+            <div class="risk-block">
+                <strong>⚠ 风险：</strong>下跌趋势延续，可能跌破48.66支撑、均线压制明显，反弹空间受限、北向数据缺失，外资动向未知、主力资金流出可能加大短期压力
+            </div>
+            
+        </div>
+        </a>
+        
+        <a href="app/stock.html?code=601668" class="stock-card-link" data-code="601668" data-name="中国建筑" data-signal="sell" data-score="-0.378" data-confidence="0.88" style="text-decoration:none;color:inherit">
+        <div class="narr-card">
+            <div class="narr-header">
+                <div class="narr-stock">
+                    <span class="narr-stock-code">601668</span>
+                    <span class="narr-stock-name">中国建筑</span>
+                </div>
+                
+                <span class="signal-pill sell">
+                    🔴 看空
+                </span>
+            </div>
+
+            <div class="score-panel">
+                <div class="score-row">
+                    <span class="score-label">综合评分</span>
+                    <span class="score-value" style="color:#EF4444">
+                        -0.378
+                    </span>
+                </div>
+                <div class="score-bar-track">
+                    <div class="score-bar-fill" style="width: 31.1%; background: #EF4444;"></div>
+                </div>
+                <div class="confidence-row">
+                    <span>置信度</span>
+                    <div class="conf-dots">
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot "></span>
+                        
+                    </div>
+                    <span class="conf-value">88.0%</span>
+                </div>
+            </div>
+
+            <div class="metrics-row">
+                
+                <div class="metric-chip" style="border-color:rgba(239,68,68,0.3)">
+                    <span class="metric-chip-label">5日</span>
+                    <span class="metric-chip-val" style="color:#EF4444">-2.7%</span>
+                </div>
+                
+                
+                <div class="metric-chip" style="border-color:rgba(239,68,68,0.3)">
+                    <span class="metric-chip-label">均线</span>
+                    <span class="metric-chip-val" style="color:#EF4444">空头</span>
+                </div>
+                
+                
+                <div class="metric-chip" style="border-color:rgba(239,68,68,0.3)">
+                    <span class="metric-chip-label">量比</span>
+                    <span class="metric-chip-val">0.66</span>
+                </div>
+                
+                
+                <div class="metric-chip">
+                    <span class="metric-chip-label">PE</span>
+                    <span class="metric-chip-val">5.2</span>
+                </div>
+                
+            </div>
+
+            
+            <div class="risk-block">
+                <strong>⚠ 风险：</strong>均线空头排列压制反弹空间、若跌破4.75元可能引发新一轮下跌、量能未配合，短期企稳信号未出现、北向资金未提供，无法判断外资动向、单日主力流出金额较小，可能为正常波动
+            </div>
+            
+        </div>
+        </a>
+        
+        <a href="app/stock.html?code=600036" class="stock-card-link" data-code="600036" data-name="招商银行" data-signal="sell" data-score="-0.365" data-confidence="0.88" style="text-decoration:none;color:inherit">
+        <div class="narr-card">
+            <div class="narr-header">
+                <div class="narr-stock">
+                    <span class="narr-stock-code">600036</span>
+                    <span class="narr-stock-name">招商银行</span>
+                </div>
+                
+                <span class="signal-pill sell">
+                    🔴 看空
+                </span>
+            </div>
+
+            <div class="score-panel">
+                <div class="score-row">
+                    <span class="score-label">综合评分</span>
+                    <span class="score-value" style="color:#EF4444">
+                        -0.365
+                    </span>
+                </div>
+                <div class="score-bar-track">
+                    <div class="score-bar-fill" style="width: 31.8%; background: #EF4444;"></div>
+                </div>
+                <div class="confidence-row">
+                    <span>置信度</span>
+                    <div class="conf-dots">
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot "></span>
+                        
+                    </div>
+                    <span class="conf-value">88.0%</span>
+                </div>
+            </div>
+
+            <div class="metrics-row">
+                
+                <div class="metric-chip" style="border-color:rgba(239,68,68,0.3)">
+                    <span class="metric-chip-label">5日</span>
+                    <span class="metric-chip-val" style="color:#EF4444">-1.0%</span>
+                </div>
+                
+                
+                <div class="metric-chip" style="border-color:rgba(239,68,68,0.3)">
+                    <span class="metric-chip-label">均线</span>
+                    <span class="metric-chip-val" style="color:#EF4444">空头</span>
+                </div>
+                
+                
+                <div class="metric-chip" style="border-color:rgba(239,68,68,0.3)">
+                    <span class="metric-chip-label">量比</span>
+                    <span class="metric-chip-val">0.76</span>
+                </div>
+                
+                
+                <div class="metric-chip">
+                    <span class="metric-chip-label">PE</span>
+                    <span class="metric-chip-val">6.2</span>
+                </div>
+                
+            </div>
+
+            
+            <div class="risk-block">
+                <strong>⚠ 风险：</strong>趋势延续下跌，跌破36.9支撑可能引发加速、反弹无成交量配合，难以扭转空头趋势、短期均线持续压制股价，反弹空间有限、数据不完整可能导致分析偏差、主力净流入金额较小，资金推动力不足
+            </div>
+            
+        </div>
+        </a>
+        
+        <a href="app/stock.html?code=601088" class="stock-card-link" data-code="601088" data-name="中国神华" data-signal="sell" data-score="-0.353" data-confidence="0.87" style="text-decoration:none;color:inherit">
+        <div class="narr-card">
+            <div class="narr-header">
+                <div class="narr-stock">
+                    <span class="narr-stock-code">601088</span>
+                    <span class="narr-stock-name">中国神华</span>
+                </div>
+                
+                <span class="signal-pill sell">
+                    🔴 看空
+                </span>
+            </div>
+
+            <div class="score-panel">
+                <div class="score-row">
+                    <span class="score-label">综合评分</span>
+                    <span class="score-value" style="color:#EF4444">
+                        -0.353
+                    </span>
+                </div>
+                <div class="score-bar-track">
+                    <div class="score-bar-fill" style="width: 32.4%; background: #EF4444;"></div>
+                </div>
+                <div class="confidence-row">
+                    <span>置信度</span>
+                    <div class="conf-dots">
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot "></span>
+                        
+                    </div>
+                    <span class="conf-value">87.0%</span>
+                </div>
+            </div>
+
+            <div class="metrics-row">
+                
+                <div class="metric-chip" style="border-color:rgba(239,68,68,0.3)">
+                    <span class="metric-chip-label">5日</span>
+                    <span class="metric-chip-val" style="color:#EF4444">-2.8%</span>
+                </div>
+                
+                
+                <div class="metric-chip" style="border-color:rgba(239,68,68,0.3)">
+                    <span class="metric-chip-label">均线</span>
+                    <span class="metric-chip-val" style="color:#EF4444">空头</span>
+                </div>
+                
+                
+                <div class="metric-chip" style="">
+                    <span class="metric-chip-label">量比</span>
+                    <span class="metric-chip-val">1.08</span>
+                </div>
+                
+                
+                <div class="metric-chip">
+                    <span class="metric-chip-label">PE</span>
+                    <span class="metric-chip-val">18.8</span>
+                </div>
+                
+            </div>
+
+            
+            <div class="risk-block">
+                <strong>⚠ 风险：</strong>均线系统持续向下发散，趋势难以立即扭转、成交量放大却收阴，说明空方力量主导、若跌破44.35，可能加速下跌、北向资金数据缺失，资金面分析不完整、仅依据单日主力流入可能存在误导
+            </div>
+            
+        </div>
+        </a>
+        
+        <a href="app/stock.html?code=600031" class="stock-card-link" data-code="600031" data-name="三一重工" data-signal="sell" data-score="-0.345" data-confidence="0.87" style="text-decoration:none;color:inherit">
+        <div class="narr-card">
+            <div class="narr-header">
+                <div class="narr-stock">
+                    <span class="narr-stock-code">600031</span>
+                    <span class="narr-stock-name">三一重工</span>
+                </div>
+                
+                <span class="signal-pill sell">
+                    🔴 看空
+                </span>
+            </div>
+
+            <div class="score-panel">
+                <div class="score-row">
+                    <span class="score-label">综合评分</span>
+                    <span class="score-value" style="color:#EF4444">
+                        -0.345
+                    </span>
+                </div>
+                <div class="score-bar-track">
+                    <div class="score-bar-fill" style="width: 32.8%; background: #EF4444;"></div>
+                </div>
+                <div class="confidence-row">
+                    <span>置信度</span>
+                    <div class="conf-dots">
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot "></span>
+                        
+                    </div>
+                    <span class="conf-value">87.0%</span>
+                </div>
+            </div>
+
+            <div class="metrics-row">
+                
+                <div class="metric-chip" style="border-color:rgba(239,68,68,0.3)">
+                    <span class="metric-chip-label">5日</span>
+                    <span class="metric-chip-val" style="color:#EF4444">-2.2%</span>
+                </div>
+                
+                
+                <div class="metric-chip" style="border-color:rgba(239,68,68,0.3)">
+                    <span class="metric-chip-label">均线</span>
+                    <span class="metric-chip-val" style="color:#EF4444">空头</span>
+                </div>
+                
+                
+                <div class="metric-chip" style="">
+                    <span class="metric-chip-label">量比</span>
+                    <span class="metric-chip-val">1.09</span>
+                </div>
+                
+                
+                <div class="metric-chip">
+                    <span class="metric-chip-label">PE</span>
+                    <span class="metric-chip-val">20.6</span>
+                </div>
+                
+            </div>
+
+            
+            <div class="risk-block">
+                <strong>⚠ 风险：</strong>均线空头压制，反弹空间有限、若放量跌破18.58，可能加速下跌、量价背离，反弹缩量表明资金承接意愿弱、资金数据不完整，分析可靠性降低、单日主力流入规模较小，缺乏方向性指引
+            </div>
+            
+        </div>
+        </a>
+        
+        <a href="app/stock.html?code=002594" class="stock-card-link" data-code="002594" data-name="比亚迪" data-signal="sell" data-score="-0.325" data-confidence="0.86" style="text-decoration:none;color:inherit">
+        <div class="narr-card">
+            <div class="narr-header">
+                <div class="narr-stock">
+                    <span class="narr-stock-code">002594</span>
+                    <span class="narr-stock-name">比亚迪</span>
+                </div>
+                
+                <span class="signal-pill sell">
+                    🔴 看空
+                </span>
+            </div>
+
+            <div class="score-panel">
+                <div class="score-row">
+                    <span class="score-label">综合评分</span>
+                    <span class="score-value" style="color:#EF4444">
+                        -0.325
+                    </span>
+                </div>
+                <div class="score-bar-track">
+                    <div class="score-bar-fill" style="width: 33.8%; background: #EF4444;"></div>
+                </div>
+                <div class="confidence-row">
+                    <span>置信度</span>
+                    <div class="conf-dots">
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot "></span>
+                        
+                    </div>
+                    <span class="conf-value">86.0%</span>
+                </div>
+            </div>
+
+            <div class="metrics-row">
+                
+                <div class="metric-chip" style="border-color:rgba(34,197,94,0.3)">
+                    <span class="metric-chip-label">5日</span>
+                    <span class="metric-chip-val" style="color:#22C55E">+0.6%</span>
+                </div>
+                
+                
+                <div class="metric-chip" style="">
+                    <span class="metric-chip-label">均线</span>
+                    <span class="metric-chip-val" style="color:var(--body-ink)">交叉</span>
+                </div>
+                
+                
+                <div class="metric-chip" style="">
+                    <span class="metric-chip-label">量比</span>
+                    <span class="metric-chip-val">0.84</span>
+                </div>
+                
+                
+                <div class="metric-chip">
+                    <span class="metric-chip-label">PE</span>
+                    <span class="metric-chip-val">31.9</span>
+                </div>
+                
+            </div>
+
+            
+            <div class="risk-block">
+                <strong>⚠ 风险：</strong>均线持续空头排列，反弹高度受限，易形成下跌中继、若反弹缩量遇阻，可能加速下破前低、20日均线快速下移，对股价形成反压、数据不完整可能导致分析偏差、单日主力资金流入持续性存疑
+            </div>
+            
+        </div>
+        </a>
+        
+        <a href="app/stock.html?code=600600" class="stock-card-link" data-code="600600" data-name="青岛啤酒" data-signal="sell" data-score="-0.303" data-confidence="0.85" style="text-decoration:none;color:inherit">
+        <div class="narr-card">
+            <div class="narr-header">
+                <div class="narr-stock">
+                    <span class="narr-stock-code">600600</span>
+                    <span class="narr-stock-name">青岛啤酒</span>
+                </div>
+                
+                <span class="signal-pill sell">
+                    🔴 看空
+                </span>
+            </div>
+
+            <div class="score-panel">
+                <div class="score-row">
+                    <span class="score-label">综合评分</span>
+                    <span class="score-value" style="color:#EF4444">
+                        -0.303
+                    </span>
+                </div>
+                <div class="score-bar-track">
+                    <div class="score-bar-fill" style="width: 34.9%; background: #EF4444;"></div>
+                </div>
+                <div class="confidence-row">
+                    <span>置信度</span>
+                    <div class="conf-dots">
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot "></span>
+                        
+                    </div>
+                    <span class="conf-value">85.0%</span>
+                </div>
+            </div>
+
+            <div class="metrics-row">
+                
+                <div class="metric-chip" style="border-color:rgba(239,68,68,0.3)">
+                    <span class="metric-chip-label">5日</span>
+                    <span class="metric-chip-val" style="color:#EF4444">-2.0%</span>
+                </div>
+                
+                
+                <div class="metric-chip" style="border-color:rgba(239,68,68,0.3)">
+                    <span class="metric-chip-label">均线</span>
+                    <span class="metric-chip-val" style="color:#EF4444">空头</span>
+                </div>
+                
+                
+                <div class="metric-chip" style="">
+                    <span class="metric-chip-label">量比</span>
+                    <span class="metric-chip-val">1.20</span>
+                </div>
+                
+                
+                <div class="metric-chip">
+                    <span class="metric-chip-label">PE</span>
+                    <span class="metric-chip-val">17.6</span>
+                </div>
+                
+            </div>
+
+            
+            <div class="risk-block">
+                <strong>⚠ 风险：</strong>若跌破59.02元关键支撑，可能加速下行、MA5与MA10持续下压，反弹空间受限、市场情绪偏空，资金流出风险加大、北向资金数据缺失，存在信息不完整风险、主力资金流入力度微弱，需警惕持续性不足
+            </div>
+            
+        </div>
+        </a>
+        
+        <a href="app/stock.html?code=601398" class="stock-card-link" data-code="601398" data-name="工商银行" data-signal="sell" data-score="-0.289" data-confidence="0.85" style="text-decoration:none;color:inherit">
+        <div class="narr-card">
+            <div class="narr-header">
+                <div class="narr-stock">
+                    <span class="narr-stock-code">601398</span>
+                    <span class="narr-stock-name">工商银行</span>
+                </div>
+                
+                <span class="signal-pill sell">
+                    🔴 看空
+                </span>
+            </div>
+
+            <div class="score-panel">
+                <div class="score-row">
+                    <span class="score-label">综合评分</span>
+                    <span class="score-value" style="color:#EF4444">
+                        -0.289
+                    </span>
+                </div>
+                <div class="score-bar-track">
+                    <div class="score-bar-fill" style="width: 35.6%; background: #EF4444;"></div>
+                </div>
+                <div class="confidence-row">
+                    <span>置信度</span>
+                    <div class="conf-dots">
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot "></span>
+                        
+                    </div>
+                    <span class="conf-value">85.0%</span>
+                </div>
+            </div>
+
+            <div class="metrics-row">
+                
+                <div class="metric-chip" style="border-color:rgba(239,68,68,0.3)">
+                    <span class="metric-chip-label">5日</span>
+                    <span class="metric-chip-val" style="color:#EF4444">-1.1%</span>
+                </div>
+                
+                
+                <div class="metric-chip" style="">
+                    <span class="metric-chip-label">均线</span>
+                    <span class="metric-chip-val" style="color:var(--body-ink)">交叉</span>
+                </div>
+                
+                
+                <div class="metric-chip" style="border-color:rgba(239,68,68,0.3)">
+                    <span class="metric-chip-label">量比</span>
+                    <span class="metric-chip-val">0.79</span>
+                </div>
+                
+                
+                <div class="metric-chip">
+                    <span class="metric-chip-label">PE</span>
+                    <span class="metric-chip-val">6.9</span>
+                </div>
+                
+            </div>
+
+            
+            <div class="risk-block">
+                <strong>⚠ 风险：</strong>若跌破7.08，可能开启新一轮下跌、反弹量能不足，难以有效突破均线压制、单日资金数据不足以反映持续性、北向资金缺失可能导致信号失真
+            </div>
+            
+        </div>
+        </a>
+        
+        <a href="app/stock.html?code=601888" class="stock-card-link" data-code="601888" data-name="中国中免" data-signal="sell" data-score="-0.285" data-confidence="0.85" style="text-decoration:none;color:inherit">
+        <div class="narr-card">
+            <div class="narr-header">
+                <div class="narr-stock">
+                    <span class="narr-stock-code">601888</span>
+                    <span class="narr-stock-name">中国中免</span>
+                </div>
+                
+                <span class="signal-pill sell">
+                    🔴 看空
+                </span>
+            </div>
+
+            <div class="score-panel">
+                <div class="score-row">
+                    <span class="score-label">综合评分</span>
+                    <span class="score-value" style="color:#EF4444">
+                        -0.285
+                    </span>
+                </div>
+                <div class="score-bar-track">
+                    <div class="score-bar-fill" style="width: 35.8%; background: #EF4444;"></div>
+                </div>
+                <div class="confidence-row">
+                    <span>置信度</span>
+                    <div class="conf-dots">
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot "></span>
+                        
+                    </div>
+                    <span class="conf-value">85.0%</span>
+                </div>
+            </div>
+
+            <div class="metrics-row">
+                
+                <div class="metric-chip" style="border-color:rgba(239,68,68,0.3)">
+                    <span class="metric-chip-label">5日</span>
+                    <span class="metric-chip-val" style="color:#EF4444">-3.1%</span>
+                </div>
+                
+                
+                <div class="metric-chip" style="border-color:rgba(239,68,68,0.3)">
+                    <span class="metric-chip-label">均线</span>
+                    <span class="metric-chip-val" style="color:#EF4444">空头</span>
+                </div>
+                
+                
+                <div class="metric-chip" style="">
+                    <span class="metric-chip-label">量比</span>
+                    <span class="metric-chip-val">1.18</span>
+                </div>
+                
+                
+                <div class="metric-chip">
+                    <span class="metric-chip-label">PE</span>
+                    <span class="metric-chip-val">29.4</span>
+                </div>
+                
+            </div>
+
+            
+            <div class="risk-block">
+                <strong>⚠ 风险：</strong>均线空头排列且股价持续走低，存在加速下跌风险、若跌破55.55支撑，可能打开新一轮下跌空间、反弹若无量配合，可能只是短暂反抽，后续仍将下行、主力资金净流出显示短线资金情绪谨慎、北向资金缺席，市场参考维度不完整
+            </div>
+            
+        </div>
+        </a>
+        
+        <a href="app/stock.html?code=600519" class="stock-card-link" data-code="600519" data-name="600519" data-signal="sell" data-score="-0.282" data-confidence="0.85" style="text-decoration:none;color:inherit">
+        <div class="narr-card">
+            <div class="narr-header">
+                <div class="narr-stock">
+                    <span class="narr-stock-code">600519</span>
+                    <span class="narr-stock-name">600519</span>
+                </div>
+                
+                <span class="signal-pill sell">
+                    🔴 看空
+                </span>
+            </div>
+
+            <div class="score-panel">
+                <div class="score-row">
+                    <span class="score-label">综合评分</span>
+                    <span class="score-value" style="color:#EF4444">
+                        -0.282
+                    </span>
+                </div>
+                <div class="score-bar-track">
+                    <div class="score-bar-fill" style="width: 35.9%; background: #EF4444;"></div>
+                </div>
+                <div class="confidence-row">
+                    <span>置信度</span>
+                    <div class="conf-dots">
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot "></span>
+                        
+                    </div>
+                    <span class="conf-value">85.0%</span>
+                </div>
+            </div>
+
+            <div class="metrics-row">
+                
+                <div class="metric-chip" style="border-color:rgba(239,68,68,0.3)">
+                    <span class="metric-chip-label">5日</span>
+                    <span class="metric-chip-val" style="color:#EF4444">-3.9%</span>
+                </div>
+                
+                
+                <div class="metric-chip" style="border-color:rgba(239,68,68,0.3)">
+                    <span class="metric-chip-label">均线</span>
+                    <span class="metric-chip-val" style="color:#EF4444">空头</span>
+                </div>
+                
+                
+                <div class="metric-chip" style="">
+                    <span class="metric-chip-label">量比</span>
+                    <span class="metric-chip-val">0.94</span>
+                </div>
+                
+                
+                <div class="metric-chip">
+                    <span class="metric-chip-label">PE</span>
+                    <span class="metric-chip-val">19.3</span>
+                </div>
+                
+            </div>
+
+            
+            <div class="risk-block">
+                <strong>⚠ 风险：</strong>均线空头排列持续压制反弹空间、下降趋势明显，抄底风险较高、仅一日数据，资金趋势尚未形成，判断依据不足、北向资金数据不可用，可能遗漏重要外资流向信息
+            </div>
+            
+        </div>
+        </a>
+        
+        <a href="app/stock.html?code=000333" class="stock-card-link" data-code="000333" data-name="000333" data-signal="sell" data-score="-0.28" data-confidence="0.84" style="text-decoration:none;color:inherit">
+        <div class="narr-card">
+            <div class="narr-header">
+                <div class="narr-stock">
+                    <span class="narr-stock-code">000333</span>
+                    <span class="narr-stock-name">000333</span>
+                </div>
+                
+                <span class="signal-pill sell">
+                    🔴 看空
+                </span>
+            </div>
+
+            <div class="score-panel">
+                <div class="score-row">
+                    <span class="score-label">综合评分</span>
+                    <span class="score-value" style="color:#EF4444">
+                        -0.280
+                    </span>
+                </div>
+                <div class="score-bar-track">
+                    <div class="score-bar-fill" style="width: 36.0%; background: #EF4444;"></div>
+                </div>
+                <div class="confidence-row">
+                    <span>置信度</span>
+                    <div class="conf-dots">
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot "></span>
+                        
+                    </div>
+                    <span class="conf-value">84.0%</span>
+                </div>
+            </div>
+
+            <div class="metrics-row">
+                
+                <div class="metric-chip" style="border-color:rgba(239,68,68,0.3)">
+                    <span class="metric-chip-label">5日</span>
+                    <span class="metric-chip-val" style="color:#EF4444">-1.8%</span>
+                </div>
+                
+                
+                <div class="metric-chip" style="">
+                    <span class="metric-chip-label">均线</span>
+                    <span class="metric-chip-val" style="color:var(--body-ink)">交叉</span>
+                </div>
+                
+                
+                <div class="metric-chip" style="border-color:rgba(239,68,68,0.3)">
+                    <span class="metric-chip-label">量比</span>
+                    <span class="metric-chip-val">0.74</span>
+                </div>
+                
+                
+                <div class="metric-chip">
+                    <span class="metric-chip-label">PE</span>
+                    <span class="metric-chip-val">13.7</span>
+                </div>
+                
+            </div>
+
+            
+            <div class="risk-block">
+                <strong>⚠ 风险：</strong>若跌破79元，可能加速下跌、均线死叉风险，进一步确认空头趋势、北向资金数据缺失，无法判断外部资金态度
+            </div>
+            
+        </div>
+        </a>
+        
+        <a href="app/stock.html?code=000001" class="stock-card-link" data-code="000001" data-name="平安银行" data-signal="sell" data-score="-0.266" data-confidence="0.84" style="text-decoration:none;color:inherit">
+        <div class="narr-card">
+            <div class="narr-header">
+                <div class="narr-stock">
+                    <span class="narr-stock-code">000001</span>
+                    <span class="narr-stock-name">平安银行</span>
+                </div>
+                
+                <span class="signal-pill sell">
+                    🔴 看空
+                </span>
+            </div>
+
+            <div class="score-panel">
+                <div class="score-row">
+                    <span class="score-label">综合评分</span>
+                    <span class="score-value" style="color:#EF4444">
+                        -0.266
+                    </span>
+                </div>
+                <div class="score-bar-track">
+                    <div class="score-bar-fill" style="width: 36.7%; background: #EF4444;"></div>
+                </div>
+                <div class="confidence-row">
+                    <span>置信度</span>
+                    <div class="conf-dots">
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot "></span>
+                        
+                    </div>
+                    <span class="conf-value">84.0%</span>
+                </div>
+            </div>
+
+            <div class="metrics-row">
+                
+                <div class="metric-chip" style="border-color:rgba(239,68,68,0.3)">
+                    <span class="metric-chip-label">5日</span>
+                    <span class="metric-chip-val" style="color:#EF4444">-0.6%</span>
+                </div>
+                
+                
+                <div class="metric-chip" style="">
+                    <span class="metric-chip-label">均线</span>
+                    <span class="metric-chip-val" style="color:var(--body-ink)">交叉</span>
+                </div>
+                
+                
+                <div class="metric-chip" style="border-color:rgba(239,68,68,0.3)">
+                    <span class="metric-chip-label">量比</span>
+                    <span class="metric-chip-val">0.76</span>
+                </div>
+                
+                
+                <div class="metric-chip">
+                    <span class="metric-chip-label">PE</span>
+                    <span class="metric-chip-val">4.9</span>
+                </div>
+                
+            </div>
+
+            
+            <div class="risk-block">
+                <strong>⚠ 风险：</strong>均线空头发散继续压制反弹、若跌破10.64可能加速下行、缩量反弹缺乏持续性、北向资金数据缺失，资金面分析不完整、单日主力净流入金额较小，持续性存疑
+            </div>
+            
+        </div>
+        </a>
+        
+        <a href="app/stock.html?code=600000" class="stock-card-link" data-code="600000" data-name="浦发银行" data-signal="buy" data-score="0.266" data-confidence="0.65" style="text-decoration:none;color:inherit">
+        <div class="narr-card">
+            <div class="narr-header">
+                <div class="narr-stock">
+                    <span class="narr-stock-code">600000</span>
+                    <span class="narr-stock-name">浦发银行</span>
+                </div>
+                
+                <span class="signal-pill buy">
+                    🟢 看多
+                </span>
+            </div>
+
+            <div class="score-panel">
+                <div class="score-row">
+                    <span class="score-label">综合评分</span>
+                    <span class="score-value" style="color:#22C55E">
+                        +0.266
+                    </span>
+                </div>
+                <div class="score-bar-track">
+                    <div class="score-bar-fill" style="width: 63.3%; background: #22C55E;"></div>
+                </div>
+                <div class="confidence-row">
+                    <span>置信度</span>
+                    <div class="conf-dots">
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot "></span>
+                        
+                        <span class="conf-dot "></span>
+                        
+                    </div>
+                    <span class="conf-value">65.0%</span>
+                </div>
+            </div>
+
+            <div class="metrics-row">
+                
+                <div class="metric-chip" style="border-color:rgba(34,197,94,0.3)">
+                    <span class="metric-chip-label">5日</span>
+                    <span class="metric-chip-val" style="color:#22C55E">+3.6%</span>
+                </div>
+                
+                
+                <div class="metric-chip" style="">
+                    <span class="metric-chip-label">均线</span>
+                    <span class="metric-chip-val" style="color:var(--body-ink)">交叉</span>
+                </div>
+                
+                
+                <div class="metric-chip" style="border-color:rgba(34,197,94,0.3)">
+                    <span class="metric-chip-label">量比</span>
+                    <span class="metric-chip-val">1.52</span>
+                </div>
+                
+                
+                <div class="metric-chip">
+                    <span class="metric-chip-label">PE</span>
+                    <span class="metric-chip-val">6.1</span>
+                </div>
+                
+            </div>
+
+            
+            <div class="risk-block">
+                <strong>⚠ 风险：</strong>均线空头排列未改，反弹可能为技术性修复、前期低点8.75若跌破，则可能加速下行、整体市场环境偏弱，银行板块承压、仅单日数据，无法确认资金持续性、北向资金缺失可能导致判断偏差
+            </div>
+            
+        </div>
+        </a>
+        
+        <a href="app/stock.html?code=000651" class="stock-card-link" data-code="000651" data-name="格力电器" data-signal="sell" data-score="-0.262" data-confidence="0.84" style="text-decoration:none;color:inherit">
+        <div class="narr-card">
+            <div class="narr-header">
+                <div class="narr-stock">
+                    <span class="narr-stock-code">000651</span>
+                    <span class="narr-stock-name">格力电器</span>
+                </div>
+                
+                <span class="signal-pill sell">
+                    🔴 看空
+                </span>
+            </div>
+
+            <div class="score-panel">
+                <div class="score-row">
+                    <span class="score-label">综合评分</span>
+                    <span class="score-value" style="color:#EF4444">
+                        -0.262
+                    </span>
+                </div>
+                <div class="score-bar-track">
+                    <div class="score-bar-fill" style="width: 36.9%; background: #EF4444;"></div>
+                </div>
+                <div class="confidence-row">
+                    <span>置信度</span>
+                    <div class="conf-dots">
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot "></span>
+                        
+                    </div>
+                    <span class="conf-value">84.0%</span>
+                </div>
+            </div>
+
+            <div class="metrics-row">
+                
+                <div class="metric-chip" style="border-color:rgba(239,68,68,0.3)">
+                    <span class="metric-chip-label">5日</span>
+                    <span class="metric-chip-val" style="color:#EF4444">-1.7%</span>
+                </div>
+                
+                
+                <div class="metric-chip" style="">
+                    <span class="metric-chip-label">均线</span>
+                    <span class="metric-chip-val" style="color:var(--body-ink)">交叉</span>
+                </div>
+                
+                
+                <div class="metric-chip" style="border-color:rgba(239,68,68,0.3)">
+                    <span class="metric-chip-label">量比</span>
+                    <span class="metric-chip-val">0.62</span>
+                </div>
+                
+                
+                <div class="metric-chip">
+                    <span class="metric-chip-label">PE</span>
+                    <span class="metric-chip-val">7.5</span>
+                </div>
+                
+            </div>
+
+            
+            <div class="risk-block">
+                <strong>⚠ 风险：</strong>均线空头排列形成压制、缩量下跌显示市场信心不足，可能继续寻底、数据不完整，结论可靠性较低、主力净流入规模较小，参考意义有限
+            </div>
+            
+        </div>
+        </a>
+        
+        <a href="app/stock.html?code=600104" class="stock-card-link" data-code="600104" data-name="上汽集团" data-signal="sell" data-score="-0.251" data-confidence="0.84" style="text-decoration:none;color:inherit">
+        <div class="narr-card">
+            <div class="narr-header">
+                <div class="narr-stock">
+                    <span class="narr-stock-code">600104</span>
+                    <span class="narr-stock-name">上汽集团</span>
+                </div>
+                
+                <span class="signal-pill sell">
+                    🔴 看空
+                </span>
+            </div>
+
+            <div class="score-panel">
+                <div class="score-row">
+                    <span class="score-label">综合评分</span>
+                    <span class="score-value" style="color:#EF4444">
+                        -0.251
+                    </span>
+                </div>
+                <div class="score-bar-track">
+                    <div class="score-bar-fill" style="width: 37.5%; background: #EF4444;"></div>
+                </div>
+                <div class="confidence-row">
+                    <span>置信度</span>
+                    <div class="conf-dots">
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot "></span>
+                        
+                    </div>
+                    <span class="conf-value">84.0%</span>
+                </div>
+            </div>
+
+            <div class="metrics-row">
+                
+                <div class="metric-chip" style="border-color:rgba(239,68,68,0.3)">
+                    <span class="metric-chip-label">5日</span>
+                    <span class="metric-chip-val" style="color:#EF4444">-3.0%</span>
+                </div>
+                
+                
+                <div class="metric-chip" style="border-color:rgba(239,68,68,0.3)">
+                    <span class="metric-chip-label">均线</span>
+                    <span class="metric-chip-val" style="color:#EF4444">空头</span>
+                </div>
+                
+                
+                <div class="metric-chip" style="">
+                    <span class="metric-chip-label">量比</span>
+                    <span class="metric-chip-val">0.91</span>
+                </div>
+                
+                
+                <div class="metric-chip">
+                    <span class="metric-chip-label">PE</span>
+                    <span class="metric-chip-val">13.9</span>
+                </div>
+                
+            </div>
+
+            
+            <div class="risk-block">
+                <strong>⚠ 风险：</strong>若跌破12.18前低，可能加速下跌、均线空头排列持续压制，反弹空间有限、主力资金流出若持续可能压制股价、北向数据缺失导致信息不完整
+            </div>
+            
+        </div>
+        </a>
+        
+        <a href="app/stock.html?code=601318" class="stock-card-link" data-code="601318" data-name="601318" data-signal="sell" data-score="-0.25" data-confidence="0.83" style="text-decoration:none;color:inherit">
+        <div class="narr-card">
+            <div class="narr-header">
+                <div class="narr-stock">
+                    <span class="narr-stock-code">601318</span>
+                    <span class="narr-stock-name">601318</span>
+                </div>
+                
+                <span class="signal-pill sell">
+                    🔴 看空
+                </span>
+            </div>
+
+            <div class="score-panel">
+                <div class="score-row">
+                    <span class="score-label">综合评分</span>
+                    <span class="score-value" style="color:#EF4444">
+                        -0.250
+                    </span>
+                </div>
+                <div class="score-bar-track">
+                    <div class="score-bar-fill" style="width: 37.5%; background: #EF4444;"></div>
+                </div>
+                <div class="confidence-row">
+                    <span>置信度</span>
+                    <div class="conf-dots">
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot "></span>
+                        
+                    </div>
+                    <span class="conf-value">83.0%</span>
+                </div>
+            </div>
+
+            <div class="metrics-row">
+                
+                <div class="metric-chip" style="border-color:rgba(239,68,68,0.3)">
+                    <span class="metric-chip-label">5日</span>
+                    <span class="metric-chip-val" style="color:#EF4444">-0.4%</span>
+                </div>
+                
+                
+                <div class="metric-chip" style="">
+                    <span class="metric-chip-label">均线</span>
+                    <span class="metric-chip-val" style="color:var(--body-ink)">交叉</span>
+                </div>
+                
+                
+                <div class="metric-chip" style="">
+                    <span class="metric-chip-label">量比</span>
+                    <span class="metric-chip-val">1.01</span>
+                </div>
+                
+                
+                <div class="metric-chip">
+                    <span class="metric-chip-label">PE</span>
+                    <span class="metric-chip-val">7.4</span>
+                </div>
+                
+            </div>
+
+            
+            <div class="risk-block">
+                <strong>⚠ 风险：</strong>均线空头排列，反弹空间受限、缩量反弹可能为下跌中继、若跌破53.47则打开下行空间、北向资金数据缺失，无法评估外资态度、单日主力资金流量可能受短期因素影响，持续性待观察
+            </div>
+            
+        </div>
+        </a>
+        
+        <a href="app/stock.html?code=600547" class="stock-card-link" data-code="600547" data-name="山东黄金" data-signal="sell" data-score="-0.229" data-confidence="0.82" style="text-decoration:none;color:inherit">
+        <div class="narr-card">
+            <div class="narr-header">
+                <div class="narr-stock">
+                    <span class="narr-stock-code">600547</span>
+                    <span class="narr-stock-name">山东黄金</span>
+                </div>
+                
+                <span class="signal-pill sell">
+                    🔴 看空
+                </span>
+            </div>
+
+            <div class="score-panel">
+                <div class="score-row">
+                    <span class="score-label">综合评分</span>
+                    <span class="score-value" style="color:#EF4444">
+                        -0.229
+                    </span>
+                </div>
+                <div class="score-bar-track">
+                    <div class="score-bar-fill" style="width: 38.6%; background: #EF4444;"></div>
+                </div>
+                <div class="confidence-row">
+                    <span>置信度</span>
+                    <div class="conf-dots">
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot "></span>
+                        
+                    </div>
+                    <span class="conf-value">82.0%</span>
+                </div>
+            </div>
+
+            <div class="metrics-row">
+                
+                <div class="metric-chip" style="border-color:rgba(34,197,94,0.3)">
+                    <span class="metric-chip-label">5日</span>
+                    <span class="metric-chip-val" style="color:#22C55E">+2.0%</span>
+                </div>
+                
+                
+                <div class="metric-chip" style="">
+                    <span class="metric-chip-label">均线</span>
+                    <span class="metric-chip-val" style="color:var(--body-ink)">交叉</span>
+                </div>
+                
+                
+                <div class="metric-chip" style="border-color:rgba(34,197,94,0.3)">
+                    <span class="metric-chip-label">量比</span>
+                    <span class="metric-chip-val">1.45</span>
+                </div>
+                
+                
+                <div class="metric-chip">
+                    <span class="metric-chip-label">PE</span>
+                    <span class="metric-chip-val">28.1</span>
+                </div>
+                
+            </div>
+
+            
+            <div class="risk-block">
+                <strong>⚠ 风险：</strong>均线空头排列，反弹空间受限、前期低点29.5附近支撑可能再次考验、量能若萎缩，反弹可能夭折、北向资金态度未知，可能反向操作、仅一日数据无法确认趋势，存在不确定性
+            </div>
+            
+        </div>
+        </a>
+        
+        <a href="app/stock.html?code=600809" class="stock-card-link" data-code="600809" data-name="山西汾酒" data-signal="hold" data-score="-0.199" data-confidence="0.81" style="text-decoration:none;color:inherit">
+        <div class="narr-card">
+            <div class="narr-header">
+                <div class="narr-stock">
+                    <span class="narr-stock-code">600809</span>
+                    <span class="narr-stock-name">山西汾酒</span>
+                </div>
+                
+                <span class="signal-pill hold">
+                    ⚪ 观望
+                </span>
+            </div>
+
+            <div class="score-panel">
+                <div class="score-row">
+                    <span class="score-label">综合评分</span>
+                    <span class="score-value" style="color:#94A3B8">
+                        -0.199
+                    </span>
+                </div>
+                <div class="score-bar-track">
+                    <div class="score-bar-fill" style="width: 40.0%; background: #94A3B8;"></div>
+                </div>
+                <div class="confidence-row">
+                    <span>置信度</span>
+                    <div class="conf-dots">
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot "></span>
+                        
+                    </div>
+                    <span class="conf-value">81.0%</span>
+                </div>
+            </div>
+
+            <div class="metrics-row">
+                
+                <div class="metric-chip" style="border-color:rgba(239,68,68,0.3)">
+                    <span class="metric-chip-label">5日</span>
+                    <span class="metric-chip-val" style="color:#EF4444">-2.4%</span>
+                </div>
+                
+                
+                <div class="metric-chip" style="border-color:rgba(239,68,68,0.3)">
+                    <span class="metric-chip-label">均线</span>
+                    <span class="metric-chip-val" style="color:#EF4444">空头</span>
+                </div>
+                
+                
+                <div class="metric-chip" style="">
+                    <span class="metric-chip-label">量比</span>
+                    <span class="metric-chip-val">1.18</span>
+                </div>
+                
+                
+                <div class="metric-chip">
+                    <span class="metric-chip-label">PE</span>
+                    <span class="metric-chip-val">14.1</span>
+                </div>
+                
+            </div>
+
+            
+            <div class="risk-block">
+                <strong>⚠ 风险：</strong>股价沿5日均线持续下行，反弹力度薄弱、均线空头发散，可能加速下跌、若跌破125.36支撑，下一支撑位较远，下跌空间或打开、北向资金缺失，信息不完整、单日主力流出不足以确认趋势，但若持续则偏空
+            </div>
+            
+        </div>
+        </a>
+        
+        <a href="app/stock.html?code=600900" class="stock-card-link" data-code="600900" data-name="长江电力" data-signal="hold" data-score="0.199" data-confidence="0.62" style="text-decoration:none;color:inherit">
+        <div class="narr-card">
+            <div class="narr-header">
+                <div class="narr-stock">
+                    <span class="narr-stock-code">600900</span>
+                    <span class="narr-stock-name">长江电力</span>
+                </div>
+                
+                <span class="signal-pill hold">
+                    ⚪ 观望
+                </span>
+            </div>
+
+            <div class="score-panel">
+                <div class="score-row">
+                    <span class="score-label">综合评分</span>
+                    <span class="score-value" style="color:#94A3B8">
+                        +0.199
+                    </span>
+                </div>
+                <div class="score-bar-track">
+                    <div class="score-bar-fill" style="width: 60.0%; background: #94A3B8;"></div>
+                </div>
+                <div class="confidence-row">
+                    <span>置信度</span>
+                    <div class="conf-dots">
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot "></span>
+                        
+                        <span class="conf-dot "></span>
+                        
+                    </div>
+                    <span class="conf-value">62.0%</span>
+                </div>
+            </div>
+
+            <div class="metrics-row">
+                
+                <div class="metric-chip" style="border-color:rgba(239,68,68,0.3)">
+                    <span class="metric-chip-label">5日</span>
+                    <span class="metric-chip-val" style="color:#EF4444">-0.4%</span>
+                </div>
+                
+                
+                <div class="metric-chip" style="">
+                    <span class="metric-chip-label">均线</span>
+                    <span class="metric-chip-val" style="color:var(--body-ink)">交叉</span>
+                </div>
+                
+                
+                <div class="metric-chip" style="border-color:rgba(34,197,94,0.3)">
+                    <span class="metric-chip-label">量比</span>
+                    <span class="metric-chip-val">1.53</span>
+                </div>
+                
+                
+                <div class="metric-chip">
+                    <span class="metric-chip-label">PE</span>
+                    <span class="metric-chip-val">18.4</span>
+                </div>
+                
+            </div>
+
+            
+            <div class="risk-block">
+                <strong>⚠ 风险：</strong>均线仍呈空头排列，未形成多头趋势、前期高点27.42附近抛压较大、若量能无法持续，可能重回震荡区间、北向资金数据缺失，无法全面评估外部资金态度、单日主力资金流入金额较小，趋势不明朗
+            </div>
+            
+        </div>
+        </a>
+        
+        <a href="app/stock.html?code=603259" class="stock-card-link" data-code="603259" data-name="药明康德" data-signal="hold" data-score="-0.169" data-confidence="0.6" style="text-decoration:none;color:inherit">
+        <div class="narr-card">
+            <div class="narr-header">
+                <div class="narr-stock">
+                    <span class="narr-stock-code">603259</span>
+                    <span class="narr-stock-name">药明康德</span>
+                </div>
+                
+                <span class="signal-pill hold">
+                    ⚪ 观望
+                </span>
+            </div>
+
+            <div class="score-panel">
+                <div class="score-row">
+                    <span class="score-label">综合评分</span>
+                    <span class="score-value" style="color:#94A3B8">
+                        -0.169
+                    </span>
+                </div>
+                <div class="score-bar-track">
+                    <div class="score-bar-fill" style="width: 41.5%; background: #94A3B8;"></div>
+                </div>
+                <div class="confidence-row">
+                    <span>置信度</span>
+                    <div class="conf-dots">
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot "></span>
+                        
+                        <span class="conf-dot "></span>
+                        
+                    </div>
+                    <span class="conf-value">60.0%</span>
+                </div>
+            </div>
+
+            <div class="metrics-row">
+                
+                <div class="metric-chip" style="border-color:rgba(34,197,94,0.3)">
+                    <span class="metric-chip-label">5日</span>
+                    <span class="metric-chip-val" style="color:#22C55E">+2.3%</span>
+                </div>
+                
+                
+                <div class="metric-chip" style="">
+                    <span class="metric-chip-label">均线</span>
+                    <span class="metric-chip-val" style="color:var(--body-ink)">交叉</span>
+                </div>
+                
+                
+                <div class="metric-chip" style="">
+                    <span class="metric-chip-label">量比</span>
+                    <span class="metric-chip-val">0.83</span>
+                </div>
+                
+                
+                <div class="metric-chip">
+                    <span class="metric-chip-label">PE</span>
+                    <span class="metric-chip-val">15.4</span>
+                </div>
+                
+            </div>
+
+            
+            <div class="risk-block">
+                <strong>⚠ 风险：</strong>若跌破100元支撑，可能加速下跌、反弹至MA20附近可能遇阻回落、市场情绪偏弱，需防范利空消息引发抛售、北向资金数据缺失，无法评估外资对股价的影响、单一主力资金数据不足以判断趋势，需结合其他指标
+            </div>
+            
+        </div>
+        </a>
+        
+        <a href="app/stock.html?code=601138" class="stock-card-link" data-code="601138" data-name="工业富联" data-signal="hold" data-score="0.168" data-confidence="0.61" style="text-decoration:none;color:inherit">
+        <div class="narr-card">
+            <div class="narr-header">
+                <div class="narr-stock">
+                    <span class="narr-stock-code">601138</span>
+                    <span class="narr-stock-name">工业富联</span>
+                </div>
+                
+                <span class="signal-pill hold">
+                    ⚪ 观望
+                </span>
+            </div>
+
+            <div class="score-panel">
+                <div class="score-row">
+                    <span class="score-label">综合评分</span>
+                    <span class="score-value" style="color:#94A3B8">
+                        +0.168
+                    </span>
+                </div>
+                <div class="score-bar-track">
+                    <div class="score-bar-fill" style="width: 58.4%; background: #94A3B8;"></div>
+                </div>
+                <div class="confidence-row">
+                    <span>置信度</span>
+                    <div class="conf-dots">
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot "></span>
+                        
+                        <span class="conf-dot "></span>
+                        
+                    </div>
+                    <span class="conf-value">61.0%</span>
+                </div>
+            </div>
+
+            <div class="metrics-row">
+                
+                <div class="metric-chip" style="border-color:rgba(34,197,94,0.3)">
+                    <span class="metric-chip-label">5日</span>
+                    <span class="metric-chip-val" style="color:#22C55E">+2.1%</span>
+                </div>
+                
+                
+                <div class="metric-chip" style="border-color:rgba(34,197,94,0.3)">
+                    <span class="metric-chip-label">均线</span>
+                    <span class="metric-chip-val" style="color:#22C55E">多头</span>
+                </div>
+                
+                
+                <div class="metric-chip" style="">
+                    <span class="metric-chip-label">量比</span>
+                    <span class="metric-chip-val">0.85</span>
+                </div>
+                
+                
+                <div class="metric-chip">
+                    <span class="metric-chip-label">PE</span>
+                    <span class="metric-chip-val">34.2</span>
+                </div>
+                
+            </div>
+
+            
+            <div class="risk-block">
+                <strong>⚠ 风险：</strong>短期均线趋于粘合，若死叉可能引发调整、近期量能不足，上攻动能减弱、数据不完整，分析结论可靠性较低、单日主力流出可能受短期交易行为影响
+            </div>
+            
+        </div>
+        </a>
+        
+        <a href="app/stock.html?code=601628" class="stock-card-link" data-code="601628" data-name="中国人寿" data-signal="hold" data-score="-0.168" data-confidence="0.8" style="text-decoration:none;color:inherit">
+        <div class="narr-card">
+            <div class="narr-header">
+                <div class="narr-stock">
+                    <span class="narr-stock-code">601628</span>
+                    <span class="narr-stock-name">中国人寿</span>
+                </div>
+                
+                <span class="signal-pill hold">
+                    ⚪ 观望
+                </span>
+            </div>
+
+            <div class="score-panel">
+                <div class="score-row">
+                    <span class="score-label">综合评分</span>
+                    <span class="score-value" style="color:#94A3B8">
+                        -0.168
+                    </span>
+                </div>
+                <div class="score-bar-track">
+                    <div class="score-bar-fill" style="width: 41.6%; background: #94A3B8;"></div>
+                </div>
+                <div class="confidence-row">
+                    <span>置信度</span>
+                    <div class="conf-dots">
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot "></span>
+                        
+                    </div>
+                    <span class="conf-value">80.0%</span>
+                </div>
+            </div>
+
+            <div class="metrics-row">
+                
+                <div class="metric-chip" style="border-color:rgba(239,68,68,0.3)">
+                    <span class="metric-chip-label">5日</span>
+                    <span class="metric-chip-val" style="color:#EF4444">-2.6%</span>
+                </div>
+                
+                
+                <div class="metric-chip" style="border-color:rgba(239,68,68,0.3)">
+                    <span class="metric-chip-label">均线</span>
+                    <span class="metric-chip-val" style="color:#EF4444">空头</span>
+                </div>
+                
+                
+                <div class="metric-chip" style="border-color:rgba(34,197,94,0.3)">
+                    <span class="metric-chip-label">量比</span>
+                    <span class="metric-chip-val">1.35</span>
+                </div>
+                
+                
+                <div class="metric-chip">
+                    <span class="metric-chip-label">PE</span>
+                    <span class="metric-chip-val">6.6</span>
+                </div>
+                
+            </div>
+
+            
+            <div class="risk-block">
+                <strong>⚠ 风险：</strong>均线空头排列，趋势下行压力持续、近期放量下跌后反弹无力，空头占优、若跌破33.5支撑，可能加速下探、主力资金单日净流出，短期资金压力、北向数据缺失，无法全面评估外资态度
+            </div>
+            
+        </div>
+        </a>
+        
+        <a href="app/stock.html?code=601211" class="stock-card-link" data-code="601211" data-name="国泰君安" data-signal="hold" data-score="-0.159" data-confidence="0.8" style="text-decoration:none;color:inherit">
+        <div class="narr-card">
+            <div class="narr-header">
+                <div class="narr-stock">
+                    <span class="narr-stock-code">601211</span>
+                    <span class="narr-stock-name">国泰君安</span>
+                </div>
+                
+                <span class="signal-pill hold">
+                    ⚪ 观望
+                </span>
+            </div>
+
+            <div class="score-panel">
+                <div class="score-row">
+                    <span class="score-label">综合评分</span>
+                    <span class="score-value" style="color:#94A3B8">
+                        -0.159
+                    </span>
+                </div>
+                <div class="score-bar-track">
+                    <div class="score-bar-fill" style="width: 42.0%; background: #94A3B8;"></div>
+                </div>
+                <div class="confidence-row">
+                    <span>置信度</span>
+                    <div class="conf-dots">
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot "></span>
+                        
+                    </div>
+                    <span class="conf-value">80.0%</span>
+                </div>
+            </div>
+
+            <div class="metrics-row">
+                
+                <div class="metric-chip" style="border-color:rgba(239,68,68,0.3)">
+                    <span class="metric-chip-label">5日</span>
+                    <span class="metric-chip-val" style="color:#EF4444">-1.1%</span>
+                </div>
+                
+                
+                <div class="metric-chip" style="">
+                    <span class="metric-chip-label">均线</span>
+                    <span class="metric-chip-val" style="color:var(--body-ink)">交叉</span>
+                </div>
+                
+                
+                <div class="metric-chip" style="">
+                    <span class="metric-chip-label">量比</span>
+                    <span class="metric-chip-val">0.83</span>
+                </div>
+                
+                
+                <div class="metric-chip">
+                    <span class="metric-chip-label">PE</span>
+                    <span class="metric-chip-val">12.3</span>
+                </div>
+                
+            </div>
+
+            
+            <div class="risk-block">
+                <strong>⚠ 风险：</strong>均线空头排列，中期趋势偏空、反弹受阻于MA10和MA20，若无法突破可能继续探底、北向资金数据缺失，无法判断外资态度、单日数据缺乏趋势参考，存在短期波动风险
+            </div>
+            
+        </div>
+        </a>
+        
+        <a href="app/stock.html?code=601166" class="stock-card-link" data-code="601166" data-name="兴业银行" data-signal="hold" data-score="0.128" data-confidence="0.59" style="text-decoration:none;color:inherit">
+        <div class="narr-card">
+            <div class="narr-header">
+                <div class="narr-stock">
+                    <span class="narr-stock-code">601166</span>
+                    <span class="narr-stock-name">兴业银行</span>
+                </div>
+                
+                <span class="signal-pill hold">
+                    ⚪ 观望
+                </span>
+            </div>
+
+            <div class="score-panel">
+                <div class="score-row">
+                    <span class="score-label">综合评分</span>
+                    <span class="score-value" style="color:#94A3B8">
+                        +0.128
+                    </span>
+                </div>
+                <div class="score-bar-track">
+                    <div class="score-bar-fill" style="width: 56.4%; background: #94A3B8;"></div>
+                </div>
+                <div class="confidence-row">
+                    <span>置信度</span>
+                    <div class="conf-dots">
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot "></span>
+                        
+                        <span class="conf-dot "></span>
+                        
+                        <span class="conf-dot "></span>
+                        
+                    </div>
+                    <span class="conf-value">59.0%</span>
+                </div>
+            </div>
+
+            <div class="metrics-row">
+                
+                <div class="metric-chip" style="border-color:rgba(34,197,94,0.3)">
+                    <span class="metric-chip-label">5日</span>
+                    <span class="metric-chip-val" style="color:#22C55E">+1.9%</span>
+                </div>
+                
+                
+                <div class="metric-chip" style="">
+                    <span class="metric-chip-label">均线</span>
+                    <span class="metric-chip-val" style="color:var(--body-ink)">交叉</span>
+                </div>
+                
+                
+                <div class="metric-chip" style="">
+                    <span class="metric-chip-label">量比</span>
+                    <span class="metric-chip-val">1.00</span>
+                </div>
+                
+                
+                <div class="metric-chip">
+                    <span class="metric-chip-label">PE</span>
+                    <span class="metric-chip-val">4.9</span>
+                </div>
+                
+            </div>
+
+            
+            <div class="risk-block">
+                <strong>⚠ 风险：</strong>均线空头排列形成压制，反弹可能遇阻、若量能不足，反弹持续性存疑，可能再度回落、前期低点17.28-17.33区域若跌破则打开下行空间、北向数据缺失可能导致判断偏差、单一主力数据存在误导风险
+            </div>
+            
+        </div>
+        </a>
+        
+        <a href="app/stock.html?code=601336" class="stock-card-link" data-code="601336" data-name="新华保险" data-signal="hold" data-score="-0.127" data-confidence="0.58" style="text-decoration:none;color:inherit">
+        <div class="narr-card">
+            <div class="narr-header">
+                <div class="narr-stock">
+                    <span class="narr-stock-code">601336</span>
+                    <span class="narr-stock-name">新华保险</span>
+                </div>
+                
+                <span class="signal-pill hold">
+                    ⚪ 观望
+                </span>
+            </div>
+
+            <div class="score-panel">
+                <div class="score-row">
+                    <span class="score-label">综合评分</span>
+                    <span class="score-value" style="color:#94A3B8">
+                        -0.127
+                    </span>
+                </div>
+                <div class="score-bar-track">
+                    <div class="score-bar-fill" style="width: 43.6%; background: #94A3B8;"></div>
+                </div>
+                <div class="confidence-row">
+                    <span>置信度</span>
+                    <div class="conf-dots">
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot "></span>
+                        
+                        <span class="conf-dot "></span>
+                        
+                        <span class="conf-dot "></span>
+                        
+                    </div>
+                    <span class="conf-value">58.0%</span>
+                </div>
+            </div>
+
+            <div class="metrics-row">
+                
+                <div class="metric-chip" style="border-color:rgba(239,68,68,0.3)">
+                    <span class="metric-chip-label">5日</span>
+                    <span class="metric-chip-val" style="color:#EF4444">-0.5%</span>
+                </div>
+                
+                
+                <div class="metric-chip" style="">
+                    <span class="metric-chip-label">均线</span>
+                    <span class="metric-chip-val" style="color:var(--body-ink)">交叉</span>
+                </div>
+                
+                
+                <div class="metric-chip" style="border-color:rgba(34,197,94,0.3)">
+                    <span class="metric-chip-label">量比</span>
+                    <span class="metric-chip-val">1.59</span>
+                </div>
+                
+                
+                <div class="metric-chip">
+                    <span class="metric-chip-label">PE</span>
+                    <span class="metric-chip-val">5.1</span>
+                </div>
+                
+            </div>
+
+            
+            <div class="risk-block">
+                <strong>⚠ 风险：</strong>均线系统空头排列，中期趋势偏弱、前期低点58.4元若被跌破可能加速下行、单日资金数据代表性有限，可能存在短期波动、北向资金缺失导致市场多空力量分析不完整
+            </div>
+            
+        </div>
+        </a>
+        
+        <a href="app/stock.html?code=601816" class="stock-card-link" data-code="601816" data-name="京沪高铁" data-signal="hold" data-score="0.124" data-confidence="0.59" style="text-decoration:none;color:inherit">
+        <div class="narr-card">
+            <div class="narr-header">
+                <div class="narr-stock">
+                    <span class="narr-stock-code">601816</span>
+                    <span class="narr-stock-name">京沪高铁</span>
+                </div>
+                
+                <span class="signal-pill hold">
+                    ⚪ 观望
+                </span>
+            </div>
+
+            <div class="score-panel">
+                <div class="score-row">
+                    <span class="score-label">综合评分</span>
+                    <span class="score-value" style="color:#94A3B8">
+                        +0.124
+                    </span>
+                </div>
+                <div class="score-bar-track">
+                    <div class="score-bar-fill" style="width: 56.2%; background: #94A3B8;"></div>
+                </div>
+                <div class="confidence-row">
+                    <span>置信度</span>
+                    <div class="conf-dots">
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot "></span>
+                        
+                        <span class="conf-dot "></span>
+                        
+                        <span class="conf-dot "></span>
+                        
+                    </div>
+                    <span class="conf-value">59.0%</span>
+                </div>
+            </div>
+
+            <div class="metrics-row">
+                
+                <div class="metric-chip" style="border-color:rgba(239,68,68,0.3)">
+                    <span class="metric-chip-label">5日</span>
+                    <span class="metric-chip-val" style="color:#EF4444">-2.4%</span>
+                </div>
+                
+                
+                <div class="metric-chip" style="border-color:rgba(34,197,94,0.3)">
+                    <span class="metric-chip-label">均线</span>
+                    <span class="metric-chip-val" style="color:#22C55E">多头</span>
+                </div>
+                
+                
+                <div class="metric-chip" style="border-color:rgba(239,68,68,0.3)">
+                    <span class="metric-chip-label">量比</span>
+                    <span class="metric-chip-val">0.72</span>
+                </div>
+                
+                
+                <div class="metric-chip">
+                    <span class="metric-chip-label">PE</span>
+                    <span class="metric-chip-val">17.8</span>
+                </div>
+                
+            </div>
+
+            
+            <div class="risk-block">
+                <strong>⚠ 风险：</strong>连续缩量回调，短期动能偏弱、若跌破4.83则可能形成短期头部，下探4.80支撑、均线空头排列风险未解除，需警惕进一步走弱、仅单日数据，无法确认资金趋势、北向资金缺失，外资动向不明确
+            </div>
+            
+        </div>
+        </a>
+        
+        <a href="app/stock.html?code=600941" class="stock-card-link" data-code="600941" data-name="中国移动" data-signal="hold" data-score="0.123" data-confidence="0.59" style="text-decoration:none;color:inherit">
+        <div class="narr-card">
+            <div class="narr-header">
+                <div class="narr-stock">
+                    <span class="narr-stock-code">600941</span>
+                    <span class="narr-stock-name">中国移动</span>
+                </div>
+                
+                <span class="signal-pill hold">
+                    ⚪ 观望
+                </span>
+            </div>
+
+            <div class="score-panel">
+                <div class="score-row">
+                    <span class="score-label">综合评分</span>
+                    <span class="score-value" style="color:#94A3B8">
+                        +0.123
+                    </span>
+                </div>
+                <div class="score-bar-track">
+                    <div class="score-bar-fill" style="width: 56.1%; background: #94A3B8;"></div>
+                </div>
+                <div class="confidence-row">
+                    <span>置信度</span>
+                    <div class="conf-dots">
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot "></span>
+                        
+                        <span class="conf-dot "></span>
+                        
+                        <span class="conf-dot "></span>
+                        
+                    </div>
+                    <span class="conf-value">59.0%</span>
+                </div>
+            </div>
+
+            <div class="metrics-row">
+                
+                <div class="metric-chip" style="border-color:rgba(239,68,68,0.3)">
+                    <span class="metric-chip-label">5日</span>
+                    <span class="metric-chip-val" style="color:#EF4444">-3.8%</span>
+                </div>
+                
+                
+                <div class="metric-chip" style="border-color:rgba(34,197,94,0.3)">
+                    <span class="metric-chip-label">均线</span>
+                    <span class="metric-chip-val" style="color:#22C55E">多头</span>
+                </div>
+                
+                
+                <div class="metric-chip" style="border-color:rgba(239,68,68,0.3)">
+                    <span class="metric-chip-label">量比</span>
+                    <span class="metric-chip-val">0.69</span>
+                </div>
+                
+                
+                <div class="metric-chip">
+                    <span class="metric-chip-label">PE</span>
+                    <span class="metric-chip-val">15.5</span>
+                </div>
+                
+            </div>
+
+            
+            <div class="risk-block">
+                <strong>⚠ 风险：</strong>若跌破95.2，可能加速下探至MA60或前低、量能持续萎缩可能导致横盘后选择向下、北向资金数据缺失，无法全面评估外资态度、仅单日数据，趋势不明朗
+            </div>
+            
+        </div>
+        </a>
+        
+        <a href="app/stock.html?code=601601" class="stock-card-link" data-code="601601" data-name="中国太保" data-signal="hold" data-score="-0.122" data-confidence="0.78" style="text-decoration:none;color:inherit">
+        <div class="narr-card">
+            <div class="narr-header">
+                <div class="narr-stock">
+                    <span class="narr-stock-code">601601</span>
+                    <span class="narr-stock-name">中国太保</span>
+                </div>
+                
+                <span class="signal-pill hold">
+                    ⚪ 观望
+                </span>
+            </div>
+
+            <div class="score-panel">
+                <div class="score-row">
+                    <span class="score-label">综合评分</span>
+                    <span class="score-value" style="color:#94A3B8">
+                        -0.122
+                    </span>
+                </div>
+                <div class="score-bar-track">
+                    <div class="score-bar-fill" style="width: 43.9%; background: #94A3B8;"></div>
+                </div>
+                <div class="confidence-row">
+                    <span>置信度</span>
+                    <div class="conf-dots">
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot "></span>
+                        
+                        <span class="conf-dot "></span>
+                        
+                    </div>
+                    <span class="conf-value">78.0%</span>
+                </div>
+            </div>
+
+            <div class="metrics-row">
+                
+                <div class="metric-chip" style="border-color:rgba(239,68,68,0.3)">
+                    <span class="metric-chip-label">5日</span>
+                    <span class="metric-chip-val" style="color:#EF4444">-1.4%</span>
+                </div>
+                
+                
+                <div class="metric-chip" style="">
+                    <span class="metric-chip-label">均线</span>
+                    <span class="metric-chip-val" style="color:var(--body-ink)">交叉</span>
+                </div>
+                
+                
+                <div class="metric-chip" style="">
+                    <span class="metric-chip-label">量比</span>
+                    <span class="metric-chip-val">1.17</span>
+                </div>
+                
+                
+                <div class="metric-chip">
+                    <span class="metric-chip-label">PE</span>
+                    <span class="metric-chip-val">5.9</span>
+                </div>
+                
+            </div>
+
+            
+            <div class="risk-block">
+                <strong>⚠ 风险：</strong>均线空头排列，趋势偏空、反弹无量，若跌破33可能加速下行、主力资金连续流出可能转为压力、北向数据缺失增加判断不确定性
+            </div>
+            
+        </div>
+        </a>
+        
+        <a href="app/stock.html?code=601688" class="stock-card-link" data-code="601688" data-name="华泰证券" data-signal="hold" data-score="-0.082" data-confidence="0.77" style="text-decoration:none;color:inherit">
+        <div class="narr-card">
+            <div class="narr-header">
+                <div class="narr-stock">
+                    <span class="narr-stock-code">601688</span>
+                    <span class="narr-stock-name">华泰证券</span>
+                </div>
+                
+                <span class="signal-pill hold">
+                    ⚪ 观望
+                </span>
+            </div>
+
+            <div class="score-panel">
+                <div class="score-row">
+                    <span class="score-label">综合评分</span>
+                    <span class="score-value" style="color:#94A3B8">
+                        -0.082
+                    </span>
+                </div>
+                <div class="score-bar-track">
+                    <div class="score-bar-fill" style="width: 45.9%; background: #94A3B8;"></div>
+                </div>
+                <div class="confidence-row">
+                    <span>置信度</span>
+                    <div class="conf-dots">
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot "></span>
+                        
+                        <span class="conf-dot "></span>
+                        
+                    </div>
+                    <span class="conf-value">77.0%</span>
+                </div>
+            </div>
+
+            <div class="metrics-row">
+                
+                <div class="metric-chip" style="border-color:rgba(239,68,68,0.3)">
+                    <span class="metric-chip-label">5日</span>
+                    <span class="metric-chip-val" style="color:#EF4444">-0.1%</span>
+                </div>
+                
+                
+                <div class="metric-chip" style="">
+                    <span class="metric-chip-label">均线</span>
+                    <span class="metric-chip-val" style="color:var(--body-ink)">交叉</span>
+                </div>
+                
+                
+                <div class="metric-chip" style="">
+                    <span class="metric-chip-label">量比</span>
+                    <span class="metric-chip-val">0.94</span>
+                </div>
+                
+                
+                <div class="metric-chip">
+                    <span class="metric-chip-label">PE</span>
+                    <span class="metric-chip-val">9.6</span>
+                </div>
+                
+            </div>
+
+            
+            <div class="risk-block">
+                <strong>⚠ 风险：</strong>均线空头排列，长期均线压制明显、5月22日放量下跌后反弹缩量，做多动能不足、若跌破18.1可能加速下行、单日资金流入不具有趋势性，需持续跟踪、北向资金缺席可能影响判断准确性
+            </div>
+            
+        </div>
+        </a>
+        
+        <a href="app/stock.html?code=300059" class="stock-card-link" data-code="300059" data-name="东方财富" data-signal="hold" data-score="-0.057" data-confidence="0.56" style="text-decoration:none;color:inherit">
+        <div class="narr-card">
+            <div class="narr-header">
+                <div class="narr-stock">
+                    <span class="narr-stock-code">300059</span>
+                    <span class="narr-stock-name">东方财富</span>
+                </div>
+                
+                <span class="signal-pill hold">
+                    ⚪ 观望
+                </span>
+            </div>
+
+            <div class="score-panel">
+                <div class="score-row">
+                    <span class="score-label">综合评分</span>
+                    <span class="score-value" style="color:#94A3B8">
+                        -0.057
+                    </span>
+                </div>
+                <div class="score-bar-track">
+                    <div class="score-bar-fill" style="width: 47.1%; background: #94A3B8;"></div>
+                </div>
+                <div class="confidence-row">
+                    <span>置信度</span>
+                    <div class="conf-dots">
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot "></span>
+                        
+                        <span class="conf-dot "></span>
+                        
+                        <span class="conf-dot "></span>
+                        
+                    </div>
+                    <span class="conf-value">56.0%</span>
+                </div>
+            </div>
+
+            <div class="metrics-row">
+                
+                <div class="metric-chip" style="border-color:rgba(34,197,94,0.3)">
+                    <span class="metric-chip-label">5日</span>
+                    <span class="metric-chip-val" style="color:#22C55E">+0.8%</span>
+                </div>
+                
+                
+                <div class="metric-chip" style="">
+                    <span class="metric-chip-label">均线</span>
+                    <span class="metric-chip-val" style="color:var(--body-ink)">交叉</span>
+                </div>
+                
+                
+                <div class="metric-chip" style="border-color:rgba(34,197,94,0.3)">
+                    <span class="metric-chip-label">量比</span>
+                    <span class="metric-chip-val">1.21</span>
+                </div>
+                
+                
+                <div class="metric-chip">
+                    <span class="metric-chip-label">PE</span>
+                    <span class="metric-chip-val">24.2</span>
+                </div>
+                
+            </div>
+
+            
+            <div class="risk-block">
+                <strong>⚠ 风险：</strong>均线空头压制、近期反弹缩量则可能继续下跌、下方支撑19.36若跌破则可能加速、北向资金数据缺失，外资态度不明、主力流入规模较小，持续性待观察
+            </div>
+            
+        </div>
+        </a>
+        
+        <a href="app/stock.html?code=600887" class="stock-card-link" data-code="600887" data-name="伊利股份" data-signal="hold" data-score="0.046" data-confidence="0.56" style="text-decoration:none;color:inherit">
+        <div class="narr-card">
+            <div class="narr-header">
+                <div class="narr-stock">
+                    <span class="narr-stock-code">600887</span>
+                    <span class="narr-stock-name">伊利股份</span>
+                </div>
+                
+                <span class="signal-pill hold">
+                    ⚪ 观望
+                </span>
+            </div>
+
+            <div class="score-panel">
+                <div class="score-row">
+                    <span class="score-label">综合评分</span>
+                    <span class="score-value" style="color:#94A3B8">
+                        +0.046
+                    </span>
+                </div>
+                <div class="score-bar-track">
+                    <div class="score-bar-fill" style="width: 52.3%; background: #94A3B8;"></div>
+                </div>
+                <div class="confidence-row">
+                    <span>置信度</span>
+                    <div class="conf-dots">
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot "></span>
+                        
+                        <span class="conf-dot "></span>
+                        
+                        <span class="conf-dot "></span>
+                        
+                    </div>
+                    <span class="conf-value">56.0%</span>
+                </div>
+            </div>
+
+            <div class="metrics-row">
+                
+                <div class="metric-chip" style="border-color:rgba(239,68,68,0.3)">
+                    <span class="metric-chip-label">5日</span>
+                    <span class="metric-chip-val" style="color:#EF4444">-2.4%</span>
+                </div>
+                
+                
+                <div class="metric-chip" style="">
+                    <span class="metric-chip-label">均线</span>
+                    <span class="metric-chip-val" style="color:var(--body-ink)">交叉</span>
+                </div>
+                
+                
+                <div class="metric-chip" style="border-color:rgba(239,68,68,0.3)">
+                    <span class="metric-chip-label">量比</span>
+                    <span class="metric-chip-val">0.68</span>
+                </div>
+                
+                
+                <div class="metric-chip">
+                    <span class="metric-chip-label">PE</span>
+                    <span class="metric-chip-val">13.9</span>
+                </div>
+                
+            </div>
+
+            
+            <div class="risk-block">
+                <strong>⚠ 风险：</strong>股价连续回调，短期均线MA5拐头向下形成压制、若跌破26元关键支撑，可能进一步下探、北向资金数据缺失，信息不完整、主力流入金额较小，方向指引有限
+            </div>
+            
+        </div>
+        </a>
+        
+        <a href="app/stock.html?code=600030" class="stock-card-link" data-code="600030" data-name="中信证券" data-signal="hold" data-score="-0.026" data-confidence="0.55" style="text-decoration:none;color:inherit">
+        <div class="narr-card">
+            <div class="narr-header">
+                <div class="narr-stock">
+                    <span class="narr-stock-code">600030</span>
+                    <span class="narr-stock-name">中信证券</span>
+                </div>
+                
+                <span class="signal-pill hold">
+                    ⚪ 观望
+                </span>
+            </div>
+
+            <div class="score-panel">
+                <div class="score-row">
+                    <span class="score-label">综合评分</span>
+                    <span class="score-value" style="color:#94A3B8">
+                        -0.026
+                    </span>
+                </div>
+                <div class="score-bar-track">
+                    <div class="score-bar-fill" style="width: 48.7%; background: #94A3B8;"></div>
+                </div>
+                <div class="confidence-row">
+                    <span>置信度</span>
+                    <div class="conf-dots">
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot "></span>
+                        
+                        <span class="conf-dot "></span>
+                        
+                        <span class="conf-dot "></span>
+                        
+                    </div>
+                    <span class="conf-value">55.0%</span>
+                </div>
+            </div>
+
+            <div class="metrics-row">
+                
+                <div class="metric-chip" style="border-color:rgba(239,68,68,0.3)">
+                    <span class="metric-chip-label">5日</span>
+                    <span class="metric-chip-val" style="color:#EF4444">-0.2%</span>
+                </div>
+                
+                
+                <div class="metric-chip" style="">
+                    <span class="metric-chip-label">均线</span>
+                    <span class="metric-chip-val" style="color:var(--body-ink)">交叉</span>
+                </div>
+                
+                
+                <div class="metric-chip" style="border-color:rgba(34,197,94,0.3)">
+                    <span class="metric-chip-label">量比</span>
+                    <span class="metric-chip-val">1.30</span>
+                </div>
+                
+                
+                <div class="metric-chip">
+                    <span class="metric-chip-label">PE</span>
+                    <span class="metric-chip-val">11.5</span>
+                </div>
+                
+            </div>
+
+            
+            <div class="risk-block">
+                <strong>⚠ 风险：</strong>均线空头排列，反弹力度不足时可能加速下跌、成交量放大但价格未能同步上涨，需防范主力出货、北向资金数据缺失，无法确认外资态度、主力净流入规模较小，可能不具备持续性
+            </div>
+            
+        </div>
+        </a>
+        
+        <a href="app/stock.html?code=002230" class="stock-card-link" data-code="002230" data-name="科大讯飞" data-signal="hold" data-score="0.017" data-confidence="0.55" style="text-decoration:none;color:inherit">
+        <div class="narr-card">
+            <div class="narr-header">
+                <div class="narr-stock">
+                    <span class="narr-stock-code">002230</span>
+                    <span class="narr-stock-name">科大讯飞</span>
+                </div>
+                
+                <span class="signal-pill hold">
+                    ⚪ 观望
+                </span>
+            </div>
+
+            <div class="score-panel">
+                <div class="score-row">
+                    <span class="score-label">综合评分</span>
+                    <span class="score-value" style="color:#94A3B8">
+                        +0.017
+                    </span>
+                </div>
+                <div class="score-bar-track">
+                    <div class="score-bar-fill" style="width: 50.8%; background: #94A3B8;"></div>
+                </div>
+                <div class="confidence-row">
+                    <span>置信度</span>
+                    <div class="conf-dots">
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot filled"></span>
+                        
+                        <span class="conf-dot "></span>
+                        
+                        <span class="conf-dot "></span>
+                        
+                        <span class="conf-dot "></span>
+                        
+                    </div>
+                    <span class="conf-value">55.0%</span>
+                </div>
+            </div>
+
+            <div class="metrics-row">
+                
+                <div class="metric-chip" style="border-color:rgba(34,197,94,0.3)">
+                    <span class="metric-chip-label">5日</span>
+                    <span class="metric-chip-val" style="color:#22C55E">+0.3%</span>
+                </div>
+                
+                
+                <div class="metric-chip" style="">
+                    <span class="metric-chip-label">均线</span>
+                    <span class="metric-chip-val" style="color:var(--body-ink)">交叉</span>
+                </div>
+                
+                
+                <div class="metric-chip" style="border-color:rgba(34,197,94,0.3)">
+                    <span class="metric-chip-label">量比</span>
+                    <span class="metric-chip-val">1.34</span>
+                </div>
+                
+                
+                <div class="metric-chip">
+                    <span class="metric-chip-label">PE</span>
+                    <span class="metric-chip-val">137.1</span>
+                </div>
+                
+            </div>
+
+            
+            <div class="risk-block">
+                <strong>⚠ 风险：</strong>均线空头排列尚未扭转，反弹可能遇阻、前期高点50.30构成技术压力、若量能萎缩，短期反弹可能夭折、北向资金数据缺失，无法全面评估资金面、单日主力净流入规模较小，信号强度有限
+            </div>
+            
+        </div>
+        </a>
+        
+    </div>
+
+    
+    <div class="archive-section">
+        <div style="font-size:14px;font-weight:600;color:var(--ink);margin-bottom:4px;">📁 历史报告</div>
+        <div class="archive-list">
+            
+            <a class="archive-pill" href="archive/2026-05-26-pre.html">2026-05-26 盘前</a>
+            
+            <a class="archive-pill" href="archive/2026-05-26-post.html">2026-05-26 盘后</a>
+            
+            <a class="archive-pill" href="archive/2026-05-25-pre.html">2026-05-25 盘前</a>
+            
+            <a class="archive-pill" href="archive/2026-05-25-post.html">2026-05-25 盘后</a>
+            
+            <a class="archive-pill" href="archive/2026-05-24-pre.html">2026-05-24 盘前</a>
+            
+        </div>
+    </div>
+    
+
+    <div class="disclaimer">⚠️ 本报告仅供个人研究参考，不构成投资建议。报告内容基于公开数据和 AI 分析生成，可能存在错误或遗漏。股市有风险，决策需谨慎。作者不对任何投资损失承担责任。</div>
+
+    <footer class="site-footer">
+        智策 NexStrat v1.4 · AI 辅助决策 · 不构成投资建议
+    </footer>
+</div>
+<script src="app/config.js"></script>
+<script src="app/app.js" defer></script>
+</body>
+</html>
