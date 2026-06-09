@@ -1,9 +1,46 @@
 {
-  "trade_date": "2026-06-08",
+  "trade_date": "2026-06-09",
   "hit_count": 0,
   "miss_count": 0,
   "hit_rate": 0.0,
   "hits": [],
   "missed_top": [],
-  "pool_underperform": []
+  "pool_underperform": [
+    {
+      "code": "601398",
+      "name": "工商银行"
+    },
+    {
+      "code": "601211",
+      "name": "国泰君安"
+    },
+    {
+      "code": "601088",
+      "name": "中国神华"
+    },
+    {
+      "code": "000333",
+      "name": "美的集团"
+    },
+    {
+      "code": "601166",
+      "name": "兴业银行"
+    },
+    {
+      "code": "600036",
+      "name": "招商银行"
+    },
+    {
+      "code": "601919",
+      "name": "中远海控"
+    },
+    {
+      "code": "000001",
+      "name": "平安银行"
+    },
+    {
+      "code": "600031",
+      "name": "三一重工"
+    }
+  ]
 }
