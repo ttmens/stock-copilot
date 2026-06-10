@@ -1,20 +1,18 @@
 {
   "cycle_id": "evo-0001",
-  "date": "2026-06-08",
+  "date": "2026-06-09",
   "win_rate": 0.0,
-  "avg_return": 0.0,
-  "sharpe_like": 0.0,
-  "signals_verified": 0,
+  "avg_return": 2.94,
+  "sharpe_like": 0.9484,
+  "signals_verified": 2,
   "weights": {
-    "hard": 0.4,
-    "soft": 0.25,
-    "gate": 0.15,
-    "dragon_tiger": 0.1,
-    "announcement": 0.1
+    "hard": 0.49,
+    "soft": 0.314,
+    "gate": 0.197
   },
   "pool_size": 50,
   "evicted_count": 0,
   "added_count": 0,
-  "summary": "权重保持稳定，无需调整。 遇到 1 个问题（见详情）。",
+  "summary": "验证了 2 个信号，胜率 0.0%，平均收益 2.94%。 信号权重已自动调整。",
   "status": "act"
 }

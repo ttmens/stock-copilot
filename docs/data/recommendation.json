@@ -1,6 +1,6 @@
 {
-  "trade_date": "2026-06-09",
-  "generated_at": "2026-06-09",
+  "trade_date": "2026-06-10",
+  "generated_at": "2026-06-10",
   "filters_applied": [
     "no_st",
     "mcap_lt_3000b",
@@ -14,21 +14,21 @@
         {
           "code": "601398",
           "name": "工商银行",
-          "score": 0.6923567915473677,
+          "score": 0.6479162577264745,
           "source": "scan",
           "focus_flag": false
         },
         {
-          "code": "601211",
-          "name": "国泰君安",
-          "score": 0.6017672904129023,
+          "code": "601288",
+          "name": "农业银行",
+          "score": 0.48090064195093074,
           "source": "scan",
           "focus_flag": false
         },
         {
-          "code": "601088",
-          "name": "中国神华",
-          "score": 0.5615637500733556,
+          "code": "000001",
+          "name": "平安银行",
+          "score": 0.44192271802341615,
           "source": "scan",
           "focus_flag": false
         }
@@ -39,23 +39,23 @@
       "reason": "硬信号+热点",
       "stocks": [
         {
-          "code": "000333",
-          "name": "美的集团",
-          "score": 0.55113313780912,
+          "code": "601919",
+          "name": "中远海控",
+          "score": 0.41720946809630266,
           "source": "scan",
           "focus_flag": false
         },
         {
-          "code": "601166",
-          "name": "兴业银行",
-          "score": 0.4938964648119187,
+          "code": "601211",
+          "name": "国泰君安",
+          "score": 0.4124986295525558,
           "source": "scan",
           "focus_flag": false
         },
         {
-          "code": "600036",
-          "name": "招商银行",
-          "score": 0.487275990146962,
+          "code": "600031",
+          "name": "三一重工",
+          "score": 0.4099256154579647,
           "source": "scan",
           "focus_flag": false
         }
@@ -66,23 +66,23 @@
       "reason": "硬信号+热点",
       "stocks": [
         {
-          "code": "601919",
-          "name": "中远海控",
-          "score": 0.4751662024743322,
+          "code": "601088",
+          "name": "中国神华",
+          "score": 0.40067553550633805,
           "source": "scan",
           "focus_flag": false
         },
         {
-          "code": "000001",
-          "name": "平安银行",
-          "score": 0.42448852359760125,
+          "code": "000333",
+          "name": "美的集团",
+          "score": 0.39081532684503295,
           "source": "scan",
           "focus_flag": false
         },
         {
-          "code": "600031",
-          "name": "三一重工",
-          "score": 0.42034054824999995,
+          "code": "600036",
+          "name": "招商银行",
+          "score": 0.36641440838461414,
           "source": "scan",
           "focus_flag": false
         }
