@@ -9,15 +9,8 @@
   "sectors": [
     {
       "name": "半导体",
-      "reason": "硬信号+热点",
+      "reason": "",
       "stocks": [
-        {
-          "code": "601398",
-          "name": "工商银行",
-          "score": 0.8344503433581246,
-          "source": "scan",
-          "focus_flag": false
-        },
         {
           "code": "601211",
           "name": "国泰君安",
@@ -35,59 +28,139 @@
       ]
     },
     {
-      "name": "新能源",
-      "reason": "硬信号+热点",
+      "name": "竞价加池",
+      "reason": "",
       "stocks": [
+        {
+          "code": "601398",
+          "name": "工商银行",
+          "score": 0.5,
+          "source": "auction",
+          "focus_flag": true
+        },
         {
           "code": "601288",
           "name": "农业银行",
-          "score": 0.6446549863573756,
-          "source": "scan",
-          "focus_flag": false
+          "score": 0.5,
+          "source": "auction",
+          "focus_flag": true
         },
         {
           "code": "600036",
           "name": "招商银行",
-          "score": 0.5907219281118892,
-          "source": "scan",
-          "focus_flag": false
+          "score": 0.5,
+          "source": "auction",
+          "focus_flag": true
         },
         {
           "code": "000001",
           "name": "平安银行",
-          "score": 0.5722866404330367,
-          "source": "scan",
-          "focus_flag": false
+          "score": 0.5,
+          "source": "auction",
+          "focus_flag": true
+        },
+        {
+          "code": "601628",
+          "name": "中国人寿",
+          "score": 0.5,
+          "source": "auction",
+          "focus_flag": true
+        },
+        {
+          "code": "000538",
+          "name": "云南白药",
+          "score": 0.5,
+          "source": "auction",
+          "focus_flag": true
         }
       ]
     },
     {
       "name": "消费",
-      "reason": "硬信号+热点",
+      "reason": "",
       "stocks": [
-        {
-          "code": "601628",
-          "name": "中国人寿",
-          "score": 0.5519456370242081,
-          "source": "scan",
-          "focus_flag": false
-        },
         {
           "code": "000333",
           "name": "美的集团",
           "score": 0.5169345626497381,
           "source": "scan",
           "focus_flag": false
-        },
-        {
-          "code": "000538",
-          "name": "云南白药",
-          "score": 0.5075983729095711,
-          "source": "scan",
-          "focus_flag": false
         }
       ]
     }
   ],
-  "auction_added": []
+  "auction_added": [
+    {
+      "id": 278,
+      "trade_date": "2026-06-15",
+      "sector_name": "竞价加池",
+      "sector_rank": 0,
+      "code": "601398",
+      "name": "工商银行",
+      "score": 0.5,
+      "source": "auction",
+      "focus_flag": 1,
+      "added_at": "2026-06-15 00:45:00"
+    },
+    {
+      "id": 281,
+      "trade_date": "2026-06-15",
+      "sector_name": "竞价加池",
+      "sector_rank": 1,
+      "code": "601288",
+      "name": "农业银行",
+      "score": 0.5,
+      "source": "auction",
+      "focus_flag": 1,
+      "added_at": "2026-06-15 00:45:00"
+    },
+    {
+      "id": 282,
+      "trade_date": "2026-06-15",
+      "sector_name": "竞价加池",
+      "sector_rank": 1,
+      "code": "600036",
+      "name": "招商银行",
+      "score": 0.5,
+      "source": "auction",
+      "focus_flag": 1,
+      "added_at": "2026-06-15 00:45:00"
+    },
+    {
+      "id": 283,
+      "trade_date": "2026-06-15",
+      "sector_name": "竞价加池",
+      "sector_rank": 1,
+      "code": "000001",
+      "name": "平安银行",
+      "score": 0.5,
+      "source": "auction",
+      "focus_flag": 1,
+      "added_at": "2026-06-15 00:45:00"
+    },
+    {
+      "id": 284,
+      "trade_date": "2026-06-15",
+      "sector_name": "竞价加池",
+      "sector_rank": 2,
+      "code": "601628",
+      "name": "中国人寿",
+      "score": 0.5,
+      "source": "auction",
+      "focus_flag": 1,
+      "added_at": "2026-06-15 00:45:00"
+    },
+    {
+      "id": 286,
+      "trade_date": "2026-06-15",
+      "sector_name": "竞价加池",
+      "sector_rank": 2,
+      "code": "000538",
+      "name": "云南白药",
+      "score": 0.5,
+      "source": "auction",
+      "focus_flag": 1,
+      "added_at": "2026-06-15 00:45:00"
+    }
+  ]
 }
