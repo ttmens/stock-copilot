@@ -1,6 +1,6 @@
 {
-  "trade_date": "2026-06-15",
-  "generated_at": "2026-06-15",
+  "trade_date": "2026-06-16",
+  "generated_at": "2026-06-16",
   "filters_applied": [
     "no_st",
     "mcap_lt_3000b",
@@ -9,158 +9,85 @@
   "sectors": [
     {
       "name": "半导体",
-      "reason": "",
+      "reason": "硬信号+热点",
       "stocks": [
         {
           "code": "601211",
           "name": "国泰君安",
-          "score": 0.6625118152080001,
+          "score": 0.7408512862892,
           "source": "scan",
           "focus_flag": false
         },
         {
           "code": "601688",
           "name": "华泰证券",
-          "score": 0.6499801047361137,
+          "score": 0.6625111582335,
+          "source": "scan",
+          "focus_flag": false
+        },
+        {
+          "code": "600030",
+          "name": "中信证券",
+          "score": 0.6384041696119134,
           "source": "scan",
           "focus_flag": false
         }
       ]
     },
     {
-      "name": "竞价加池",
-      "reason": "",
+      "name": "新能源",
+      "reason": "硬信号+热点",
       "stocks": [
         {
-          "code": "601398",
-          "name": "工商银行",
-          "score": 0.5,
-          "source": "auction",
-          "focus_flag": true
+          "code": "600016",
+          "name": "民生银行",
+          "score": 0.6221861183711264,
+          "source": "scan",
+          "focus_flag": false
         },
         {
-          "code": "601288",
-          "name": "农业银行",
-          "score": 0.5,
-          "source": "auction",
-          "focus_flag": true
-        },
-        {
-          "code": "600036",
-          "name": "招商银行",
-          "score": 0.5,
-          "source": "auction",
-          "focus_flag": true
-        },
-        {
-          "code": "000001",
-          "name": "平安银行",
-          "score": 0.5,
-          "source": "auction",
-          "focus_flag": true
+          "code": "601336",
+          "name": "新华保险",
+          "score": 0.6211901042559589,
+          "source": "scan",
+          "focus_flag": false
         },
         {
           "code": "601628",
           "name": "中国人寿",
-          "score": 0.5,
-          "source": "auction",
-          "focus_flag": true
-        },
-        {
-          "code": "000538",
-          "name": "云南白药",
-          "score": 0.5,
-          "source": "auction",
-          "focus_flag": true
+          "score": 0.5741742203591738,
+          "source": "scan",
+          "focus_flag": false
         }
       ]
     },
     {
       "name": "消费",
-      "reason": "",
+      "reason": "硬信号+热点",
       "stocks": [
         {
-          "code": "000333",
-          "name": "美的集团",
-          "score": 0.5169345626497381,
+          "code": "601601",
+          "name": "中国太保",
+          "score": 0.5499524474895321,
+          "source": "scan",
+          "focus_flag": false
+        },
+        {
+          "code": "600036",
+          "name": "招商银行",
+          "score": 0.5451204591283837,
+          "source": "scan",
+          "focus_flag": false
+        },
+        {
+          "code": "601318",
+          "name": "中国平安",
+          "score": 0.49283757562256314,
           "source": "scan",
           "focus_flag": false
         }
       ]
     }
   ],
-  "auction_added": [
-    {
-      "id": 278,
-      "trade_date": "2026-06-15",
-      "sector_name": "竞价加池",
-      "sector_rank": 0,
-      "code": "601398",
-      "name": "工商银行",
-      "score": 0.5,
-      "source": "auction",
-      "focus_flag": 1,
-      "added_at": "2026-06-15 00:45:00"
-    },
-    {
-      "id": 281,
-      "trade_date": "2026-06-15",
-      "sector_name": "竞价加池",
-      "sector_rank": 1,
-      "code": "601288",
-      "name": "农业银行",
-      "score": 0.5,
-      "source": "auction",
-      "focus_flag": 1,
-      "added_at": "2026-06-15 00:45:00"
-    },
-    {
-      "id": 282,
-      "trade_date": "2026-06-15",
-      "sector_name": "竞价加池",
-      "sector_rank": 1,
-      "code": "600036",
-      "name": "招商银行",
-      "score": 0.5,
-      "source": "auction",
-      "focus_flag": 1,
-      "added_at": "2026-06-15 00:45:00"
-    },
-    {
-      "id": 283,
-      "trade_date": "2026-06-15",
-      "sector_name": "竞价加池",
-      "sector_rank": 1,
-      "code": "000001",
-      "name": "平安银行",
-      "score": 0.5,
-      "source": "auction",
-      "focus_flag": 1,
-      "added_at": "2026-06-15 00:45:00"
-    },
-    {
-      "id": 284,
-      "trade_date": "2026-06-15",
-      "sector_name": "竞价加池",
-      "sector_rank": 2,
-      "code": "601628",
-      "name": "中国人寿",
-      "score": 0.5,
-      "source": "auction",
-      "focus_flag": 1,
-      "added_at": "2026-06-15 00:45:00"
-    },
-    {
-      "id": 286,
-      "trade_date": "2026-06-15",
-      "sector_name": "竞价加池",
-      "sector_rank": 2,
-      "code": "000538",
-      "name": "云南白药",
-      "score": 0.5,
-      "source": "auction",
-      "focus_flag": 1,
-      "added_at": "2026-06-15 00:45:00"
-    }
-  ]
+  "auction_added": []
 }
